@@ -1,0 +1,5 @@
+.collapsible__content {
+	height: 0;
+	overflow: hidden;
+	transition: height 250ms ease-out;
+}
