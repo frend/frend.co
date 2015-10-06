@@ -50,7 +50,7 @@ gulp.task('css', function () {
 	.pipe(autoprefixer({
 		browsers: ['last 2 versions', 'ie 10']
 	}))
-	.pipe(cmq())
+	//.pipe(cmq())
 
 	// minify css and save as global.min.css
 	.pipe(minifyCSS())
@@ -71,7 +71,7 @@ gulp.task('css', function () {
 //-----------------------------------
 gulp.task('svg', function () {
 	return gulp.src([
-			'images/svg/*.svg'
+		'images/svg/*.svg'
 	])
 		.pipe(svgmin())
 		.pipe(rename(function (path) {
@@ -88,6 +88,11 @@ gulp.task('svg', function () {
 //	Utils
 //
 //----------------------------------------------------------------------
+
+
+//	Default
+//-----------------------------------
+gulp.task('default', ['css']);
 
 
 //	Watch
