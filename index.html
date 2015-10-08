@@ -7,49 +7,55 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Frend</title>
 	<link rel="stylesheet" href="/css/dist/global.min.css">
+	<script>
+		/*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
+		function loadJS( src, cb ){
+			"use strict";
+			var ref = window.document.getElementsByTagName( "script" )[ 0 ];
+			var script = window.document.createElement( "script" );
+			script.src = src;
+			script.async = true;
+			ref.parentNode.insertBefore( script, ref );
+			if (cb && typeof(cb) === "function") {
+				script.onload = cb;
+			}
+			return script;
+		}
+	</script>
 </head>
 
 <body class="site">
 
 	<header class="site-header" role="banner">
+		<a class="site-header__logo" href="/">Frend</a>
+	</header>
+
+	<main class="site-main" role="main">
+		<div class="wrapper">
+			<h1>frend yo</h1>
+			<p>Main intro blurb, Dardy Duncan take it away&hellip;</p>
+			<div class="grid">
+				<article class="grid__col col-lap--1-3">
+					<h3><a href="/components/accordion/">Accordion</a></h3>
+					<p>Accordion blurb</p>
+				</article>
+			</div>
+		</div>
+	</main>
+
+	<footer class="site-footer">
 		<nav>
 			<ul class="nav-primary">
-				<li class="nav-primary__list-item">
-					<a href="/" class="nav-primary__item">Components</a>
-				</li>
 				<li class="nav-primary__list-item">
 					<a href="/about/" class="nav-primary__item">About</a>
 				</li>
 			</ul>
 		</nav>
-	</header>
-
-	<main class="site-main" role="main">
-
-		<h1>frend yo</h1>
-		<p>Main intro blurb, Dardy Duncan take it away&hellip;</p>
-
-		<h2>Components</h2>
-		<article>
-			<h3><a href="/components/accordion/">Accordion</a></h3>
-			<p>Accordion blurb</p>
-		</article>
-
-		<article>
-			<h3><a href="/components/component-1/">Component 1</a></h3>
-			<p>Component 1 blurb</p>
-		</article>
-
-		<article>
-			<h3><a href="/components/component-1/">Component 2</a></h3>
-			<p>Component 2 blurb</p>
-		</article>
-
-	</main>
-
-	<footer class="site-footer">
-		<small>&copy; frend.co</small>
 	</footer>
+
+	<script>
+		loadJS('/js/dist/global.js');
+	</script>
 </body>
 
 </html>

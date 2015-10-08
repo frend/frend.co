@@ -1,0 +1,24 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Containers
+//----------------------------------------------------------------------
+
+//	Container
+//-----------------------------------
+
+.site-header {
+	border-bottom: 1px solid $light-grey;
+	text-align: center;
+}
+
+
+
+//	Logo
+//-----------------------------------
+
+.site-header__logo {
+	color: $dark-grey;
+	display: inline-block;
+	text-decoration: none;
+	padding: 20px;
+}

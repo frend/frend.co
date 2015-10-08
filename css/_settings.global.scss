@@ -30,6 +30,7 @@ $easing: ease-out;
 //-----------------------------------
 
 $dark-grey: #333;
+$light-grey: #e5e5e5;
 
 
 
@@ -40,3 +41,11 @@ $dark-grey: #333;
 //	Breakpoints (in px)
 $lap: 600;
 $desk: 900;
+
+
+
+//	Grid
+//-----------------------------------
+
+//	Gutters (in em)
+$gutter-width: 1.25; /* 20px */

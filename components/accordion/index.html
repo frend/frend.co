@@ -12,27 +12,41 @@
 <body class="site">
 
 	<header class="site-header" role="banner">
-		<nav>
-			<ul class="nav-primary">
-				<li class="nav-primary__list-item">
-					<a href="/" class="nav-primary__item">Components</a>
-				</li>
-				<li class="nav-primary__list-item">
-					<a href="/about/" class="nav-primary__item">About</a>
-				</li>
-			</ul>
-		</nav>
+		<a class="site-header__logo" href="/">Frend</a>
 	</header>
 
 	<main class="site-main" role="main">
-
-		<section>
-			<iframe src="accordion.html"></iframe>
+		<section class="component-embed">
+			<h2 data-collapsible-toggle>Toggle 1</h2>
+			<div class="collapsible__content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+			<h2 data-collapsible-toggle data-collapsible-text="Close yo">Open yo</h2>
+			<div class="collapsible__content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+			<div data-accordion>
+				<h2 data-collapsible-toggle>Accordion 1</h2>
+				<div class="collapsible__content">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				</div>
+				<h2 data-collapsible-toggle>Accordion 2</h2>
+				<div class="collapsible__content">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				</div>
+			</div>
+			<link rel="stylesheet" href="accordion.css">
+			<script src="accordion.js"></script>
 		</section>
-
-		<h1>Accordion</h1>
-		<p>Component blurb</p>
-		<ul>
+		<section class="wrapper">
+			<h1>Accordion</h1>
+			<p>Component blurb</p>
+		</section>
+		<!-- <ul>
 			<li>
 				<a href="https://github.com/frend/frend.co/tree/master/accordion/accordion.html" target="_blank">HTML</a>
 			</li>
@@ -42,12 +56,17 @@
 			<li>
 				<a href="https://github.com/frend/frend.co/tree/master/accordion/accordion.js" target="_blank">JS</a>
 			</li>
-		</ul>
-
+		</ul> -->
 	</main>
 
 	<footer class="site-footer">
-		<small>&copy; frend.co</small>
+		<nav>
+			<ul class="nav-primary">
+				<li class="nav-primary__list-item">
+					<a href="/about/" class="nav-primary__item">About</a>
+				</li>
+			</ul>
+		</nav>
 	</footer>
 </body>
 
