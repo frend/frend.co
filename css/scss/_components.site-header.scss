@@ -1,22 +1,25 @@
 //----------------------------------------------------------------------
-//	Components
+//	COMPONENTS
 //	Containers
 //----------------------------------------------------------------------
 
-//	Body
+//	Container
 //-----------------------------------
 
-.site {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+.site-header {
+	background-color: #eee;
+	border-bottom: 1px solid $light-grey;
+	text-align: center;
 }
 
 
 
-//	Content
+//	Logo
 //-----------------------------------
 
-.site-main {
-	flex: 1;
+.site-header__logo {
+	color: $dark-grey;
+	display: inline-block;
+	text-decoration: none;
+	padding: 20px;
 }

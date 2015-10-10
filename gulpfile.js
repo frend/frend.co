@@ -40,6 +40,7 @@ gulp.task('css', function () {
 	// compile sass to css and save as global.css
 	.pipe(sourcemaps.init())
 	.pipe(sass({
+		includePaths: ['css/scss'],
 		errLogToConsole: true
 	}))
 	.pipe(rename('global.css'))

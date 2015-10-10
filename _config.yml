@@ -1,0 +1,23 @@
+# Site settings
+title: Frend
+email: hello@frend.co
+description: Frend description something
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://frend.co" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+highlighter: pygments
+
+exclude: [node_modules, package.json, npm-debug.log, gulpfile.js, webpack.config.js, css/*.scss]
+
+collections:
+  components:
+    output: true
+
+defaults:
+  - scope:
+      type: components
+    values:
+      layout: component
+      permalink: components/:name/

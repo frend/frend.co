@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<section class="component-embed">
+	{% include_relative {{ page.filename }}.html %}
+</section>
+
+<section class="wrapper">
+	<h1>{{ page.title }}</h1>
+	<p>{{ page.description }}</p>
+
+	<h2>Source code</h2>
+	<h3>HTML</h3>
+	{% highlight html linenos %}
+	{% include_relative {{ page.filename }}.html %}
+	{% endhighlight %}
+	<h3>CSS</h3>
+	{% highlight css linenos %}
+	{% include_relative {{ page.filename }}.css %}
+	{% endhighlight %}
+	<h3>JS</h3>
+	{% highlight js linenos %}
+	{% include_relative {{ page.filename }}.js %}
+	{% endhighlight %}
+</section>
+
+<script>loadCSS('{{ page.filename }}.css');</script>
+<script>loadCSS('/css/syntax.css');</script>
+<script>loadJS('{{ page.filename }}.js');</script>

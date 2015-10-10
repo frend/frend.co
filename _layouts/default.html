@@ -1,0 +1,20 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  {% include head.html %}
+
+  <body class="site">
+
+    {% include header.html %}
+
+    <main class="site-main" role="main">
+        {{ content }}
+    </main>
+
+    {% include footer.html %}
+
+  <script>
+    loadJS('/js/dist/global.js');
+  </script>
+</body>
+
+</html>
