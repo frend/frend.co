@@ -3,4 +3,4 @@ layout: page
 title: About Frend
 permalink: /about/
 ---
-<h1>About Frend</h1>
+{% include_relative README.md %}
