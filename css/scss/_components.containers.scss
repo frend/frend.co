@@ -7,9 +7,9 @@
 //-----------------------------------
 
 .site {
-	//display: flex;
-	//flex-direction: column;
-	//min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
 
@@ -18,5 +18,5 @@
 //-----------------------------------
 
 .site-main {
-	//flex: 1;
+	flex: 1 0 auto;
 }
