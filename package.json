@@ -11,10 +11,16 @@
     "url": "https://github.com/frend/frend.co.git"
   },
   "devDependencies": {
-    "babel-core": "^5.8.25",
-    "babel-loader": "^5.3.2",
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "event-stream": "^3.3.2",
+    "glob": "^6.0.1",
     "gulp": "3.9.0",
     "gulp-autoprefixer": "3.0.2",
+    "gulp-babel": "^6.1.0",
     "gulp-cached": "1.1.0",
     "gulp-combine-media-queries": "0.2.0",
     "gulp-minify-css": "1.2.1",
@@ -22,6 +28,8 @@
     "gulp-sass": "2.0.4",
     "gulp-sourcemaps": "1.6.0",
     "gulp-svgmin": "1.2.0",
+    "gulp-uglify": "^1.5.1",
+    "vinyl-source-stream": "^1.1.0",
     "webpack": "^1.12.2"
   }
 }

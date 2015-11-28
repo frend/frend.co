@@ -1,3 +1,3 @@
 import something from './component-embed';
 
-console.log(something);
+//console.log(something);

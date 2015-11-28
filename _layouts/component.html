@@ -24,6 +24,10 @@ layout: default
 	{% endhighlight %}
 </section>
 
-<script>loadCSS('{{ page.filename }}.css');</script>
-<script>loadCSS('/css/syntax.css');</script>
-<script>loadJS('{{ page.filename }}.js');</script>
+<script>
+	loadCSS('{{ page.filename }}.css');
+	loadCSS('/css/syntax.css');
+	loadJS('/dist/fr{{ page.filename }}.min.js', function () {
+		fr{{ page.filename }}('.fr-{{ page.filename }}');
+	});
+</script>

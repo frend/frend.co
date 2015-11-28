@@ -46,13 +46,13 @@
 
 	'use strict';
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 	var _componentEmbed = __webpack_require__(1);
 
 	var _componentEmbed2 = _interopRequireDefault(_componentEmbed);
 
-	console.log(_componentEmbed2['default']);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	console.log(_componentEmbed2.default);
 
 /***/ },
 /* 1 */
@@ -60,13 +60,12 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	var something = 'Test';
 
-	exports['default'] = something;
-	module.exports = exports['default'];
+	exports.default = something;
 
 /***/ }
 /******/ ]);
