@@ -5,6 +5,8 @@
 
 //	All
 //-----------------------------------
+var modulePrefix = 'Fr';
+
 var gulp = require('gulp');
 var pkg = require('./package.json');
 var cache = require('gulp-cached');
@@ -82,14 +84,14 @@ gulp.task('js-component', function (done) {
 	// glob the component files
 	glob('./_components/**/*.js', function(err, files) {
         if(err) done(err);
-	    
+
 	    // map them to our stream function
 	    var tasks = files.map(function(entry) {
 	    	// wrangle the plugin exports name from the entry param
 	    	var moduleDir = entry.split('./_components/')[1],
-	    		moduleName = 'fr' + moduleDir.split('/')[0];
+	    		moduleName = modulePrefix + moduleDir.split('/')[0];
 	    	// use this to expose standalone module name
-	        return browserify({ 
+	        return browserify({
 	        		entries: [entry],
 	        		debug: true, // includes sourcemaps
 	        		standalone: moduleName
@@ -99,7 +101,7 @@ gulp.task('js-component', function (done) {
 	            .pipe(source(entry))
 	            .pipe(rename({
 					dirname: '',
-					prefix: 'fr'
+					prefix: modulePrefix
 				}))
 	            .pipe(gulp.dest('./dist'));
 	        });

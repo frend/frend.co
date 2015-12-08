@@ -1,16 +1,42 @@
 'use strict';
 
-function frtabs(selector, options = {}) {
+//
+let options = {};
 
-	console.log(selector, options);
 
-	let something = true;
+class Frtabs {
 
-	function build () {
+	constructor (selector = '.js-fr-tabs', {
+		containerClassName: containerClassName = 'fr-tabs',
+		linkEl: linkEl = 'button'
+	} = {}) {
+
+		options = {
+			containerClassName,
+			linkEl
+		}
+
+		init();
+	}
+
+
+	// public methods
+	destroy () {
+		console.log('destroy');
 	}
 
 }
 
-// not importing this module anywhere, so module.exports instead of named default
-// export default frtabs;
-module.exports = frtabs;
+
+// private methods
+function addA11y (selector, options) {
+	console.log('a11y');
+}
+
+function init () {
+	console.log(options);
+}
+
+
+// module exports
+export default Frtabs;
