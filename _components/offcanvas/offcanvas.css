@@ -1,0 +1,25 @@
+
+/* Functional */
+.fr-offcanvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	transform: translateX(-100%);
+	will-change: translateX;
+	z-index: 10;
+}
+.fr-offcanvas[aria-hidden="false"] {
+	transform: translateX(0);
+}
+
+/* Style */
+.fr-offcanvas {
+	background-color: rgba(0, 0, 0, 0.9);
+	color: #fff;
+	max-width: 400px;
+	padding: 20px;
+	transition: transform 200ms ease-out;
+	outline: none;
+}
