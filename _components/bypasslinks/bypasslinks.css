@@ -1,0 +1,16 @@
+
+.fr-links-bypass {
+	left: 0;
+	position: fixed;
+	top: 0;
+	z-index: 100;
+}
+.fr-links-bypass__link {
+	display: inline-block;
+	position: absolute;
+	top: -100%;
+	white-space: nowrap;
+}
+.fr-links-bypass__link:focus {
+	top: 0;
+}
