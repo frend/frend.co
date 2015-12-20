@@ -38,7 +38,7 @@ layout: default
 	loadCSS('/css/syntax.css');
 	// {% if page.filename %}
 		loadJS('/dist/fr{{ page.filename }}.js', function () {
-			var {{ page.filename }} = new Fr{{ page.filename }}('.js-fr-{{ page.filename }}');
+			var {{ page.filename }} = new Fr{{ page.filename }}();
 		});
 	// {% endif %}
 </script>
