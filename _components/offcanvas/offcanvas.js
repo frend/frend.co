@@ -6,7 +6,7 @@ let elemToggle = {};
 const namespace = 'froffcanvas';
 
 
-var Froffcanvas = function(selector = '.js-fr-offcanvas', toggle = '.js-fr-offcanvas-toggle') {
+let Froffcanvas = function(selector = '.js-fr-offcanvas', toggle = '.js-fr-offcanvas-toggle') {
 
 
 	elemSelector = document.querySelector(selector);
