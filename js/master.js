@@ -1,3 +1,9 @@
-import something from './component-embed';
+/**
+ * Global scripts
+ */
 
-//console.log(something);
+import ComponentEmbed from './modules/component-embed';
+import WebFonts from './modules/web-fonts';
+
+//	Run
+WebFonts();

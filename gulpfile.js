@@ -101,7 +101,7 @@ gulp.task('js-component', function (done) {
 	            .pipe(source(entry))
 	            .pipe(rename({
 					dirname: '',
-					prefix: modulePrefix
+					prefix: modulePrefix.toLowerCase()
 				}))
 	            .pipe(gulp.dest('./dist'));
 	        });

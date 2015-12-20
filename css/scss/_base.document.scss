@@ -17,6 +17,11 @@ body {
 	font-size: 100%; /* 16px */
 	height: 100%;
 	line-height: $doc-line-height;
+	letter-spacing: 0.055em; /* adjust letter spacing to match webfont */
+	.wf-active & {
+		font-family: $web-font;
+		letter-spacing: 0; /* reset */
+	}
 }
 
 

@@ -3,13 +3,36 @@
 //	Lists
 //----------------------------------------------------------------------
 
+
 //	Inline
 //-----------------------------------
-
 .list-inline {
 	font-size: 0;
 }
 .list-inline > li {
 	display: inline-block;
 	font-size: 1rem; /* 16px */
+}
+
+
+
+//	Inline
+//-----------------------------------
+.list-components {
+	font-size: 0;
+	margin-left: -1.25rem; /* -20px */
+}
+.list-components__list-item {
+	display: inline-block;
+	font-size: 1rem; /* 16px */
+	margin-bottom: 1.25rem; /* 20px */
+	padding-left: 1.25rem; /* 20px */
+	vertical-align: top;
+	width: 100%;
+	@include mq($lap) {
+		width: 50%;
+	}
+	@include mq($desk) {
+		width: 33.3%;
+	}
 }

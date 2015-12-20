@@ -11,7 +11,8 @@ $doc-font-size: 16; /* 16px */
 $doc-line-height: 1.25; /* 20px */
 
 //	Font stacks
-$base-font: Arial, Helvetica, sans-serif;
+$base-font: Palatino, Georgia, serif;
+$web-font: 'Merriweather', $base-font;
 
 
 
@@ -39,8 +40,8 @@ $light-grey: #e5e5e5;
 //-----------------------------------
 
 //	Breakpoints (in px)
-$lap: 600;
-$desk: 900;
+$lap: 500;
+$desk: 800;
 
 
 

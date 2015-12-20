@@ -3,12 +3,11 @@ layout: default
 title: Front-end something something
 ---
 <div class="wrapper">
-	<h1>frend yo</h1>
-	<p>Main intro blurb, Dardy Duncan take it away&hellip;</p>
-	<div class="grid">
+	<h1 class="text-large">Frendly components.</h1>
+	<ul class="list-components">
 		{% assign component = site.components | sort: 'title'  %}
 		{% for component in component %}
         {% include listed-component.html %}
         {% endfor %}
-	</div>
+	</ul>
 </div>

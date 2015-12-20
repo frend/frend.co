@@ -7,8 +7,6 @@
 //-----------------------------------
 
 .site-header {
-	background-color: #eee;
-	border-bottom: 1px solid $light-grey;
 	text-align: center;
 }
 
@@ -20,6 +18,9 @@
 .site-header__logo {
 	color: $dark-grey;
 	display: inline-block;
+	font-family: 'Montserrat';
+	font-size: 1.25em; /* 20px */
+	line-height: 1; /* 20px */
 	text-decoration: none;
-	padding: 20px;
+	padding: 1em; /* 20px */
 }

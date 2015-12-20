@@ -50,9 +50,18 @@
 
 	var _componentEmbed2 = _interopRequireDefault(_componentEmbed);
 
+	var _webFonts = __webpack_require__(2);
+
+	var _webFonts2 = _interopRequireDefault(_webFonts);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	console.log(_componentEmbed2.default);
+	//	Run
+	/**
+	 * Global scripts
+	 */
+
+	(0, _webFonts2.default)();
 
 /***/ },
 /* 1 */
@@ -63,9 +72,41 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var something = 'Test';
+	var ComponentEmbed = 'Test';
 
-	exports.default = something;
+	exports.default = ComponentEmbed;
+	module.exports = exports['default'];
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	/**
+	 * Web font loader
+	 */
+
+	var fonts = {
+		google: {
+			families: ['Merriweather:400,700:latin', 'Montserrat']
+		}
+	};
+	var webfontLocation = '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+
+	//	Main
+	function WebFonts() {
+		//	set webfont.js config options and async load the library
+		window.WebFontConfig = fonts;
+		loadJS(webfontLocation);
+	}
+
+	//	module exports
+	exports.default = WebFonts;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

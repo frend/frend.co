@@ -36,23 +36,16 @@
 
 
 
-//	Objects
-//-----------------------------------
-
-@import "objects.grid";
-
-
-
-
 //	Components
 //-----------------------------------
 
-@import "components.component-embed";
+@import "components.component";
 @import "components.containers";
+@import "components.links";
 @import "components.lists";
 @import "components.navigation";
 @import "components.site-header";
-//@import "components.site-footer";
+@import "components.text";
 
 
 
