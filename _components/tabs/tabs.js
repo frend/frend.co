@@ -40,48 +40,48 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	// a11y
 	function _addA11y () {
 		// add role="tablist" to ul
-		for (let tabList of tabLists) {
+		tabLists.forEach((tabList) => {
 			tabList.setAttribute('role', 'tablist');
-		};
+		});
 
 		// add role="presentation" to li
-		for (let tabItem of tabListItems) {
+		tabListItems.forEach((tabItem) => {
 			tabItem.setAttribute('role', 'presentation');
-		};
+		});
 		
 		// add role="tab" and aria-controls to anchor
-		for (let tab of tabs) {
+		tabs.forEach((tab) => {
 			tab.setAttribute('role', 'tab');
 			tab.setAttribute('aria-controls', tab.hash.substring(1));
-		};
+		});
 		
 		// add role="tabpanel" to section
-		for (let tabpanel of tabpanels) {
+		tabpanels.forEach((tabpanel) => {
 			tabpanel.setAttribute('role', 'tabpanel');
-		};
+		});
 	}
 
 	function _removeA11y () {
 		// remove role="tablist" from ul
-		for (let tabList of tabLists) {
+		tabLists.forEach((tabList) => {
 			tabList.removeAttribute('role');
-		};
+		});
 
 		// remove role="presentation" from li
-		for (let tabItem of tabListItems) {
+		tabListItems.forEach((tabItem) => {
 			tabItem.removeAttribute('role');
-		};
+		});
 		
 		// remove role="tab" and aria-controls from anchor
-		for (let tab of tabs) {
+		tabs.forEach((tab) => {
 			tab.removeAttribute('role');
 			tab.removeAttribute('aria-controls');
-		};
+		});
 		
 		// remove role="tabpanel" from section
-		for (let tabpanel of tabpanels) {
+		tabpanels.forEach((tabpanel) => {
 			tabpanel.removeAttribute('role');
-		};
+		});
 	}
 
 
