@@ -6,7 +6,7 @@
 .fr-tabs__tablist {
 }
 
-.fr-tabs__tablist-item {
+.has-fr-tabs .fr-tabs__tablist-item {
 	display: inline;
 }
 

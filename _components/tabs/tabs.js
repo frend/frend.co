@@ -35,6 +35,13 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	let tabpanels = doc.querySelectorAll(tabpanelSelector);
 
 
+	// UTILS
+	// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
+	function _closest (el, fn) {
+		return el && (fn(el) ? el : _closest(el.parentNode, fn));
+	}
+
+
 	// PRIVATE METHODS
 	// a11y
 	function _addA11y () {
@@ -128,13 +135,21 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 
 	// actions
 	function _showTab (target) {
+		// get context of tab container and its children
+		let thisContainer = _closest(target, (el) => {
+			return el.classList.contains(selector.substring(1));
+		});
+		let siblingTabs = thisContainer.querySelectorAll(tablistSelector + ' a');
+		let siblingTabpanels = thisContainer.querySelectorAll(tabpanelSelector);
+
 		// set inactives
-		tabs.forEach((tab) => {
+		siblingTabs.forEach((tab) => {
 			tab.setAttribute('tabindex', -1);
 		});
-		tabpanels.forEach((tabpanel) => {
+		siblingTabpanels.forEach((tabpanel) => {
 			tabpanel.setAttribute('aria-hidden', 'true');
 		});
+		
 		// set actives and focus
 		target.setAttribute('tabindex', 0);
 		target.focus();
@@ -143,7 +158,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 
 
 	// bindings
-	function _bindTabEvents () {
+	function _bindTabsEvents () {
 		// bind all tab click and keydown events
 		tabs.forEach((tab) => {
 			tab.addEventListener('click', _eventTabClick);
@@ -151,7 +166,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 		});
 	}
 
-	function _unbindTabEvents () {
+	function _unbindTabsEvents () {
 		// unbind all tab click and keydown events
 		tabs.forEach((tab) => {
 			tab.removeEventListener('click', _eventTabClick);
@@ -163,7 +178,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	// PUBLIC METHODS
 	function destroy () {
 		_removeA11y();
-		_unbindTabEvents();
+		_unbindTabsEvents();
 		docEl.classList.remove(tabsReadyClass);
 	}
 
@@ -172,10 +187,12 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	function _init () {
 		if (tabContainers.length) {
 			_addA11y();
-			_bindTabEvents();
+			_bindTabsEvents();
+			// set all first tabs active on init
+			tabContainers.forEach((tabContainer) => {
+				_showTab(tabContainer.querySelector(tablistSelector + ' a'));
+			});
 			docEl.classList.add(tabsReadyClass);
-			// set first tab active on init
-			_showTab(tabs[0]);
 		}
 	}
 	_init();
