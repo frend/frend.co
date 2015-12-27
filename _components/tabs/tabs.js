@@ -102,7 +102,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 
 	// events
 	function _eventTabClick (e) {
-		_showTab(e.target);
+		_showTab(e.target, true);
 		e.preventDefault(); // look into remove id/settimeout/reinstate id as an alternative to preventDefault
 	}
 
@@ -128,13 +128,13 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 
 		// if new next/prev tab available, show it by passing tab anchor to _showTab method
 		if (newTabItem) {
-			_showTab(newTabItem.querySelector('[role="tab"]'));
+			_showTab(newTabItem.querySelector('[role="tab"]'), true);
 		}
 	}
 
 
 	// actions
-	function _showTab (target) {
+	function _showTab (target, giveFocus) {
 		// get context of tab container and its children
 		let thisContainer = _closest(target, (el) => {
 			return el.classList.contains(selector.substring(1));
@@ -152,7 +152,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 		
 		// set actives and focus
 		target.setAttribute('tabindex', 0);
-		target.focus();
+		if (giveFocus) target.focus();
 		doc.getElementById(target.getAttribute('aria-controls')).removeAttribute('aria-hidden');
 	}
 
@@ -190,7 +190,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 			_bindTabsEvents();
 			// set all first tabs active on init
 			tabContainers.forEach((tabContainer) => {
-				_showTab(tabContainer.querySelector(tablistSelector + ' a'));
+				_showTab(tabContainer.querySelector(tablistSelector + ' a'), false);
 			});
 			docEl.classList.add(tabsReadyClass);
 		}
