@@ -5,8 +5,8 @@ title: Front-end something something
 <div class="wrapper">
 	<h1 class="text-large">Frendly components.</h1>
 	<ul class="list-components">
-		{% assign component = site.components | sort: 'title'  %}
-		{% for component in component %}
+		{% assign components = site.components | sort: 'title'  %}
+		{% for component in components %}
         {% include listed-component.html %}
         {% endfor %}
 	</ul>

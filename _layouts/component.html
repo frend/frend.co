@@ -31,6 +31,16 @@ layout: default
 	<div class="component-source">
 		{% highlight js %}{% include_relative {{ page.filename }}.js %}{% endhighlight %}
 	</div>
+
+	{% if page.links %}
+	<h2>Handy links</h2>
+	<ul>
+		{% for link in page.links %}
+		<li><a href="{{link.url}}" title="Opens in new window" target="_blank">{{link.title}}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+
 </section>
 
 <script>
