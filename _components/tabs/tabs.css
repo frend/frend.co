@@ -1,2 +1,24 @@
+/* Container */
 .fr-tabs {
+}
+
+/* Tablist */
+.fr-tabs__tablist {
+}
+
+.fr-tabs__tablist-item {
+	display: inline;
+}
+
+.fr-tabs__tab {
+}
+.fr-tabs__tab[tabindex="0"] {
+	font-weight: bold;
+}
+
+/* Tabpanel */
+.fr-tabs__panel {
+}
+.fr-tabs__panel[aria-hidden="true"] {
+	display: none;
 }

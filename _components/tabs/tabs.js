@@ -13,8 +13,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 		activeTabClass: activeTabClass = 'fr-tabs__tab--is-active',
 		tabpanelSelector: tabpanelSelector = '.fr-tabs__panel',
 		activePanelClass: activePanelClass = 'fr-tabs__panel--is-active',
-		tabsReadyClass: tabsReadyClass = 'has-fr-tabs',
-		useHash: useHash = false
+		tabsReadyClass: tabsReadyClass = 'has-fr-tabs'
 	} = {}) {
 
 
@@ -58,7 +57,12 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 		// add role="tabpanel" to section
 		tabpanels.forEach((tabpanel) => {
 			tabpanel.setAttribute('role', 'tabpanel');
+			// make first child of tabpanel focusable if available
+			if (tabpanel.children) {
+				tabpanel.children[0].setAttribute('tabindex', 0);
+			}
 		});
+
 	}
 
 	function _removeA11y () {
@@ -81,42 +85,86 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 		// remove role="tabpanel" from section
 		tabpanels.forEach((tabpanel) => {
 			tabpanel.removeAttribute('role');
+			// remove first child focusability if present
+			if (tabpanel.children) {
+				tabpanel.children[0].removeAttribute('tabindex');
+			}
 		});
 	}
 
 
 	// events
 	function _eventTabClick (e) {
-		console.log(e);
+		_showTab(e.target);
+		e.preventDefault(); // look into remove id/settimeout/reinstate id as an alternative to preventDefault
+	}
+
+	function _eventTabKeydown (e) {
+		// collect tab targets, and their parents' prev/next
+		let currentTab = e.target;
+		let previousTabItem = e.target.parentNode.previousElementSibling;
+		let nextTabItem = e.target.parentNode.nextElementSibling;
+		let newTabItem;
+
+		// catch left and right arrow key events
+		switch (e.keyCode) {
+			case 37:
+				newTabItem = previousTabItem;
+				break;
+			case 39:
+				newTabItem = nextTabItem;
+				break;
+			default:
+				newTabItem = false
+				break;
+		}
+
+		// if new next/prev tab available, show it by passing tab anchor to _showTab method
+		if (newTabItem) {
+			_showTab(newTabItem.querySelector('[role="tab"]'));
+		}
 	}
 
 
 	// actions
-	function _addTabsReady () {
-		docEl.classList.add(tabsReadyClass);
-	}
-
-	function _removeTabsReady () {
-		docEl.classList.remove(tabsReadyClass);
-	}
-
-	function _setActiveTab (i) {
+	function _showTab (target) {
+		// set inactives
+		tabs.forEach((tab) => {
+			tab.setAttribute('tabindex', -1);
+		});
+		tabpanels.forEach((tabpanel) => {
+			tabpanel.setAttribute('aria-hidden', 'true');
+		});
+		// set actives and focus
+		target.setAttribute('tabindex', 0);
+		target.focus();
+		doc.getElementById(target.getAttribute('aria-controls')).removeAttribute('aria-hidden');
 	}
 
 
 	// bindings
-	function _bindClickEvents () {
+	function _bindTabEvents () {
+		// bind all tab click and keydown events
+		tabs.forEach((tab) => {
+			tab.addEventListener('click', _eventTabClick);
+			tab.addEventListener('keydown', _eventTabKeydown);
+		});
 	}
 
-	function _unbindClickEvents () {
+	function _unbindTabEvents () {
+		// unbind all tab click and keydown events
+		tabs.forEach((tab) => {
+			tab.removeEventListener('click', _eventTabClick);
+			tab.removeEventListener('keydown', _eventTabKeydown);
+		});
 	}
 
 
 	// PUBLIC METHODS
 	function destroy () {
 		_removeA11y();
-		_unbindClickEvents();
-		_removeTabsReady();
+		_unbindTabEvents();
+		docEl.classList.remove(tabsReadyClass);
 	}
 
 
@@ -124,8 +172,10 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	function _init () {
 		if (tabContainers.length) {
 			_addA11y();
-			_bindClickEvents();
-			_addTabsReady();
+			_bindTabEvents();
+			docEl.classList.add(tabsReadyClass);
+			// set first tab active on init
+			_showTab(tabs[0]);
 		}
 	}
 	_init();
