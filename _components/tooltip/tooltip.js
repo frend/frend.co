@@ -1,72 +1,92 @@
 'use strict';
 
-//
-let options = {};
-let elemSelector = {};
-let currentTooltip = {};
+// Move Array prototype to NodeList (allows for Array methods on NodeLists)
+// https://gist.github.com/paulirish/12fb951a8b893a454b32 (#gistcomment-1487315)
+Object.setPrototypeOf(NodeList.prototype, Array.prototype);
+
+/**
+ * @param {string} selector The selector to match for tab components
+ */
+let Frtooltip = function (selector = '.js-fr-tooltip') {
 
 
-var Frtooltip = function (selector = '.js-fr-tooltip') {
+	// CONSTANTS
+	const doc = document;
+	const docEl = doc.documentElement;
 
 
-	elemSelector = document.querySelectorAll(selector);
+	// SUPPORTS
+	if (!'querySelector' in document || !'addEventListener' in window || !docEl.classList) return;
 
 
-	function init () {
-		bindMouseOver();
-		bindMouseOut();
-		bindFocus();
-		bindBlur();
+	// SETUP
+	// set tab element NodeLists
+	let tooltips = document.querySelectorAll(selector);
+	let currentTooltip;
+
+
+	// PRIVATE METHODS
+	//	bindings
+	function _bindMouseOver(tooltip) {
+		tooltip.addEventListener('mouseover', _eventMouseOver);
+	}
+	function _bindMouseOut(tooltip) {
+		tooltip.addEventListener('mouseout', _eventMouseOut);
+	}
+	function _bindFocus(tooltip) {
+		tooltip.addEventListener('focus', _eventFocus);
+	}
+	function _bindBlur(tooltip) {
+		tooltip.addEventListener('blur', _eventBlur);
 	}
 
 
-	//	Bindings
-	function bindMouseOver() {
-		elemSelector[0].addEventListener('mouseover', eventMouseOver);
+	//	events
+	function _eventMouseOver(e) {
+		_showTooltip(e.target);
 	}
-	function bindMouseOut() {
-		elemSelector[0].addEventListener('mouseout', eventMouseOut);
+	function _eventMouseOut() {
+		_hideTooltip(currentTooltip);
 	}
-	function bindFocus() {
-		elemSelector[0].addEventListener('focus', eventFocus);
+	function _eventFocus(e) {
+		_showTooltip(e.target);
 	}
-	function bindBlur() {
-		elemSelector[0].addEventListener('blur', eventBlur);
-	}
-
-
-	//	Events
-	function eventMouseOver(e) {
-		showTooltip(e.target);
-	}
-	function eventMouseOut() {
-		hideTooltip(currentTooltip);
-	}
-	function eventFocus(e) {
-		showTooltip(e.target);
-	}
-	function eventBlur(e) {
-		hideTooltip(e.target);
+	function _eventBlur(e) {
+		_hideTooltip(e.target);
 	}
 
 
-	function showTooltip(_this) {
+	//	actions
+	function _showTooltip(_this) {
 		let id = _this.getAttribute('aria-describedby');
 		currentTooltip = document.querySelector('#' + id);
-		toggleTooltip(currentTooltip, false);
+		_toggleTooltip(currentTooltip, false);
 	}
-	function hideTooltip() {
-		toggleTooltip(currentTooltip, true);
+	function _hideTooltip() {
+		_toggleTooltip(currentTooltip, true);
 	}
-
-	//	Utils
-	function toggleTooltip(tooltip, state) {
-		console.log(tooltip);
+	function _toggleTooltip(tooltip, state) {
 		tooltip.setAttribute('aria-hidden', state);
 	}
 
 
-	if (elemSelector.length) init();
+	// INIT
+	function _init () {
+		if (tooltips.length) {
+			tooltips.forEach((tooltip) => {
+				//	bind all interaction events
+				_bindMouseOver(tooltip);
+				_bindMouseOut(tooltip);
+				_bindFocus(tooltip);
+				_bindBlur(tooltip);
+			});
+		}
+	}
+	_init();
+
+
+	// REVEAL API
+	return {};
 }
 
 
