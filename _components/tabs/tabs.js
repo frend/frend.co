@@ -8,13 +8,13 @@ Object.setPrototypeOf(NodeList.prototype, Array.prototype);
  * @param {string} selector The selector to match for tab components
  * @param {object} options Object containing configuration overrides
  */
-let Frtabs = function (selector = '.js-fr-tabs', {
+const Frtabs = (selector = '.js-fr-tabs', {
 		tablistSelector: tablistSelector = '.fr-tabs__tablist',
 		activeTabClass: activeTabClass = 'fr-tabs__tab--is-active',
 		tabpanelSelector: tabpanelSelector = '.fr-tabs__panel',
 		activePanelClass: activePanelClass = 'fr-tabs__panel--is-active',
 		tabsReadyClass: tabsReadyClass = 'has-fr-tabs'
-	} = {}) {
+	} = {}) => {
 
 
 	// CONSTANTS
@@ -42,8 +42,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	}
 
 
-	// PRIVATE METHODS
-	// a11y
+	// A11Y
 	function _addA11y () {
 		// add role="tablist" to ul
 		tabLists.forEach((tabList) => {
@@ -100,7 +99,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	}
 
 
-	// events
+	// EVENTS
 	function _eventTabClick (e) {
 		_showTab(e.target, true);
 		e.preventDefault(); // look into remove id/settimeout/reinstate id as an alternative to preventDefault
@@ -133,7 +132,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	}
 
 
-	// actions
+	// ACTIONS
 	function _showTab (target, giveFocus) {
 		// get context of tab container and its children
 		let thisContainer = _closest(target, (el) => {
@@ -157,7 +156,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	}
 
 
-	// bindings
+	// BINDINGS
 	function _bindTabsEvents () {
 		// bind all tab click and keydown events
 		tabs.forEach((tab) => {
@@ -175,7 +174,7 @@ let Frtabs = function (selector = '.js-fr-tabs', {
 	}
 
 
-	// PUBLIC METHODS
+	// DESTROY
 	function destroy () {
 		_removeA11y();
 		_unbindTabsEvents();
