@@ -8,7 +8,7 @@ layout: default
 <section class="wrapper">
 	<section>
 		<h1 class="text-large">{{ page.title }}</h1>
-		<p>{{ page.description }}</p>
+		{{ page.content }}
 	</section>
 	<aside>
 		<ul>
@@ -17,20 +17,6 @@ layout: default
 			</li>
 		</ul>
 	</aside>
-
-	<!-- <h2 class="text-medium">Source code</h2> -->
-	<h3 class="text-medium">HTML</h3>
-	<div class="component-source">
-		{% highlight html %}{% include_relative {{ page.filename }}.html %}{% endhighlight %}
-	</div>
-	<h3 class="text-medium">CSS</h3>
-	<div class="component-source">
-		{% highlight css %}{% include_relative {{ page.filename }}.css %}{% endhighlight %}
-	</div>
-	<h3 class="text-medium">JS</h3>
-	<div class="component-source">
-		{% highlight js %}{% include_relative {{ page.filename }}.js %}{% endhighlight %}
-	</div>
 
 	{% if page.links %}
 	<h2>Handy links</h2>

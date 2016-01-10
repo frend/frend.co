@@ -7,7 +7,9 @@ title: Front-end something something
 	<ul class="list-components">
 		{% assign components = site.components | sort: 'title'  %}
 		{% for component in components %}
+		{% if component.alpha != true %}
         {% include listed-component.html %}
+        {% endif %}
         {% endfor %}
 	</ul>
 </div>
