@@ -18,6 +18,12 @@ const Froffcanvas = function(
 	//	CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
+	const transitionEventSyntax = {
+		transition: 'transitionend',
+		WebkitTransition: 'webkitTransitionEnd',
+		MozTransition: 'transitionend',
+		OTransition: 'oTransitionEnd otransitionend'
+	};
 
 
 	//	SUPPORTS
@@ -27,6 +33,8 @@ const Froffcanvas = function(
 	//	SETUP
 	let panel = doc.querySelector(panelSelector);
 	let toggle = doc.querySelector(toggleSelector);
+	let transitionEventName = 'transitionend';
+
 
 
 	//	UTILS
@@ -37,6 +45,14 @@ const Froffcanvas = function(
 	function _closest (el, fn) {
 		// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
 		return el && (fn(el) ? el : _closest(el.parentNode, fn));
+	}
+
+
+	//	Cross-browser
+	function _setTransitionEventPrefix () {
+		for (var prefix in transitionEventSyntax) {
+			if (panel.style[prefix] !== undefined) return transitionEventSyntax[prefix];
+		}
 	}
 
 
@@ -72,6 +88,12 @@ const Froffcanvas = function(
 		//	esc key
 		if (e.keyCode === 27) _hidePanel();
 	}
+	function _eventTransitionEnd (e) {
+		//	set visibilty property to remove keyboard access
+		panel.style.visibility = 'hidden';
+		//	transition event not needed
+		_unbindTransitionEnd();
+	}
 
 
 	//	Bindings
@@ -84,6 +106,9 @@ const Froffcanvas = function(
 	function _bindDocKey () {
 		doc.addEventListener('keydown', _eventDocKey);
 	}
+	function _bindTransitionEnd () {
+		panel.addEventListener(transitionEventName, _eventTransitionEnd);
+	}
 
 	//	Unbind
 	function _unbindPointer () {
@@ -95,6 +120,9 @@ const Froffcanvas = function(
 	function _unbindDocKey () {
 		doc.removeEventListener('keydown', _eventDocKey);
 	}
+	function _unbindTransitionEnd () {
+		panel.removeEventListener(transitionEventName, _eventTransitionEnd);
+	}
 
 
 	//	Actions
@@ -103,6 +131,8 @@ const Froffcanvas = function(
 		panel.setAttribute('aria-hidden', false);
 		panel.setAttribute('tabindex', 0);
 		panel.focus();
+		//	set visibility to override any previous set style
+		panel.style.visibility = 'visible';
 		//	bind document close events
 		_defer(_bindDocClick); // this isn't working for enter, works for space though. WTF.
 		_defer(_bindDocKey);
@@ -114,6 +144,8 @@ const Froffcanvas = function(
 		panel.setAttribute('aria-hidden', true);
 		panel.setAttribute('tabindex', -1);
 		panel.blur();
+		//	bind transition end
+		_bindTransitionEnd();
 		//	unbind document events
 		_unbindDocKey();
 		_unbindDocClick();
@@ -137,6 +169,7 @@ const Froffcanvas = function(
 		if (panel) {
 			_addA11y();
 			_bindPointer();
+			_setTransitionEventPrefix();
 			docEl.classList.add(readyClass);
 		}
 	}
