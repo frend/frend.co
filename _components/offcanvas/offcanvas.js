@@ -18,6 +18,7 @@ const Froffcanvas = function(
 	//	CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
+	// const html = doc.getElementByTagName('html');
 	const transitionEventSyntax = {
 		transition: 'transitionend',
 		WebkitTransition: 'webkitTransitionEnd',
@@ -34,7 +35,7 @@ const Froffcanvas = function(
 	let panel = doc.querySelector(panelSelector);
 	let toggle = doc.querySelector(toggleSelector);
 	let transitionEventName = 'transitionend';
-
+	let docOverflow = {};
 
 
 	//	UTILS
@@ -46,13 +47,23 @@ const Froffcanvas = function(
 		// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
 		return el && (fn(el) ? el : _closest(el.parentNode, fn));
 	}
+	function _getPropValue (el, prop) {
+		//	return css property value
+		return doc.defaultView.getComputedStyle(el, null).getPropertyValue(prop);
+	}
 
 
 	//	Cross-browser
 	function _setTransitionEventPrefix () {
+		//	loop through prefixes and return relevant event
 		for (var prefix in transitionEventSyntax) {
 			if (panel.style[prefix] !== undefined) return transitionEventSyntax[prefix];
 		}
+	}
+	function _setDocOverflowProperty () {
+		//	save document overflow properties to apply when closing panel
+		docOverflow.overflow = _getPropValue(docEl, 'overflow');
+		docOverflow.overflowY = _getPropValue(docEl, 'overflow-y');
 	}
 
 
@@ -138,6 +149,8 @@ const Froffcanvas = function(
 		_defer(_bindDocKey);
 		//	add active class
 		panel.classList.add(activePanelClass);
+		//	fix overflow to remove scroll when covering the entire viewport
+		_hideDocOverflow();
 	}
 	function _hidePanel () {
 		//	add aria-hidden, remove focus
@@ -151,6 +164,8 @@ const Froffcanvas = function(
 		_unbindDocClick();
 		//	remove active class
 		panel.classList.remove(activePanelClass);
+		//	fix overflow to remove scroll when covering the entire viewport
+		_resetDocOverflow();
 	}
 	function destroy () {
 		//	remove attributes
@@ -162,6 +177,16 @@ const Froffcanvas = function(
 		//	remove reference
 		docEl.classList.remove(readyClass);
 	}
+	function _resetDocOverflow () {
+		//	loop through overflow properties and set value
+		for (var prop in docOverflow) {
+			docEl.style[prop] = docOverflow[prop];
+		}
+	}
+	function _hideDocOverflow () {
+		//	prevent scrolling document when panel open
+		docEl.style.overflow = 'hidden';
+	}
 
 
 	//	INIT
@@ -170,6 +195,7 @@ const Froffcanvas = function(
 			_addA11y();
 			_bindPointer();
 			_setTransitionEventPrefix();
+			_setDocOverflowProperty();
 			docEl.classList.add(readyClass);
 		}
 	}
