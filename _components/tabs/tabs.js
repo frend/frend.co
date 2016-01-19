@@ -106,28 +106,26 @@ const Frtabs = function (selector = '.js-fr-tabs', {
 	}
 
 	function _eventTabKeydown (e) {
-		// collect tab targets, and their parents' prev/next
+		// collect tab targets, and their parents' prev/next (or first/last - this is honkin dom traversing)
 		let currentTab = e.target;
-		let previousTabItem = e.target.parentNode.previousElementSibling;
-		let nextTabItem = e.target.parentNode.nextElementSibling;
-		let newTabItem;
+		let previousTabItem = currentTab.parentNode.previousElementSibling || currentTab.parentNode.parentNode.lastElementChild;
+		let nextTabItem = currentTab.parentNode.nextElementSibling || currentTab.parentNode.parentNode.firstElementChild;
 
-		// catch left and right arrow key events
+		// catch left/ and right arrow key events
+		// if new next/prev tab available, show it by passing tab anchor to _showTab method
 		switch (e.keyCode) {
 			case 37:
-				newTabItem = previousTabItem;
+			case 38:
+				_showTab(previousTabItem.querySelector('[role="tab"]'));
+				e.preventDefault();
 				break;
 			case 39:
-				newTabItem = nextTabItem;
+			case 40:
+				_showTab(nextTabItem.querySelector('[role="tab"]'));
+				e.preventDefault();
 				break;
 			default:
-				newTabItem = false
 				break;
-		}
-
-		// if new next/prev tab available, show it by passing tab anchor to _showTab method
-		if (newTabItem) {
-			_showTab(newTabItem.querySelector('[role="tab"]'));
 		}
 	}
 
