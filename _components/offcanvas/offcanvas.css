@@ -8,11 +8,13 @@
 	overflow: auto;
 	width: 100%;
 	transform: translateX(-100%);
+	/*visibility: hidden;*/
 	will-change: translateX;
 	z-index: 10;
 }
 .has-fr-offcanvas .fr-offcanvas[aria-hidden="false"] {
 	transform: translateX(0);
+	/*visibility: visible;*/
 }
 
 /* Style */
