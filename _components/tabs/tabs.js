@@ -194,6 +194,7 @@ const Frtabs = function (selector = '.js-fr-tabs', {
 			docEl.classList.add(tabsReadyClass);
 		}
 	}
+	init();
 
 
 	// REVEAL API
