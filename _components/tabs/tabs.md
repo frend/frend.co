@@ -10,6 +10,8 @@ links:
     url: http://accessibility.athena-ict.com/aria/examples/tabpanel2.shtml
   - title: 24 Ways - How Tabs Should Work
     url: https://24ways.org/2015/how-tabs-should-work/
+  - title: Accessible Culture - Accessible ARIA Tabs
+    url: http://accessibleculture.org/articles/2010/08/aria-tabs/
 ---
 
 The full explanation content can go here. This supports multiple paragraphs.
