@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <section class="component-embed">
 	{% include_relative {{ page.filename }}.html %}
 </section>
@@ -8,12 +9,22 @@ layout: default
 <section class="wrapper">
 	<section>
 		<h1 class="text-large">{{ page.title }}</h1>
+
+		{% if page.sources %}
+		<h2 class="text-hidden">View sources</h2>
+		<ul>
+			{% for source in page.sources %}
+			<li><a href="{{source.url}}"><span>{{ page.title }} </span>{{source.title}}<span> on GitHub</span></a></li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
 		{{ page.content }}
 	</section>
 	<aside>
 		<ul>
 			<li>
-				<a href="https://github.com/frend/frend.co/tree/gh-pages/_components/{{ page.filename }}">View on Github</a>
+				<a href="https://github.com/frend/frend.co/tree/gh-pages/_components/{{ page.filename }}">View {{ page.title }} repo on GitHub</a>
 			</li>
 		</ul>
 	</aside>
@@ -22,7 +33,7 @@ layout: default
 	<h2>Handy links</h2>
 	<ul>
 		{% for link in page.links %}
-		<li><a href="{{link.url}}">{{link.title}}</li>
+		<li><a href="{{link.url}}">{{link.title}}</a></li>
 		{% endfor %}
 	</ul>
 	{% endif %}
@@ -31,7 +42,6 @@ layout: default
 
 <script>
 	loadCSS('{{ page.filename }}.css');
-	loadCSS('/css/syntax.css');
 	// {% if page.filename %} // if a component doesn't need JS, we might wanna wrap this in a conditional
 		loadJS('/dist/fr{{ page.filename }}.min.js', function () {
 			var {{ page.filename }} = Fr{{ page.filename }}();

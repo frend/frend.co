@@ -3,7 +3,16 @@ filename: tabs
 title: Tabs
 description: Tabs blurb. This will pulled into both homepage and component page.
 alpha: false
+sources:
+  - title: HTML
+    url: https://github.com/frend/frend.co/blob/gh-pages/_components/tabs/tabs.html
+  - title: CSS
+    url: https://github.com/frend/frend.co/blob/gh-pages/_components/tabs/tabs.css
+  - title: JS
+    url: https://github.com/frend/frend.co/blob/gh-pages/_components/tabs/tabs.js
 links:
+  - title: WAI ARIA Authoring Practices - Tab Panel
+    url: https://www.w3.org/TR/wai-aria-practices/#tabpanel
   - title: Heydon Pickering - Practical ARIA Examples
     url: http://heydonworks.com/practical_aria_examples/#tab-interface
   - title: Athena Technologies - Tab panel
@@ -14,42 +23,33 @@ links:
     url: http://accessibleculture.org/articles/2010/08/aria-tabs/
 ---
 
-The full explanation content can go here. This supports multiple paragraphs.
+The concept of a tab interface for the web may seem strikingly straight-forward. However, implementations often draw the line at styling and showing/hiding content. Let’s take it further, using JavaScript to add meaningful information and bind helpful keyboard events.
 
-This is pretty forgiving when it comes to whitespace, so shouldn't matter if we add newlines between paras/headings. It also transforms characters like &rsquos from within content, which is pretty cool.
-
-## Usage
-
-### HTML
-This one should be pretty easy. Just a little preformatted block of HTML? Make sure there's a line break here, otherwise it thinks it's part of the paragraph.
-
-	<div class="the-component">
-		<div class="something"></div>
-	</div>
-
-Or you can get syntax highlighing for free with fenced code blocks, using triple-graves:
+Starting with the tab controls, we add relevant `role` attributes to our list. The initial markup that served as a static list of jumplinks to content, is now announced as a part of tab widget.
 
 ``` html
-<div class="the-component">
-	<div class="something"></div>
-</div>
+<ul role="tablist">
+    <li role="presentation">
+      <a href="#tab1" role="tab">Tab 1</a>
+    </li>
+    <li role="presentation">
+      <a href="#tab2" role="tab">Tab 2</a>
+    </li>
+    <li role="presentation">
+      <a href="#tab3" role="tab">Tab 3</a>
+    </li>
+  </ul>
 ```
 
-We should even be able to directly include entire files by using a relative include (single source of truth!) inside of a fenced block:
+The tab panels that hold our content get a similar treatment.
 
 ``` html
-{% include_relative tabs.html %}
+<section id=”tab1” role="tabpanel">
+</section>
+<section id=”tab2” role="tabpanel">
+</section>
+<section id=”tab3” role="tabpanel">
+</section>
 ```
 
-### JS
-Inline code can be included, by wrapping it in graves, like `this = _that;`
-
-For preformatted multiline code blocks, indent the markup with a tab:
-
-	var myComponent = frTabs();
-
-Or again, fenced code blocks, where syntax highlighting is required:
-
-``` js
-var myComponent = frTabs();
-```
+TBC
