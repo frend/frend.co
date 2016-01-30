@@ -11,16 +11,16 @@ html {
 }
 
 body {
-	background-color: #fff;
+	background-color: $blue;
 	color: $dark-grey;
 	font-family: $base-font;
 	font-size: 100%; /* 16px */
 	height: 100%;
 	line-height: $doc-line-height;
-	letter-spacing: 0.055em; /* adjust letter spacing to match webfont */
+	/* letter-spacing: 0.055em; adjust letter spacing to match webfont */
 	.wf-active & {
 		font-family: $web-font;
-		letter-spacing: 0; /* reset */
+		/* letter-spacing: 0; reset */
 	}
 }
 

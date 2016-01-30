@@ -1,7 +1,80 @@
 //----------------------------------------------------------------------
 //	COMPONENTS
-//	Containers
+//	Text
 //----------------------------------------------------------------------
+
+//	Headings
+//-----------------------------------
+
+h1, h2, h3, h4 {
+	font-family: $sans-font;
+	font-weight: normal;
+	letter-spacing: -0.04em;
+	.wf-active & {
+		font-family: $web-font-sans;
+		letter-spacing: 0; /* reset */
+	}
+}
+
+h1 {
+	font-size: 2.125em; /* 34px */
+	line-height: 1.118; /* 38px from 34 */
+	margin-bottom: 2rem; /* 32px */
+}
+
+h2 {
+	font-size: 1.5em; /* 24px */
+	line-height: 1.25; /* 30px from 24 */
+	margin-bottom: 0.375rem; /* 6px */
+}
+p + h2 {
+	padding-top: 2.5rem; /* 40px */
+}
+
+h3 {
+	font-size: 1.25em; /* 20px */
+	line-height: 1.2; /* 24px from 20 */
+	margin-bottom: 0.25rem; /* 4px */
+}
+p + h3 {
+	padding-top: 1.5rem; /* 24px */
+}
+
+
+
+
+//	Paragraphs
+//-----------------------------------
+
+p {
+	font-size: 1.125em; /* 18px */
+	line-height: 1.556; /* 28px from 18 */
+	@include mq($desk) {
+		font-size: 1.25em; /* 20px */
+		line-height: 1.4; /* 28px from 20 */
+	}
+}
+p:not([class]) + p {
+	text-indent: 1.625rem; /* 26px */
+}
+h1 + p + p {
+	text-indent: 0 !important; // hack to fix first para after .text-intro
+}
+
+// .text-intro
+h1 + p { 
+	font-size: 1.5em; /* 24px */
+	font-style: italic;
+	letter-spacing: -0.02em;
+	line-height: 1.208; /* 29px from 24 */
+	margin-bottom: 1.5rem; /* 24px */
+	.wf-active & {
+		letter-spacing: 0;
+	}
+}
+
+
+
 
 //	Sizes
 //-----------------------------------

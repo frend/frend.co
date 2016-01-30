@@ -91,8 +91,9 @@
 	 */
 
 	var fonts = {
-		google: {
-			families: ['Merriweather:400,700:latin', 'Montserrat']
+		custom: {
+			families: ['Benton Sans Cond Medium', 'Freight Text'],
+			urls: ['//cloud.webtype.com/css/d0f727b8-b89e-413f-ad8a-085ca4d7de47.css']
 		}
 	};
 	var webfontLocation = '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';

@@ -1,6 +1,6 @@
 #About Frend
 
-A collection of accessible, modern front-end components.
+A collection of accessible, modern front‑end components.
 
 Frend components are modest and dependency-free. They are built with web standards as a priority and aim to avoid assumptions about tooling or environment. Care has been taken to make sure each component is compliant, keyboard navigable and properly interpreted by assistive technologies.
 

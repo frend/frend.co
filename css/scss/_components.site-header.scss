@@ -18,9 +18,14 @@
 .site-header__logo {
 	color: $dark-grey;
 	display: inline-block;
-	font-family: 'Montserrat';
+	font-family: $sans-font;
 	font-size: 1.25em; /* 20px */
+	letter-spacing: -0.055em;
 	line-height: 1; /* 20px */
 	text-decoration: none;
 	padding: 1em; /* 20px */
+	.wf-active & {
+		font-family: $web-font-sans;
+		letter-spacing: 0; /* reset */
+	}
 }

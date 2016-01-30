@@ -11,8 +11,10 @@ $doc-font-size: 16; /* 16px */
 $doc-line-height: 1.25; /* 20px */
 
 //	Font stacks
-$base-font: Palatino, Georgia, serif;
-$web-font: 'Merriweather', $base-font;
+$base-font: Times, serif;
+$web-font: 'Freight Text', $base-font;
+$sans-font: Helvetica, Arial, sans-serif;
+$web-font-sans: 'Benton Sans Cond Medium', $sans-font;
 
 
 
@@ -30,9 +32,11 @@ $easing: ease-out;
 //	Colors/Themes
 //-----------------------------------
 
-$dark-grey: #333;
-$light-grey: #e5e5e5;
+$dark-grey: #222;
 
+$blue: #d6f4ff;
+$red: #ea3b37;
+$yellow: #ffe566;
 
 
 
