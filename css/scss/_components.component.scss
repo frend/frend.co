@@ -36,7 +36,20 @@
 //	Code
 //-----------------------------------
 
-code {
+pre {
+	background-color: rgba(255, 255, 255, 0.5);
+	font-size: 0.938em; /* 15px */
+	line-height: 1.4; /* 21px */
+	margin: 1.5rem 0 2.25rem -1.25rem; /* 24px 0 36px -20px */
+	padding: 1rem; /* 4px */
+	position: relative;
+	width: calc(100% + 2.5rem);
+	@include mq($desk) {
+		font-size: 1.125em; /* 18px */
+		margin-bottom: 2.75rem; /* 44px */ 
+	}
+}
+p code {
 	background-color: rgba(255, 255, 255, 0.5);
 	font-size: 85%;
 	padding: 0.25rem; /* 4px */
