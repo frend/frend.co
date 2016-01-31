@@ -4,6 +4,30 @@
 //----------------------------------------------------------------------
 
 
+//	Content
+//-----------------------------------
+
+ul:not([class]) {
+	margin-left: 1.25rem; /* 20px */
+}
+ul:not([class]) li {
+	//	extend .p; without the indentation (REWRITE)
+	font-size: 1.125em; /* 18px */
+	letter-spacing: 0.014em;
+	line-height: 1.556; /* 28px from 18 */
+	margin-bottom: 0.5625rem; /* 9px from 18 */
+	@include mq($desk) {
+		font-size: 1.375em; /* 22px */
+		line-height: 1.45; /* 29px from 22 */
+		margin-bottom: 0.6875rem; /* 11px from 22 */
+	}
+	.wf-active {
+		letter-spacing: 0;
+	}
+}
+
+
+
 //	Inline
 //-----------------------------------
 .list-inline {
@@ -35,4 +59,26 @@
 	@include mq($desk) {
 		width: 33.3%;
 	}
+}
+
+
+//	Buttons
+//-----------------------------------
+.list-buttons {
+	@extend .list-inline;
+	margin-bottom: 1.25rem; /* 20px */
+}
+.list-buttons__list-item {
+	margin-right: 5px;
+}
+.list-buttons__item {
+	font-size: 0.875rem; /* 14px */
+	color: #fff;
+	display: block;
+	background-color: $red;
+	padding: 5px 10px;
+	border-radius: 20px;
+	line-height: 20px;
+	text-decoration: none;
+	font-weight: bold;
 }

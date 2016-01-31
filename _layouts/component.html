@@ -2,42 +2,57 @@
 layout: default
 ---
 
+<h1 class="visually-hidden">{{ page.title }}</h1>
+
 <section class="component-embed">
 	{% include_relative {{ page.filename }}.html %}
 </section>
 
 <section class="wrapper">
 	<section>
-		<h1 class="text-large">{{ page.title }}</h1>
+		<header>
+			<h1 class="text-large">
+				{{ page.title }}
+			</h1>
 
-		{% if page.sources %}
-		<h2 class="text-hidden">View sources</h2>
+			{% if page.sources %}
+			<h2 class="visually-hidden">
+				View sources
+			</h2>
+			<ul class="list-buttons">
+				{% for source in page.sources %}
+					<li class="list-buttons__list-item">
+						<a class="list-buttons__item" href="{{source.url}}">
+							{{source.title}}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+		</header>
+
+		{{ page.content }}
+
+		<footer>
+			<p><a href="https://github.com/frend/frend.co/tree/gh-pages/_components/{{ page.filename }}">
+				View {{ page.title }} repo on GitHub
+			</a></p>
+		</footer>
+	</section>
+	<aside>
+		{% if page.links %}
+		<h2>References</h2>
 		<ul>
-			{% for source in page.sources %}
-			<li><a href="{{source.url}}"><span>{{ page.title }} </span>{{source.title}}<span> on GitHub</span></a></li>
+			{% for link in page.links %}
+				<li>
+					<a href="{{link.url}}">
+						{{link.title}}
+					</a>
+				</li>
 			{% endfor %}
 		</ul>
 		{% endif %}
-
-		{{ page.content }}
-	</section>
-	<aside>
-		<ul>
-			<li>
-				<a href="https://github.com/frend/frend.co/tree/gh-pages/_components/{{ page.filename }}">View {{ page.title }} repo on GitHub</a>
-			</li>
-		</ul>
 	</aside>
-
-	{% if page.links %}
-	<h2>Handy links</h2>
-	<ul>
-		{% for link in page.links %}
-		<li><a href="{{link.url}}">{{link.title}}</a></li>
-		{% endfor %}
-	</ul>
-	{% endif %}
-
 </section>
 
 <script>

@@ -51,5 +51,3 @@ The tab panels that hold our content get a similar treatment.
 <section id=”tab3” role="tabpanel">
 </section>
 ```
-
-TBC

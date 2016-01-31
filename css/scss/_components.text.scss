@@ -56,10 +56,16 @@ p + h3 {
 
 p {
 	font-size: 1.125em; /* 18px */
+	letter-spacing: 0.014em;
 	line-height: 1.556; /* 28px from 18 */
+	margin-bottom: 0.5625rem; /* 9px from 18 */
 	@include mq($desk) {
 		font-size: 1.375em; /* 22px */
 		line-height: 1.45; /* 29px from 22 */
+		margin-bottom: 0.6875rem; /* 11px from 22 */
+	}
+	.wf-active {
+		letter-spacing: 0;
 	}
 }
 p:not([class]) + p {
@@ -70,7 +76,7 @@ h1 + p + p {
 }
 
 // .text-intro
-h1 + p { 
+h1 + p {
 	font-size: 1.5em; /* 24px */
 	font-style: italic;
 	letter-spacing: -0.02em;

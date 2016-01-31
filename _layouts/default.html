@@ -1,21 +1,22 @@
 <!doctype html>
 <html class="no-js" lang="en">
-  {% include head.html %}
 
-  <body class="site">
+{% include head.html %}
 
-    <!-- {% include header.html %} -->
+<body class="site">
 
-    <main class="site-main" role="main">
-        {{ content }}
-    </main>
+	<!-- {% include header.html %} -->
 
-    {% include footer.html %}
+	<main class="site-main" role="main">
+		{{ content }}
+	</main>
 
-  <script>
-    loadJS('/js/dist/global.js');
-    // loadJS('/js/vendor/tota11y.min.js');
-  </script>
+	<!-- {% include footer.html %} -->
+
+	<script>
+		loadJS('/js/dist/global.js');
+		// loadJS('/js/vendor/tota11y.min.js');
+	</script>
 </body>
 
 </html>

@@ -3,11 +3,21 @@
 //	Lists
 //----------------------------------------------------------------------
 
+//	Text
+//-----------------------------------
+
+ul:not([class]) a,
+p a {
+	color: $dark-grey;
+	text-decoration: none;
+	@include underline($dark-grey, $blue, 1.05em, 2px);
+}
+
 
 //	Default
 //-----------------------------------
 .link-standard {
 	color: $dark-grey;
 	text-decoration: none;
-	@include underline($dark-grey, #fff, 1.05em, 2px);
+	@include underline($dark-grey, $blue, 1.05em, 2px);
 }
