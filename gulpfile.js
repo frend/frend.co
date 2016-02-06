@@ -75,8 +75,7 @@ gulp.task('component', ['component-lint', 'component-build']);
 gulp.task('component-lint', function (done) {
 	return gulp.src(path.components + '*/*.js')
 		.pipe(eslint())
-		.pipe(eslint.format())
-		.pipe(eslint.failAfterError());
+		.pipe(eslint.format());
 });
 //	Component build
 gulp.task('component-build', function (done) {
