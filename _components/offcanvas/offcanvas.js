@@ -8,9 +8,9 @@
 const FrOffcanvas = function(
 		selector = '.js-fr-offcanvas',
 		{
-			openSelector = openSelector = '.js-fr-offcanvas-open',
-			closeSelector = closeSelector = '.js-fr-offcanvas-close',
-			toggleSelector = toggleSelector = '.js-fr-offcanvas-toggle',
+			openSelector: openSelector = '.js-fr-offcanvas-open',
+			closeSelector: closeSelector = '.js-fr-offcanvas-close',
+			toggleSelector: toggleSelector = '.js-fr-offcanvas-toggle',
 			readyClass: readyClass = 'has-fr-offcanvas',
 			activeClass: activeClass = 'fr-offcanvas-is-active',
 			panelActiveClass: panelActiveClass = 'fr-offcanvas--is-active'
@@ -49,6 +49,10 @@ const FrOffcanvas = function(
 	function _closest (el, fn) {
 		// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
 		return el && (fn(el) ? el : _closest(el.parentNode, fn));
+	}
+	function _getStyleValue (el, prop) {
+		//	return value for CSS property on element
+		return window.getComputedStyle(el, null).getPropertyValue(prop);
 	}
 
 
@@ -100,6 +104,7 @@ const FrOffcanvas = function(
 		if (e.keyCode === 27) _hidePanel();
 	}
 	function _eventTransitionEnd () {
+		console.log('whatttt');
 		//	set visibilty property to remove keyboard access
 		panel.style.visibility = 'hidden';
 		//	transition event not needed
@@ -166,12 +171,15 @@ const FrOffcanvas = function(
 		docEl.classList.add(activeClass);
 	}
 	function _hidePanel () {
+		//	detect transition
+		let hasTransition = _getStyleValue(panel, 'transition').includes('transform');
 		//	add aria-hidden, remove focus
 		panel.setAttribute('aria-hidden', true);
 		panel.removeAttribute('tabindex');
 		panel.blur();
 		//	bind transition end
-		_bindTransitionEnd();
+		if (hasTransition) _bindTransitionEnd();
+		else panel.style.visibility = 'hidden';
 		//	unbind document events
 		_unbindDocKey();
 		_unbindDocClick();
