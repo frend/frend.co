@@ -6,7 +6,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://frend.co" # the base hostname & protocol for your site
 
 # Build settings
-markdown: redcarpet
+# markdown: redcarpet
 # highlighter: pygments
 
 exclude: [node_modules, package.json, npm-debug.log, .babelrc, gulpfile.js, webpack.config.js, css/*.scss]

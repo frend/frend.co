@@ -5,10 +5,10 @@
 Object.setPrototypeOf(NodeList.prototype, Array.prototype);
 
 /**
- * @param {string} selector The selector to match for tab components
  * @param {object} options Object containing configuration overrides
  */
-const Frtabs = function (selector = '.js-fr-tabs', {
+const Frtabs = function ({
+		selector = '.js-fr-tabs',
 		tablistSelector: tablistSelector = '.fr-tabs__tablist',
 		activeTabClass: activeTabClass = 'fr-tabs__tab--is-active',
 		tabpanelSelector: tabpanelSelector = '.fr-tabs__panel',

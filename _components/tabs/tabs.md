@@ -23,11 +23,13 @@ links:
     url: http://accessibleculture.org/articles/2010/08/aria-tabs/
 ---
 
-The concept of a tab interface for the web may seem strikingly straight-forward. However, implementations often draw the line at styling and showing/hiding content. Let’s take it further, using JavaScript to add meaningful information and bind helpful keyboard events.
+The concept of a tab interface for the web may seem strikingly straight-forward. However, implementations often draw the line at styling and showing/hiding content. 
+
+Let’s take it further, using JavaScript to add meaningful information and bind helpful keyboard events.
 
 Starting with the tab controls, we add relevant `role` attributes to our list. The initial markup that served as a static list of jumplinks to content, is now announced as a part of tab widget.
 
-``` html
+~~~ html
 <ul role="tablist">
     <li role="presentation">
       <a href="#tab1" role="tab">Tab 1</a>
@@ -39,15 +41,15 @@ Starting with the tab controls, we add relevant `role` attributes to our list. T
       <a href="#tab3" role="tab">Tab 3</a>
     </li>
   </ul>
-```
+~~~
 
-The tab panels that hold our content get a similar treatment.
+The tab panels that follow this `tablist` and hold our content get a similar treatment.
 
-``` html
+~~~ html
 <section id=”tab1” role="tabpanel">
 </section>
 <section id=”tab2” role="tabpanel">
 </section>
 <section id=”tab3” role="tabpanel">
 </section>
-```
+~~~
