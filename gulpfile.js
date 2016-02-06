@@ -4,167 +4,115 @@
 //----------------------------------------------------------------------
 
 //	All
-//-----------------------------------
-var modulePrefix = 'Fr';
-
 var gulp = require('gulp');
 var pkg = require('./package.json');
-var cache = require('gulp-cached');
 var rename = require('gulp-rename');
-var path = require('path');
 
 //	CSS
-//-----------------------------------
 var sass = require('gulp-sass');
-var minifyCSS = require('gulp-minify-css');
+var nano = require('gulp-cssnano');
+var mergemq = require('gulp-merge-media-queries');
 var autoprefixer = require('gulp-autoprefixer');
-var cmq = require('gulp-combine-media-queries');
 var sourcemaps = require('gulp-sourcemaps');
 
 //	JS
-//-----------------------------------
 var glob = require('glob');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var uglify = require('gulp-uglify');
 var source = require('vinyl-source-stream');
 var es = require('event-stream');
+var buffer = require('vinyl-buffer');
 
-//	Images
-//-----------------------------------
-var svgmin = require('gulp-svgmin');
+//	Project
+var modulePrefix = 'Fr';
+var path = {
+	components: './_components/',
+	css: './css/',
+	js: './js/'
+};
 
 
-
-
-//----------------------------------------------------------------------
 //	CSS
-//
 //----------------------------------------------------------------------
-
+//	Site build
 gulp.task('css', function () {
 
 	// get all .scss files
 	return gulp.src([
-		'css/master.scss'
-	])
-
-	// compile sass to css and save as global.css
-	.pipe(sourcemaps.init())
-	.pipe(sass({
-		includePaths: ['css/scss'],
-		errLogToConsole: true
-	}))
-	.pipe(rename('global.css'))
-	.pipe(sourcemaps.write())
-	.pipe(gulp.dest('css/dist/'))
-
-	// add vendor prefixes and combine media queries
-	.pipe(autoprefixer({
-		browsers: ['last 2 versions', 'ie 10']
-	}))
-	//.pipe(cmq())
-
-	// minify css and save as global.min.css
-	.pipe(minifyCSS())
-	.pipe(rename('global.min.css'))
-	.pipe(gulp.dest('css/dist/'));
+			path.css + 'master.scss'
+		])
+		.pipe(sourcemaps.init())
+		// compile sass to css
+		.pipe(sass({
+			includePaths: [path.css + 'scss'],
+			errLogToConsole: true
+		}))
+		// add vendor prefixes
+		.pipe(autoprefixer({
+			browsers: ['last 2 versions', 'ie 10']
+		}))
+		.pipe(sourcemaps.write())
+		// merge media queries
+		.pipe(mergemq())
+		// output file
+		.pipe(rename('global.css'))
+		.pipe(gulp.dest(path.css + 'dist/'))
+		// minify css
+		.pipe(nano())
+		// output file
+		.pipe(rename('global.min.css'))
+		.pipe(gulp.dest(path.css + 'dist/'));
 });
 
 
-
-
-//----------------------------------------------------------------------
 //	JS
-//
 //----------------------------------------------------------------------
+//	Component build
+gulp.task('component', function (done) {
 
-gulp.task('js-component', function (done) {
+	//	use glob to catch file names/directories
+	glob(path.components + '*/*.js', function(err, files) {
 
-	// glob the component files
-	glob('./_components/**/*.js', function(err, files) {
-        if(err) done(err);
+		//	catch errors
+		if (err) done(err);
 
-	    // map them to our stream function
-	    var tasks = files.map(function(entry) {
-	    	// wrangle the plugin exports name from the entry param
-	    	var moduleDir = entry.split('./_components/')[1],
-	    		moduleName = modulePrefix + moduleDir.split('/')[0];
-	    	// use this to expose standalone module name
-	        return browserify({
-	        		entries: [entry],
-	        		debug: true, // includes sourcemaps
-	        		standalone: moduleName
-	        	})
-	        	.transform(babelify)
-	            .bundle()
-	            .pipe(source(entry))
-	            .pipe(rename({
+		//	create task per file
+		var tasks = files.map(function (entry) {
+			//	get file props
+			var dir = entry.split(path.components)[1],
+				name = dir.split('/')[0];
+			//	use this to expose standalone module name
+			return browserify({
+					entries: [entry],
+					debug: true, // includes sourcemaps
+					standalone: modulePrefix + name
+				})
+				.transform(babelify) // transpile to ES5
+				.bundle()
+				.pipe(source(entry))
+				.pipe(buffer())
+				.pipe(uglify())
+				.pipe(rename({
 					dirname: '',
+					extname: '.min.js',
 					prefix: modulePrefix.toLowerCase()
 				}))
-	            .pipe(gulp.dest('./dist'));
-	        });
-	    // create a merged stream
-	    es.merge(tasks).on('end', done);
+				.pipe(gulp.dest(path.components + name + '/dist'));
+		});
+
+		es.merge(tasks).on('end', done);
 	});
-
-});
-
-// call build synchronously
-gulp.task('js-component-build', ['js-component'], function () {
-	return gulp.src([
-		'dist/**/*.js',
-		'!dist/**/*.min.js'
-	])
-	.pipe(uglify())
-	.pipe(rename({
-		dirname: '',
-        extname: '.min.js'
-    }))
-	.pipe(gulp.dest('./dist'));
 });
 
 
-
-//----------------------------------------------------------------------
-//	Images
-//
-//----------------------------------------------------------------------
-
-
-//	SVG
-//-----------------------------------
-gulp.task('svg', function () {
-	return gulp.src([
-		'images/svg/*.svg'
-	])
-	.pipe(svgmin())
-	.pipe(rename(function (path) {
-		path.basename += '.min';
-	}))
-	.pipe(gulp.dest('images/svgmin/'));
-});
-
-
-
-
-
-//----------------------------------------------------------------------
 //	Utils
-//
 //----------------------------------------------------------------------
-
-
 //	Default
-//-----------------------------------
 gulp.task('default', ['css', 'js']);
-
-
 //	Watch
-//-----------------------------------
 gulp.task('watch', function () {
-	gulp.watch(['css/**/*.*', '!css/dist/*.css'], ['css']);
-	//gulp.watch(['js/**/*.*', '!js/dist/*.js'], ['js']);
-	gulp.watch(['_components/**/*.js'], ['js-component', 'js-component-build']);
+	gulp.watch([path.css + '**/*.scss'], ['css']);
+	// gulp.watch([path.js + '**/*.*', '!' + path.js + 'dist/*.js'], ['js']);
+	gulp.watch([path.components + '*/*.js'], ['component']);
 });

@@ -58,7 +58,7 @@ layout: default
 <script>
 	loadCSS('{{ page.filename }}.css');
 	// {% if page.filename %} // if a component doesn't need JS, we might wanna wrap this in a conditional
-		loadJS('/dist/fr{{ page.filename }}.min.js', function () {
+		loadJS('/components/{{ page.filename }}/dist/fr{{ page.filename }}.min.js', function () {
 			var {{ page.filename }} = Fr{{ page.filename }}();
 		});
 	// {% endif %}
