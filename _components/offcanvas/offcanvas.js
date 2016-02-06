@@ -30,7 +30,7 @@ const FrOffcanvas = function(
 
 
 	//	SUPPORTS
-	if (!'querySelector' in doc || !'addEventListener' in window || !docEl.classList) return;
+	if (!('querySelector' in doc) || !('addEventListener' in window) || !docEl.classList) return;
 
 
 	//	SETUP
@@ -89,9 +89,9 @@ const FrOffcanvas = function(
 	}
 	function _eventDocClick (e) {
 		//	check if target is panel or child of
-		let isPanel = e.target == panel;
+		let isPanel = e.target === panel;
 		let isPanelChild = _closest(e.target, (el) => {
-			if (el != doc) return el.classList.contains(selector.substring(1));
+			if (el !== doc) return el.classList.contains(selector.substring(1));
 		});
 		if (!isPanel && !isPanelChild) _hidePanel();
 	}
@@ -99,7 +99,7 @@ const FrOffcanvas = function(
 		//	esc key
 		if (e.keyCode === 27) _hidePanel();
 	}
-	function _eventTransitionEnd (e) {
+	function _eventTransitionEnd () {
 		//	set visibilty property to remove keyboard access
 		panel.style.visibility = 'hidden';
 		//	transition event not needed
@@ -109,13 +109,13 @@ const FrOffcanvas = function(
 
 	//	Bindings
 	function _bindTogglePointer () {
-		if (!!buttonToggle) buttonToggle.addEventListener('click', _eventTogglePointer);
+		if (buttonToggle) buttonToggle.addEventListener('click', _eventTogglePointer);
 	}
 	function _bindOpenPointer () {
-		if (!!buttonOpen) buttonOpen.addEventListener('click', _eventOpenPointer);
+		if (buttonOpen) buttonOpen.addEventListener('click', _eventOpenPointer);
 	}
 	function _bindClosePointer () {
-		if (!!buttonClose) buttonClose.addEventListener('click', _eventClosePointer);
+		if (buttonClose) buttonClose.addEventListener('click', _eventClosePointer);
 	}
 	function _bindDocClick () {
 		doc.addEventListener('click', _eventDocClick);
@@ -128,8 +128,14 @@ const FrOffcanvas = function(
 	}
 
 	//	Unbind
-	function _unbindPointer () {
-		buttonToggle.removeEventListener('click', _eventPointer);
+	function _unbindTogglePointer () {
+		if (buttonToggle) buttonToggle.addEventListener('click', _eventTogglePointer);
+	}
+	function _unbindOpenPointer () {
+		if (buttonOpen) buttonOpen.addEventListener('click', _eventOpenPointer);
+	}
+	function _unbindClosePointer () {
+		if (buttonClose) buttonClose.addEventListener('click', _eventClosePointer);
 	}
 	function _unbindDocClick () {
 		doc.removeEventListener('click', _eventDocClick);
@@ -177,7 +183,9 @@ const FrOffcanvas = function(
 		//	remove attributes
 		_removeA11y();
 		//	unbind events
-		_unbindPointer();
+		_unbindTogglePointer();
+		_unbindOpenPointer();
+		_unbindClosePointer();
 		_unbindDocClick();
 		_unbindDocKey();
 		//	remove reference

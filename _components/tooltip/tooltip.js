@@ -16,7 +16,7 @@ let Frtooltip = function (selector = '.js-fr-tooltip') {
 
 
 	// SUPPORTS
-	if (!'querySelector' in document || !'addEventListener' in window || !docEl.classList) return;
+	if (!('querySelector' in doc) || !('addEventListener' in window) || !docEl.classList) return;
 
 
 	// SETUP
@@ -57,8 +57,8 @@ let Frtooltip = function (selector = '.js-fr-tooltip') {
 
 
 	//	actions
-	function _showTooltip(_this) {
-		let id = _this.getAttribute('aria-describedby');
+	function _showTooltip(toggle) {
+		let id = toggle.getAttribute('aria-describedby');
 		currentTooltip = document.querySelector('#' + id);
 		_toggleTooltip(currentTooltip, false);
 	}

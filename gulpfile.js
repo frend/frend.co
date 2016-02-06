@@ -23,6 +23,7 @@ var uglify = require('gulp-uglify');
 var source = require('vinyl-source-stream');
 var es = require('event-stream');
 var buffer = require('vinyl-buffer');
+var eslint = require('gulp-eslint');
 
 //	Project
 var modulePrefix = 'Fr';
@@ -68,8 +69,17 @@ gulp.task('css', function () {
 
 //	JS
 //----------------------------------------------------------------------
+//	Default
+gulp.task('component', ['component-lint', 'component-build']);
+//	Component lint
+gulp.task('component-lint', function (done) {
+	return gulp.src(path.components + '*/*.js')
+		.pipe(eslint())
+		.pipe(eslint.format())
+		.pipe(eslint.failAfterError());
+});
 //	Component build
-gulp.task('component', function (done) {
+gulp.task('component-build', function (done) {
 
 	//	use glob to catch file names/directories
 	glob(path.components + '*/*.js', function(err, files) {

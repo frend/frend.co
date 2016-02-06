@@ -23,7 +23,7 @@ const Frtabs = function (selector = '.js-fr-tabs', {
 
 
 	// SUPPORTS
-	if (!'querySelector' in doc || !'addEventListener' in window || !docEl.classList) return;
+	if (!('querySelector' in doc) || !('addEventListener' in window) || !docEl.classList) return;
 
 
 	// SETUP
@@ -53,13 +53,13 @@ const Frtabs = function (selector = '.js-fr-tabs', {
 		tabListItems.forEach((tabItem) => {
 			tabItem.setAttribute('role', 'presentation');
 		});
-		
+
 		// add role="tab" and aria-controls to anchor
 		tabs.forEach((tab) => {
 			tab.setAttribute('role', 'tab');
 			tab.setAttribute('aria-controls', tab.hash.substring(1));
 		});
-		
+
 		// add role="tabpanel" to section
 		tabpanels.forEach((tabpanel) => {
 			tabpanel.setAttribute('role', 'tabpanel');
@@ -81,13 +81,13 @@ const Frtabs = function (selector = '.js-fr-tabs', {
 		tabListItems.forEach((tabItem) => {
 			tabItem.removeAttribute('role');
 		});
-		
+
 		// remove role="tab" and aria-controls from anchor
 		tabs.forEach((tab) => {
 			tab.removeAttribute('role');
 			tab.removeAttribute('aria-controls');
 		});
-		
+
 		// remove role="tabpanel" from section
 		tabpanels.forEach((tabpanel) => {
 			tabpanel.removeAttribute('role');
@@ -146,7 +146,7 @@ const Frtabs = function (selector = '.js-fr-tabs', {
 		siblingTabpanels.forEach((tabpanel) => {
 			tabpanel.setAttribute('aria-hidden', 'true');
 		});
-		
+
 		// set actives and focus
 		target.setAttribute('tabindex', 0);
 		if (giveFocus) target.focus();
