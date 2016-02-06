@@ -8,11 +8,9 @@ Object.setPrototypeOf(NodeList.prototype, Array.prototype);
  * @param {object} options Object containing configuration overrides
  */
 const Frtabs = function ({
-		selector = '.js-fr-tabs',
+		selector: selector = '.js-fr-tabs',
 		tablistSelector: tablistSelector = '.fr-tabs__tablist',
-		activeTabClass: activeTabClass = 'fr-tabs__tab--is-active',
 		tabpanelSelector: tabpanelSelector = '.fr-tabs__panel',
-		activePanelClass: activePanelClass = 'fr-tabs__panel--is-active',
 		tabsReadyClass: tabsReadyClass = 'has-fr-tabs'
 	} = {}) {
 
@@ -99,37 +97,6 @@ const Frtabs = function ({
 	}
 
 
-	// EVENTS
-	function _eventTabClick (e) {
-		_showTab(e.target);
-		e.preventDefault(); // look into remove id/settimeout/reinstate id as an alternative to preventDefault
-	}
-
-	function _eventTabKeydown (e) {
-		// collect tab targets, and their parents' prev/next (or first/last - this is honkin dom traversing)
-		let currentTab = e.target;
-		let previousTabItem = currentTab.parentNode.previousElementSibling || currentTab.parentNode.parentNode.lastElementChild;
-		let nextTabItem = currentTab.parentNode.nextElementSibling || currentTab.parentNode.parentNode.firstElementChild;
-
-		// catch left/ and right arrow key events
-		// if new next/prev tab available, show it by passing tab anchor to _showTab method
-		switch (e.keyCode) {
-			case 37:
-			case 38:
-				_showTab(previousTabItem.querySelector('[role="tab"]'));
-				e.preventDefault();
-				break;
-			case 39:
-			case 40:
-				_showTab(nextTabItem.querySelector('[role="tab"]'));
-				e.preventDefault();
-				break;
-			default:
-				break;
-		}
-	}
-
-
 	// ACTIONS
 	function _showTab (target, giveFocus = true) {
 		// get context of tab container and its children
@@ -151,6 +118,37 @@ const Frtabs = function ({
 		target.setAttribute('tabindex', 0);
 		if (giveFocus) target.focus();
 		doc.getElementById(target.getAttribute('aria-controls')).removeAttribute('aria-hidden');
+	}
+
+
+	// EVENTS
+	function _eventTabClick (e) {
+		_showTab(e.target);
+		e.preventDefault(); // look into remove id/settimeout/reinstate id as an alternative to preventDefault
+	}
+
+	function _eventTabKeydown (e) {
+		// collect tab targets, and their parents' prev/next (or first/last - this is honkin dom traversing)
+		let currentTab = e.target;
+		let previousTabItem = currentTab.parentNode.previousElementSibling || currentTab.parentNode.parentNode.lastElementChild;
+		let nextTabItem = currentTab.parentNode.nextElementSibling || currentTab.parentNode.parentNode.firstElementChild;
+
+		// catch left/right and up/down arrow key events
+		// if new next/prev tab available, show it by passing tab anchor to _showTab method
+		switch (e.keyCode) {
+			case 37:
+			case 38:
+				_showTab(previousTabItem.querySelector('[role="tab"]'));
+				e.preventDefault();
+				break;
+			case 39:
+			case 40:
+				_showTab(nextTabItem.querySelector('[role="tab"]'));
+				e.preventDefault();
+				break;
+			default:
+				break;
+		}
 	}
 
 

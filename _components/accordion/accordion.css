@@ -1,5 +1,16 @@
-.fr-accordion-content[aria-hidden="true"] {
-	height: 0;
+/* Container */
+.fr-accordion {
+}
+
+/* Accordion header */
+.has-fr-accordion .fr-accordion__header {
+	cursor: pointer;
+}
+
+/* Accordion panel */
+.fr-accordion__panel[aria-hidden="true"] {
+	display: none;
+	/*height: 0;
 	overflow: hidden;
-	transition: height 250ms ease-out;
+	transition: height 250ms ease-out;*/
 }

@@ -13,7 +13,6 @@
 .fr-tabs__tab {
 }
 .fr-tabs__tab[tabindex="0"] {
-	font-weight: bold;
 }
 
 /* Tabpanel */
