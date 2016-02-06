@@ -117,30 +117,39 @@ const Fraccordion = function ({
 		});
 	}
 
-	// function _hidePanel (target) {
-	// 	console.log('close', target);
-	// 	target.setAttribute('aria-selected', 'false');
-	// 	target.setAttribute('aria-expanded', 'false');
-	// }
-
-	function _showPanel (target, userInitiatedAction = true) {
-		// exit early if already active
-		if (target.getAttribute('aria-selected') === 'true') return;
-
-		// get context of accordion container and its children
-		let thisContainer = _closest(target, (el) => {
-			return el.classList.contains(selector.substring(1));
-		});
+	function _hidePanel (target) {
 		let activePanel = doc.getElementById(target.getAttribute('aria-controls'));
 
-		// set inactives
-		_hideAllPanels(thisContainer);
+		target.setAttribute('aria-selected', 'false');
+		target.setAttribute('aria-expanded', 'false');
+		activePanel.setAttribute('aria-hidden', 'true');
+	}
+
+	function _showPanel (target) {
+		let activePanel = doc.getElementById(target.getAttribute('aria-controls'));
 
 		// set actives
 		target.setAttribute('tabindex', 0);
 		target.setAttribute('aria-selected', 'true');
 		target.setAttribute('aria-expanded', 'true');
 		activePanel.setAttribute('aria-hidden', 'false');
+	}
+
+	function _togglePanel (target) {
+		// close target panel if already active
+		if (target.getAttribute('aria-selected') === 'true') {
+			_hidePanel(target);
+			return;
+		}
+		// if not multiselectable hide all, then show target
+		if (!multiselectable) {
+			// get context of accordion container and its children
+			let thisContainer = _closest(target, (el) => {
+				return el.classList.contains(selector.substring(1));
+			});
+			_hideAllPanels(thisContainer);
+		}
+		_showPanel(target);
 	}
 
 	function _giveHeaderFocus (headerSet, i) {
@@ -156,7 +165,7 @@ const Fraccordion = function ({
 
 	// EVENTS
 	function _eventHeaderClick (e) {
-		_showPanel(e.target);
+		_togglePanel(e.target);
 	}
 
 	function _eventHeaderKeydown (e) {
@@ -174,7 +183,7 @@ const Fraccordion = function ({
 		switch (e.keyCode) {
 			case 13:
 			case 32:
-				_showPanel(currentHeader);
+				_togglePanel(currentHeader);
 				e.preventDefault();
 				break;
 			case 37:
@@ -226,16 +235,23 @@ const Fraccordion = function ({
 		if (accordionContainers.length) {
 			_addA11y();
 			_bindAccordionEvents();
+
+			// hide all panels
+			accordionContainers.forEach((accordionContainer) => {
+				_hideAllPanels(accordionContainer);
+			});
 			// set all first accordion panels active on init if required (default behaviour)
+			// otherwise make sure first accordion header for each is focusable
 			if (firstPanelsOpenByDefault) {
 				accordionContainers.forEach((accordionContainer) => {
-					_showPanel(accordionContainer.querySelector(headerSelector), false);
+					_togglePanel(accordionContainer.querySelector(headerSelector));
 				});
 			} else {
 				accordionContainers.forEach((accordionContainer) => {
-					_hideAllPanels(accordionContainer);
+					accordionContainer.querySelector(headerSelector).setAttribute('tabindex', 0);
 				});
 			}
+
 			docEl.classList.add(readyClass);
 		}
 	}
