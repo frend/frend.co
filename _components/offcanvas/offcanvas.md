@@ -15,10 +15,10 @@ links:
     url: http://heydonworks.com/practical_aria_examples/#hamburger
 ---
 
-A common interface pattern for navigation on small viewports, the off-canvas component consists of a hidden panel that can be shown by clicking on a button.
+A common interface pattern for navigation on small viewports, the off-canvas component consists of a hidden panel and button toggling its visibility.
 
-Aria-roles play an important role in this interactive widget, `aria-hidden` is toggled when the panel is opened or closed to keep the accessibility tree inline with the DOM and `aria-controls` are used to link the relevant buttons and panels.
+Aria-roles play an important role, `aria-hidden` is toggled when the panel is opened or closed to preserve consistency between the DOM & the accessibility tree, `aria-controls` are used to link the relevant buttons and panels.
 
-No assumption is made about the panel containing navigation however, hence the lack of an `aria-role=”navigation”`, the component is defined as a collapsible section of the document. If navigation is contained within the panel, you can easily define a `<nav>` element for correct interpretation by the browser.
+No assumption is made about the panel containing navigation hence the lack of an `aria-role=”navigation”`, the component is simply defined as a collapsible section of the document. If navigation is contained within the panel, you can define a `<nav>` element for correct interpretation by the browser.
 
-Keyboard navigation is enabled by default, the ESC key will close the panel if open and any focusable elements within the panel are not accessible when the panel is closed. Focus is applied to the panel when opened to maintain TAB order.
+Keyboard navigation is enabled by default, the `ESC` key will close the panel and focusable elements within the panel aren't accessible if closed. Focus is applied to the panel when open to maintain the correct tab order.
