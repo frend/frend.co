@@ -4,9 +4,11 @@ redirect_from: /components/
 title: A collection of accessible, modern front-end components.
 ---
 <div class="wrapper">
-	<h1 class="text-large">Frend</h1>
-	<p>A collection of accessible, modern front-end components.</p>
-	<p>Frend components are modest and dependency-free. They are built with web standards as a priority and aim to avoid assumptions about tooling or environment. Care has been taken to make sure each component is compliant, keyboard navigable and properly interpreted by assistive technologies. <a href="/about">Read more about Frend</a></p>
+	<div class="content-header">
+		<h1 class="text-large">Frend</h1>
+		<p>A collection of accessible, modern front-end components.</p>
+		<p>Frend components are modest and dependency-free. They are built with web standards as a priority and aim to avoid assumptions about tooling or environment. Care has been taken to make sure each component is compliant, keyboard navigable and properly interpreted by assistive technologies. <a href="/about">Read more about Frend</a></p>
+	</div>
 	<h2 class="visually-hidden">Components</h2>
 	<ul class="list-components">
 		{% assign components = site.components | sort: 'title'  %}
@@ -17,12 +19,9 @@ title: A collection of accessible, modern front-end components.
        		</li>
         {% endif %}
         {% endfor %}
-	</ul>
-	<ul class="list-components list-components--secondary">
-		{% assign components = site.components | sort: 'title'  %}
 		{% for component in components %}
 		{% if component.alpha == true %}
-			<li class="list-components__list-item">
+			<li class="list-components__list-item list-components__list-item--alpha">
        			{% include listed-component-alpha.html %}
        		</li>
         {% endif %}

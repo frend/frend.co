@@ -5,12 +5,14 @@ layout: default
 <h1 class="visually-hidden">{{ page.title }}</h1>
 
 <section class="component-embed">
-	{% include_relative {{ page.filename }}.html %}
+	<div class="component-embed__inner">
+		{% include_relative {{ page.filename }}.html %}
+	</div>
 </section>
 
 <section class="wrapper">
 	<section>
-		<header>
+		<header class="content-header">
 			<h1 class="text-large">
 				{{ page.title }}
 			</h1>
@@ -33,26 +35,29 @@ layout: default
 
 		{{ page.content }}
 
-		<footer>
+		<footer class="content-footer">
 			<p><a href="https://github.com/frend/frend.co/tree/gh-pages/_components/{{ page.filename }}">
 				View {{ page.title }} repo on GitHub
 			</a></p>
+			<p><a href="/">
+				View other Frend components
+			</a></p>
 		</footer>
 	</section>
-	<aside>
-		{% if page.links %}
-		<h2>References</h2>
-		<ul>
-			{% for link in page.links %}
-				<li>
-					<a href="{{link.url}}">
-						{{link.title}}
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-		{% endif %}
-	</aside>
+	{% if page.links %}
+		<aside>
+			<h2>References</h2>
+			<ul>
+				{% for link in page.links %}
+					<li>
+						<a href="{{link.url}}">
+							{{link.title}}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</aside>
+	{% endif %}
 </section>
 
 <script>

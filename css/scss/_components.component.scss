@@ -7,15 +7,14 @@
 //-----------------------------------
 
 .component-embed {
-	align-items: center;
 	background-color: rgba(255, 255, 255, 0.5);
-	display: flex;
-	flex-direction: column;
 	height: 60vh;
-	justify-content: center;
 	overflow: auto;
-	padding: 10%;
+	padding: 10% 0;
 	position: relative;
+}
+.component-embed__inner {
+	@extend .wrapper;
 }
 
 
@@ -38,7 +37,7 @@
 
 pre {
 	background-color: rgba(255, 255, 255, 0.5);
-	font-size: 0.938em; /* 15px */
+	font-size: 1em; /* 16px */
 	line-height: 1.4; /* 21px */
 	margin: 1.5rem 0 2.25rem -1.25rem; /* 24px 0 36px -20px */
 	padding: 1rem; /* 4px */

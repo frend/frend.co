@@ -58,21 +58,14 @@ p {
 	font-size: 1.125em; /* 18px */
 	letter-spacing: 0.014em;
 	line-height: 1.556; /* 28px from 18 */
-	margin-bottom: 0.5625rem; /* 9px from 18 */
+	margin-bottom: 1em; /* 18px */
 	@include mq($desk) {
 		font-size: 1.375em; /* 22px */
 		line-height: 1.45; /* 29px from 22 */
-		margin-bottom: 0.6875rem; /* 11px from 22 */
 	}
 	.wf-active {
 		letter-spacing: 0;
 	}
-}
-p:not([class]) + p {
-	text-indent: 1.625rem; /* 26px */
-}
-h1 + p + p {
-	text-indent: 0 !important; // hack to fix first para after .text-intro
 }
 
 // .text-intro
@@ -101,11 +94,9 @@ h1 + p {
 	font-size: 35px;
 	line-height: 1;
 	margin-bottom: 20px;
-	margin-top: 30px;
 	@include mq($lap) {
 		font-size: 50px;
 		margin-bottom: 25px;
-		margin-top: 50px;
 		letter-spacing: -0.02em;
 		text-rendering: optimizeLegibility;
 	}
@@ -114,5 +105,8 @@ h1 + p {
 	font-size: 20px;
 	line-height: 1.5; /* 30px */
 	letter-spacing: -0.02em;
-	font-weight: 700;
+	@include mq($lap) {
+		font-size: 26px;
+		line-height: 1.125;
+	}
 }

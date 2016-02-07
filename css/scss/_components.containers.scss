@@ -19,6 +19,7 @@
 
 .site-main {
 	flex: 1 0 auto;
+	padding-bottom: 3.5em;
 }
 
 
@@ -38,4 +39,17 @@
 	@include mq($desk) {
 		max-width: 42.5em; /* 680px */
 	}
+}
+
+
+
+
+//	Page content header/footer
+//-----------------------------------
+
+.content-header {
+	margin: 3.5em 0 2.5em;
+}
+.content-footer {
+	margin-bottom: 3.5em;
 }
