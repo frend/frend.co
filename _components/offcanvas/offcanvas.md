@@ -26,23 +26,14 @@ Keyboard navigation is enabled by default, the `ESC` key will close the panel an
 
 ##Usage
 
-Accordions rely on header and panel pairs, wrapped in a single container.
+Offcanvas relies on both a panel, a close button and either an open or toggle button.
 
 ~~~ html
-<div class="fr-accordion js-fr-accordion">
-	<h2 id="accordion-header-1" class="fr-accordion__header">...</h2>	
-	<div id="accordion-panel-1" class="fr-accordion__panel">
-		...
-	</div>
-	<h2 id="accordion-header-2" class="fr-accordion__header">...</h2>	
-	<div id="accordion-panel-2" class="fr-accordion__panel">
-		...
-	</div>
-	<h2 id="accordion-header-3" class="fr-accordion__header">...</h2>	
-	<div id="accordion-panel-3" class="fr-accordion__panel">
-		...
-	</div>
+<div class="fr-offcanvas-panel js-fr-offcanvas">
+	<button class="fr-offcanvas-close js-fr-offcanvas-close">Close panel</button>
+	...
 </div>
+<button class="fr-offcanvas-open js-fr-offcanvas-open">Open panel</button>
 ~~~
 
 Assign the function invocation to a variable.
