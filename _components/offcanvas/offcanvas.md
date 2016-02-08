@@ -23,52 +23,63 @@ No assumption is made about the panel containing navigation hence the lack of an
 
 Keyboard navigation is enabled by default, the `ESC` key will close the panel and focusable elements within the panel aren't accessible if closed. Focus is applied to the panel when open to maintain the correct tab order.
 
+
 ##Usage
+
+Accordions rely on header and panel pairs, wrapped in a single container.
+
+~~~ html
+<div class="fr-accordion js-fr-accordion">
+	<h2 id="accordion-header-1" class="fr-accordion__header">...</h2>	
+	<div id="accordion-panel-1" class="fr-accordion__panel">
+		...
+	</div>
+	<h2 id="accordion-header-2" class="fr-accordion__header">...</h2>	
+	<div id="accordion-panel-2" class="fr-accordion__panel">
+		...
+	</div>
+	<h2 id="accordion-header-3" class="fr-accordion__header">...</h2>	
+	<div id="accordion-panel-3" class="fr-accordion__panel">
+		...
+	</div>
+</div>
+~~~
+
+Assign the function invocation to a variable.
+
 ~~~ js
-var offcanvas = Froffcanvas('.c-offcanvas');
+var myOffcanvas = Froffcanvas();
+~~~
+
+###Methods
+
+~~~ js
+// remove all bindings and attributes when no longer needed
+myOffcanvas.destroy();
+
+// re-initialise as needed
+myOffcanvas.init();
 ~~~
 
 ###Options
-~~~ js
-var options = {
-    openSelector: '.js-fr-offcanvas-open',
-    closeSelector: '.js-fr-offcanvas-close',
-    toggleSelector: '.js-fr-offcanvas-toggle',
-    readyClass: 'has-fr-offcanvas',
-    activeClass: 'fr-offcanvas-is-active',
-    panelActiveClass: 'fr-offcanvas--is-active'
-}
-~~~
 
-####Defaults
-*openSelector*, `string`, CSS selector to target the open button, this button will show the panel on click.
-*closeSelector*, `string`, CSS selector to target close button, this button will close the panel on click.
-<!-- ###options.openSelector###
-`string`
-CSS selector to target the open button
-###options.closeSelector###
-`string`
-CSS selector to target the close button
-###options.toggleSelector###
-`string`
-CSS selector to target a toggle button
-###options.readyClass###
-`string`
-Class applied to the `html` element on component load
-###options.activeClass###
-`string`
-Class applied to the `html` element when panel is open
-###options.panelActiveClass###
-`string`
-Class applied to the panel selector when panel is open
-###Default options###
 ~~~ js
-{
+var myOffcanvas = Froffcanvas({
+	selector: '.fr-offcanvas-panel',
+	// panel selector, hook for JS init() method
+	
 	openSelector: '.js-fr-offcanvas-open',
 	closeSelector: '.js-fr-offcanvas-close',
 	toggleSelector: '.js-fr-offcanvas-toggle',
+	// interactive element selectors to open/close/toggle panel
+	
 	readyClass: 'has-fr-offcanvas',
+	// class name that will be added to <html> as offcanvas is initialised
+	
 	activeClass: 'fr-offcanvas-is-active',
+	// class name that will be added to <html> when offcanvas is visible
+	
 	panelActiveClass: 'fr-offcanvas--is-active'
-}
-~~~ -->
+	// class name that will be added to the selector when offcanvas is visible
+});
+~~~
