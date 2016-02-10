@@ -104,7 +104,6 @@ const FrOffcanvas = function(
 		if (e.keyCode === 27) _hidePanel();
 	}
 	function _eventTransitionEnd () {
-		console.log('whatttt');
 		//	set visibilty property to remove keyboard access
 		panel.style.visibility = 'hidden';
 		//	transition event not needed
@@ -134,13 +133,13 @@ const FrOffcanvas = function(
 
 	//	Unbind
 	function _unbindTogglePointer () {
-		if (buttonToggle) buttonToggle.addEventListener('click', _eventTogglePointer);
+		if (buttonToggle) buttonToggle.removeEventListener('click', _eventTogglePointer);
 	}
 	function _unbindOpenPointer () {
-		if (buttonOpen) buttonOpen.addEventListener('click', _eventOpenPointer);
+		if (buttonOpen) buttonOpen.removeEventListener('click', _eventOpenPointer);
 	}
 	function _unbindClosePointer () {
-		if (buttonClose) buttonClose.addEventListener('click', _eventClosePointer);
+		if (buttonClose) buttonClose.removeEventListener('click', _eventClosePointer);
 	}
 	function _unbindDocClick () {
 		doc.removeEventListener('click', _eventDocClick);
@@ -164,6 +163,8 @@ const FrOffcanvas = function(
 		//	bind document close events
 		_defer(_bindDocClick); // this isn't working for enter, works for space though. WTF.
 		_defer(_bindDocKey);
+		_defer(_bindClosePointer);
+		_defer(_unbindOpenPointer);
 		//	reset scroll position
 		panel.scrollTop = 0;
 		//	add active class
@@ -183,6 +184,8 @@ const FrOffcanvas = function(
 		//	unbind document events
 		_unbindDocKey();
 		_unbindDocClick();
+		_unbindClosePointer();
+		_bindOpenPointer();
 		//	remove active class
 		panel.classList.remove(panelActiveClass);
 		docEl.classList.remove(activeClass);
@@ -211,7 +214,6 @@ const FrOffcanvas = function(
 			//	bind button events
 			_bindTogglePointer();
 			_bindOpenPointer();
-			_bindClosePointer();
 			//	set ready class
 			docEl.classList.add(readyClass);
 		}
