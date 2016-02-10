@@ -2,38 +2,54 @@
 layout: default
 ---
 
-<h1 class="visually-hidden">{{ page.title }}</h1>
+<h1 class="visually-hidden">
+	{{ page.title }}
+</h1>
 
-<section class="component-embed">
+<div class="component-embed">
 	<div class="component-embed__inner">
 		{% include_relative {{ page.filename }}.html %}
 	</div>
-</section>
+</div>
 
-<section class="wrapper">
+<div class="wrapper">
 	<section>
 		<header class="content-header">
 			<h1 class="text-large">
 				{{ page.title }}
 			</h1>
-
 			{% if page.sources %}
-			<h2 class="visually-hidden">
-				View sources
-			</h2>
-			<ul class="list-buttons">
-				{% for source in page.sources %}
-					<li class="list-buttons__list-item">
-						<a class="list-buttons__item" href="{{source.url}}">
-							{{source.title}}
-						</a>
-					</li>
-				{% endfor %}
-			</ul>
+				<h2 class="visually-hidden">
+					View sources
+				</h2>
+				<ul class="list-buttons">
+					{% for source in page.sources %}
+						<li class="list-buttons__list-item">
+							<a class="list-buttons__item" href="{{source.url}}">
+								{{source.title}}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
 			{% endif %}
 		</header>
 
 		{{ page.content }}
+
+		{% if page.links %}
+			<aside>
+				<h2>References</h2>
+				<ul>
+					{% for link in page.links %}
+						<li>
+							<a href="{{link.url}}">
+								{{link.title}}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</aside>
+		{% endif %}
 
 		<footer class="content-footer">
 			<p><a href="https://github.com/frend/frend.co/tree/gh-pages/_components/{{ page.filename }}">
@@ -44,27 +60,11 @@ layout: default
 			</a></p>
 		</footer>
 	</section>
-	{% if page.links %}
-		<aside>
-			<h2>References</h2>
-			<ul>
-				{% for link in page.links %}
-					<li>
-						<a href="{{link.url}}">
-							{{link.title}}
-						</a>
-					</li>
-				{% endfor %}
-			</ul>
-		</aside>
-	{% endif %}
-</section>
+</div>
 
 <script>
 	loadCSS('{{ page.filename }}.css');
-	// {% if page.filename %} // if a component doesn't need JS, we might wanna wrap this in a conditional
-		loadJS('/components/{{ page.filename }}/dist/fr{{ page.filename }}.min.js', function () {
-			var {{ page.filename }} = Fr{{ page.filename }}();
-		});
-	// {% endif %}
+	loadJS('/components/{{ page.filename }}/dist/fr{{ page.filename }}.min.js', function () {
+		var {{ page.filename }} = Fr{{ page.filename }}();
+	});
 </script>
