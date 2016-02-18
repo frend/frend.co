@@ -16,6 +16,17 @@ links:
     url: http://www.oaa-accessibility.org/examplep/accordian1/
 ---
 
+Accordions leverage a lot of similar conventions to tab interfaces, in that they progressively disclose portions of content to the user.
+
+Accordion components themselves can be considered `tablist`s, and declared so on their parent container. Depending on whether multiple or single panels can be expanded at one time, we can set the container's `aria-multiselectable` attribute to true or false.
+
+To effectively progressively enhance sections of content into an accordion widget, we can start our with pairs of headings and content containers. As headings themselves aren't interactive and can't receive focus, we have the option of programatically nesting a button element within them, or managing focus and roles ourselves. This component chooses to do that latter using `tabindex` and `aria-controls` attributes, with the help of common `id`s on headers and panels. The script that supports the interactions, should also manage header `aria-selected` and `aria-expanded` states.
+
+Panels that are inactive can be hidden using `tabindex="-1"` and `aria-hidden="true"`. This ensures only the active content is focusable at any given time.
+
+Arrow keys can be used to navigate between header items, and Spacebar or Enter keypresses with toggle active `tabpanel`s. If `aria-multiselectable="false"` is set, then sibling panels should close and be hidden appropriately.
+
+There is more work to do on this particular component to manage alternative keybindings (Home, End, PageUp/Down), as per the WAI-ARIA spec.
 
 ##Usage
 
