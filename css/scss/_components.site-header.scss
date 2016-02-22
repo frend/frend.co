@@ -7,7 +7,11 @@
 //-----------------------------------
 
 .site-header {
-	text-align: center;
+}
+// sorry, Tom
+.site-footer {
+	@extend .wrapper;
+	margin-bottom: 2.5em;
 }
 
 
@@ -16,14 +20,15 @@
 //-----------------------------------
 
 .site-header__logo {
-	color: $dark-grey;
+	@extend h2;
+	background-color: $red;
+	color: #fff;
 	display: inline-block;
-	font-family: $sans-font;
-	font-size: 1.25em; /* 20px */
-	letter-spacing: -0.055em;
-	line-height: 1; /* 20px */
+	min-width: 4.25rem; /* 68px */
 	text-decoration: none;
-	padding: 1em; /* 20px */
+	padding: 1rem 1.25rem; /* 16px 20px */
+	position: absolute;
+	z-index: 1;
 	.wf-active & {
 		font-family: $web-font-sans;
 		letter-spacing: 0; /* reset */

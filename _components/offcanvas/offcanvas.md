@@ -17,14 +17,14 @@ links:
 
 A common interface pattern for navigation on small viewports, the off-canvas component consists of a hidden panel and button toggling its visibility.
 
-Aria-roles play an important role, `aria-hidden` is toggled when the panel is opened or closed to preserve consistency between the DOM & the accessibility tree, `aria-controls` are used to link the relevant buttons and panels.
+ARIA roles play an important role; `aria-hidden` is toggled when the panel is opened or closed to preserve consistency between the DOM and the accessibility tree, and `aria-controls` are used to link the relevant buttons and panels.
 
-No assumption is made about the panel containing navigation hence the lack of an `aria-role=”navigation”`, the component is simply defined as a collapsible section of the document. If navigation is contained within the panel, you can define a `<nav>` element for correct interpretation by the browser.
+No assumption is made about the panel containing navigation hence the lack of an `aria-role="navigation"`. The component is simply defined as a collapsible section of the document. If navigation is contained within the panel, you can define a `<nav>` element for correct interpretation by the browser.
 
-Keyboard navigation is enabled by default, the `ESC` key will close the panel and focusable elements within the panel aren't accessible if closed. Focus is applied to the panel when open to maintain the correct tab order.
+Keyboard navigation is enabled by default, and the `ESC` key will close the panel and focusable elements within the panel aren't accessible if closed. Focus is applied to the panel when open to maintain the correct tab order.
 
 
-##Usage
+## Usage
 
 Offcanvas relies on both a panel, a close button and either an open or toggle button.
 
@@ -42,7 +42,7 @@ Assign the function invocation to a variable.
 var myOffcanvas = Froffcanvas();
 ~~~
 
-###Methods
+### Methods
 
 ~~~ js
 // remove all bindings and attributes when no longer needed
@@ -52,24 +52,24 @@ myOffcanvas.destroy();
 myOffcanvas.init();
 ~~~
 
-###Options
+### Options
 
 ~~~ js
 var myOffcanvas = Froffcanvas({
 	selector: '.fr-offcanvas-panel',
 	// panel selector, hook for JS init() method
-	
+
 	openSelector: '.js-fr-offcanvas-open',
 	closeSelector: '.js-fr-offcanvas-close',
 	toggleSelector: '.js-fr-offcanvas-toggle',
 	// interactive element selectors to open/close/toggle panel
-	
+
 	readyClass: 'has-fr-offcanvas',
 	// class name that will be added to <html> as offcanvas is initialised
-	
+
 	activeClass: 'fr-offcanvas-is-active',
 	// class name that will be added to <html> when offcanvas is visible
-	
+
 	panelActiveClass: 'fr-offcanvas--is-active'
 	// class name that will be added to the selector when offcanvas is visible
 });

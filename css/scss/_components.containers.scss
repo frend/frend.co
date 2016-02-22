@@ -48,8 +48,12 @@
 //-----------------------------------
 
 .content-header {
-	margin: 3.5em 0 2.5em;
+	margin: 4.5em 0 2.5em;
+
+	@include mq($lap - 1, max) {
+		margin-top: 6em;
+	}
 }
 .content-footer {
-	margin-bottom: 3.5em;
+	margin: 3.5em 0;
 }

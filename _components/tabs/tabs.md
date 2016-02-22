@@ -26,12 +26,12 @@ The concept of a tab interface for the web may seem strikingly straight-forward.
 
 ARIA roles can be used to help give clearer meaning about the controls and containers in a tab component. `tablist`, `tab` and `tabpanel` are all ideal for the list, anchor and sectioning elements, respectively. These aid assistive technologies when announcing the component. It's also beneficial to tie each tab to its respective tabpanel, by way of the `aria-controls` and `aria-labelledby` attributes.
 
-Managing focus and tabindex ensures that only the visible content is included when needed. We properly hide content by declaring its `tabindex="-1"` and `aria-hidden="true"` when inactive. When active, the first element in each tabpanel should have the ability to be focused. We can again use `tabindex="0"` to achieve this. An `aria-selected="true"` attribute is needed to correctly set the active tabp's state (to do).
+Managing focus and tabindex ensures that only the visible content can be accessed when needed. We properly hide content by declaring its `tabindex="-1"` and `aria-hidden="true"` when inactive. When active, the first element in each tabpanel should have the ability to be focused. We can again use `tabindex="0"` to achieve this. An `aria-selected="true"` attribute is needed to correctly set the active tabpanel's state (to do).
 
-Key bindings also give keyboard users more predictable and intuitive ways of navigating the component. All arrow keys can be used to cycle through the tabs. Hitting the tab key will shift focus directly from the focused tab to it's active tabpanel content. Additional work should be done to the key bindings for this component to support skipping to first/last content (Ctrl+PageUp/PageDown), as per the WAI-ARIA spec.
+Key bindings also give keyboard users more predictable and intuitive ways of navigating the component. All arrow keys can be used to cycle through the tabs. Hitting the tab key will shift focus directly from the focused tab to its active tabpanel content. Additional work should be done to the key bindings for this component to support skipping to first/last content (Ctrl+PageUp/PageDown), as per the WAI-ARIA spec.
 
 
-##Usage
+## Usage
 
 A simple list of jumplinks to content anchors can form the basis of a tabs component.
 
@@ -66,7 +66,7 @@ Assign the function invocation to a variable.
 var myTabs = Frtabs();
 ~~~
 
-###Methods
+### Methods
 
 ~~~ js
 // remove all bindings and attributes when no longer needed
@@ -76,7 +76,7 @@ myTabs.destroy();
 myTabs.init();
 ~~~
 
-###Options
+### Options
 
 ~~~ js
 var myTabs = Frtabs({
@@ -91,6 +91,6 @@ var myTabs = Frtabs({
 
   tabsReadyClass: tabsReadyClass = 'has-fr-tabs'
   // class name that will be added to <html> as accordion is initialised
-  
+
 });
 ~~~

@@ -9,3 +9,12 @@
 .nav-primary {
 	@extend .list-inline;
 }
+
+.nav-primary__list-item {
+	margin: 0 1em;
+}
+
+.nav-primary__item {
+	@extend .text-link;
+	font-size: 1.25em;
+}

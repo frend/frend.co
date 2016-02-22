@@ -7,10 +7,10 @@
 //-----------------------------------
 
 ul:not([class]) a,
-p a {
+p a,
+.text-link {
 	color: $dark-grey;
 	text-decoration: none;
-	font-style: italic;
 	@include underline($dark-grey, $blue, 1.05em, 2px);
 }
 
