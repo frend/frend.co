@@ -29,4 +29,4 @@ Frend is powered by [Jekyll](http://jekyllrb.com) and served directly from the [
 Please refer to our [contributing guidelines](https://github.com/frend/frend.co/blob/gh-pages/CONTRIBUTING.md).
 
 ## Feedback
-If you have feedback or suggestions on how to make Frend better, please [email us](mailto:hello@frend.co) or [Tweet us](http://www.twitter.com/frendco).
+If you have feedback or suggestions on how to make Frend better, please [email us](mailto:hello@frend.co) or [Tweet us](http://www.twitter.com/ffffrend).

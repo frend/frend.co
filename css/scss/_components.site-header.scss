@@ -8,12 +8,6 @@
 
 .site-header {
 }
-// sorry, Tom
-.site-footer {
-	@extend .wrapper;
-	margin-bottom: 2.5em;
-}
-
 
 
 //	Logo
@@ -28,9 +22,14 @@
 	text-decoration: none;
 	padding: 1rem 1.25rem; /* 16px 20px */
 	position: absolute;
+	transition: background-color $duration $easing;
 	z-index: 1;
 	.wf-active & {
 		font-family: $web-font-sans;
 		letter-spacing: 0; /* reset */
 	}
+}
+.site-header__logo:hover,
+.site-header__logo:focus {
+	background-color: $dark-grey;
 }

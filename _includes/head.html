@@ -2,9 +2,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#ea3b37">
 	<title>{% if page.title %}{{ site.title }} — {{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
   	<meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 	<link rel="stylesheet" href="/css/dist/global.min.css">
+	<!-- touch icons - 256px x 256px-->
+	<link rel="shortcut icon" href="/icon-touch.png">
+	<link rel="apple-touch-icon-precomposed" href="/icon-touch.png">
+
+    <!-- prefetch webfont dns -->
+    <link href="//ajax.googleapis.com" rel="dns-prefetch" />
+    <link href="//cloud.webtype.com" rel="dns-prefetch" />
+    <link href="//pls.webtype.com" rel="dns-prefetch" />
+
 	<script>
 		/*!
 		loadCSS: load a CSS file asynchronously.

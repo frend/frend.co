@@ -77,5 +77,10 @@ ul:not([class]) li {
 	border-radius: 20px;
 	line-height: 20px;
 	text-decoration: none;
+	transition: background $duration $easing;
 	font-weight: bold;
+}
+.list-buttons__item:hover,
+.list-buttons__item:focus {
+	background-color: $dark-grey;
 }

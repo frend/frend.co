@@ -1,0 +1,34 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Containers
+//----------------------------------------------------------------------
+
+//	Container
+//-----------------------------------
+
+.site-footer {
+	background-color: rgba(255, 255, 255, 0.5);
+	min-height: 3.75em; /* 60px */
+	padding: 1.25em 0;
+}
+
+.nav-footer {
+	list-style: none;
+}
+
+.nav-footer__list-item {
+	display: inline-block;
+	margin-right: 1.25em; /* 20px */
+}
+
+.nav-footer__item {
+	color: $dark-grey;
+	text-decoration: none;
+	transition: color $duration $easing;
+	@include underline($dark-grey, rgba($blue, 0.5), 1.05em, 2px);
+}
+.nav-footer__item:hover,
+.nav-footer__item:focus {
+	color: $red;
+	@include underline($red, rgba($blue, 0.5), 1.05em, 2px);
+}

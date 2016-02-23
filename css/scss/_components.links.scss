@@ -11,7 +11,17 @@ p a,
 .text-link {
 	color: $dark-grey;
 	text-decoration: none;
+	transition: color $duration $easing;
 	@include underline($dark-grey, $blue, 1.05em, 2px);
+}
+ul:not([class]) a:hover,
+ul:not([class]) a:focus,
+p a:hover,
+p a:focus,
+.text-link:hover,
+.text-link:focus {
+	color: $red;
+	@include underline($red, $blue, 1.05em, 2px);
 }
 
 
@@ -20,5 +30,11 @@ p a,
 .link-standard {
 	color: $dark-grey;
 	text-decoration: none;
-	@include underline($dark-grey, $blue, 1.05em, 2px);
+	transition: color $duration $easing;
+	@include underline($dark-grey, $blue, 1.1em, 2px);
+}
+.link-standard:hover,
+.link-standard:focus {
+	color: $red;
+	@include underline($red, $blue, 1.1em, 2px);
 }

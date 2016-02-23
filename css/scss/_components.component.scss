@@ -10,8 +10,12 @@
 	background-color: rgba(255, 255, 255, 0.5);
 	height: 60vh;
 	overflow: auto;
-	padding: 10% 0;
+	padding: 20% 0;
 	position: relative;
+
+	@include mq($lap) {
+		padding: 10% 0;
+	}
 }
 .component-embed__inner {
 	@extend .wrapper;
@@ -45,7 +49,7 @@ pre {
 	width: calc(100% + 2.5rem);
 	@include mq($desk) {
 		font-size: 1.125em; /* 18px */
-		margin-bottom: 2.75rem; /* 44px */ 
+		margin-bottom: 2.75rem; /* 44px */
 	}
 }
 p code {
