@@ -1,0 +1,67 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Accordion
+//----------------------------------------------------------------------
+
+//	Header
+//-----------------------------------
+
+.has-fr-accordion .fr-accordion__header {
+	background-color: $yellow;
+	border-bottom: 1px solid mix(#000, $yellow, 10%);
+	color: $dark-grey;
+	display: block;
+	font-family: $sans-font;
+	font-size: 1em; /* 16px */
+	line-height: 1.25; /* 20px from 16 */
+	margin-bottom: 0;
+	padding: 1em 1.25em; /* 16px 20px */
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background-color $duration $easing, color $duration $easing;
+}
+.wf-active .fr-accordion__header {
+	font-family: $web-font-sans;
+}
+
+.has-fr-accordion .fr-accordion__header:first-child {
+	border-radius: 0.25em 0.25em 0 0; /* 4px */
+}
+.has-fr-accordion .fr-accordion__header:last-of-type:not([aria-selected="true"]) {
+	border-radius: 0 0 0.25em 0.25em; /* 4px */
+}
+
+// Active
+.fr-accordion__header[aria-selected="true"] {
+	background-color: mix(#fff, $dark-grey, 20%);
+	color: #fff;
+}
+
+// Hover
+.fr-accordion__header[aria-selected="false"]:hover,
+.fr-accordion__header[aria-selected="false"]:focus {
+	background-color: mix(#000, $yellow, 5%);
+}
+
+
+
+
+//	Panels
+//-----------------------------------
+
+.has-fr-accordion .fr-accordion__panel {
+	background-color: $yellow;
+	border-bottom: 1px solid mix(#000, $yellow, 10%);
+	padding: 1.25em;
+}
+.has-fr-accordion .fr-accordion__panel:last-child {
+	border-radius: 0 0 0.25em 0.25em; /* 4px */
+}
+
+.has-fr-accordion .fr-accordion p a {
+	@include underline($dark-grey, $yellow, 1.05em, 2px);
+}
+.has-fr-accordion .fr-accordion p a:hover,
+.has-fr-accordion .fr-accordion p a:focus {
+	@include underline($red, $yellow, 1.05em, 2px);
+}

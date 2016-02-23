@@ -1,0 +1,45 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Tabs
+//----------------------------------------------------------------------
+
+//	Tabs
+//-----------------------------------
+
+.has-fr-tabs .fr-tabs__tab {
+	background-color: mix(#000, $yellow, 5%);
+	border-radius: 0.25em 0.25em 0 0; /* 4px */
+	color: $dark-grey;
+	display: inline-block;
+	font-family: $sans-font;
+	font-size: 1em; /* 16px */
+	line-height: 1.25; /* 20px from 16 */
+	padding: 1em 1.25em; /* 16px 20px */
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background-color $duration $easing, color $duration $easing;
+}
+.wf-active .fr-tabs__tab {
+	font-family: $web-font-sans;
+}
+
+// Active
+.fr-tabs__tab[tabindex="0"] {
+	background-color: $yellow;
+}
+
+// Hover
+.fr-tabs__tab:not([tabindex="0"]):hover {
+	background-color: mix(#fff, $dark-grey, 20%);
+	color: #fff;
+}
+
+
+
+//	Panels
+//-----------------------------------
+
+.has-fr-tabs .fr-tabs__panel {
+	background-color: $yellow;
+	padding: 1.25em;
+}
