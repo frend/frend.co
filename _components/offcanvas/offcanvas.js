@@ -1,21 +1,23 @@
 'use strict';
 
 /**
- * @param {string} panelSelector 	Off-canvas element
- * @param {string} toggleSelector 	Button with which to toggle the off-canvas state
- * @param {object} options			Object containing config overrides
+ * @param {string} selector				Panel selector, hook for JS init() method
+ * @param {string} openSelector			Interactive element selector to open panel
+ * @param {string} closeSelector		Interactive element selector to close panel
+ * @param {string} toggleSelector		Interactive element selector to toggle panel
+ * @param {string} readyClass			Class name that will be added to <html> as offcanvas is initialised
+ * @param {string} activeClass			Class name that will be added to <html> when offcanvas is visible
+ * @param {string} panelActiveClass		Class name that will be added to the selector when offcanvas is visible
  */
-const FrOffcanvas = function(
-		selector = '.js-fr-offcanvas',
-		{
+const FrOffcanvas = function({
+			selector: selector = '.js-fr-offcanvas',
 			openSelector: openSelector = '.js-fr-offcanvas-open',
 			closeSelector: closeSelector = '.js-fr-offcanvas-close',
 			toggleSelector: toggleSelector = '.js-fr-offcanvas-toggle',
 			readyClass: readyClass = 'has-fr-offcanvas',
 			activeClass: activeClass = 'fr-offcanvas-is-active',
 			panelActiveClass: panelActiveClass = 'fr-offcanvas--is-active'
-		} = {}
-	) {
+		} = {}) {
 
 
 	//	CONSTANTS
@@ -42,9 +44,9 @@ const FrOffcanvas = function(
 
 
 	//	UTILS
-	function _defer (func) {
+	function _defer (fn) {
 		//	wrapped in setTimeout to delay binding until previous rendering has completed
-		if (typeof func === 'function') setTimeout(func, 0);
+		if (typeof fn === 'function') setTimeout(fn, 0);
 	}
 	function _closest (el, fn) {
 		// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
@@ -173,7 +175,7 @@ const FrOffcanvas = function(
 	}
 	function _hidePanel () {
 		//	detect transition
-		let hasTransition = _getStyleValue(panel, 'transition').includes('transform');
+		let hasTransition = _getStyleValue(panel, 'transition').indexOf('transform') > -1;
 		//	add aria-hidden, remove focus
 		panel.setAttribute('aria-hidden', true);
 		panel.removeAttribute('tabindex');

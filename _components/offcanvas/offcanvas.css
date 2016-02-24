@@ -8,19 +8,6 @@
 	overflow: auto;
 	width: 100%;
 	transform: translateX(0);
-	/*visibility: hidden;*/
 	will-change: translateX;
 	z-index: 10;
-}
-.has-fr-offcanvas .fr-offcanvas[aria-hidden="false"] {
-	transform: translateX(-100%);
-	/*visibility: visible;*/
-}
-
-/* Style */
-.has-fr-offcanvas .fr-offcanvas {
-	max-width: 400px;
-	padding: 20px;
-	transition: transform 200ms ease-out;
-	/*outline: none;*/
 }

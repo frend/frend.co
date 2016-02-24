@@ -17,9 +17,11 @@
 	padding: 1em 1.25em; /* 16px 20px */
 	text-transform: uppercase;
 	transition: background-color $duration $easing, border-color $duration $easing, color $duration $easing;
-
 	.wf-active & {
 		font-family: $web-font-sans;
+	}
+	html:not(.has-fr-offcanvas) & {
+		display: none;
 	}
 }
 
@@ -33,8 +35,9 @@
 	background-color: mix(#fff, $dark-grey, 10%);
 	border-bottom: 0.125em solid $dark-grey;
 	color: #fff;
-	float: right;
-	margin: 0 0 1.25em 100%; /* 0 0 20px 100% */
+	position: absolute;
+	top: 1.25em; /* 20px */
+	right: 1.25em; /* 20px */
 }
 
 .fr-offcanvas-toggle:hover,
@@ -56,7 +59,17 @@
 
 .fr-offcanvas {
 	background-color: $yellow;
+	padding: 20px;
 }
+.has-fr-offcanvas .fr-offcanvas {
+	padding: 80px 20px 20px;
+	max-width: 400px;
+	transition: transform 200ms ease-out;
+}
+.has-fr-offcanvas .fr-offcanvas[aria-hidden="false"] {
+	transform: translateX(-100%);
+}
+
 
 .fr-offcanvas p a {
 	@include underline($dark-grey, $yellow, 1.05em, 2px);
