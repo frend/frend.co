@@ -8,14 +8,14 @@
 
 .component-embed {
 	background-color: rgba(255, 255, 255, 0.5);
-	height: 60vh;
+	height: 65vh;
 	overflow-x: hidden;
 	overflow-y: auto;
 	padding: 20% 0;
 	position: relative;
 
 	@include mq($lap) {
-		padding: 10% 0;
+		padding: 8% 0;
 	}
 }
 .component-embed__inner {

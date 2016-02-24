@@ -43,3 +43,11 @@
 	background-color: $yellow;
 	padding: 1.25em;
 }
+
+.fr-tabs p a {
+	@include underline($dark-grey, $yellow, 1.05em, 2px);
+}
+.fr-tabs p a:hover,
+.fr-tabs p a:focus {
+	@include underline($red, $yellow, 1.05em, 2px);
+}

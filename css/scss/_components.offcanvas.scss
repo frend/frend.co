@@ -16,7 +16,7 @@
 	margin-right: 0.5em; /* 8px */
 	padding: 1em 1.25em; /* 16px 20px */
 	text-transform: uppercase;
-	transition: background-color $duration $easing, color $duration $easing;
+	transition: background-color $duration $easing, border-color $duration $easing, color $duration $easing;
 
 	.wf-active & {
 		font-family: $web-font-sans;

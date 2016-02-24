@@ -37,26 +37,26 @@ A simple list of jumplinks to content anchors can form the basis of a tabs compo
 
 ~~~ html
 <div class="fr-tabs js-fr-tabs">
-  <ul class="fr-tabs__tablist">
-    <li class="fr-tabs__tablist-item">
-      <a class="fr-tabs__tab" href="#tab1">...</a>
-    </li>
-    <li class="fr-tabs__tablist-item">
-      <a class="fr-tabs__tab" href="#tab2">...</a>
-    </li>
-    <li class="fr-tabs__tablist-item">
-      <a class="fr-tabs__tab" href="#tab3">...</a>
-    </li>
-  </ul>
-  <section class="fr-tabs__panel" id="tab1">
-    ...
-  </section>
-  <section class="fr-tabs__panel" id="tab2">
-    ...
-  </section>
-  <section class="fr-tabs__panel" id="tab3">
-    ...
-  </section>
+	<ul class="fr-tabs__tablist">
+		<li class="fr-tabs__tablist-item">
+			<a class="fr-tabs__tab" href="#tab1">...</a>
+		</li>
+		<li class="fr-tabs__tablist-item">
+			<a class="fr-tabs__tab" href="#tab2">...</a>
+		</li>
+		<li class="fr-tabs__tablist-item">
+			<a class="fr-tabs__tab" href="#tab3">...</a>
+		</li>
+	</ul>
+	<section class="fr-tabs__panel" id="tab1">
+		...
+	</section>
+	<section class="fr-tabs__panel" id="tab2">
+		...
+	</section>
+	<section class="fr-tabs__panel" id="tab3">
+		...
+	</section>
 </div>
 ~~~
 
@@ -80,17 +80,16 @@ myTabs.init();
 
 ~~~ js
 var myTabs = Frtabs({
-  selector: selector = '.js-fr-tabs',
-  // outer container selector, hook for JS init() method
+	selector: selector = '.js-fr-tabs',
+	// outer container selector, hook for JS init() method
 
-  tablistSelector: tablistSelector = '.fr-tabs__tablist',
-  // list selector to transform into tablist
+	tablistSelector: tablistSelector = '.fr-tabs__tablist',
+	// list selector to transform into tablist
 
-  tabpanelSelector: tabpanelSelector = '.fr-tabs__panel',
-  // containers which hold content, toggled via tabs
+	tabpanelSelector: tabpanelSelector = '.fr-tabs__panel',
+	// containers which hold content, toggled via tabs
 
-  tabsReadyClass: tabsReadyClass = 'has-fr-tabs'
-  // class name that will be added to <html> as accordion is initialised
-
+	tabsReadyClass: tabsReadyClass = 'has-fr-tabs'
+	// class name that will be added to <html> as accordion is initialised
 });
 ~~~
