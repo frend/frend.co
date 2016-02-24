@@ -176,7 +176,7 @@ const Fraccordion = function ({
 			return el.classList.contains(selector.substring(1));
 		});
 		let theseHeaders = thisContainer.querySelectorAll(headerSelector);
-		let currentHeaderIndex = theseHeaders.indexOf(currentHeader);
+		let currentHeaderIndex = [].indexOf.call(theseHeaders, currentHeader);
 
 		// catch enter/space, left/right and up/down arrow key events
 		// if new panel show it, if next/prev move focus
