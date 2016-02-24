@@ -1,8 +1,8 @@
 'use strict';
 
-// Set Array prototype on NodeList (allows for Array methods on NodeLists)
-// https://gist.github.com/paulirish/12fb951a8b893a454b32 (#gistcomment-1487315)
-Object.setPrototypeOf(NodeList.prototype, Array.prototype);
+// Set Array prototype on NodeList for forEach() support
+// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
+NodeList.prototype.forEach = Array.prototype.forEach;
 
 /**
  * @param {object} options Object containing configuration overrides
@@ -13,8 +13,8 @@ const Fraccordion = function ({
 		headerIdPrefix: headerIdPrefix = 'accordion-header',
 		panelSelector: panelSelector = '.fr-accordion__panel',
 		panelIdPrefix: panelIdPrefix = 'accordion-panel',
-		firstPanelsOpenByDefault: firstPanelsOpenByDefault = true, 
-		multiselectable: multiselectable = true, 
+		firstPanelsOpenByDefault: firstPanelsOpenByDefault = true,
+		multiselectable: multiselectable = true,
 		readyClass: readyClass = 'has-fr-accordion'
 	} = {}) {
 
@@ -48,7 +48,7 @@ const Fraccordion = function ({
 		accordionContainers.forEach((accordion) => {
 			accordion.setAttribute('role', 'tablist');
 			// set multiselectable attribute (define support for multiple panels open at once)
-			accordion.setAttribute('aria-multiselectable', multiselectable);			
+			accordion.setAttribute('aria-multiselectable', multiselectable);
 		});
 
 		// add role="tab" and aria-controls to headers
@@ -75,7 +75,7 @@ const Fraccordion = function ({
 		accordionContainers.forEach((accordion) => {
 			accordion.removeAttribute('role');
 			// remove multiselectable attribute
-			accordion.removeAttribute('aria-multiselectable');			
+			accordion.removeAttribute('aria-multiselectable');
 		});
 
 		// remove role="tab" and aria-controls from headers
@@ -176,7 +176,7 @@ const Fraccordion = function ({
 			return el.classList.contains(selector.substring(1));
 		});
 		let theseHeaders = thisContainer.querySelectorAll(headerSelector);
-		let currentHeaderIndex = theseHeaders.indexOf(currentHeader);
+		let currentHeaderIndex = [].indexOf.call(theseHeaders, currentHeader);
 
 		// catch enter/space, left/right and up/down arrow key events
 		// if new panel show it, if next/prev move focus
