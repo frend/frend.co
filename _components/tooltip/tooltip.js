@@ -1,13 +1,16 @@
 'use strict';
 
-// Move Array prototype to NodeList (allows for Array methods on NodeLists)
-// https://gist.github.com/paulirish/12fb951a8b893a454b32 (#gistcomment-1487315)
-Object.setPrototypeOf(NodeList.prototype, Array.prototype);
+// Set Array prototype on NodeList for forEach() support
+// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
+NodeList.prototype.forEach = Array.prototype.forEach;
 
 /**
- * @param {string} selector The selector to match for tab components
+ * @param {object} options Object containing configuration overrides
  */
-let Frtooltip = function (selector = '.js-fr-tooltip') {
+const Frtooltip = function ({
+		selector: selector = '.js-fr-tooltip',
+		readyClass: readyClass = 'has-fr-tooltip'
+	} = {}) {
 
 
 	// CONSTANTS
@@ -20,73 +23,139 @@ let Frtooltip = function (selector = '.js-fr-tooltip') {
 
 
 	// SETUP
-	// set tab element NodeLists
-	let tooltips = document.querySelectorAll(selector);
-	let currentTooltip;
+	let tooltipContainers = doc.querySelectorAll(selector);
 
 
-	// PRIVATE METHODS
-	//	bindings
-	function _bindMouseOver(tooltip) {
-		tooltip.addEventListener('mouseover', _eventMouseOver);
-	}
-	function _bindMouseOut(tooltip) {
-		tooltip.addEventListener('mouseout', _eventMouseOut);
-	}
-	function _bindFocus(tooltip) {
-		tooltip.addEventListener('focus', _eventFocus);
-	}
-	function _bindBlur(tooltip) {
-		tooltip.addEventListener('blur', _eventBlur);
+	//	TEMP
+	let currentTooltip = {};
+
+
+	//	UTILS
+	function _closest (el, fn) {
+		// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
+		return el && (fn(el) ? el : _closest(el.parentNode, fn));
 	}
 
 
-	//	events
-	function _eventMouseOver(e) {
-		_showTooltip(e.target);
+	// ACTIONS
+	function _showTooltip (toggle, tooltip) {
+		//	assign describedby matching tooltip reference
+		let tooltipId = tooltip.getAttribute('id');
+		toggle.setAttribute('aria-describedby', tooltipId);
+		//	set visible state
+		toggle.setAttribute('aria-expanded', 'true');
+		tooltip.setAttribute('aria-hidden', 'false');
+		//	store temp reference to tooltip
+		currentTooltip = tooltip;
+		//	bind doc close events
+		_bindDocClick();
+		_bindDocKey();
 	}
-	function _eventMouseOut() {
-		_hideTooltip(currentTooltip);
-	}
-	function _eventFocus(e) {
-		_showTooltip(e.target);
-	}
-	function _eventBlur(e) {
-		_hideTooltip(e.target);
+	function _hideTooltip (toggle, tooltip) {
+		//	remove tooltip reference
+		toggle.setAttribute('aria-describedby', '');
+		//	set visible state
+		toggle.setAttribute('aria-expanded', 'false');
+		tooltip.setAttribute('aria-hidden', 'true');
+		//	remove tooltip temp reference
+		currentTooltip = {};
+		//	unbind doc close events
+		_unbindDocClick();
+		_unbindDocKey();
 	}
 
 
-	//	actions
-	function _showTooltip(toggle) {
-		let id = toggle.getAttribute('aria-describedby');
-		currentTooltip = document.querySelector('#' + id);
-		_toggleTooltip(currentTooltip, false);
+	// EVENTS
+	function _eventToggleClick (e) {
+		//	close any open tooltips
+		if (currentTooltip.nodeType) {
+			//	get toggle relative to tooltip
+			let toggle = currentTooltip.previousElementSibling;
+			_hideTooltip(toggle, currentTooltip);
+		}
+		//	get relevant tooltip elements
+		let toggle = e.target;
+		let tooltip = toggle.parentNode.querySelector('[role="tooltip"]');
+		//	show or hide if toggle is 'expanded'
+		if (toggle.getAttribute('aria-expanded') === 'false') {
+			_showTooltip(toggle, tooltip);
+		} else {
+			_hideTooltip(toggle, tooltip);
+		}
 	}
-	function _hideTooltip() {
-		_toggleTooltip(currentTooltip, true);
+	function _eventDocClick (e) {
+		//	check if target is panel or child of
+		let isTooltip = e.target === currentTooltip;
+		let isTooltipchild = _closest(e.target, (el) => {
+			if (el !== doc) return el.classList.contains(selector.substring(1));
+		});
+		if (!isTooltip && !isTooltipchild) {
+			//	get toggle relative to tooltip
+			let toggle = currentTooltip.previousElementSibling;
+			_hideTooltip(toggle, currentTooltip);
+		}
 	}
-	function _toggleTooltip(tooltip, state) {
-		tooltip.setAttribute('aria-hidden', state);
+	function _eventDocKey (e) {
+		//	esc key
+		if (e.keyCode === 27) {
+			//	get toggle relative to tooltip
+			let toggle = currentTooltip.previousElementSibling;
+			_hideTooltip(toggle, currentTooltip);
+		}
+	}
+
+
+	// BINDINGS
+	function _bindTooltipEvents () {
+		// bind all tooltip toggle click and keydown events
+		tooltipContainers.forEach((container) => {
+			let toggle = container.querySelector('[aria-expanded]');
+			toggle.addEventListener('click', _eventToggleClick);
+		});
+	}
+	function _unbindTooltipEvents () {
+		// unbind all tooltip toggle click and keydown events
+		tooltipContainers.forEach((container) => {
+			let toggle = container.querySelector('[aria-expanded]');
+			toggle.removeEventListener('click', _eventToggleClick);
+		});
+	}
+	function _bindDocClick () {
+		doc.addEventListener('click', _eventDocClick);
+	}
+	function _unbindDocClick () {
+		doc.removeEventListener('click', _eventDocClick);
+	}
+	function _bindDocKey () {
+		doc.addEventListener('keydown', _eventDocKey);
+	}
+	function _unbindDocKey () {
+		doc.removeEventListener('keydown', _eventDocKey);
+	}
+
+
+	// DESTROY
+	function destroy () {
+		_unbindTooltipEvents();
+		docEl.classList.remove(readyClass);
 	}
 
 
 	// INIT
-	function _init () {
-		if (tooltips.length) {
-			tooltips.forEach((tooltip) => {
-				//	bind all interaction events
-				_bindMouseOver(tooltip);
-				_bindMouseOut(tooltip);
-				_bindFocus(tooltip);
-				_bindBlur(tooltip);
-			});
+	function init () {
+		if (tooltipContainers.length) {
+			_bindTooltipEvents();
+			docEl.classList.add(readyClass);
 		}
 	}
-	_init();
+	init();
 
 
 	// REVEAL API
-	return {};
+	return {
+		init,
+		destroy
+	}
 }
 
 
