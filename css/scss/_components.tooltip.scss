@@ -1,0 +1,17 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Tooltip
+//----------------------------------------------------------------------
+
+//	Tooltip
+//-----------------------------------
+.fr-tooltip [role="tooltip"] {
+	background-color: $yellow;
+	left: 50%;
+	padding: 5px 10px;
+	position: absolute;
+	bottom: 100%;
+	transform: translateX(-50%);
+	min-width: 220px;
+	text-align: center;
+}

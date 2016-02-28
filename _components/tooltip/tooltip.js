@@ -24,6 +24,9 @@ const Frtooltip = function ({
 
 	// SETUP
 	let tooltipContainers = doc.querySelectorAll(selector);
+	// DOM references to find within container
+	let toggleSelector = '[aria-expanded]';
+	let tooltipSelector = '[role="tooltip"]';
 
 
 	//	TEMP
@@ -75,7 +78,7 @@ const Frtooltip = function ({
 		}
 		//	get relevant tooltip elements
 		let toggle = e.target;
-		let tooltip = toggle.parentNode.querySelector('[role="tooltip"]');
+		let tooltip = toggle.parentNode.querySelector(tooltipSelector);
 		//	show or hide if toggle is 'expanded'
 		if (toggle.getAttribute('aria-expanded') === 'false') {
 			_showTooltip(toggle, tooltip);
@@ -109,14 +112,14 @@ const Frtooltip = function ({
 	function _bindTooltipEvents () {
 		// bind all tooltip toggle click and keydown events
 		tooltipContainers.forEach((container) => {
-			let toggle = container.querySelector('[aria-expanded]');
+			let toggle = container.querySelector(toggleSelector);
 			toggle.addEventListener('click', _eventToggleClick);
 		});
 	}
 	function _unbindTooltipEvents () {
 		// unbind all tooltip toggle click and keydown events
 		tooltipContainers.forEach((container) => {
-			let toggle = container.querySelector('[aria-expanded]');
+			let toggle = container.querySelector(toggleSelector);
 			toggle.removeEventListener('click', _eventToggleClick);
 		});
 	}
@@ -137,6 +140,8 @@ const Frtooltip = function ({
 	// DESTROY
 	function destroy () {
 		_unbindTooltipEvents();
+		_unbindDocKey();
+		_unbindDocClick();
 		docEl.classList.remove(readyClass);
 	}
 
