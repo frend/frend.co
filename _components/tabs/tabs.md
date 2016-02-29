@@ -80,16 +80,16 @@ myTabs.init();
 
 ~~~ js
 var myTabs = Frtabs({
-	selector: selector = '.js-fr-tabs',
+	selector: '.js-fr-tabs',
 	// outer container selector, hook for JS init() method
 
-	tablistSelector: tablistSelector = '.fr-tabs__tablist',
+	tablistSelector: '.fr-tabs__tablist',
 	// list selector to transform into tablist
 
-	tabpanelSelector: tabpanelSelector = '.fr-tabs__panel',
+	tabpanelSelector: '.fr-tabs__panel',
 	// containers which hold content, toggled via tabs
 
-	tabsReadyClass: tabsReadyClass = 'has-fr-tabs'
+	tabsReadyClass: 'has-fr-tabs'
 	// class name that will be added to <html> as accordion is initialised
 });
 ~~~

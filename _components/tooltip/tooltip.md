@@ -20,7 +20,7 @@ links:
 
 A simple tooltip component usually consists of a button and a tooltip, with the button toggling the visible state of the tooltip when hovered or clicked on. By utilising a few relevant attributes we can improve the accessibility of the button and the tooltip.
 
-`role="tooltip"` and `aria-describedby` are the key attributes to be added to the elements. The `role` applies to the tooltip and describes “a contextual popup that displays a description for an element”, its counterpart `aria-describedby` defines the element that *describes* the button, which in this case is the tooltip.
+`role="tooltip"` and `aria-describedby` are the key attributes to be added to the elements. The `role` applies to the tooltip and describes “a contextual popup that displays a description for an element”. Its counterpart `aria-describedby` defines the element that *describes* the button, which in this case is the tooltip.
 
 The `ESC` key will close any open tooltips and clicking off either element will do the same. Tooltips are hidden using the `aria-hidden` attribute to keep the accessibility tree and the DOM in sync.
 
@@ -60,13 +60,13 @@ var myTooltip = Frtooltip({
 	selector: '.js-fr-tooltip',
 	// outer container selector, hook for JS init() method
 
-	toggleSelector: toggleSelector = '.js-fr-tooltip-toggle',
+	toggleSelector: '.js-fr-tooltip-toggle',
 	// selector to define the toggle element controlling the tooltip
 
-	tooltipIdPrefix: tooltipIdPrefix = 'tooltip',
+	tooltipIdPrefix: 'tooltip',
 	// prefix for id applied to each tooltip as identifier for button
 
-	readyClass: readyClass = 'has-fr-tooltip'
+	readyClass: 'has-fr-tooltip'
 	// class name that will be added to <html> as tooltip is initialised
 
 });
