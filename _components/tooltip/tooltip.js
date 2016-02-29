@@ -9,6 +9,8 @@ NodeList.prototype.forEach = Array.prototype.forEach;
  */
 const Frtooltip = function ({
 		selector: selector = '.js-fr-tooltip',
+		toggleSelector: toggleSelector = '.js-fr-tooltip-toggle',
+		tooltipIdPrefix: tooltipIdPrefix = 'tooltip',
 		readyClass: readyClass = 'has-fr-tooltip'
 	} = {}) {
 
@@ -25,7 +27,6 @@ const Frtooltip = function ({
 	// SETUP
 	let tooltipContainers = doc.querySelectorAll(selector);
 	// DOM references to find within container
-	let toggleSelector = '[aria-expanded]';
 	let tooltipSelector = '[role="tooltip"]';
 
 
@@ -37,6 +38,39 @@ const Frtooltip = function ({
 	function _closest (el, fn) {
 		// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
 		return el && (fn(el) ? el : _closest(el.parentNode, fn));
+	}
+
+
+	//	A11Y
+	function _addA11y (container, i) {
+		//	get relative elements
+		let toggle = container.querySelector(toggleSelector);
+		let tooltip = container.querySelector(tooltipSelector);
+		//	create new button and replace toggle
+		var button = doc.createElement('button');
+		button.setAttribute('class', toggle.getAttribute('class'));
+		button.setAttribute('aria-expanded', 'false');
+		button.setAttribute('aria-describedby', '');
+		button.textContent = toggle.textContent;
+		container.replaceChild(button, toggle);
+		//	add tooltip attributes
+		tooltip.setAttribute('id', tooltipIdPrefix + '-' + i);
+		tooltip.setAttribute('aria-hidden', 'true');
+		tooltip.setAttribute('aria-live', 'polite');
+	}
+	function _removeA11y (container) {
+		//	get relative elements
+		let toggle = container.querySelector(toggleSelector);
+		let tooltip = container.querySelector(tooltipSelector);
+		//	create new span and replace toggle
+		var span = doc.createElement('span');
+		span.setAttribute('class', toggleSelector.slice(1));
+		span.textContent = toggle.textContent;
+		container.replaceChild(span, toggle);
+		//	remove tooltip attributes
+		tooltip.removeAttribute('id');
+		tooltip.removeAttribute('aria-hidden');
+		tooltip.removeAttribute('aria-live');
 	}
 
 
@@ -139,6 +173,8 @@ const Frtooltip = function ({
 
 	// DESTROY
 	function destroy () {
+		//	add accessible attributes
+		tooltipContainers.forEach((container) => _removeA11y(container));
 		_unbindTooltipEvents();
 		_unbindDocKey();
 		_unbindDocClick();
@@ -149,6 +185,8 @@ const Frtooltip = function ({
 	// INIT
 	function init () {
 		if (tooltipContainers.length) {
+			//	add accessible attributes
+			tooltipContainers.forEach((container, i) => _addA11y(container, i));
 			_bindTooltipEvents();
 			docEl.classList.add(readyClass);
 		}

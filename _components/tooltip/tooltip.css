@@ -1,19 +1,17 @@
-/* Container */
-.fr-tooltip {
+/*	Container */
+.js-fr-tooltip {
 	position: relative;
 }
 
-/* Label */
-.fr-tooltip [aria-expanded] {
+/*	Label */
+.js-fr-tooltip-toggle {
 	cursor: help;
-	position: relative;
-	text-decoration: underline;
 }
 
-/* Toolip */
-.fr-tooltip [role="tooltip"][aria-hidden="true"] {
-	display: none;
+/*	Toolip */
+.js-fr-tooltip [role="tooltip"] {
+	visibility: hidden;
 }
-.fr-tooltip [role="tooltip"][aria-hidden="false"] {
-	display: block;
+.js-fr-tooltip [role="tooltip"][aria-hidden="false"] {
+	visibility: visible;
 }

@@ -5,13 +5,41 @@
 
 //	Tooltip
 //-----------------------------------
+
+//	Toggle
+.fr-tooltip-toggle {
+	text-decoration: underline;
+}
+
+//	Tooltip
 .fr-tooltip [role="tooltip"] {
 	background-color: $yellow;
+	border-radius: 0.25em; /* 4px */
+	bottom: 100%;
 	left: 50%;
+	min-width: 260px;
+	opacity: 0;
 	padding: 5px 10px;
 	position: absolute;
-	bottom: 100%;
-	transform: translateX(-50%);
-	min-width: 220px;
 	text-align: center;
+	transform: translateX(-50%) translateY(0);
+	transition: visibility $duration $easing, opacity $duration $easing, transform $duration $easing;
+}
+.fr-tooltip [role="tooltip"]::after {
+	border-color: transparent;
+	border-top-color: $yellow;
+	border-width: 8px;
+	border: solid transparent;
+	bottom: -16px;
+	content: " ";
+	height: 0;
+	left: 50%;
+	margin-left: -8px;
+	pointer-events: none;
+	position: absolute;
+	width: 0;
+}
+.fr-tooltip [role="tooltip"][aria-hidden="false"] {
+	opacity: 1;
+	transform: translateX(-50%) translateY(-12px);
 }
