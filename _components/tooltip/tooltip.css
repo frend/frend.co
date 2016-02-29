@@ -1,26 +1,17 @@
-
-.fr-tooltip {
+/*	Container */
+.js-fr-tooltip {
 	position: relative;
 }
 
-.fr-tooltip__label {
+/*	Label */
+.js-fr-tooltip-toggle {
 	cursor: help;
-	position: relative;
-	text-decoration: underline;
 }
 
-.fr-tooltip__tooltip {
-	background-color: #333;
-	color: #fff;
-	left: 50%;
-	padding: 5px;
-	position: absolute;
-	top: 100%;
-	transform: translateX(-50%);
+/*	Toolip */
+.js-fr-tooltip [role="tooltip"] {
+	visibility: hidden;
 }
-.fr-tooltip__tooltip[aria-hidden="true"] {
-	display: none;
-}
-.fr-tooltip__tooltip[aria-hidden="false"] {
-	display: block;
+.js-fr-tooltip [role="tooltip"][aria-hidden="false"] {
+	visibility: visible;
 }
