@@ -26,10 +26,10 @@
 	transition: visibility $duration $easing, opacity $duration $easing, transform $duration $easing;
 }
 .fr-tooltip [role="tooltip"]::after {
+	border: solid transparent;
 	border-color: transparent;
 	border-top-color: $yellow;
 	border-width: 8px;
-	border: solid transparent;
 	bottom: -16px;
 	content: " ";
 	height: 0;
