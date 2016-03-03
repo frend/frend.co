@@ -2,20 +2,20 @@
 
 // Set Array prototype on NodeList for forEach() support
 // https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
-NodeList.prototype.forEach = Array.prototype.forEach;
+// NodeList.prototype.forEach = Array.prototype.forEach;
 
 /**
  * @param {object} options Object containing configuration overrides
  */
 const Fraccordion = function ({
 		selector: selector = '.js-fr-accordion',
-		headerSelector: headerSelector = '.fr-accordion__header',
+		headerSelector: headerSelector = '.js-fr-accordion__header',
 		headerIdPrefix: headerIdPrefix = 'accordion-header',
-		panelSelector: panelSelector = '.fr-accordion__panel',
+		panelSelector: panelSelector = '.js-fr-accordion__panel',
 		panelIdPrefix: panelIdPrefix = 'accordion-panel',
 		firstPanelsOpenByDefault: firstPanelsOpenByDefault = true,
 		multiselectable: multiselectable = true,
-		readyClass: readyClass = 'has-fr-accordion'
+		readyClass: readyClass = 'fr-accordion--is-ready'
 	} = {}) {
 
 
@@ -31,55 +31,42 @@ const Fraccordion = function ({
 	// SETUP
 	// set accordion element NodeLists
 	let accordionContainers = doc.querySelectorAll(selector);
-	let accordionHeaders = doc.querySelectorAll(headerSelector);
-	let accordionPanels = doc.querySelectorAll(panelSelector);
-
-
-	// UTILS
-	// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
-	function _closest (el, fn) {
-		return el && (fn(el) ? el : _closest(el.parentNode, fn));
-	}
-
 
 	// A11Y
-	function _addA11y () {
-		// add role="tablist" to containers
-		accordionContainers.forEach((accordion) => {
-			accordion.setAttribute('role', 'tablist');
-			// set multiselectable attribute (define support for multiple panels open at once)
-			accordion.setAttribute('aria-multiselectable', multiselectable);
-		});
+	function _addA11y (accordionContainer) {
+		// get accordion elements
+		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
+		const accordionPanels = accordionContainer.querySelectorAll(panelSelector);
 
-		// add role="tab" and aria-controls to headers
-		accordionHeaders.forEach((accordionHeader) => {
+		// add relevant roles and properties
+		accordionContainer.setAttribute('role', 'tablist');
+		accordionContainer.setAttribute('aria-multiselectable', multiselectable);
+
+		[...accordionHeaders].forEach((accordionHeader) => {
 			accordionHeader.setAttribute('role', 'tab');
 			accordionHeader.setAttribute('aria-controls', accordionHeader.id.replace(headerIdPrefix, panelIdPrefix));
 			// make headers focusable, this is preferred over wrapping contents in native button element
 			accordionHeader.setAttribute('tabindex', 0);
 		});
 
-		// add role="tabpanel" to panels
-		accordionPanels.forEach((accordionPanel) => {
+		[...accordionPanels].forEach((accordionPanel) => {
 			accordionPanel.setAttribute('role', 'tabpanel');
 			accordionPanel.setAttribute('aria-labelledby', accordionPanel.id.replace(panelIdPrefix, headerIdPrefix));
-			// make first child of tabpanel focusable if available
-			if (accordionPanel.children) {
-				accordionPanel.children[0].setAttribute('tabindex', 0);
-			}
+			// make tabpanel focusable
+			accordionPanel.setAttribute('tabindex', 0);
 		});
 	}
 
-	function _removeA11y () {
-		// remove role="tablist" from containers
-		accordionContainers.forEach((accordion) => {
-			accordion.removeAttribute('role');
-			// remove multiselectable attribute
-			accordion.removeAttribute('aria-multiselectable');
-		});
+	function _removeA11y (accordionContainer) {
+		// get accordion elements
+		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
+		const accordionPanels = accordionContainer.querySelectorAll(panelSelector);
 
-		// remove role="tab" and aria-controls from headers
-		accordionHeaders.forEach((accordionHeader) => {
+		// remove roles and properties
+		accordionContainer.removeAttribute('role');
+		accordionContainer.removeAttribute('aria-multiselectable');
+
+		[...accordionHeaders].forEach((accordionHeader) => {
 			accordionHeader.removeAttribute('role');
 			accordionHeader.removeAttribute('aria-controls');
 			accordionHeader.removeAttribute('aria-selected');
@@ -88,15 +75,12 @@ const Fraccordion = function ({
 			accordionHeader.removeAttribute('tabindex');
 		});
 
-		// remove role="tabpanel" from panels
-		accordionPanels.forEach((accordionPanel) => {
+		[...accordionPanels].forEach((accordionPanel) => {
 			accordionPanel.removeAttribute('role');
 			accordionPanel.removeAttribute('aria-labelledby');
 			accordionPanel.removeAttribute('aria-hidden');
-			// remove first child of tabpanel focusablibility
-			if (accordionPanel.children) {
-				accordionPanel.children[0].removeAttribute('tabindex');
-			}
+			// remove tabpanel focusablibility
+			accordionPanel.removeAttribute('tabindex');
 		});
 	}
 
@@ -107,12 +91,12 @@ const Fraccordion = function ({
 		let siblingPanels = accordionContainer.querySelectorAll(panelSelector);
 
 		// set inactives
-		siblingHeaders.forEach((header) => {
+		[...siblingHeaders].forEach((header) => {
 			header.setAttribute('tabindex', -1);
 			header.setAttribute('aria-selected', 'false');
 			header.setAttribute('aria-expanded', 'false');
 		});
-		siblingPanels.forEach((panel) => {
+		[...siblingPanels].forEach((panel) => {
 			panel.setAttribute('aria-hidden', 'true');
 		});
 	}
@@ -144,9 +128,7 @@ const Fraccordion = function ({
 		// if not multiselectable hide all, then show target
 		if (!multiselectable) {
 			// get context of accordion container and its children
-			let thisContainer = _closest(target, (el) => {
-				return el.classList.contains(selector.substring(1));
-			});
+			let thisContainer = target.parentNode;
 			_hideAllPanels(thisContainer);
 		}
 		_showPanel(target);
@@ -154,7 +136,7 @@ const Fraccordion = function ({
 
 	function _giveHeaderFocus (headerSet, i) {
 		// remove focusability from inactives
-		headerSet.forEach((header) => {
+		[...headerSet].forEach((header) => {
 			header.setAttribute('tabindex', -1);
 		});
 		// set active focus
@@ -172,11 +154,9 @@ const Fraccordion = function ({
 		// collect header targets, and their prev/next
 		let currentHeader = e.target;
 		// get context of accordion container and its children
-		let thisContainer = _closest(currentHeader, (el) => {
-			return el.classList.contains(selector.substring(1));
-		});
+		let thisContainer = currentHeader.parentNode;
 		let theseHeaders = thisContainer.querySelectorAll(headerSelector);
-		let currentHeaderIndex = [].indexOf.call(theseHeaders, currentHeader);
+		let currentHeaderIndex = [].indexOf.call([...theseHeaders], currentHeader);
 
 		// catch enter/space, left/right and up/down arrow key events
 		// if new panel show it, if next/prev move focus
@@ -205,17 +185,19 @@ const Fraccordion = function ({
 
 
 	// BINDINGS
-	function _bindAccordionEvents () {
+	function _bindAccordionEvents (accordionContainer) {
+		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
 		// bind all accordion header click and keydown events
-		accordionHeaders.forEach((accordionHeader) => {
+		[...accordionHeaders].forEach((accordionHeader) => {
 			accordionHeader.addEventListener('click', _eventHeaderClick);
 			accordionHeader.addEventListener('keydown', _eventHeaderKeydown);
 		});
 	}
 
-	function _unbindAccordionEvents () {
+	function _unbindAccordionEvents (accordionContainer) {
+		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
 		// unbind all accordion header click and keydown events
-		accordionHeaders.forEach((accordionHeader) => {
+		[...accordionHeaders].forEach((accordionHeader) => {
 			accordionHeader.removeEventListener('click', _eventHeaderClick);
 			accordionHeader.removeEventListener('keydown', _eventHeaderKeydown);
 		});
@@ -224,35 +206,33 @@ const Fraccordion = function ({
 
 	// DESTROY
 	function destroy () {
-		_removeA11y();
-		_unbindAccordionEvents();
-		docEl.classList.remove(readyClass);
+		[...accordionContainers].forEach((accordionContainer) => {
+			_removeA11y(accordionContainer);
+			_unbindAccordionEvents(accordionContainer);
+			accordionContainer.classList.remove(readyClass);
+		});
 	}
 
 
 	// INIT
 	function init () {
 		if (accordionContainers.length) {
-			_addA11y();
-			_bindAccordionEvents();
-
-			// hide all panels
-			accordionContainers.forEach((accordionContainer) => {
+			
+			[...accordionContainers].forEach((accordionContainer) => {
+				_addA11y(accordionContainer);
+				_bindAccordionEvents(accordionContainer);
 				_hideAllPanels(accordionContainer);
-			});
-			// set all first accordion panels active on init if required (default behaviour)
-			// otherwise make sure first accordion header for each is focusable
-			if (firstPanelsOpenByDefault) {
-				accordionContainers.forEach((accordionContainer) => {
+				// set all first accordion panels active on init if required (default behaviour)
+				// otherwise make sure first accordion header for each is focusable
+				if (firstPanelsOpenByDefault) {
 					_togglePanel(accordionContainer.querySelector(headerSelector));
-				});
-			} else {
-				accordionContainers.forEach((accordionContainer) => {
+				} else {
 					accordionContainer.querySelector(headerSelector).setAttribute('tabindex', 0);
-				});
-			}
+				}
+				// set ready style hook
+				accordionContainer.classList.add(readyClass);
+			});
 
-			docEl.classList.add(readyClass);
 		}
 	}
 	init();

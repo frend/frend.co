@@ -34,16 +34,16 @@ Accordions rely on header and panel pairs, wrapped in a single container.
 
 ~~~ html
 <div class="fr-accordion js-fr-accordion">
-	<h2 id="accordion-header-1" class="fr-accordion__header">...</h2>
-	<div id="accordion-panel-1" class="fr-accordion__panel">
+	<h2 id="accordion-header-1" class="fr-accordion__header js-fr-accordion__header">...</h2>
+	<div id="accordion-panel-1" class="fr-accordion__panel js-fr-accordion__panel">
 		...
 	</div>
-	<h2 id="accordion-header-2" class="fr-accordion__header">...</h2>
-	<div id="accordion-panel-2" class="fr-accordion__panel">
+	<h2 id="accordion-header-2" class="fr-accordion__header js-fr-accordion__header">...</h2>
+	<div id="accordion-panel-2" class="fr-accordion__panel js-fr-accordion__panel">
 		...
 	</div>
-	<h2 id="accordion-header-3" class="fr-accordion__header">...</h2>
-	<div id="accordion-panel-3" class="fr-accordion__panel">
+	<h2 id="accordion-header-3" class="fr-accordion__header js-fr-accordion__header">...</h2>
+	<div id="accordion-panel-3" class="fr-accordion__panel js-fr-accordion__panel">
 		...
 	</div>
 </div>
@@ -72,14 +72,14 @@ var myAccordion = Fraccordion({
 	selector: '.js-fr-accordion',
 	// outer container selector, hook for JS init() method
 
-	headerSelector: '.fr-accordion__header',
+	headerSelector: '.js-fr-accordion__header',
 	// accordion header elements converted to focusable, togglable elements
 
 	headerIdPrefix: 'accordion-header',
 	// use header id on element to tie each accordion panel to its header
 	// see panelIdPrefix
 
-	panelSelector: '.fr-accordion__panel',
+	panelSelector: '.js-fr-accordion__panel',
 	// accordion panel elements to expand/collapse
 
 	panelIdPrefix: 'accordion-panel',
@@ -92,8 +92,8 @@ var myAccordion = Fraccordion({
 	multiselectable: true,
 	// if set to false, each accordion instance will only allow a single panel to be open at a time
 
-	readyClass: 'has-fr-accordion'
-	// class name that will be added to <html> as accordion is initialised
+	readyClass: 'fr-accordion--is-ready'
+	// class name that will be added to the accordion as it is initialised
 
 });
 ~~~

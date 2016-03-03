@@ -9,7 +9,7 @@ The purpose of Frend is to offer ready-to-use components for projects. These als
 The goal is to work on these components collaboratively. This allows us to share our implementation experiences, approaches to supporting different environments, and any bugs we’ve come across along the way.
 
 ## Standards
-Appropriate, semantic elements are at the core of each Frend component. This ensures that a useable baseline for the content or interaction is in place before we introduce enhancements using CSS or JavaScript. Enhancements are based upon available features, so components won’t necessarily function the same in every browser.
+Appropriate, semantic elements are at the core of each Frend component. This ensures that a useable baseline for the content or interaction is in place before we introduce enhancements using CSS or JavaScript. Enhancements are based upon available features, so components won’t necessarily function the same in every browser. And that's okay.
 
 ### CSS
 CSS included with each component is purely functional. We include the relevant selectors in our stylesheets, but what you do within them is entirely up to you. We favour a BEM syntax when defining selectors, however these are all configurable in the component options if you’d like to use a different convention.
