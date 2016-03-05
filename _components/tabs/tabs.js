@@ -109,6 +109,7 @@ const Frtabs = function ({
 		// set inactives
 		siblingTabs.forEach((tab) => {
 			tab.setAttribute('tabindex', -1);
+			tab.removeAttribute('aria-selected');
 		});
 		siblingTabpanels.forEach((tabpanel) => {
 			tabpanel.setAttribute('aria-hidden', 'true');
@@ -116,6 +117,7 @@ const Frtabs = function ({
 
 		// set actives and focus
 		target.setAttribute('tabindex', 0);
+		target.setAttribute('aria-selected', 'true');
 		if (giveFocus) target.focus();
 		doc.getElementById(target.getAttribute('aria-controls')).removeAttribute('aria-hidden');
 	}
