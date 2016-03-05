@@ -115,7 +115,7 @@ const Frtabs = function ({
 	// EVENTS
 	function _eventTabClick (e) {
 		_showTab(e.target);
-		e.preventDefault(); // look into remove id/settimeout/reinstate id as an alternative to preventDefault
+		//e.preventDefault(); // look into remove id/settimeout/reinstate id as an alternative to preventDefault
 	}
 
 	function _eventTabKeydown (e) {
