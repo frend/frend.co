@@ -1,7 +1,6 @@
 ---
 filename: offcanvas
 title: Off Canvas
-description: A simple, accessible off-canvas component with useful keyboard events and meaningful markup.
 alpha: false
 sources:
   - title: HTML
@@ -19,7 +18,7 @@ A common interface pattern for navigation on small viewports, the off-canvas com
 
 ARIA roles play an important role; `aria-hidden` is toggled when the panel is opened or closed to preserve consistency between the DOM and the accessibility tree, and `aria-controls` are used to link the relevant buttons and panels.
 
-No assumption is made about the panel containing navigation hence the lack of an `aria-role="navigation"`. The component is simply defined as a collapsible section of the document. If navigation is contained within the panel, you can define a `<nav>` element for correct interpretation by the browser.
+No assumption is made about the panel containing navigation hence the lack of an `role="navigation"`. The component is simply defined as a collapsible section of the document. If navigation is contained within the panel, you can define a `<nav>` element for correct interpretation by the browser.
 
 Keyboard navigation is enabled by default, and the `ESC` key will close the panel and focusable elements within the panel aren't accessible if closed. Focus is applied to the panel when open to maintain the correct tab order.
 
@@ -30,8 +29,8 @@ Offcanvas relies on both a panel, a close button and either an open or toggle bu
 
 ~~~ html
 <div class="fr-offcanvas-panel js-fr-offcanvas">
-	<button class="fr-offcanvas-close js-fr-offcanvas-close">Close panel</button>
 	...
+	<button class="fr-offcanvas-close js-fr-offcanvas-close">Close panel</button>
 </div>
 <button class="fr-offcanvas-open js-fr-offcanvas-open">Open panel</button>
 ~~~

@@ -42,6 +42,9 @@ const FrOffcanvas = function({
 	let buttonToggle = doc.querySelector(toggleSelector);
 	let transitionEventName = 'transitionend';
 
+	//	TEMP
+	let currentOpenButton = {};
+
 
 	//	UTILS
 	function _defer (fn) {
@@ -79,7 +82,8 @@ const FrOffcanvas = function({
 
 
 	//	Events
-	function _eventTogglePointer () {
+	function _eventTogglePointer (e) {
+		currentOpenButton = e.target;
 		let panelHidden = panel.getAttribute('aria-hidden') === 'true';
 		if (panelHidden) {
 			_showPanel();
@@ -87,7 +91,8 @@ const FrOffcanvas = function({
 			_hidePanel();
 		}
 	}
-	function _eventOpenPointer () {
+	function _eventOpenPointer (e) {
+		currentOpenButton = e.target;
 		_showPanel();
 	}
 	function _eventClosePointer () {
@@ -191,6 +196,9 @@ const FrOffcanvas = function({
 		//	remove active class
 		panel.classList.remove(panelActiveClass);
 		docEl.classList.remove(activeClass);
+		//	return focus to button that opened the panel
+		currentOpenButton.focus();
+		currentOpenButton = {};
 	}
 	function destroy () {
 		//	remove attributes
