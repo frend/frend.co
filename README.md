@@ -18,9 +18,11 @@ Styling hooks are added to the document when each component is initialised, so w
 
 
 ### JavaScript
-JavaScript is written using ES2015 module syntax. Modules export themselves, so they’re available to `import` into your existing project where and when they are needed. If this doesn’t suit your workflow, we also transpile modules to ES5 and bundle them using UMD, so they can be utilised directly in the browser, or by other module loaders. You can find these files in the `dist` directory.
+JavaScript is written using ES2015 module syntax. Modules export themselves, so they’re available to `import` into your existing project where and when they are needed. If this doesn’t suit your workflow, we also transpile modules to ES5 and bundle them using UMD, so they can be utilised directly in the browser, or by other module loaders. You can find these files in the `dist` directory of each component.
 
 A simple API is exposed for each component, which usually contains `init()` and `destroy()` methods. More information about invoking components and any additional methods can be found on each of their respective pages.
+
+The JavaScript written to enhance these components has been purposefully left with as little abstraction as possible. While we bundle scripts into ready-to-use plugins, it's also important that the source files can remain a clear reference for those interested in stepping through each of the methods. We hope this helps other developers in uncovering the steps involved in making the components more accessible.
 
 ## Platform
 Frend is powered by [Jekyll](http://jekyllrb.com) and served directly from the [frend/frend.co Github repository](https://github.com/frend/frend.co) thanks to [Github Pages](https://pages.github.com/).

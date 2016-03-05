@@ -1,17 +1,13 @@
 'use strict';
 
-// Set Array prototype on NodeList for forEach() support
-// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
-NodeList.prototype.forEach = Array.prototype.forEach;
-
 /**
  * @param {object} options Object containing configuration overrides
  */
 const Frtabs = function ({
 		selector: selector = '.js-fr-tabs',
-		tablistSelector: tablistSelector = '.fr-tabs__tablist',
-		tabpanelSelector: tabpanelSelector = '.fr-tabs__panel',
-		tabsReadyClass: tabsReadyClass = 'has-fr-tabs'
+		tablistSelector: tablistSelector = '.js-fr-tabs__tablist',
+		tabpanelSelector: tabpanelSelector = '.js-fr-tabs__panel',
+		tabsReadyClass: tabsReadyClass = 'fr-tabs--is-ready'
 	} = {}) {
 
 
@@ -25,97 +21,92 @@ const Frtabs = function ({
 
 
 	// SETUP
-	// set tab element NodeLists
+	// set tab element NodeList
 	let tabContainers = doc.querySelectorAll(selector);
-	let tabLists = doc.querySelectorAll(tablistSelector);
-	let tabListItems = doc.querySelectorAll(tablistSelector + ' li');
-	let tabs = doc.querySelectorAll(tablistSelector + ' a');
-	let tabpanels = doc.querySelectorAll(tabpanelSelector);
-
-
-	// UTILS
-	// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
-	function _closest (el, fn) {
-		return el && (fn(el) ? el : _closest(el.parentNode, fn));
-	}
 
 
 	// A11Y
-	function _addA11y () {
-		// add role="tablist" to ul
-		tabLists.forEach((tabList) => {
+	function _addA11y (tabContainer) {
+		// get tab elements
+		const tabLists = tabContainer.querySelectorAll(tablistSelector);
+		const tabListItems = tabContainer.querySelectorAll(tablistSelector + ' li');
+		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
+		const tabpanels = tabContainer.querySelectorAll(tabpanelSelector);
+
+		// add roles, properties, states
+		[...tabLists].forEach((tabList) => {
 			tabList.setAttribute('role', 'tablist');
 		});
 
-		// add role="presentation" to li
-		tabListItems.forEach((tabItem) => {
+		[...tabListItems].forEach((tabItem) => {
 			tabItem.setAttribute('role', 'presentation');
 		});
 
-		// add role="tab" and aria-controls to anchor
-		tabs.forEach((tab) => {
+		[...tabs].forEach((tab) => {
 			tab.setAttribute('role', 'tab');
 			tab.setAttribute('aria-controls', tab.hash.substring(1));
 		});
 
-		// add role="tabpanel" to section
-		tabpanels.forEach((tabpanel) => {
+		[...tabpanels].forEach((tabpanel) => {
 			tabpanel.setAttribute('role', 'tabpanel');
 			// make first child of tabpanel focusable if available
-			if (tabpanel.children) {
-				tabpanel.children[0].setAttribute('tabindex', 0);
-			}
+			tabpanel.setAttribute('tabindex', 0);
 		});
 
 	}
 
-	function _removeA11y () {
-		// remove role="tablist" from ul
-		tabLists.forEach((tabList) => {
+	function _removeA11y (tabContainer) {
+		// get tab elements
+		const tabLists = tabContainer.querySelectorAll(tablistSelector);
+		const tabListItems = tabContainer.querySelectorAll(tablistSelector + ' li');
+		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
+		const tabpanels = tabContainer.querySelectorAll(tabpanelSelector);
+
+		// remove roles, properties, states
+		[...tabLists].forEach((tabList) => {
 			tabList.removeAttribute('role');
 		});
 
-		// remove role="presentation" from li
-		tabListItems.forEach((tabItem) => {
+		[...tabListItems].forEach((tabItem) => {
 			tabItem.removeAttribute('role');
 		});
 
-		// remove role="tab" and aria-controls from anchor
-		tabs.forEach((tab) => {
+		[...tabs].forEach((tab) => {
 			tab.removeAttribute('role');
 			tab.removeAttribute('aria-controls');
+			tab.removeAttribute('aria-selected');
+			tab.removeAttribute('tabindex');
 		});
 
-		// remove role="tabpanel" from section
-		tabpanels.forEach((tabpanel) => {
+		[...tabpanels].forEach((tabpanel) => {
 			tabpanel.removeAttribute('role');
+			tabpanel.removeAttribute('aria-hidden');
 			// remove first child focusability if present
-			if (tabpanel.children) {
-				tabpanel.children[0].removeAttribute('tabindex');
-			}
+			tabpanel.removeAttribute('tabindex');
 		});
 	}
 
 
 	// ACTIONS
 	function _showTab (target, giveFocus = true) {
-		// get context of tab container and its children
-		let thisContainer = _closest(target, (el) => {
-			return el.classList.contains(selector.substring(1));
-		});
+		// get context of tab container (this sucks - look at implementing equivalent .closest() method)
+		let thisContainer = target.parentNode.parentNode.parentNode;
+
 		let siblingTabs = thisContainer.querySelectorAll(tablistSelector + ' a');
 		let siblingTabpanels = thisContainer.querySelectorAll(tabpanelSelector);
 
 		// set inactives
-		siblingTabs.forEach((tab) => {
+		[...siblingTabs].forEach((tab) => {
 			tab.setAttribute('tabindex', -1);
+			tab.removeAttribute('aria-selected');
 		});
-		siblingTabpanels.forEach((tabpanel) => {
+		[...siblingTabpanels].forEach((tabpanel) => {
 			tabpanel.setAttribute('aria-hidden', 'true');
 		});
 
 		// set actives and focus
 		target.setAttribute('tabindex', 0);
+		target.setAttribute('aria-selected', 'true');
 		if (giveFocus) target.focus();
 		doc.getElementById(target.getAttribute('aria-controls')).removeAttribute('aria-hidden');
 	}
@@ -153,17 +144,19 @@ const Frtabs = function ({
 
 
 	// BINDINGS
-	function _bindTabsEvents () {
+	function _bindTabsEvents (tabContainer) {
+		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
 		// bind all tab click and keydown events
-		tabs.forEach((tab) => {
+		[...tabs].forEach((tab) => {
 			tab.addEventListener('click', _eventTabClick);
 			tab.addEventListener('keydown', _eventTabKeydown);
 		});
 	}
 
-	function _unbindTabsEvents () {
+	function _unbindTabsEvents (tabContainer) {
+		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
 		// unbind all tab click and keydown events
-		tabs.forEach((tab) => {
+		[...tabs].forEach((tab) => {
 			tab.removeEventListener('click', _eventTabClick);
 			tab.removeEventListener('keydown', _eventTabKeydown);
 		});
@@ -172,22 +165,25 @@ const Frtabs = function ({
 
 	// DESTROY
 	function destroy () {
-		_removeA11y();
-		_unbindTabsEvents();
-		docEl.classList.remove(tabsReadyClass);
+		[...tabContainers].forEach((tabContainer) => {
+			_removeA11y(tabContainer);
+			_unbindTabsEvents(tabContainer);
+			tabContainer.classList.remove(tabsReadyClass);
+		});
 	}
 
 
 	// INIT
 	function init () {
 		if (tabContainers.length) {
-			_addA11y();
-			_bindTabsEvents();
-			// set all first tabs active on init
-			tabContainers.forEach((tabContainer) => {
-				_showTab(tabContainer.querySelector(tablistSelector + ' a'), false);
+			[...tabContainers].forEach((tabContainer) => {
+				_addA11y(tabContainer);
+				_bindTabsEvents(tabContainer);
+				// set all first tabs active on init
+				_showTab(tabContainer.querySelectorAll(tablistSelector + ' a')[0], false);
+				// set ready style hook
+				tabContainer.classList.add(tabsReadyClass);
 			});
-			docEl.classList.add(tabsReadyClass);
 		}
 	}
 	init();
