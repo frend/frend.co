@@ -1,0 +1,1 @@
+if (sessionStorage[storageId]) docEl.classList.add(classLoaded);

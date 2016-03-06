@@ -28,76 +28,9 @@
 	<link href="//pls.webtype.com" rel="dns-prefetch" />
 	<link href="//www.google-analytics.com" rel="dns-prefetch" />
 
+	<link href="//cloud.webtype.com/css/d0f727b8-b89e-413f-ad8a-085ca4d7de47.css" rel="stylesheet" type="text/css" />
+
 	<script>
-		/*!
-		loadCSS: load a CSS file asynchronously.
-		[c]2015 @scottjehl, Filament Group, Inc.
-		Licensed MIT
-		*/
-		(function(w){
-			"use strict";
-			/* exported loadCSS */
-			w.loadCSS = function( href, before, media ){
-				// Arguments explained:
-				// `href` [REQUIRED] is the URL for your CSS file.
-				// `before` [OPTIONAL] is the element the script should use as a reference for injecting our stylesheet <link> before
-					// By default, loadCSS attempts to inject the link after the last stylesheet or script in the DOM. However, you might desire a more specific location in your document.
-				// `media` [OPTIONAL] is the media type or query of the stylesheet. By default it will be 'all'
-				var doc = w.document;
-				var ss = doc.createElement( "link" );
-				var ref;
-				if( before ){
-					ref = before;
-				}
-				else {
-					var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
-					ref = refs[ refs.length - 1];
-				}
-
-				var sheets = doc.styleSheets;
-				ss.rel = "stylesheet";
-				ss.href = href;
-				// temporarily set media to something inapplicable to ensure it'll fetch without blocking render
-				ss.media = "only x";
-
-				// Inject link
-					// Note: the ternary preserves the existing behavior of "before" argument, but we could choose to change the argument to "after" in a later release and standardize on ref.nextSibling for all refs
-					// Note: `insertBefore` is used instead of `appendChild`, for safety re: http://www.paulirish.com/2011/surefire-dom-element-insertion/
-				ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
-				// A method (exposed on return object for external use) that mimics onload by polling until document.styleSheets until it includes the new sheet.
-				var onloadcssdefined = function( cb ){
-					var resolvedHref = ss.href;
-					var i = sheets.length;
-					while( i-- ){
-						if( sheets[ i ].href === resolvedHref ){
-							return cb();
-						}
-					}
-					setTimeout(function() {
-						onloadcssdefined( cb );
-					});
-				};
-
-				// once loaded, set link's media back to `all` so that the stylesheet applies once it loads
-				ss.onloadcssdefined = onloadcssdefined;
-				onloadcssdefined(function() {
-					ss.media = media || "all";
-				});
-				return ss;
-			};
-		}(this));
-		/*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
-		function loadJS( src, cb ){
-			"use strict";
-			var ref = window.document.getElementsByTagName( "script" )[ 0 ];
-			var script = window.document.createElement( "script" );
-			script.src = src;
-			script.async = true;
-			ref.parentNode.insertBefore( script, ref );
-			if (cb && typeof(cb) === "function") {
-				script.onload = cb;
-			}
-			return script;
-		}
+		!function(e){"use strict";var t=function(t,n,o){function d(e){return i.body?e():void setTimeout(function(){d(e)})}function r(){s.addEventListener&&s.removeEventListener("load",r),s.media=o||"all"}var a,i=e.document,s=i.createElement("link");if(n)a=n;else{var l=(i.body||i.getElementsByTagName("head")[0]).childNodes;a=l[l.length-1]}var f=i.styleSheets;s.rel="stylesheet",s.href=t,s.media="only x",d(function(){a.parentNode.insertBefore(s,n?a:a.nextSibling)});var u=function(e){for(var t=s.href,n=f.length;n--;)if(f[n].href===t)return e();setTimeout(function(){u(e)})};return s.addEventListener&&s.addEventListener("load",r),s.onloadcssdefined=u,u(r),s};"undefined"!=typeof exports?exports.loadCSS=t:e.loadCSS=t}("undefined"!=typeof global?global:this),function(e){var t=function(t,n){"use strict";var o=e.document.getElementsByTagName("script")[0],d=e.document.createElement("script");return d.src=t,d.async=!0,o.parentNode.insertBefore(d,o),n&&"function"==typeof n&&(d.onload=n),d};"undefined"!=typeof module?module.exports=t:e.loadJS=t}("undefined"!=typeof global?global:this),sessionStorage.FontsLoaded&&(document.documentElement.className+=" fonts-loaded");
 	</script>
 </head>

@@ -11,7 +11,7 @@ h1, h2, h3, h4 {
 	font-weight: normal;
 	letter-spacing: -0.04em;
 	text-rendering: optimizeLegibility;
-	.wf-active & {
+	.fonts-loaded & {
 		font-family: $web-font-sans;
 		letter-spacing: 0; /* reset */
 	}
@@ -56,14 +56,14 @@ p + h3 {
 
 p {
 	font-size: 1.125em; /* 18px */
-	letter-spacing: 0.014em;
+	letter-spacing: 0.012em;
 	line-height: 1.556; /* 28px from 18 */
 	margin-bottom: 1em; /* 18px */
 	@include mq($desk) {
 		font-size: 1.375em; /* 22px */
 		line-height: 1.45; /* 29px from 22 */
 	}
-	.wf-active {
+	.fonts-loaded & {
 		letter-spacing: 0;
 	}
 }
@@ -72,14 +72,14 @@ p {
 h1 + p {
 	font-size: 1.5em; /* 24px */
 	font-style: italic;
-	letter-spacing: -0.02em;
+	letter-spacing: -0.033em;
 	line-height: 1.208; /* 29px from 24 */
 	margin-bottom: 2rem; /* 32px */
 	@include mq($desk) {
 		font-size: 1.75em; /* 28px */
 		line-height: 1.214; /* 34px from 28 */
 	}
-	.wf-active & {
+	.fonts-loaded & {
 		letter-spacing: 0;
 	}
 }

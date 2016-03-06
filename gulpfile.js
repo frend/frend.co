@@ -29,8 +29,7 @@ var eslint = require('gulp-eslint');
 var modulePrefix = 'Fr';
 var path = {
 	components: './_components/',
-	css: './css/',
-	js: './js/'
+	css: './css/'
 };
 
 
@@ -122,6 +121,5 @@ gulp.task('default', ['css', 'js']);
 //	Watch
 gulp.task('watch', function () {
 	gulp.watch([path.css + '**/*.scss'], ['css']);
-	// gulp.watch([path.js + '**/*.*', '!' + path.js + 'dist/*.js'], ['js']);
 	gulp.watch([path.components + '*/*.js'], ['component']);
 });
