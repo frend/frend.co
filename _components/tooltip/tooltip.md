@@ -20,7 +20,7 @@ links:
 
 A simple tooltip component usually consists of a button and a tooltip, with the button toggling the visible state of the tooltip when hovered or clicked on. By utilising a few relevant attributes we can improve the accessibility of the button and the tooltip.
 
-`role="tooltip"` and `aria-describedby` are the key attributes to be added to the elements. The `role` applies to the tooltip and describes “a contextual popup that displays a description for an element”. Its counterpart `aria-describedby` defines the element that *describes* the button, which in this case is the tooltip.
+`role="tooltip"` and `aria-describedby` are the key attributes to be added to the elements. The `role` applies to the tooltip and describes “a contextual popup that displays a description for an element”. Its counterpart `aria-describedby` defines the element that *describes* the relevant text (button), which in this case is the tooltip.
 
 The `ESC` key will close any open tooltips and clicking off either element will do the same. Tooltips are hidden using the `aria-hidden` attribute to keep the accessibility tree and the DOM in sync.
 
@@ -31,9 +31,9 @@ The `button` is initially rendered as a `span` in the HTML, this enables us to p
 Tooltips rely on a pair of `<span>`s defining both the toggle element and the tooltip.
 
 ~~~ html
-<span class="fr-tooltip js-fr-tooltip">
-  <span class="js-fr-tooltip-toggle">ipsam</span>
-  <span role="tooltip">Tooltip describing ipsam</span>
+<span class="js-fr-tooltip">
+	<span class="js-fr-tooltip-toggle">ipsam</span>
+	<span class="js-fr-tooltip-tooltip">Tooltip describing ipsam</span>
 </span>
 ~~~
 
@@ -60,6 +60,9 @@ var myTooltip = Frtooltip({
 	selector: '.js-fr-tooltip',
 	// outer container selector, hook for JS init() method
 
+	tooltipSelector: '.js-fr-tooltip-tooltip',
+	// selector to define the tooltip element
+
 	toggleSelector: '.js-fr-tooltip-toggle',
 	// selector to define the toggle element controlling the tooltip
 
@@ -67,7 +70,7 @@ var myTooltip = Frtooltip({
 	// prefix for id applied to each tooltip as identifier for button
 
 	readyClass: 'has-fr-tooltip'
-	// class name that will be added to <html> as tooltip is initialised
+	// class name that will be added to the selector as tooltip is initialised
 
 });
 ~~~
