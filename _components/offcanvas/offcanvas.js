@@ -1,34 +1,20 @@
 'use strict';
 
 /**
- * @param {string} selector				Panel selector, hook for JS init() method
- * @param {string} openSelector			Interactive element selector to open panel
- * @param {string} closeSelector		Interactive element selector to close panel
- * @param {string} toggleSelector		Interactive element selector to toggle panel
- * @param {string} readyClass			Class name that will be added to <html> as offcanvas is initialised
- * @param {string} activeClass			Class name that will be added to <html> when offcanvas is visible
- * @param {string} panelActiveClass		Class name that will be added to the selector when offcanvas is visible
+ * @param {object} options Object containing configuration overrides
  */
-const FrOffcanvas = function({
-			selector: selector = '.js-fr-offcanvas',
-			openSelector: openSelector = '.js-fr-offcanvas-open',
-			closeSelector: closeSelector = '.js-fr-offcanvas-close',
-			toggleSelector: toggleSelector = '.js-fr-offcanvas-toggle',
-			readyClass: readyClass = 'has-fr-offcanvas',
-			activeClass: activeClass = 'fr-offcanvas-is-active',
-			panelActiveClass: panelActiveClass = 'fr-offcanvas--is-active'
-		} = {}) {
+const Froffcanvas = function({
+		selector: selector = '.js-fr-offcanvas',
+		openSelector: openSelector = '.js-fr-offcanvas-open',
+		closeSelector: closeSelector = '.js-fr-offcanvas-close',
+		readyClass: readyClass = 'fr-offcanvas--is-ready',
+		activeClass: activeClass = 'fr-offcanvas--is-active'
+	} = {}) {
 
 
 	//	CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
-	const transitionEventSyntax = {
-		transition: 'transitionend',
-		WebkitTransition: 'webkitTransitionEnd',
-		MozTransition: 'transitionend',
-		OTransition: 'oTransitionEnd otransitionend'
-	};
 
 
 	//	SUPPORTS
@@ -36,14 +22,12 @@ const FrOffcanvas = function({
 
 
 	//	SETUP
-	let panel = doc.querySelector(selector);
-	let buttonOpen = doc.querySelector(openSelector);
-	let buttonClose = doc.querySelector(closeSelector);
-	let buttonToggle = doc.querySelector(toggleSelector);
-	let transitionEventName = 'transitionend';
+	// set accordion element NodeLists
+	const panels = doc.querySelectorAll(selector);
 
 	//	TEMP
-	let currentOpenButton = {};
+	let currButtonOpen = null;
+	let currPanel = null;
 
 
 	//	UTILS
@@ -51,82 +35,122 @@ const FrOffcanvas = function({
 		//	wrapped in setTimeout to delay binding until previous rendering has completed
 		if (typeof fn === 'function') setTimeout(fn, 0);
 	}
-	function _closest (el, fn) {
-		// closest: http://clubmate.fi/jquerys-closest-function-and-pure-javascript-alternatives/
-		return el && (fn(el) ? el : _closest(el.parentNode, fn));
-	}
-	function _getStyleValue (el, prop) {
-		//	return value for CSS property on element
-		return window.getComputedStyle(el, null).getPropertyValue(prop);
-	}
-
-
-	//	Cross-browser
-	function _setTransitionEventPrefix () {
-		//	loop through prefixes and return relevant event
-		for (var prefix in transitionEventSyntax) {
-			if (panel.style[prefix] !== undefined) return transitionEventSyntax[prefix];
+	function _closest (el, selector) {
+		while (el) {
+			if (el.matches(selector)) break;
+			el = el.parentElement;
 		}
+		return el;
+	}
+	function _getPanelId (panel) {
+		return panel.getAttribute('id');
 	}
 
 
-	//	A11y
-	function _addA11y () {
+	//	A11Y
+	function _addA11y (panel) {
 		//	add aria-hidden attribute
 		panel.setAttribute('aria-hidden', true);
 	}
-	function _removeA11y () {
-		//	add aria-hidden attribute
+	function _removeA11y (panel) {
+		//	remove aria-hidden attribute
 		panel.removeAttribute('aria-hidden');
 	}
 
 
-	//	Events
-	function _eventTogglePointer (e) {
-		currentOpenButton = e.target;
-		let panelHidden = panel.getAttribute('aria-hidden') === 'true';
-		if (panelHidden) {
-			_showPanel();
-		} else {
-			_hidePanel();
+	//	ACTIONS
+	function _showPanel (panel) {
+		//	set visibility to override any previous set style
+		panel.style.visibility = 'visible';
+		//	remove aria-hidden, add focus
+		panel.setAttribute('aria-hidden', false);
+		panel.setAttribute('tabindex', -1);
+		panel.focus();
+		//	sort out events
+		_defer(_unbindOpenPointer);
+		_defer(_bindDocKey);
+		_defer(_bindDocClick);
+		_defer(_bindClosePointer);
+		//	reset scroll position
+		panel.scrollTop = 0;
+		//	add active class
+		panel.classList.add(activeClass);
+	}
+	function _hidePanel (panel = currPanel, returnfocus = true) {
+		//	add aria-hidden, remove focus
+		panel.setAttribute('aria-hidden', true);
+		panel.removeAttribute('tabindex');
+		panel.blur();
+		//	set visibility to override any previous set style
+		panel.style.visibility = 'hidden';
+		//	sort out events
+		_unbindClosePointer(panel);
+		_unbindDocKey();
+		_unbindDocClick();
+		_bindOpenPointer(panel);
+		//	remove active class
+		panel.classList.remove(activeClass);
+		//	return focus to button that opened the panel and reset the reference
+		if (returnfocus) {
+			currButtonOpen.focus();
+			currButtonOpen = null;
 		}
 	}
+	function destroy () {
+		[...panels].forEach((panel) => {
+			//	remove attributes
+			_removeA11y(panel);
+			//	unbind local events
+			_unbindOpenPointer(panel);
+			_unbindClosePointer();
+			//	remove class
+			panel.classList.add(readyClass);
+		});
+		//	unbind global events
+		_unbindDocClick();
+		_unbindDocKey();
+		//	reset temp references
+		currButtonOpen = null;
+		currPanel = null;
+	}
+
+
+	//	EVENTS
 	function _eventOpenPointer (e) {
-		currentOpenButton = e.target;
-		_showPanel();
+		//	get panel
+		let panelId = e.target.getAttribute('aria-controls');
+		let panel = doc.querySelector(`#${panelId}`);
+		//	hide any open panels
+		if (currPanel) _hidePanel(currPanel, false);
+		//	save temp panel/button
+		currButtonOpen = e.target;
+		currPanel = panel;
+		//	show
+		_showPanel(panel);
 	}
 	function _eventClosePointer () {
 		_hidePanel();
 	}
 	function _eventDocClick (e) {
 		//	check if target is panel or child of
-		let isPanel = e.target === panel;
-		let isPanelChild = _closest(e.target, (el) => {
-			if (el !== doc) return el.classList.contains(selector.substring(1));
-		});
+		let isPanel = e.target === currPanel;
+		let isPanelChild = _closest(e.target, selector);
 		if (!isPanel && !isPanelChild) _hidePanel();
 	}
 	function _eventDocKey (e) {
 		//	esc key
 		if (e.keyCode === 27) _hidePanel();
 	}
-	function _eventTransitionEnd () {
-		//	set visibilty property to remove keyboard access
-		panel.style.visibility = 'hidden';
-		//	transition event not needed
-		_unbindTransitionEnd();
-	}
 
 
-	//	Bindings
-	function _bindTogglePointer () {
-		if (buttonToggle) buttonToggle.addEventListener('click', _eventTogglePointer);
+	//	BIND EVENTS
+	function _bindOpenPointer (panel) {
+		const openButtons = doc.querySelectorAll(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // is this selector totally crazy?
+		[...openButtons].forEach((button) => button.addEventListener('click', _eventOpenPointer));
 	}
-	function _bindOpenPointer () {
-		if (buttonOpen) buttonOpen.addEventListener('click', _eventOpenPointer);
-	}
-	function _bindClosePointer () {
-		if (buttonClose) buttonClose.addEventListener('click', _eventClosePointer);
+	function _bindClosePointer (panel = currPanel) {
+		var closeButton = panel.querySelector(closeSelector);
+		closeButton.addEventListener('click', _eventClosePointer);
 	}
 	function _bindDocClick () {
 		doc.addEventListener('click', _eventDocClick);
@@ -134,19 +158,16 @@ const FrOffcanvas = function({
 	function _bindDocKey () {
 		doc.addEventListener('keydown', _eventDocKey);
 	}
-	function _bindTransitionEnd () {
-		panel.addEventListener(transitionEventName, _eventTransitionEnd);
-	}
 
-	//	Unbind
-	function _unbindTogglePointer () {
-		if (buttonToggle) buttonToggle.removeEventListener('click', _eventTogglePointer);
+
+	//	UNBIND EVENTS
+	function _unbindOpenPointer (panel = currPanel) {
+		const openButtons = doc.querySelectorAll(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // yep its totally crazy
+		[...openButtons].forEach((button) => button.removeEventListener('click', _eventOpenPointer));
 	}
-	function _unbindOpenPointer () {
-		if (buttonOpen) buttonOpen.removeEventListener('click', _eventOpenPointer);
-	}
-	function _unbindClosePointer () {
-		if (buttonClose) buttonClose.removeEventListener('click', _eventClosePointer);
+	function _unbindClosePointer (panel = currPanel) {
+		var closeButton = panel.querySelector(closeSelector);
+		closeButton.removeEventListener('click', _eventClosePointer);
 	}
 	function _unbindDocClick () {
 		doc.removeEventListener('click', _eventDocClick);
@@ -154,79 +175,17 @@ const FrOffcanvas = function({
 	function _unbindDocKey () {
 		doc.removeEventListener('keydown', _eventDocKey);
 	}
-	function _unbindTransitionEnd () {
-		panel.removeEventListener(transitionEventName, _eventTransitionEnd);
-	}
-
-
-	//	Actions
-	function _showPanel () {
-		//	set visibility to override any previous set style
-		panel.style.visibility = 'visible';
-		//	remove aria-hidden, add focus
-		panel.setAttribute('aria-hidden', false);
-		panel.setAttribute('tabindex', -1);
-		panel.focus();
-		//	bind document close events
-		_defer(_bindDocClick); // this isn't working for enter, works for space though. WTF.
-		_defer(_bindDocKey);
-		_defer(_bindClosePointer);
-		_defer(_unbindOpenPointer);
-		//	reset scroll position
-		panel.scrollTop = 0;
-		//	add active class
-		panel.classList.add(panelActiveClass);
-		docEl.classList.add(activeClass);
-	}
-	function _hidePanel () {
-		//	detect transition
-		let hasTransition = _getStyleValue(panel, 'transition').indexOf('transform') > -1;
-		//	add aria-hidden, remove focus
-		panel.setAttribute('aria-hidden', true);
-		panel.removeAttribute('tabindex');
-		panel.blur();
-		//	bind transition end
-		if (hasTransition) _bindTransitionEnd();
-		else panel.style.visibility = 'hidden';
-		//	unbind document events
-		_unbindDocKey();
-		_unbindDocClick();
-		_unbindClosePointer();
-		_bindOpenPointer();
-		//	remove active class
-		panel.classList.remove(panelActiveClass);
-		docEl.classList.remove(activeClass);
-		//	return focus to button that opened the panel
-		currentOpenButton.focus();
-		currentOpenButton = {};
-	}
-	function destroy () {
-		//	remove attributes
-		_removeA11y();
-		//	unbind events
-		_unbindTogglePointer();
-		_unbindOpenPointer();
-		_unbindClosePointer();
-		_unbindDocClick();
-		_unbindDocKey();
-		//	remove reference
-		docEl.classList.remove(readyClass);
-	}
 
 
 	//	INIT
 	function init () {
-		if (panel) {
-			//	detect required properties
-			_setTransitionEventPrefix();
-			//	set a11y DOM properties
-			_addA11y();
-			//	bind button events
-			_bindTogglePointer();
-			_bindOpenPointer();
-			//	set ready class
-			docEl.classList.add(readyClass);
-		}
+		if (!panels) return;
+		//	loop through each offcanvas element
+		[...panels].forEach((panel) => {
+			_addA11y(panel);
+			_bindOpenPointer(panel);
+			panel.classList.add(readyClass);
+		});
 	}
 	init();
 
@@ -240,4 +199,4 @@ const FrOffcanvas = function({
 
 
 // module exports
-export default FrOffcanvas;
+export default Froffcanvas;

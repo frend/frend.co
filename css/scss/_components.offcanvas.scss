@@ -6,7 +6,6 @@
 //	Toggles
 //-----------------------------------
 
-.fr-offcanvas-toggle,
 .fr-offcanvas-open,
 .fr-offcanvas-close {
 	border-radius: 0.25em; /* 4px */
@@ -20,12 +19,8 @@
 	.wf-active & {
 		font-family: $web-font-sans;
 	}
-	html:not(.has-fr-offcanvas) & {
-		display: none;
-	}
 }
 
-.fr-offcanvas-toggle,
 .fr-offcanvas-open {
 	background-color: $yellow;
 	border-bottom: 0.125em solid mix(#000, $yellow, 10%);
@@ -40,8 +35,6 @@
 	right: 1.25em; /* 20px */
 }
 
-.fr-offcanvas-toggle:hover,
-.fr-offcanvas-toggle:focus,
 .fr-offcanvas-open:hover,
 .fr-offcanvas-open:focus,
 .fr-offcanvas-close:hover,
@@ -61,13 +54,25 @@
 	background-color: $yellow;
 	padding: 20px;
 }
-.has-fr-offcanvas .fr-offcanvas {
+.fr-offcanvas--is-ready {
 	padding: 80px 20px 20px;
 	max-width: 400px;
 	transition: transform 200ms ease-out;
 }
-.has-fr-offcanvas .fr-offcanvas[aria-hidden="false"] {
+.fr-offcanvas--is-ready[aria-hidden="false"] {
 	transform: translateX(-100%);
+}
+.fr-offcanvas--is-ready[aria-hidden="true"] {
+	transition: transform 200ms ease-out, visibility 200ms;
+}
+
+//	Left modifier
+.fr-offcanvas--is-ready.fr-offcanvas--left {
+	left: auto;
+	right: 100%;
+}
+.fr-offcanvas--is-ready.fr-offcanvas--left[aria-hidden="false"] {
+	transform: translateX(100%);
 }
 
 
