@@ -22,7 +22,7 @@ const Froffcanvas = function({
 
 
 	//	SETUP
-	// set accordion element NodeLists
+	// set offcanvas element NodeLists
 	const panels = doc.querySelectorAll(selector);
 
 	//	TEMP
@@ -104,7 +104,7 @@ const Froffcanvas = function({
 			_unbindOpenPointer(panel);
 			_unbindClosePointer();
 			//	remove class
-			panel.classList.add(readyClass);
+			panel.classList.remove(readyClass);
 		});
 		//	unbind global events
 		_unbindDocClick();
