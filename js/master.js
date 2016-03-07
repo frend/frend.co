@@ -2,8 +2,7 @@
  * Global scripts
  */
 
-import ComponentEmbed from './modules/component-embed';
-import WebFonts from './modules/web-fonts';
+import WebFontLoader from './modules/webfont-loader';
 
 //	Run
-WebFonts();
+WebFontLoader();

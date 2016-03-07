@@ -4,7 +4,7 @@ module.exports = {
 	entry: './js/master.js',
 	output: {
 		path: path.join(__dirname, './js/dist'),
-		filename: 'global.js'
+		filename: 'global.min.js'
 	},
 	module: {
 		loaders: [{
