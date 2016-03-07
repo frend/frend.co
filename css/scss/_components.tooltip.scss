@@ -12,7 +12,7 @@
 }
 
 //	Tooltip
-.fr-tooltip [role="tooltip"] {
+.fr-tooltip .js-fr-tooltip-tooltip {
 	background-color: $yellow;
 	border-radius: 0.25em; /* 4px */
 	bottom: 100%;
@@ -23,9 +23,12 @@
 	position: absolute;
 	text-align: center;
 	transform: translateX(-50%) translateY(0);
+	visibility: hidden;
+}
+.fr-tooltip--is-ready .js-fr-tooltip-tooltip {
 	transition: visibility $duration $easing, opacity $duration $easing, transform $duration $easing;
 }
-.fr-tooltip [role="tooltip"]::after {
+.fr-tooltip .js-fr-tooltip-tooltip::after {
 	border: solid transparent;
 	border-color: transparent;
 	border-top-color: $yellow;
@@ -39,7 +42,7 @@
 	position: absolute;
 	width: 0;
 }
-.fr-tooltip [role="tooltip"][aria-hidden="false"] {
+.fr-tooltip--is-ready .js-fr-tooltip-tooltip[aria-hidden="false"] {
 	opacity: 1;
 	transform: translateX(-50%) translateY(-12px);
 }
