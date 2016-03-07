@@ -62,17 +62,19 @@ myOffcanvas.init();
 
 ~~~ js
 var myOffcanvas = Froffcanvas({
+	// String - Panel selector, hook for JS init() method
 	selector: '.fr-offcanvas-panel',
-	// panel selector, hook for JS init() method
 
+	// String - Selector for the open button(s)
 	openSelector: '.js-fr-offcanvas-open',
+
+	// String - Selector for the close button
 	closeSelector: '.js-fr-offcanvas-close',
-	// interactive element selectors to open/close panel
 
+	// String - Class name that will be added to the selector when the component has been initialised
 	readyClass: 'fr-offcanvas--is-ready',
-	// class name that will be added to the selector when offcanvas is initialised
 
+	// String - Class name that will be added to the selector when the panel is visible
 	activeClass: 'fr-offcanvas--is-active'
-	// class name that will be added to the selector when offcanvas is visible
 });
 ~~~

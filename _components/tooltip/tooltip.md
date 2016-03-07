@@ -57,19 +57,19 @@ myTooltip.init();
 
 ~~~ js
 var myTooltip = Frtooltip({
+	// String - Container selector, hook for JS init() method
 	selector: '.js-fr-tooltip',
-	// outer container selector, hook for JS init() method
 
+	// String - Selector to define the tooltip element
 	tooltipSelector: '.js-fr-tooltip-tooltip',
-	// selector to define the tooltip element
 
+	// String - Selector to define the toggle element controlling the tooltip
 	toggleSelector: '.js-fr-tooltip-toggle',
-	// selector to define the toggle element controlling the tooltip
 
+	// String - Prefix for the id applied to each tooltip as a reference for the toggle
 	tooltipIdPrefix: 'tooltip',
-	// prefix for id applied to each tooltip as identifier for button
 
+	// String - Class name that will be added to the selector when the component has been initialised
 	readyClass: 'fr-tooltip--is-ready'
-	// class name that will be added to the selector as tooltip is initialised
 });
 ~~~
