@@ -1,6 +1,6 @@
 'use strict';
 
-import Promise from 'promise-polyfill';
+import 'promis';
 import FontFaceObserver from 'fontfaceobserver';
 
 
