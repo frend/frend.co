@@ -6,7 +6,7 @@
 //	Tabs
 //-----------------------------------
 
-.has-fr-tabs .fr-tabs__tab {
+.fr-tabs--is-ready .fr-tabs__tab {
 	background-color: mix(#000, $yellow, 5%);
 	border-radius: 0.25em 0.25em 0 0; /* 4px */
 	color: $dark-grey;
@@ -39,7 +39,7 @@
 //	Panels
 //-----------------------------------
 
-.has-fr-tabs .fr-tabs__panel {
+.fr-tabs--is-ready .fr-tabs__panel {
 	background-color: $yellow;
 	padding: 1.25em;
 }

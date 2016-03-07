@@ -14,25 +14,32 @@ links:
     url: http://heydonworks.com/practical_aria_examples/#hamburger
 ---
 
-A common interface pattern for navigation on small viewports, the off-canvas component consists of a hidden panel and button toggling its visibility.
+A common interface pattern for navigation on narrow viewports, the off-canvas component consists of a hidden panel and a button to toggle its visibility.
 
-ARIA roles play an important role; `aria-hidden` is toggled when the panel is opened or closed to preserve consistency between the DOM and the accessibility tree, and `aria-controls` are used to link the relevant buttons and panels.
+`aria-controls` is used to associate the button with its panel and `aria-hidden` is toggled when the panel is opened or closed, this preserves consistency between the DOM and the accessibility tree.
 
-No assumption is made about the panel containing navigation hence the lack of an `role="navigation"`. The component is simply defined as a collapsible section of the document. If navigation is contained within the panel, you can define a `<nav>` element for correct interpretation by the browser.
+To retain the correct taborder, focus is applied to the panel when opening and returned to the button when closed.
 
-Keyboard navigation is enabled by default, and the `ESC` key will close the panel and focusable elements within the panel aren't accessible if closed. Focus is applied to the panel when open to maintain the correct tab order.
+A few handy extra events are bound, keyboard navigation is enabled with the `ESC` key closing the panel and any interactions outside of the panel similarly closing it.
 
+It’s important to note that no assumption is made about the panel containing navigation, hence the lack of a `role="navigation"`; the component is simply defined as a collapsible section of the document. Navigation can of course be contained within the panel, in which case it’s recommended to use a `<nav>` element for correct interpretation by the browser.
+
+Initialising the component responsively is possible, call `init()` when the required breakpoint is met and `destroy()` when outside of that breakpoint.
 
 ## Usage
 
-Offcanvas relies on both a panel, a close button and either an open or toggle button.
+Offcanvas relies on a paired panel and button, with a single close button living within the panel.
 
 ~~~ html
-<div class="fr-offcanvas-panel js-fr-offcanvas">
+<button class="js-fr-offcanvas-open" aria-controls="offcanvas-1">
+	Open
+</button>
+<section class="js-fr-offcanvas" id="offcanvas-1">
 	...
-	<button class="fr-offcanvas-close js-fr-offcanvas-close">Close panel</button>
-</div>
-<button class="fr-offcanvas-open js-fr-offcanvas-open">Open panel</button>
+	<button class="js-fr-offcanvas-close">
+		Close
+	</button>
+</section>
 ~~~
 
 Assign the function invocation to a variable.
@@ -55,21 +62,19 @@ myOffcanvas.init();
 
 ~~~ js
 var myOffcanvas = Froffcanvas({
+	// String - Panel selector, hook for JS init() method
 	selector: '.fr-offcanvas-panel',
-	// panel selector, hook for JS init() method
 
+	// String - Selector for the open button(s)
 	openSelector: '.js-fr-offcanvas-open',
+
+	// String - Selector for the close button
 	closeSelector: '.js-fr-offcanvas-close',
-	toggleSelector: '.js-fr-offcanvas-toggle',
-	// interactive element selectors to open/close/toggle panel
 
-	readyClass: 'has-fr-offcanvas',
-	// class name that will be added to <html> as offcanvas is initialised
+	// String - Class name that will be added to the selector when the component has been initialised
+	readyClass: 'fr-offcanvas--is-ready',
 
-	activeClass: 'fr-offcanvas-is-active',
-	// class name that will be added to <html> when offcanvas is visible
-
-	panelActiveClass: 'fr-offcanvas--is-active'
-	// class name that will be added to the selector when offcanvas is visible
+	// String - Class name that will be added to the selector when the panel is visible
+	activeClass: 'fr-offcanvas--is-active'
 });
 ~~~

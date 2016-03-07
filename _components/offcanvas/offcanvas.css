@@ -1,6 +1,6 @@
 
 /* Functional */
-.has-fr-offcanvas .fr-offcanvas {
+.fr-offcanvas--is-ready {
 	position: fixed;
 	top: 0;
 	left: 100%;
