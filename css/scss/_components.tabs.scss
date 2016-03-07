@@ -19,7 +19,7 @@
 	text-transform: uppercase;
 	transition: background-color $duration $easing, color $duration $easing;
 }
-.wf-active .fr-tabs__tab {
+.fonts-loaded .fr-tabs__tab {
 	font-family: $web-font-sans;
 }
 
