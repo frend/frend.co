@@ -69,8 +69,7 @@ var myTooltip = Frtooltip({
 	tooltipIdPrefix: 'tooltip',
 	// prefix for id applied to each tooltip as identifier for button
 
-	readyClass: 'has-fr-tooltip'
+	readyClass: 'fr-tooltip--is-ready'
 	// class name that will be added to the selector as tooltip is initialised
-
 });
 ~~~

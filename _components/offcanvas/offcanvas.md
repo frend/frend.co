@@ -69,10 +69,10 @@ var myOffcanvas = Froffcanvas({
 	closeSelector: '.js-fr-offcanvas-close',
 	// interactive element selectors to open/close panel
 
-	readyClass: 'has-fr-offcanvas',
+	readyClass: 'fr-offcanvas--is-ready',
 	// class name that will be added to the selector when offcanvas is initialised
 
-	activeClass: 'fr-offcanvas-is-active',
+	activeClass: 'fr-offcanvas--is-active'
 	// class name that will be added to the selector when offcanvas is visible
 });
 ~~~
