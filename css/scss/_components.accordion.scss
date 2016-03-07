@@ -6,7 +6,7 @@
 //	Header
 //-----------------------------------
 
-.has-fr-accordion .fr-accordion__header {
+.fr-accordion--is-ready .fr-accordion__header {
 	background-color: $yellow;
 	border-bottom: 1px solid mix(#000, $yellow, 10%);
 	color: $dark-grey;
@@ -24,10 +24,10 @@
 	font-family: $web-font-sans;
 }
 
-.has-fr-accordion .fr-accordion__header:first-child {
+.fr-accordion--is-ready .fr-accordion__header:first-child {
 	border-radius: 0.25em 0.25em 0 0; /* 4px */
 }
-.has-fr-accordion .fr-accordion__header:last-of-type:not([aria-selected="true"]) {
+.fr-accordion--is-ready .fr-accordion__header:last-of-type:not([aria-selected="true"]) {
 	border-radius: 0 0 0.25em 0.25em; /* 4px */
 }
 
@@ -49,19 +49,19 @@
 //	Panels
 //-----------------------------------
 
-.has-fr-accordion .fr-accordion__panel {
+.fr-accordion--is-ready .fr-accordion__panel {
 	background-color: $yellow;
 	border-bottom: 1px solid mix(#000, $yellow, 10%);
 	padding: 1.25em;
 }
-.has-fr-accordion .fr-accordion__panel:last-child {
+.fr-accordion--is-ready .fr-accordion__panel:last-child {
 	border-radius: 0 0 0.25em 0.25em; /* 4px */
 }
 
-.has-fr-accordion .fr-accordion p a {
+.fr-accordion--is-ready .fr-accordion p a {
 	@include underline($dark-grey, $yellow, 1.05em, 2px);
 }
-.has-fr-accordion .fr-accordion p a:hover,
-.has-fr-accordion .fr-accordion p a:focus {
+.fr-accordion--is-ready .fr-accordion p a:hover,
+.fr-accordion--is-ready .fr-accordion p a:focus {
 	@include underline($red, $yellow, 1.05em, 2px);
 }

@@ -3,7 +3,7 @@
 }
 
 /* Accordion header */
-.has-fr-accordion .fr-accordion__header {
+.fr-accordion--is-ready .fr-accordion__header {
 	cursor: pointer;
 }
 
