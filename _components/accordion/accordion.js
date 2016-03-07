@@ -11,7 +11,8 @@ const Fraccordion = function ({
 		panelIdPrefix: panelIdPrefix = 'accordion-panel',
 		firstPanelsOpenByDefault: firstPanelsOpenByDefault = true,
 		multiselectable: multiselectable = true,
-		readyClass: readyClass = 'fr-accordion--is-ready'
+		readyClass: readyClass = 'fr-accordion--is-ready',
+		transitionLength: transitionLength = 250
 	} = {}) {
 
 
@@ -27,6 +28,7 @@ const Fraccordion = function ({
 	// SETUP
 	// set accordion element NodeLists
 	let accordionContainers = doc.querySelectorAll(selector);
+
 
 	// A11Y
 	function _addA11y (accordionContainer) {
@@ -52,7 +54,6 @@ const Fraccordion = function ({
 			accordionPanel.setAttribute('tabindex', 0);
 		});
 	}
-
 	function _removeA11y (accordionContainer) {
 		// get accordion elements
 		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
@@ -81,6 +82,36 @@ const Fraccordion = function ({
 	}
 
 
+	//	UTILS
+	function _getPanelHeight (panel) {
+		//	set auto height and read offsetHeight
+		panel.style.height = 'auto';
+		let height = panel.offsetHeight;
+		//	remove style
+		panel.style.height = '';
+		return height;
+	}
+	function _setPanelHeight (panel) {
+		//	get panel height
+		let panelHeight = _getPanelHeight(panel);
+		//	recalc style and layout
+		panel.getBoundingClientRect();
+		//	set height on panel, reset to 'auto' on transition complete
+		panel.style.height = panelHeight + 'px';
+		setTimeout(() => { panel.style.height = 'auto' }, transitionLength);
+	}
+	function _unsetPanelHeight (panel) {
+		//	get panel height
+		let panelHeight = _getPanelHeight(panel);
+		//	set panel height from 'auto' to px
+		panel.style.height = panelHeight + 'px';
+		//	recalc style and layout
+		panel.getBoundingClientRect();
+		//	reset height
+		panel.style.height = 0;
+	}
+
+
 	// ACTIONS
 	function _hideAllPanels (accordionContainer) {
 		let siblingHeaders = accordionContainer.querySelectorAll(headerSelector);
@@ -93,43 +124,46 @@ const Fraccordion = function ({
 			header.setAttribute('aria-expanded', 'false');
 		});
 		[...siblingPanels].forEach((panel) => {
+			if (panel.getAttribute('aria-hidden') === 'false') _unsetPanelHeight(panel);
+			//	toggle aria-hidden
 			panel.setAttribute('aria-hidden', 'true');
 		});
 	}
-
 	function _hidePanel (target) {
+		//	get panel
 		let activePanel = doc.getElementById(target.getAttribute('aria-controls'));
-
 		target.setAttribute('aria-selected', 'false');
 		target.setAttribute('aria-expanded', 'false');
+		//	toggle aria-hidden
+		_unsetPanelHeight(activePanel);
 		activePanel.setAttribute('aria-hidden', 'true');
 	}
-
 	function _showPanel (target) {
+		//	get panel
 		let activePanel = doc.getElementById(target.getAttribute('aria-controls'));
-
-		// set actives
+		//	set attributes on header
 		target.setAttribute('tabindex', 0);
 		target.setAttribute('aria-selected', 'true');
 		target.setAttribute('aria-expanded', 'true');
+		//	toggle aria-hidden and set height on panel
+		_setPanelHeight(activePanel);
 		activePanel.setAttribute('aria-hidden', 'false');
+		setTimeout(() => _bindAccordionEvents(target.parentNode), transitionLength);
 	}
-
 	function _togglePanel (target) {
+		// get context of accordion container and its children
+		let thisContainer = target.parentNode;
 		// close target panel if already active
 		if (target.getAttribute('aria-selected') === 'true') {
 			_hidePanel(target);
 			return;
 		}
 		// if not multiselectable hide all, then show target
-		if (!multiselectable) {
-			// get context of accordion container and its children
-			let thisContainer = target.parentNode;
-			_hideAllPanels(thisContainer);
-		}
-		_showPanel(target);
-	}
+		if (!multiselectable) _hideAllPanels(thisContainer);
 
+		_showPanel(target);
+		if (transitionLength > 0) _unbindAccordionEvents(thisContainer);
+	}
 	function _giveHeaderFocus (headerSet, i) {
 		// remove focusability from inactives
 		[...headerSet].forEach((header) => {
@@ -141,11 +175,10 @@ const Fraccordion = function ({
 	}
 
 
-	// EVENTS
+	//	EVENTS
 	function _eventHeaderClick (e) {
 		_togglePanel(e.target);
 	}
-
 	function _eventHeaderKeydown (e) {
 		// collect header targets, and their prev/next
 		let currentHeader = e.target;
@@ -180,7 +213,7 @@ const Fraccordion = function ({
 	}
 
 
-	// BINDINGS
+	//	BIND EVENTS
 	function _bindAccordionEvents (accordionContainer) {
 		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
 		// bind all accordion header click and keydown events
@@ -190,6 +223,8 @@ const Fraccordion = function ({
 		});
 	}
 
+
+	//	UNBIND EVENTS
 	function _unbindAccordionEvents (accordionContainer) {
 		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
 		// unbind all accordion header click and keydown events
@@ -212,7 +247,7 @@ const Fraccordion = function ({
 
 	// INIT
 	function init () {
-		if (accordionContainers.length) {			
+		if (accordionContainers.length) {
 			[...accordionContainers].forEach((accordionContainer) => {
 				_addA11y(accordionContainer);
 				_bindAccordionEvents(accordionContainer);

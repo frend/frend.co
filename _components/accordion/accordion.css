@@ -8,9 +8,13 @@
 }
 
 /* Accordion panel */
-.fr-accordion__panel[aria-hidden="true"] {
-	display: none;
-	/*height: 0;
+.fr-accordion--is-ready .fr-accordion__panel {
 	overflow: hidden;
-	transition: height 250ms ease-out;*/
+}
+.fr-accordion__panel[aria-hidden="true"] {
+	visibility: hidden;
+	height: 0;
+}
+.fr-accordion__panel[aria-hidden="false"] {
+	visibility: visible;
 }

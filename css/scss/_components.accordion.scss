@@ -52,7 +52,7 @@
 .fr-accordion--is-ready .fr-accordion__panel {
 	background-color: $yellow;
 	border-bottom: 1px solid mix(#000, $yellow, 10%);
-	padding: 1.25em;
+	transition: height 250ms ease-out, visibility 250ms;
 }
 .fr-accordion--is-ready .fr-accordion__panel:last-child {
 	border-radius: 0 0 0.25em 0.25em; /* 4px */
@@ -64,4 +64,7 @@
 .fr-accordion--is-ready .fr-accordion p a:hover,
 .fr-accordion--is-ready .fr-accordion p a:focus {
 	@include underline($red, $yellow, 1.05em, 2px);
+}
+.fr-accordion__inner {
+	padding: 1.25em;
 }
