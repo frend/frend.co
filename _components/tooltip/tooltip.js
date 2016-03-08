@@ -4,6 +4,13 @@
 // https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
 NodeList.prototype.forEach = Array.prototype.forEach;
 
+// Polyfill matches as per https://github.com/jonathantneal/closest
+Element.prototype.matches = Element.prototype.matches ||
+							Element.prototype.mozMatchesSelector ||
+							Element.prototype.msMatchesSelector ||
+							Element.prototype.oMatchesSelector ||
+							Element.prototype.webkitMatchesSelector;
+
 /**
  * @param {object} options Object containing configuration overrides
  */
