@@ -1,5 +1,9 @@
 'use strict';
 
+// Set Array prototype on NodeList for forEach() support
+// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
+NodeList.prototype.forEach = Array.prototype.forEach;
+
 /**
  * @param {object} options Object containing configuration overrides
  */
@@ -40,14 +44,14 @@ const Fraccordion = function ({
 		accordionContainer.setAttribute('role', 'tablist');
 		accordionContainer.setAttribute('aria-multiselectable', multiselectable);
 
-		[...accordionHeaders].forEach((accordionHeader) => {
+		accordionHeaders.forEach((accordionHeader) => {
 			accordionHeader.setAttribute('role', 'tab');
 			accordionHeader.setAttribute('aria-controls', accordionHeader.id.replace(headerIdPrefix, panelIdPrefix));
 			// make headers focusable, this is preferred over wrapping contents in native button element
 			accordionHeader.setAttribute('tabindex', 0);
 		});
 
-		[...accordionPanels].forEach((accordionPanel) => {
+		accordionPanels.forEach((accordionPanel) => {
 			accordionPanel.setAttribute('role', 'tabpanel');
 			accordionPanel.setAttribute('aria-labelledby', accordionPanel.id.replace(panelIdPrefix, headerIdPrefix));
 			// make tabpanel focusable
@@ -63,7 +67,7 @@ const Fraccordion = function ({
 		accordionContainer.removeAttribute('role');
 		accordionContainer.removeAttribute('aria-multiselectable');
 
-		[...accordionHeaders].forEach((accordionHeader) => {
+		accordionHeaders.forEach((accordionHeader) => {
 			accordionHeader.removeAttribute('role');
 			accordionHeader.removeAttribute('aria-controls');
 			accordionHeader.removeAttribute('aria-selected');
@@ -72,7 +76,7 @@ const Fraccordion = function ({
 			accordionHeader.removeAttribute('tabindex');
 		});
 
-		[...accordionPanels].forEach((accordionPanel) => {
+		accordionPanels.forEach((accordionPanel) => {
 			accordionPanel.removeAttribute('role');
 			accordionPanel.removeAttribute('aria-labelledby');
 			accordionPanel.removeAttribute('aria-hidden');
@@ -118,12 +122,12 @@ const Fraccordion = function ({
 		let siblingPanels = accordionContainer.querySelectorAll(panelSelector);
 
 		// set inactives
-		[...siblingHeaders].forEach((header) => {
+		siblingHeaders.forEach((header) => {
 			header.setAttribute('tabindex', -1);
 			header.setAttribute('aria-selected', 'false');
 			header.setAttribute('aria-expanded', 'false');
 		});
-		[...siblingPanels].forEach((panel) => {
+		siblingPanels.forEach((panel) => {
 			if (panel.getAttribute('aria-hidden') === 'false') _unsetPanelHeight(panel);
 			//	toggle aria-hidden
 			panel.setAttribute('aria-hidden', 'true');
@@ -166,7 +170,7 @@ const Fraccordion = function ({
 	}
 	function _giveHeaderFocus (headerSet, i) {
 		// remove focusability from inactives
-		[...headerSet].forEach((header) => {
+		headerSet.forEach((header) => {
 			header.setAttribute('tabindex', -1);
 		});
 		// set active focus
@@ -185,7 +189,7 @@ const Fraccordion = function ({
 		// get context of accordion container and its children
 		let thisContainer = currentHeader.parentNode;
 		let theseHeaders = thisContainer.querySelectorAll(headerSelector);
-		let currentHeaderIndex = [].indexOf.call([...theseHeaders], currentHeader);
+		let currentHeaderIndex = [].indexOf.call(theseHeaders, currentHeader);
 
 		// catch enter/space, left/right and up/down arrow key events
 		// if new panel show it, if next/prev move focus
@@ -217,7 +221,7 @@ const Fraccordion = function ({
 	function _bindAccordionEvents (accordionContainer) {
 		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
 		// bind all accordion header click and keydown events
-		[...accordionHeaders].forEach((accordionHeader) => {
+		accordionHeaders.forEach((accordionHeader) => {
 			accordionHeader.addEventListener('click', _eventHeaderClick);
 			accordionHeader.addEventListener('keydown', _eventHeaderKeydown);
 		});
@@ -228,7 +232,7 @@ const Fraccordion = function ({
 	function _unbindAccordionEvents (accordionContainer) {
 		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
 		// unbind all accordion header click and keydown events
-		[...accordionHeaders].forEach((accordionHeader) => {
+		accordionHeaders.forEach((accordionHeader) => {
 			accordionHeader.removeEventListener('click', _eventHeaderClick);
 			accordionHeader.removeEventListener('keydown', _eventHeaderKeydown);
 		});
@@ -237,7 +241,7 @@ const Fraccordion = function ({
 
 	// DESTROY
 	function destroy () {
-		[...accordionContainers].forEach((accordionContainer) => {
+		accordionContainers.forEach((accordionContainer) => {
 			_removeA11y(accordionContainer);
 			_unbindAccordionEvents(accordionContainer);
 			accordionContainer.classList.remove(readyClass);
@@ -248,7 +252,7 @@ const Fraccordion = function ({
 	// INIT
 	function init () {
 		if (accordionContainers.length) {
-			[...accordionContainers].forEach((accordionContainer) => {
+			accordionContainers.forEach((accordionContainer) => {
 				_addA11y(accordionContainer);
 				_bindAccordionEvents(accordionContainer);
 				_hideAllPanels(accordionContainer);

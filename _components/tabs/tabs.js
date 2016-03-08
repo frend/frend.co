@@ -1,5 +1,9 @@
 'use strict';
 
+// Set Array prototype on NodeList for forEach() support
+// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
+NodeList.prototype.forEach = Array.prototype.forEach;
+
 /**
  * @param {object} options Object containing configuration overrides
  */
@@ -34,20 +38,20 @@ const Frtabs = function ({
 		const tabpanels = tabContainer.querySelectorAll(tabpanelSelector);
 
 		// add roles, properties, states
-		[...tabLists].forEach((tabList) => {
+		tabLists.forEach((tabList) => {
 			tabList.setAttribute('role', 'tablist');
 		});
 
-		[...tabListItems].forEach((tabItem) => {
+		tabListItems.forEach((tabItem) => {
 			tabItem.setAttribute('role', 'presentation');
 		});
 
-		[...tabs].forEach((tab) => {
+		tabs.forEach((tab) => {
 			tab.setAttribute('role', 'tab');
 			tab.setAttribute('aria-controls', tab.hash.substring(1));
 		});
 
-		[...tabpanels].forEach((tabpanel) => {
+		tabpanels.forEach((tabpanel) => {
 			tabpanel.setAttribute('role', 'tabpanel');
 			// make first child of tabpanel focusable if available
 			tabpanel.setAttribute('tabindex', 0);
@@ -63,22 +67,22 @@ const Frtabs = function ({
 		const tabpanels = tabContainer.querySelectorAll(tabpanelSelector);
 
 		// remove roles, properties, states
-		[...tabLists].forEach((tabList) => {
+		tabLists.forEach((tabList) => {
 			tabList.removeAttribute('role');
 		});
 
-		[...tabListItems].forEach((tabItem) => {
+		tabListItems.forEach((tabItem) => {
 			tabItem.removeAttribute('role');
 		});
 
-		[...tabs].forEach((tab) => {
+		tabs.forEach((tab) => {
 			tab.removeAttribute('role');
 			tab.removeAttribute('aria-controls');
 			tab.removeAttribute('aria-selected');
 			tab.removeAttribute('tabindex');
 		});
 
-		[...tabpanels].forEach((tabpanel) => {
+		tabpanels.forEach((tabpanel) => {
 			tabpanel.removeAttribute('role');
 			tabpanel.removeAttribute('aria-hidden');
 			// remove first child focusability if present
@@ -96,11 +100,11 @@ const Frtabs = function ({
 		let siblingTabpanels = thisContainer.querySelectorAll(tabpanelSelector);
 
 		// set inactives
-		[...siblingTabs].forEach((tab) => {
+		siblingTabs.forEach((tab) => {
 			tab.setAttribute('tabindex', -1);
 			tab.removeAttribute('aria-selected');
 		});
-		[...siblingTabpanels].forEach((tabpanel) => {
+		siblingTabpanels.forEach((tabpanel) => {
 			tabpanel.setAttribute('aria-hidden', 'true');
 		});
 
@@ -147,7 +151,7 @@ const Frtabs = function ({
 	function _bindTabsEvents (tabContainer) {
 		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
 		// bind all tab click and keydown events
-		[...tabs].forEach((tab) => {
+		tabs.forEach((tab) => {
 			tab.addEventListener('click', _eventTabClick);
 			tab.addEventListener('keydown', _eventTabKeydown);
 		});
@@ -156,7 +160,7 @@ const Frtabs = function ({
 	function _unbindTabsEvents (tabContainer) {
 		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
 		// unbind all tab click and keydown events
-		[...tabs].forEach((tab) => {
+		tabs.forEach((tab) => {
 			tab.removeEventListener('click', _eventTabClick);
 			tab.removeEventListener('keydown', _eventTabKeydown);
 		});
@@ -165,7 +169,7 @@ const Frtabs = function ({
 
 	// DESTROY
 	function destroy () {
-		[...tabContainers].forEach((tabContainer) => {
+		tabContainers.forEach((tabContainer) => {
 			_removeA11y(tabContainer);
 			_unbindTabsEvents(tabContainer);
 			tabContainer.classList.remove(tabsReadyClass);
@@ -176,7 +180,7 @@ const Frtabs = function ({
 	// INIT
 	function init () {
 		if (tabContainers.length) {
-			[...tabContainers].forEach((tabContainer) => {
+			tabContainers.forEach((tabContainer) => {
 				_addA11y(tabContainer);
 				_bindTabsEvents(tabContainer);
 				// set all first tabs active on init
