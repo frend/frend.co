@@ -1,5 +1,9 @@
 'use strict';
 
+// Set Array prototype on NodeList for forEach() support
+// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
+NodeList.prototype.forEach = Array.prototype.forEach;
+
 /**
  * @param {object} options Object containing configuration overrides
  */
@@ -97,7 +101,7 @@ const Froffcanvas = function({
 		}
 	}
 	function destroy () {
-		[...panels].forEach((panel) => {
+		panels.forEach((panel) => {
 			//	remove attributes
 			_removeA11y(panel);
 			//	unbind local events
@@ -146,7 +150,7 @@ const Froffcanvas = function({
 	//	BIND EVENTS
 	function _bindOpenPointer (panel) {
 		const openButtons = doc.querySelectorAll(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // is this selector totally crazy?
-		[...openButtons].forEach((button) => button.addEventListener('click', _eventOpenPointer));
+		openButtons.forEach((button) => button.addEventListener('click', _eventOpenPointer));
 	}
 	function _bindClosePointer (panel = currPanel) {
 		var closeButton = panel.querySelector(closeSelector);
@@ -163,7 +167,7 @@ const Froffcanvas = function({
 	//	UNBIND EVENTS
 	function _unbindOpenPointer (panel = currPanel) {
 		const openButtons = doc.querySelectorAll(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // yep its totally crazy
-		[...openButtons].forEach((button) => button.removeEventListener('click', _eventOpenPointer));
+		openButtons.forEach((button) => button.removeEventListener('click', _eventOpenPointer));
 	}
 	function _unbindClosePointer (panel = currPanel) {
 		var closeButton = panel.querySelector(closeSelector);
@@ -181,7 +185,7 @@ const Froffcanvas = function({
 	function init () {
 		if (!panels) return;
 		//	loop through each offcanvas element
-		[...panels].forEach((panel) => {
+		panels.forEach((panel) => {
 			_addA11y(panel);
 			_bindOpenPointer(panel);
 			panel.classList.add(readyClass);
