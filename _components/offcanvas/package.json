@@ -19,9 +19,6 @@
     "es2015"
   ],
   "author": "Frend <hello@frend.co> (http://frend.co)",
-  "files": [
-    "dist/froffcanvas.min.js"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/frend/frend.co/issues"
