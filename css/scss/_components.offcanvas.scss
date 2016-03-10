@@ -58,6 +58,7 @@
 	padding: 80px 20px 20px;
 	max-width: 400px;
 	transition: transform 200ms ease-out;
+	z-index: 10;
 }
 .fr-offcanvas--is-ready[aria-hidden="false"] {
 	transform: translateX(-100%);

@@ -1,15 +1,13 @@
+
 /*	Container */
 .js-fr-tooltip {
 	position: relative;
 }
 
-/*	Label */
-.js-fr-tooltip-toggle {
-	cursor: help;
-}
-
 /*	Toolip */
 .js-fr-tooltip [role="tooltip"] {
+	bottom: 100%;
+	position: absolute;
 	visibility: hidden;
 }
 .js-fr-tooltip [role="tooltip"][aria-hidden="false"] {
