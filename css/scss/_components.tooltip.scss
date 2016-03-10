@@ -8,6 +8,7 @@
 
 //	Toggle
 .fr-tooltip-toggle {
+	cursor: help;
 	text-decoration: underline;
 }
 
@@ -15,12 +16,10 @@
 .fr-tooltip .js-fr-tooltip-tooltip {
 	background-color: $yellow;
 	border-radius: 0.25em; /* 4px */
-	bottom: 100%;
 	left: 50%;
 	min-width: 260px;
 	opacity: 0;
 	padding: 5px 10px;
-	position: absolute;
 	text-align: center;
 	transform: translateX(-50%) translateY(0);
 	visibility: hidden;
