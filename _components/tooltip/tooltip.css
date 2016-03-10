@@ -1,15 +1,23 @@
 
 /*	Container */
-.js-fr-tooltip {
+.fr-tooltip--is-ready {
 	position: relative;
 }
 
 /*	Toolip */
-.js-fr-tooltip [role="tooltip"] {
+.fr-tooltip--is-ready .fr-tooltip-tooltip {
 	bottom: 100%;
 	position: absolute;
 	visibility: hidden;
 }
-.js-fr-tooltip [role="tooltip"][aria-hidden="false"] {
+.fr-tooltip--is-ready .fr-tooltip-tooltip[aria-hidden="false"] {
 	visibility: visible;
+}
+
+/*	No JS */
+.fr-tooltip:not(.fr-tooltip--is-ready) .fr-tooltip-tooltip::before {
+	content: " (";
+}
+.fr-tooltip:not(.fr-tooltip--is-ready) .fr-tooltip-tooltip::after {
+	content: ")";
 }
