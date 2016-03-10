@@ -28,6 +28,22 @@ Arrow keys can be used to navigate between header items, and Spacebar or Enter k
 
 There is more work to do on this particular component to manage alternative keybindings (Home, End, PageUp/Down), as per the WAI-ARIA spec.
 
+## Install
+
+Fraccordion is available through `npm`, run `--save` to add the component your project dependencies.
+
+~~~
+npm install fr-accordion --save
+~~~
+
+The component will then be available to `import`.
+
+~~~ js
+import Fraccordion from 'fr-accordion';
+~~~
+
+You can read more about installing Frend components on our [about](/about/) page, including details on the functional CSS and other methods of importing the JS.
+
 ## Usage
 
 Accordions rely on header and panel pairs, wrapped in a single container.
