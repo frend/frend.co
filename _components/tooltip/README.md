@@ -26,6 +26,24 @@ The `ESC` key will close any open tooltips and clicking off either element will 
 
 The `button` is initially rendered as a `span` in the HTML, this enables us to progressively enhance the component and introduce the relevant element when JavaScript is available.
 
+## Install
+
+Frtooltip is available to install with `npm`. Run with the `--save` flag to add the component your project dependencies.
+
+~~~
+npm install fr-tooltip --save
+~~~
+
+The component will then be available to `import`.
+
+~~~ js
+import Frtooltip from 'fr-tooltip';
+~~~
+
+Functional styles for the tooltip ([tooltip.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/tooltip/tooltip.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
+
+You can read more about installing Frend components on our [About page](/about/), including details on the functional CSS and JavaScript structure.
+
 ## Usage
 
 Tooltips rely on a pair of `<span>`s defining both the toggle element and the tooltip.

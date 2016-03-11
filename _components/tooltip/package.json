@@ -1,0 +1,25 @@
+{
+  "name": "fr-tooltip",
+  "version": "1.0.0",
+  "description": "Frend's accessible, modern tooltip component.",
+  "homepage": "http://frend.co/components/tooltip",
+  "main": "tooltip.js",
+  "style": "tooltip.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frend/frend.co/tree/gh-pages/_components/tooltip"
+  },
+  "keywords": [
+    "tooltip",
+    "accessible",
+    "es2015"
+  ],
+  "author": "Frend <hello@frend.co> (http://frend.co)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frend/frend.co/issues"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "fr-accordion",
+  "version": "1.0.1",
+  "description": "Frend's accessible, modern accordion component.",
+  "homepage": "http://frend.co/components/accordion",
+  "main": "accordion.js",
+  "style": "accordion.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frend/frend.co/tree/gh-pages/_components/accordion"
+  },
+  "keywords": [
+    "accordion",
+    "accessible",
+    "es2015"
+  ],
+  "author": "Frend <hello@frend.co> (http://frend.co)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frend/frend.co/issues"
+  }
+}
