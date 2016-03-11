@@ -1,6 +1,6 @@
 {
   "name": "fr-accordion",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Frend's accessible, modern accordion component.",
   "homepage": "http://frend.co/components/accordion",
   "main": "accordion.js",
