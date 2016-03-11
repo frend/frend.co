@@ -1,4 +1,5 @@
 ---
+permalink: /components/offcanvas/
 filename: offcanvas
 title: Off Canvas
 alpha: false
