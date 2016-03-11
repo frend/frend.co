@@ -30,7 +30,7 @@ There is more work to do on this particular component to manage alternative keyb
 
 ## Install
 
-Fraccordion is available through `npm`, run `--save` to add the component your project dependencies.
+Fraccordion is available to install with `npm`. Run with the `--save` flag to add the component your project dependencies.
 
 ~~~
 npm install fr-accordion --save
@@ -42,7 +42,9 @@ The component will then be available to `import`.
 import Fraccordion from 'fr-accordion';
 ~~~
 
-You can read more about installing Frend components on our [about](/about/) page, including details on the functional CSS and other methods of importing the JS.
+Functional styles for the accordion ([accordion.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/accordion/accordion.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
+
+You can read more about installing Frend components on our [About page](/about/), including details on the functional CSS and JavaScript structure.
 
 ## Usage
 
