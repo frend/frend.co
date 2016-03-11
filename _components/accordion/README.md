@@ -1,4 +1,5 @@
 ---
+permalink: /components/accordion/
 filename: accordion
 title: Accordion
 alpha: false

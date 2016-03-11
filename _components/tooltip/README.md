@@ -1,4 +1,5 @@
 ---
+permalink: /components/tooltip/
 filename: tooltip
 title: Tooltip
 alpha: false

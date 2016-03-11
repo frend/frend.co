@@ -1,4 +1,5 @@
 ---
+permalink: /components/tabs/
 filename: tabs
 title: Tabs
 alpha: false
