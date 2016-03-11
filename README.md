@@ -14,7 +14,7 @@ Appropriate, semantic elements are at the core of each Frend component. This ens
 ### CSS
 CSS included with each component is purely functional. We include the relevant selectors in our stylesheets, but what you do within them is entirely up to you. We favour a BEM syntax when defining selectors, however these are all configurable in the component options if you’d like to use a different convention.
 
-Styling hooks are added to the document when each component is initialised, so we have the ability to apply styles to their static state, before we style them in their fully-functioning state.
+Styling hooks are added to the component when it's initialised, so we have the ability to apply styles to their static state, before we style them in their fully-functioning state.
 
 
 ### JavaScript
