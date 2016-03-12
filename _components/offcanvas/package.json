@@ -1,0 +1,26 @@
+{
+  "name": "fr-offcanvas",
+  "version": "1.0.1",
+  "description": "Frend's accessible, modern off-canvas component.",
+  "homepage": "http://frend.co/components/accordion",
+  "main": "offcanvas.js",
+  "style": "offcanvas.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frend/frend.co/tree/gh-pages/_components/offcanvas"
+  },
+  "keywords": [
+    "off-canvas",
+    "menu",
+    "accessible",
+    "es2015"
+  ],
+  "author": "Frend <hello@frend.co> (http://frend.co)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frend/frend.co/issues"
+  }
+}

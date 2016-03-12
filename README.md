@@ -14,13 +14,13 @@ Appropriate, semantic elements are at the core of each Frend component. This ens
 ### CSS
 CSS included with each component is purely functional. We include the relevant selectors in our stylesheets, but what you do within them is entirely up to you. We favour a BEM syntax when defining selectors, however these are all configurable in the component options if you’d like to use a different convention.
 
-Styling hooks are added to the document when each component is initialised, so we have the ability to apply styles to their static state, before we style them in their fully-functioning state.
+Styling hooks are added to the component when it's initialised, so we have the ability to apply styles to their static state, before we style them in their fully-functioning state.
 
 
 ### JavaScript
-JavaScript is written using ES2015 module syntax. Modules export themselves, so they’re available to `import` into your existing project where and when they are needed. If this doesn’t suit your workflow, we also transpile modules to ES5 and bundle them using UMD, so they can be utilised directly in the browser, or by other module loaders. You can find these files in the `dist` directory of each component.
+JavaScript is written using ES2015 module syntax. Modules export themselves, so they’re available to `import` into your existing project where and when they are needed. If this doesn’t suit your workflow, we also transpile modules to ES5 and bundle them using UMD, so they can be compiled using module loaders, or directly in the browser via a `<script>` tag. You can find these files in the `dist` directory of each component.
 
-A simple API is exposed for each component, which usually contains `init()` and `destroy()` methods. More information about invoking components and any additional methods can be found on each of their respective pages.
+A simple API is exposed for each component instance, which usually contains `init()` and `destroy()` methods. More information about invoking components and any additional methods can be found on each of their respective pages.
 
 The JavaScript written to enhance these components has been purposefully left with as little abstraction as possible. While we bundle scripts into ready-to-use plugins, it's also important that the source files can remain a clear reference for those interested in stepping through each of the methods. We hope this helps other developers in uncovering the steps involved in making the components more accessible.
 

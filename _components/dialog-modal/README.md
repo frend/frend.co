@@ -1,4 +1,5 @@
 ---
+permalink: /components/dialog-modal/
 filename: dialog-modal
 title: Dialog Modal
 alpha: true

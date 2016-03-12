@@ -25,4 +25,4 @@ defaults:
       type: components
     values:
       layout: component
-      permalink: components/:name/
+      permalink: components/:name
