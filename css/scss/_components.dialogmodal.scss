@@ -1,0 +1,37 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Accordion
+//----------------------------------------------------------------------
+
+//	Header
+//-----------------------------------
+
+.fr-dialogmodal--is-ready {
+	background-color: $yellow;
+	padding: 20px;
+}
+.fr-dialogmodal-open,
+.fr-dialogmodal-close {
+	border-radius: 0.25em; /* 4px */
+	font-family: $sans-font;
+	font-size: 1em; /* 16px */
+	line-height: 1.25; /* 20px from 16 */
+	margin-right: 0.5em; /* 8px */
+	padding: 1em 1.25em; /* 16px 20px */
+	text-transform: uppercase;
+	transition: background-color $duration $easing, border-color $duration $easing, color $duration $easing;
+	.fonts-loaded & {
+		font-family: $web-font-sans;
+	}
+}
+
+.fr-dialogmodal-open {
+	background-color: $yellow;
+	border-bottom: 0.125em solid mix(#000, $yellow, 10%);
+}
+
+.fr-dialogmodal-close {
+	background-color: mix(#fff, $dark-grey, 10%);
+	border-bottom: 0.125em solid $dark-grey;
+	color: #fff;
+}

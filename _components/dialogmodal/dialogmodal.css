@@ -1,2 +1,13 @@
-.fr-dialogmodal {
+.fr-dialogmodal--is-ready {
+	left: 50%;
+	position: fixed;
+	top: 50%;
+	transform: translate3d(-50%, -50%, 0);
+}
+
+.fr-dialogmodal--is-ready[aria-hidden="true"] {
+	visibility: hidden;
+}
+.fr-dialogmodal--is-ready[aria-hidden="false"] {
+	visibility: visible;
 }
