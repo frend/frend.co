@@ -34,7 +34,8 @@ const Frdialogmodal = function ({
 
 	// SETUP
 	// set accordion element NodeLists
-	let modals = doc.querySelectorAll(selector);
+	const modals = doc.querySelectorAll(selector);
+	const focusableSelectors = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
 
 	//	TEMP
 	let currButtonOpen = null;
@@ -46,13 +47,19 @@ const Frdialogmodal = function ({
 		//	wrapped in setTimeout to delay binding until previous rendering has completed
 		if (typeof fn === 'function') setTimeout(fn, 0);
 	}
-	// function _closest (el, selector) {
-	// 	while (el) {
-	// 		if (el.matches(selector)) break;
-	// 		el = el.parentElement;
-	// 	}
-	// 	return el;
-	// }
+	function _closest (el, selector) {
+		while (el) {
+			if (el.matches(selector)) break;
+			el = el.parentElement;
+		}
+		return el;
+	}
+	function _getAllFocusableEl (el) {
+		//	get nodelist of elements
+		let elements = el.querySelectorAll(focusableSelectors.join());
+		//	return array of elements
+		return [...elements];
+	}
 
 
 	// A11Y
@@ -70,6 +77,8 @@ const Frdialogmodal = function ({
 		modal.setAttribute('tabindex', -1);
 		modal.focus();
 		//	sort out events
+		_defer(_bindDocKey);
+		_defer(_bindDocClick);
 		_defer(_bindClosePointer);
 		//	reset scroll position
 		modal.scrollTop = 0;
@@ -82,6 +91,8 @@ const Frdialogmodal = function ({
 		modal.removeAttribute('tabindex');
 		modal.blur();
 		//	sort out events
+		_unbindDocKey();
+		_unbindDocClick();
 		_unbindClosePointer(modal);
 		//	remove active class
 		modal.classList.remove(activeClass);
@@ -89,6 +100,18 @@ const Frdialogmodal = function ({
 		if (returnfocus) {
 			currButtonOpen.focus();
 			currButtonOpen = null;
+		}
+	}
+	function _retainModalFocus (e) {
+		//	get focusable elements and current focused index
+		let elements = _getAllFocusableEl(currModal);
+		let activeElementIndex = elements.indexOf(doc.activeElement);
+		//	if element if outside of modal
+		if (activeElementIndex === -1) {
+			//	if shiftkey is used to reverse tab, focus last element
+			if (e.shiftKey) elements[elements.length - 1].focus();
+			//	else, focus first
+			else elements[0].focus();
 		}
 	}
 
@@ -107,6 +130,18 @@ const Frdialogmodal = function ({
 	function _eventClosePointer () {
 		_hideModal();
 	}
+	function _eventDocClick (e) {
+		//	check if target is panel or child of
+		let isModal = e.target === currModal;
+		let isModalChild = _closest(e.target, selector);
+		if (!isModal && !isModalChild) _hideModal();
+	}
+	function _eventDocKey (e) {
+		//	tab key
+		if (e.keyCode === 9) _retainModalFocus(e);
+		//	esc key
+		if (e.keyCode === 27) _hideModal();
+	}
 
 
 	//	BIND EVENTS
@@ -119,12 +154,24 @@ const Frdialogmodal = function ({
 		var closeButton = modal.querySelector(closeSelector);
 		closeButton.addEventListener('click', _eventClosePointer);
 	}
+	function _bindDocClick () {
+		doc.addEventListener('click', _eventDocClick);
+	}
+	function _bindDocKey () {
+		doc.addEventListener('keydown', _eventDocKey);
+	}
 
 
 	//	UNBIND EVENTS
 	function _unbindClosePointer (modal = currModal) {
 		var closeButton = modal.querySelector(closeSelector);
 		closeButton.removeEventListener('click', _eventClosePointer);
+	}
+	function _unbindDocClick () {
+		doc.removeEventListener('click', _eventDocClick);
+	}
+	function _unbindDocKey () {
+		doc.removeEventListener('keydown', _eventDocKey);
 	}
 
 
