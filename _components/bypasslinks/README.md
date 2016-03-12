@@ -14,8 +14,6 @@ sources:
 links:
   - title: WebAIM - "Skip Navigation" Links
     url: http://webaim.org/techniques/skipnav/
-  - title: WebAIM - Accesskey
-    url: http://webaim.org/techniques/keyboard/accesskey
   - title: Penn State Accessibility - Skip Navigation
     url: http://accessibility.psu.edu/skipnav/
   - title: W3C - Bypass blocks
@@ -24,7 +22,25 @@ links:
 
 Having a simple set of bypass links available, provides users the ability to bypass blocks of content that are repeated over multiple web pages. Useful for screen-readers and keyboard users, bypass links are visibly hidden until focused, when they appear at the top of the viewport.
 
-The JavaScript part of this component is optional as the important functionality can be achieved with the correct HTML & CSS. The usability of the links can be improved however, removing the `tabindex` once the user has tabbed past the target element will not allow the user to accidently apply focus to a target element.
+The JavaScript part of this component is optional as the important functionality can be achieved with the correct HTML & CSS. The usability of the links can be improved however, removing the `tabindex` once the user has tabbed past the target element will not allow the user to unintentionally apply focus to a target element e.g. on click or tabbing through the document.
+
+## Install
+
+Frbypasslinks is available to install with `npm`. Run with the `--save` flag to add the component your project dependencies.
+
+~~~
+npm install fr-bypasslinks --save
+~~~
+
+The component will then be available to `import`.
+
+~~~ js
+import Frbypasslinks from 'fr-bypasslinks';
+~~~
+
+Functional styles for the off-canvas ([bypasslinks.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/bypasslinks/bypasslinks.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
+
+You can read more about installing Frend components on our [About page](/about/), including details on the functional CSS and JavaScript structure.
 
 ## Usage
 
