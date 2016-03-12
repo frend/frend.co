@@ -19,6 +19,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var glob = require('glob');
 var browserify = require('browserify');
 var babelify = require('babelify');
+// require("babel-polyfill");
 var uglify = require('gulp-uglify');
 var source = require('vinyl-source-stream');
 var es = require('event-stream');
@@ -96,7 +97,7 @@ gulp.task('component-build', function (done) {
 					debug: true, // includes sourcemaps
 					standalone: modulePrefix + name
 				})
-				.transform(babelify) // transpile to ES5
+				.transform(babelify, { presets: ['es2015'], plugins: ['add-module-exports'] }) // transpile to ES5
 				.bundle()
 				.pipe(source(entry))
 				.pipe(buffer())

@@ -1,5 +1,16 @@
 'use strict';
 
+// Set Array prototype on NodeList for forEach() support
+// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
+NodeList.prototype.forEach = Array.prototype.forEach;
+
+// Polyfill matches as per https://github.com/jonathantneal/closest
+Element.prototype.matches = Element.prototype.matches ||
+							Element.prototype.mozMatchesSelector ||
+							Element.prototype.msMatchesSelector ||
+							Element.prototype.oMatchesSelector ||
+							Element.prototype.webkitMatchesSelector;
+
 /**
  * @param {object} options Object containing configuration overrides
  */
@@ -104,7 +115,7 @@ const Frtooltip = function ({
 		_unbindDocKey();
 	}
 	function destroy () {
-		[...tooltipContainers].forEach((container, i) => {
+		tooltipContainers.forEach((container, i) => {
 			_removeA11y(container, i);
 			_unbindToggleEvents(container);
 			container.classList.remove(readyClass);
@@ -180,7 +191,7 @@ const Frtooltip = function ({
 	function init () {
 		if (!tooltipContainers) return;
 		//	loop through each tooltip element
-		[...tooltipContainers].forEach((container, i) => {
+		tooltipContainers.forEach((container, i) => {
 			_addA11y(container, i);
 			_bindToggleEvents(container);
 			container.classList.add(readyClass);
