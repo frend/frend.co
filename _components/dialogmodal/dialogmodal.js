@@ -4,13 +4,6 @@
 // https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
 NodeList.prototype.forEach = Array.prototype.forEach;
 
-// Polyfill matches as per https://github.com/jonathantneal/closest
-Element.prototype.matches = Element.prototype.matches ||
-							Element.prototype.mozMatchesSelector ||
-							Element.prototype.msMatchesSelector ||
-							Element.prototype.oMatchesSelector ||
-							Element.prototype.webkitMatchesSelector;
-
 /**
  * @param {object} options Object containing configuration overrides
  */
@@ -51,13 +44,6 @@ const Frdialogmodal = function ({
 		//	wrapped in setTimeout to delay binding until previous rendering has completed
 		if (typeof fn === 'function') setTimeout(fn, 0);
 	}
-	function _closest (el, selector) {
-		while (el) {
-			if (el.matches(selector)) break;
-			el = el.parentElement;
-		}
-		return el;
-	}
 	function _getAllFocusableEl (el) {
 		//	get nodelist of elements
 		let elements = el.querySelectorAll(focusableSelectors.join());
@@ -83,7 +69,7 @@ const Frdialogmodal = function ({
 		modal.focus();
 		//	sort out events
 		_defer(_bindDocKey);
-		_defer(_bindDocClick);
+		_defer(_bindContainerClick);
 		_defer(_bindClosePointer);
 		//	reset scroll position
 		modal.scrollTop = 0;
@@ -91,15 +77,15 @@ const Frdialogmodal = function ({
 		container.classList.add(activeClass);
 		skipToLast = true;
 	}
-	function _hideModal (container = currModal, returnfocus = true) {
-		let modal = container.querySelector(modalSelector);
+	function _hideModal (modal = currModal, returnfocus = true) {
+		let container = modal.parentElement;
 		//	add aria-hidden, remove focus
 		container.setAttribute('aria-hidden', true);
 		modal.removeAttribute('tabindex');
 		modal.blur();
 		//	sort out events
 		_unbindDocKey();
-		_unbindDocClick();
+		_unbindContainerClick();
 		_unbindClosePointer(modal);
 		//	remove active class
 		container.classList.remove(activeClass);
@@ -155,21 +141,20 @@ const Frdialogmodal = function ({
 	function _eventOpenPointer (e) {
 		//	get modal
 		let modalId = e.target.getAttribute('aria-controls');
-		let modal = doc.querySelector(`#${modalId}`);
+		let container = doc.querySelector(`#${modalId}`);
+		let modal = container.querySelector(modalSelector);
 		//	save temp reference
 		currButtonOpen = e.target;
 		currModal = modal;
 		//	show modal
-		_showModal(modal);
+		_showModal(container);
 	}
 	function _eventClosePointer () {
 		_hideModal();
 	}
-	function _eventDocClick (e) {
-		//	check if target is panel or child of
-		let isModal = e.target === currModal;
-		let isModalChild = _closest(e.target, modalSelector);
-		if (!isModal && !isModalChild) _hideModal();
+	function _eventContainerClick (e) {
+		//	check if target is modal container (but not modal)
+		if (e.target === currModal.parentElement) _hideModal();
 	}
 	function _eventDocKey (e) {
 		//	tab key
@@ -189,8 +174,8 @@ const Frdialogmodal = function ({
 		var closeButton = modal.querySelector(closeSelector);
 		closeButton.addEventListener('click', _eventClosePointer);
 	}
-	function _bindDocClick () {
-		doc.addEventListener('click', _eventDocClick);
+	function _bindContainerClick () {
+		currModal.parentElement.addEventListener('click', _eventContainerClick);
 	}
 	function _bindDocKey () {
 		doc.addEventListener('keydown', _eventDocKey);
@@ -202,8 +187,8 @@ const Frdialogmodal = function ({
 		var closeButton = modal.querySelector(closeSelector);
 		closeButton.removeEventListener('click', _eventClosePointer);
 	}
-	function _unbindDocClick () {
-		doc.removeEventListener('click', _eventDocClick);
+	function _unbindContainerClick () {
+		currModal.parentElement.removeEventListener('click', _eventContainerClick);
 	}
 	function _unbindDocKey () {
 		doc.removeEventListener('keydown', _eventDocKey);
