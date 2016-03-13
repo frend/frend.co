@@ -1,6 +1,14 @@
 .fr-dialogmodal--is-ready {
-	left: 50%;
+	height: 100%;
+	left: 0;
 	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.fr-dialogmodal--is-ready .fr-dialogmodal-modal {
+	left: 50%;
+	position: absolute;
 	top: 50%;
 	transform: translate3d(-50%, -50%, 0);
 }

@@ -7,8 +7,29 @@
 //-----------------------------------
 
 .fr-dialogmodal--is-ready {
+	transition: background-color 150ms ease-out;
+}
+.fr-dialogmodal[aria-hidden="false"] {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.fr-dialogmodal[aria-hidden="true"] {
+	transition: background-color 150ms ease-out, visibility 150ms ease-out;
+}
+
+.fr-dialogmodal-modal {
+	opacity: 0;
+	transition: transform 150ms ease-out, opacity 150ms ease-out;
+}
+[aria-hidden="false"] .fr-dialogmodal-modal {
+	opacity: 1;
+}
+
+
+.fr-dialogmodal--is-ready .fr-dialogmodal-modal {
 	background-color: $yellow;
-	padding: 20px;
+	border-radius: 0.25em; /* 4px */
+	padding: 80px 20px 20px;
+	min-width: 400px;
 }
 .fr-dialogmodal-open,
 .fr-dialogmodal-close {
@@ -16,7 +37,6 @@
 	font-family: $sans-font;
 	font-size: 1em; /* 16px */
 	line-height: 1.25; /* 20px from 16 */
-	margin-right: 0.5em; /* 8px */
 	padding: 1em 1.25em; /* 16px 20px */
 	text-transform: uppercase;
 	transition: background-color $duration $easing, border-color $duration $easing, color $duration $easing;
@@ -34,4 +54,7 @@
 	background-color: mix(#fff, $dark-grey, 10%);
 	border-bottom: 0.125em solid $dark-grey;
 	color: #fff;
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
