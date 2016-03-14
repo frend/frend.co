@@ -12,6 +12,7 @@ const Frdialogmodal = function ({
 		modalSelector: modalSelector = '.js-fr-dialogmodal-modal',
 		openSelector: openSelector = '.js-fr-dialogmodal-open',
 		closeSelector: closeSelector = '.js-fr-dialogmodal-close',
+		isInteractive: isInteractive = false,
 		readyClass: readyClass = 'fr-dialogmodal--is-ready',
 		activeClass: activeClass = 'fr-dialogmodal--is-active'
 	} = {}) {
@@ -28,15 +29,18 @@ const Frdialogmodal = function ({
 
 	// SETUP
 	// set accordion element NodeLists
-	const modals = doc.querySelectorAll(selector);
+	const containers = doc.querySelectorAll(selector);
 	const focusableSelectors = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
-
 	//	TEMP
 	let currButtonOpen = null;
 	let currModal = null;
-	let skipToFirst = false;
-	let skipToLast = false;
-	let disableTab = false;
+	//	global references for tab events
+	let disallowTab = false;
+	let focusFirst = false;
+	let focusLast = false;
+	//	elements within tab
+	let firstFocusableElement = null;
+	let lastFocusableElement = null;
 
 
 	//	UTILS
@@ -44,50 +48,58 @@ const Frdialogmodal = function ({
 		//	wrapped in setTimeout to delay binding until previous rendering has completed
 		if (typeof fn === 'function') setTimeout(fn, 0);
 	}
-	function _getAllFocusableEl (el) {
-		//	get nodelist of elements
-		let elements = el.querySelectorAll(focusableSelectors.join());
-		//	return array of elements
-		return [...elements];
-	}
 
 
-	// A11Y
-	function _addA11y (modal) {
+	//	A11Y
+	function _addA11y (container) {
+		let modal = container.querySelector(modalSelector);
+		let role = isInteractive ? 'dialog' : 'alertdialog';
 		//	add relevant roles and properties
-		modal.setAttribute('aria-hidden', true);
-		modal.querySelector(modalSelector).setAttribute('role', 'dialog');
+		container.setAttribute('aria-hidden', true);
+		modal.setAttribute('role', role);
+	}
+	function _removeA11y (container) {
+		let modal = container.querySelector(modalSelector);
+		//	add relevant roles and properties
+		container.removeAttribute('aria-hidden');
+		modal.removeAttribute('role');
 	}
 
 
 	//	ACTIONS
-	function _showModal (container) {
-		let modal = container.querySelector(modalSelector);
-		//	remove aria-hidden, add focus
+	function _showModal (container, modal) {
+		//	show container and focus the modal
 		container.setAttribute('aria-hidden', false);
 		modal.setAttribute('tabindex', -1);
 		modal.focus();
-		//	sort out events
+		//	update bound events
 		_defer(_bindDocKey);
-		_defer(_bindContainerClick);
 		_defer(_bindClosePointer);
-		//	reset scroll position
+		//	if contents are not interactive, bind click off
+		if (!isInteractive) _defer(_bindContainerPointer);
+		//	reset scroll
 		modal.scrollTop = 0;
-		//	add active class
+		//	update style hook
 		container.classList.add(activeClass);
-		skipToLast = true;
+		//	set first/last focusable elements
+		let focusableElements = [...modal.querySelectorAll(focusableSelectors.join())];
+		firstFocusableElement = focusableElements[0];
+		lastFocusableElement = focusableElements[focusableElements.length - 1];
+		//	cancel tab event if no items to tab to
+		if (focusableElements.length < 2) disallowTab = true;
 	}
-	function _hideModal (modal = currModal, returnfocus = true) {
+	function _hideModal (modal, returnfocus = true) {
+		//	get container element
 		let container = modal.parentElement;
-		//	add aria-hidden, remove focus
+		//	show container and focus the modal
 		container.setAttribute('aria-hidden', true);
 		modal.removeAttribute('tabindex');
-		modal.blur();
-		//	sort out events
+		//	update bound events
 		_unbindDocKey();
-		_unbindContainerClick();
-		_unbindClosePointer(modal);
-		//	remove active class
+		_unbindClosePointer();
+		//	if contents are not interactive, unbind click off
+		if (!isInteractive) _unbindContainerPointer();
+		//	update style hook
 		container.classList.remove(activeClass);
 		//	return focus to button that opened the modal and reset the reference
 		if (returnfocus) {
@@ -95,87 +107,80 @@ const Frdialogmodal = function ({
 			currButtonOpen = null;
 		}
 	}
-	function _retainModalFocus (e) {
-
-		if (disableTab) e.preventDefault();
-
-		//	if first item and shiftkey, prevent default tab behaviour
-		if (skipToLast && e.shiftKey) e.preventDefault();
-
-		//	if last item and not shiftkey, prevent default tab behaviour
-		if (skipToFirst && !e.shiftKey) e.preventDefault();
-
-		//	defer
+	function _handleTabEvent (e) {
+		//	cancel default TAB event if necessary
+		if (disallowTab ||
+			(focusFirst && !e.shiftKey) ||
+			(focusLast && e.shiftKey)) e.preventDefault();
+		//	defer to get correct event
 		_defer(() => {
-
-			//	get focusable elements and current focused index
-			let elements = _getAllFocusableEl(currModal);
-			let activeElementIndex = elements.indexOf(doc.activeElement);
-
-			if (elements.length < 2) disableTab = true;
-
-			if (skipToFirst && !e.shiftKey) {
-				elements[0].focus();
-				skipToFirst = false;
-				skipToLast = true;
+			//	handle tab event if need to skip
+			//	if skip to first is true and shiftkey is not in use
+			if (focusFirst && !e.shiftKey) {
+				//	focus first element, reset temp references
+				firstFocusableElement.focus();
+				focusFirst = false;
+				focusLast = true;
 				return false;
-			} else if (skipToLast && e.shiftKey) {
-				elements[elements.length - 1].focus();
-				skipToLast = false;
-				skipToFirst = true;
+			//	if skip to last is true and shiftkey is in use
+			} else if (focusLast && e.shiftKey) {
+				//	focus last element, reset temp references
+				lastFocusableElement.focus();
+				focusLast = false;
+				focusFirst = true;
 				return false;
 			} else {
-				skipToLast = skipToFirst = false;
+				//	reset temp references
+				focusFirst = focusLast = false;
 			}
-
-			//	set skipToFirst if last element is highlighted
-			if (activeElementIndex === elements.length - 1) skipToFirst = true;
-
-			//	set skipToFirst if last element is highlighted
-			if (activeElementIndex === 0) skipToLast = true;
+			//	set reference for next tab event
+			if (doc.activeElement === firstFocusableElement) focusLast = true;
+			if (doc.activeElement === lastFocusableElement) focusFirst = true;
 		});
 	}
 
 
 	//	EVENTS
 	function _eventOpenPointer (e) {
-		//	get modal
-		let modalId = e.target.getAttribute('aria-controls');
-		let container = doc.querySelector(`#${modalId}`);
+		//	get related elements
+		let button = e.target;
+		let container = doc.getElementById(button.getAttribute('aria-controls'));
 		let modal = container.querySelector(modalSelector);
-		//	save temp reference
-		currButtonOpen = e.target;
+		//	save element references
+		currButtonOpen = button;
 		currModal = modal;
 		//	show modal
-		_showModal(container);
+		_showModal(container, modal);
 	}
 	function _eventClosePointer () {
-		_hideModal();
+		_hideModal(currModal);
 	}
-	function _eventContainerClick (e) {
+	function _eventContainerPointer (e) {
+		let container = currModal.parentElement;
 		//	check if target is modal container (but not modal)
-		if (e.target === currModal.parentElement) _hideModal();
+		if (e.target === container) _hideModal(currModal);
 	}
 	function _eventDocKey (e) {
-		//	tab key
-		if (e.keyCode === 9) _retainModalFocus(e);
-		//	esc key
-		if (e.keyCode === 27) _hideModal();
+		//	ESC key
+		if (e.keyCode === 27) _hideModal(currModal);
+		//	TAB key
+		if (e.keyCode === 9) _handleTabEvent(e);
 	}
 
 
 	//	BIND EVENTS
-	function _bindOpenPointers (modal) {
-		const modalId = modal.getAttribute('id');
-		const openButtons = doc.querySelectorAll(`${openSelector}[aria-controls="${modalId}"]`);
-		openButtons.forEach((button) => button.addEventListener('click', _eventOpenPointer));
+	function _bindOpenPointers (container) {
+		let id = container.getAttribute('id');
+		let buttons = doc.querySelectorAll(`${openSelector}[aria-controls="${id}"]`);
+		buttons.forEach(button => button.addEventListener('click', _eventOpenPointer));
 	}
 	function _bindClosePointer (modal = currModal) {
-		var closeButton = modal.querySelector(closeSelector);
-		closeButton.addEventListener('click', _eventClosePointer);
+		let button = modal.querySelector(closeSelector);
+		button.addEventListener('click', _eventClosePointer);
 	}
-	function _bindContainerClick () {
-		currModal.parentElement.addEventListener('click', _eventContainerClick);
+	function _bindContainerPointer (modal = currModal) {
+		let container = modal.parentElement;
+		container.addEventListener('click', _eventContainerPointer);
 	}
 	function _bindDocKey () {
 		doc.addEventListener('keydown', _eventDocKey);
@@ -183,28 +188,51 @@ const Frdialogmodal = function ({
 
 
 	//	UNBIND EVENTS
-	function _unbindClosePointer (modal = currModal) {
-		var closeButton = modal.querySelector(closeSelector);
-		closeButton.removeEventListener('click', _eventClosePointer);
+	function _unbindOpenPointers (container) {
+		let id = container.getAttribute('id');
+		let buttons = doc.querySelectorAll(`${openSelector}[aria-controls="${id}"]`);
+		buttons.forEach(button => button.removeEventListener('click', _eventOpenPointer));
 	}
-	function _unbindContainerClick () {
-		currModal.parentElement.removeEventListener('click', _eventContainerClick);
+	function _unbindClosePointer (modal = currModal) {
+		let button = modal.querySelector(closeSelector);
+		button.removeEventListener('click', _eventClosePointer);
+	}
+	function _unbindContainerPointer () {
+		let container = currModal.parentElement;
+		container.removeEventListener('click', _eventContainerPointer);
 	}
 	function _unbindDocKey () {
 		doc.removeEventListener('keydown', _eventDocKey);
 	}
 
 
-	// INIT
+	//	DESTROY
+	function destroy () {
+		//	loop through available modals
+		containers.forEach(container => {
+			let modal = container.querySelector(modalSelector);
+			modal.removeAttribute('tabindex');
+			_removeA11y(container);
+			_unbindOpenPointers(container);
+			_unbindClosePointer(modal);
+			_unbindContainerPointer(modal);
+			//	remove ready, active style hooks
+			container.classList.remove(readyClass, activeClass);
+		});
+		_unbindDocKey();
+	}
+
+
+	//	INIT
 	function init () {
 		//	cancel if no modals found
-		if (!modals.length) return;
+		if (!containers.length) return;
 		//	loop through available modals
-		modals.forEach((modal) => {
-			_addA11y(modal);
-			_bindOpenPointers(modal);
+		containers.forEach(container => {
+			_addA11y(container);
+			_bindOpenPointers(container);
 			// set ready style hook
-			modal.classList.add(readyClass);
+			container.classList.add(readyClass);
 		});
 	}
 	init();
@@ -212,8 +240,8 @@ const Frdialogmodal = function ({
 
 	// REVEAL API
 	return {
-		init
-		// destroy
+		init,
+		destroy
 	}
 
 }
