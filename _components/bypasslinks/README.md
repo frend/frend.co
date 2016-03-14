@@ -18,9 +18,11 @@ links:
     url: http://accessibility.psu.edu/skipnav/
   - title: W3C - Bypass blocks
     url: https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-skip.html
+  - title: W3C - Using ARIA landmarks to identify regions of a page
+    url: https://www.w3.org/WAI/GL/wiki/Using_ARIA_landmarks_to_identify_regions_of_a_page
 ---
 
-Having a simple set of bypass links available, provides users the ability to bypass blocks of content that are repeated over multiple web pages. Useful for screen-readers and keyboard users, bypass links are visibly hidden until focused, when they appear at the top of the viewport.
+Having a simple set of bypass links available, provides users the ability to bypass blocks of content that are repeated over multiple web pages. Useful for screen-readers and keyboard users, bypass links are visibly hidden until focused via the `tab` key, when they appear at the top of the viewport. These can be used in conjunction with proper ARIA landmarks, as a keyboard-friendly option.
 
 The JavaScript part of this component is optional as the important functionality can be achieved with the correct HTML & CSS. The usability of the links can be improved however, removing the `tabindex` once the user has tabbed past the target element will not allow the user to unintentionally apply focus to a target element e.g. on click or tabbing through the document.
 
@@ -38,9 +40,9 @@ The component will then be available to `import`.
 import Frbypasslinks from 'fr-bypasslinks';
 ~~~
 
-Functional styles for the off-canvas ([bypasslinks.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/bypasslinks/bypasslinks.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
+Functional styles for the bypass links ([bypasslinks.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/bypasslinks/bypasslinks.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
 
-You can read more about installing Frend components on our [About page](/about/), including details on the functional CSS and JavaScript structure.
+You can read more about installing Frend components on our [About page](http://frend.co/about/), including details on the functional CSS and JavaScript structure.
 
 ## Usage
 
