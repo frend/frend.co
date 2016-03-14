@@ -1,0 +1,26 @@
+{
+  "name": "fr-bypasslinks",
+  "version": "1.0.0",
+  "description": "Frend's accessible, modern bypass link component.",
+  "homepage": "http://frend.co/components/bypasslinks",
+  "main": "bypasslinks.js",
+  "style": "bypasslinks.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frend/frend.co/tree/gh-pages/_components/bypasslinks"
+  },
+  "keywords": [
+    "bypasslinks",
+    "navigation",
+    "accessible",
+    "es2015"
+  ],
+  "author": "Frend <hello@frend.co> (http://frend.co)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frend/frend.co/issues"
+  }
+}

@@ -7,28 +7,25 @@
 //-----------------------------------
 
 //	Toggle
-.fr-tooltip-toggle {
+.fr-tooltip--is-ready .fr-tooltip-toggle {
+	cursor: help;
 	text-decoration: underline;
 }
 
 //	Tooltip
-.fr-tooltip .js-fr-tooltip-tooltip {
+.fr-tooltip--is-ready .fr-tooltip-tooltip {
 	background-color: $yellow;
 	border-radius: 0.25em; /* 4px */
-	bottom: 100%;
 	left: 50%;
 	min-width: 260px;
 	opacity: 0;
 	padding: 5px 10px;
-	position: absolute;
 	text-align: center;
 	transform: translateX(-50%) translateY(0);
+	transition: visibility $duration $easing, opacity $duration $easing, transform $duration $easing;
 	visibility: hidden;
 }
-.fr-tooltip--is-ready .js-fr-tooltip-tooltip {
-	transition: visibility $duration $easing, opacity $duration $easing, transform $duration $easing;
-}
-.fr-tooltip .js-fr-tooltip-tooltip::after {
+.fr-tooltip--is-ready .fr-tooltip-tooltip::after {
 	border: solid transparent;
 	border-color: transparent;
 	border-top-color: $yellow;
@@ -42,7 +39,9 @@
 	position: absolute;
 	width: 0;
 }
-.fr-tooltip--is-ready .js-fr-tooltip-tooltip[aria-hidden="false"] {
+.fr-tooltip--is-ready .fr-tooltip-tooltip[aria-hidden="false"] {
 	opacity: 1;
 	transform: translateX(-50%) translateY(-12px);
 }
+// .fr-tooltip--is-ready .fr-tooltip-tooltip {
+// }

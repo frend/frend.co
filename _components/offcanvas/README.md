@@ -1,4 +1,5 @@
 ---
+permalink: /components/offcanvas/
 filename: offcanvas
 title: Off Canvas
 alpha: false
@@ -25,6 +26,24 @@ A few handy extra events are bound, keyboard navigation is enabled with the `ESC
 It’s important to note that no assumption is made about the panel containing navigation, hence the lack of a `role="navigation"`; the component is simply defined as a collapsible section of the document. Navigation can of course be contained within the panel, in which case it’s recommended to use a `<nav>` element for correct interpretation by the browser.
 
 Initialising the component responsively is possible, call `init()` when the required breakpoint is met and `destroy()` when outside of that breakpoint.
+
+## Install
+
+Froffcanvas is available to install with `npm`. Run with the `--save` flag to add the component your project dependencies.
+
+~~~
+npm install fr-offcanvas --save
+~~~
+
+The component will then be available to `import`.
+
+~~~ js
+import Froffcanvas from 'fr-offcanvas';
+~~~
+
+Functional styles for the off-canvas ([offcanvas.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/offcanvas/offcanvas.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
+
+You can read more about installing Frend components on our [About page](http://frend.co/about/), including details on the functional CSS and JavaScript structure.
 
 ## Usage
 

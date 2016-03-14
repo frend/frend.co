@@ -18,15 +18,15 @@
 	<meta name="twitter:description" property="og:description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 	<meta name="og:type" content="website">
 
-	<link rel="stylesheet" href="/css/dist/global.min.css">
-	<link rel="shortcut icon" href="/icon-touch.png">
-	<link rel="apple-touch-icon-precomposed" href="/icon-touch.png">
-
 	<!-- prefetch third-party dns -->
 	<link href="//ajax.googleapis.com" rel="dns-prefetch" />
 	<link href="//cloud.webtype.com" rel="dns-prefetch" />
 	<link href="//pls.webtype.com" rel="dns-prefetch" />
 	<link href="//www.google-analytics.com" rel="dns-prefetch" />
+
+	<link rel="stylesheet" href="/css/dist/global.min.css" id="loadCSSTarget">
+	<link rel="shortcut icon" href="/icon-touch.png">
+	<link rel="apple-touch-icon-precomposed" href="/icon-touch.png">
 
 	<link href="//cloud.webtype.com/css/d0f727b8-b89e-413f-ad8a-085ca4d7de47.css" rel="stylesheet" type="text/css" />
 

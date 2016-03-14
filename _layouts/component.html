@@ -63,7 +63,7 @@ layout: default
 </div>
 
 <script>
-	loadCSS('{{ page.filename }}.css');
+	loadCSS('{{ page.filename }}.css', document.getElementById('loadCSSTarget'));
 	loadJS('/components/{{ page.filename }}/dist/fr{{ page.filename }}.min.js', function () {
 		var {{ page.filename | replace: '-', '' }} = Fr{{ page.filename | replace: '-', '' }}();
 	});

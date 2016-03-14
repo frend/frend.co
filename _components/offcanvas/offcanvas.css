@@ -1,13 +1,19 @@
 
-/* Functional */
+/*	Panel */
 .fr-offcanvas--is-ready {
+	background-color: #fff;
+	height: 100%;
+	left: 100%;
+	overflow: auto;
+	max-width: 300px;
 	position: fixed;
 	top: 0;
-	left: 100%;
-	height: 100%;
-	overflow: auto;
-	width: 100%;
 	transform: translateX(0);
+	width: 100%;
 	will-change: translateX;
-	z-index: 10;
+}
+
+/*	Panel - Visible */
+.fr-offcanvas--is-ready[aria-hidden="false"] {
+	transform: translateX(-100%);
 }

@@ -1,4 +1,5 @@
 ---
+permalink: /components/tabs/
 filename: tabs
 title: Tabs
 alpha: false
@@ -30,6 +31,23 @@ Managing focus and tabindex ensures that only the visible content can be accesse
 
 Key bindings also give keyboard users more predictable and intuitive ways of navigating the component. All arrow keys can be used to cycle through the tabs. Hitting the tab key will shift focus directly from the focused tab to its active tabpanel content. Additional work should be done to the key bindings for this component to support skipping to first/last content (Ctrl+PageUp/PageDown), as per the WAI-ARIA spec.
 
+## Install
+
+Frtabs is available to install with `npm`. Run with the `--save` flag to add the component your project dependencies.
+
+~~~
+npm install fr-tabs --save
+~~~
+
+The component will then be available to `import`.
+
+~~~ js
+import Frtabs from 'fr-tabs';
+~~~
+
+Functional styles for the tabs ([tabs.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/tabs/tabs.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
+
+You can read more about installing Frend components on our [About page](http://frend.co/about/), including details on the functional CSS and JavaScript structure.
 
 ## Usage
 

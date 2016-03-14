@@ -1,4 +1,5 @@
 ---
+permalink: /components/accordion/
 filename: accordion
 title: Accordion
 alpha: false
@@ -27,6 +28,24 @@ Panels that are inactive can be hidden using `tabindex="-1"` and `aria-hidden="t
 Arrow keys can be used to navigate between header items, and Spacebar or Enter keypresses will toggle active `tabpanel`s. If `aria-multiselectable="false"` is set, then sibling panels should close and be hidden appropriately.
 
 There is more work to do on this particular component to manage alternative keybindings (Home, End, PageUp/Down), as per the WAI-ARIA spec.
+
+## Install
+
+Fraccordion is available to install with `npm`. Run with the `--save` flag to add the component your project dependencies.
+
+~~~
+npm install fr-accordion --save
+~~~
+
+The component will then be available to `import`.
+
+~~~ js
+import Fraccordion from 'fr-accordion';
+~~~
+
+Functional styles for the accordion ([accordion.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/accordion/accordion.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
+
+You can read more about installing Frend components on our [About page](http://frend.co/about/), including details on the functional CSS and JavaScript structure.
 
 ## Usage
 
