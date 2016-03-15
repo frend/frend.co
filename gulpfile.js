@@ -46,7 +46,6 @@ gulp.task('css', function () {
 		.pipe(sourcemaps.init())
 		// compile sass to css
 		.pipe(sass({
-			includePaths: [path.css + 'scss'],
 			errLogToConsole: true
 		}))
 		// add vendor prefixes

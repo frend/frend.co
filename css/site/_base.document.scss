@@ -9,10 +9,9 @@ html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-
 body {
 	background-color: $blue;
-	border-top: 4px solid $red;
+	border-top: 0.25rem solid $red; /* 4px */
 	color: $dark-grey;
 	font-family: $base-font;
 	font-size: 100%; /* 16px */
@@ -30,13 +29,6 @@ body {
 
 //	Selection
 //-----------------------------------
-
-::-moz-selection {
-	background-color: rgba($dark-grey, 0.8);
-	color: #fff;
-	text-shadow: none;
-}
-
 ::selection {
 	background-color: rgba($dark-grey, 0.8);
 	color: #fff;

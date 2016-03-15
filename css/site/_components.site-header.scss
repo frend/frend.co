@@ -3,33 +3,27 @@
 //	Containers
 //----------------------------------------------------------------------
 
-//	Container
-//-----------------------------------
-
-.site-header {
-}
-
-
 //	Logo
 //-----------------------------------
-
 .site-header__logo {
-	@extend h2;
 	background-color: $red;
 	color: #fff;
 	display: inline-block;
+	font-size: 1.5rem; /* 24px */
+	line-height: 1.25;
 	min-width: 4.25rem; /* 68px */
-	text-decoration: none;
-	padding: 1rem 1.25rem; /* 16px 20px */
+	padding: 1.125rem 1.25rem; /* 18px 20px */
 	position: absolute;
+	text-decoration: none;
+	text-rendering: optimizeLegibility;
 	transition: background-color $duration $easing;
 	z-index: 1;
-	.wf-active & {
+	.fonts-loaded & {
 		font-family: $web-font-sans;
 		letter-spacing: 0; /* reset */
 	}
-}
-.site-header__logo:hover,
-.site-header__logo:focus {
-	background-color: $dark-grey;
+	&:hover,
+	&:focus {
+		background-color: $dark-grey;
+	}
 }

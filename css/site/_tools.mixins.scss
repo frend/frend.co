@@ -3,23 +3,6 @@
 //	Mixins
 //----------------------------------------------------------------------
 
-//	Media query
-//-----------------------------------
-
-/*
-*	$point: breakpoint integer in px
-*	$constraint: Constraint for media query (min/max)
-*	$feature: Media feature of query (width/height)
-*/
-
-@mixin mq($point, $constraint: min, $feature: width) {
-	@media screen and (#{$constraint}-#{$feature}: $point / $doc-font-size + em) {
-		@content;
-	}
-}
-
-
-
 //	Underline
 //-----------------------------------
 /*
