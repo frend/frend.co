@@ -69,16 +69,16 @@ ul:not([class]) li {
 	margin-right: 5px;
 }
 .list-buttons__item {
-	font-size: 0.875rem; /* 14px */
+	background-color: $red;
+	border-radius: 20px;
 	color: #fff;
 	display: block;
-	background-color: $red;
-	padding: 5px 10px;
-	border-radius: 20px;
+	font-size: 0.875rem; /* 14px */
+	font-weight: bold;
 	line-height: 20px;
+	padding: 5px 10px;
 	text-decoration: none;
 	transition: background $duration $easing;
-	font-weight: bold;
 }
 .list-buttons__item:hover,
 .list-buttons__item:focus {
