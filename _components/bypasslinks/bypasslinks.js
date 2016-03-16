@@ -14,11 +14,10 @@ const Frbypasslinks = function({
 
 	//	CONSTANTS
 	const doc = document;
-	const docEl = doc.documentElement;
 
 
 	//	SUPPORTS
-	if (!('querySelector' in doc) || !('addEventListener' in window) || !docEl.classList) return;
+	if (!('querySelector' in doc) || !('addEventListener' in window)) return;
 
 
 	//	SETUP
