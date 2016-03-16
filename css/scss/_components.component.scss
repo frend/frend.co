@@ -14,7 +14,6 @@
 	overflow-y: auto;
 	padding: 20% 0;
 	position: relative;
-
 	@include mq($lap) {
 		padding: 8% 0;
 	}
@@ -31,8 +30,8 @@
 
 .component-source {
 	font-size: 14px;
-	tab-size: 4;
 	margin-bottom: 20px;
+	tab-size: 4;
 }
 
 
@@ -57,7 +56,7 @@ pre {
 p code {
 	background-color: rgba(255, 255, 255, 0.5);
 	font-size: 85%;
+	margin: -0.25rem 0 0; /* -4px */
 	padding: 0.25rem; /* 4px */
 	position: relative;
-	margin: -0.25rem 0 0 0; /* -4px */
 }

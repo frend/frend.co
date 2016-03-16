@@ -19,9 +19,9 @@
 	color: #fff;
 	display: inline-block;
 	min-width: 4.25rem; /* 68px */
-	text-decoration: none;
 	padding: 1rem 1.25rem; /* 16px 20px */
 	position: absolute;
+	text-decoration: none;
 	transition: background-color $duration $easing;
 	z-index: 1;
 	.wf-active & {

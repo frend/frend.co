@@ -31,8 +31,8 @@
 	border-bottom: 0.125em solid $dark-grey;
 	color: #fff;
 	position: absolute;
-	top: 1.25em; /* 20px */
 	right: 1.25em; /* 20px */
+	top: 1.25em; /* 20px */
 }
 
 .fr-offcanvas-open:hover,
@@ -55,8 +55,8 @@
 	padding: 20px;
 }
 .fr-offcanvas--is-ready {
-	padding: 80px 20px 20px;
 	max-width: 400px;
+	padding: 80px 20px 20px;
 	transition: transform 200ms ease-out;
 	z-index: 10;
 }

@@ -23,13 +23,13 @@
 }
 
 .nav-footer__item {
+	@include underline($dark-grey, rgba($blue, 0.5), 1.05em);
 	color: $dark-grey;
 	text-decoration: none;
 	transition: color $duration $easing;
-	@include underline($dark-grey, rgba($blue, 0.5), 1.05em, 2px);
 }
 .nav-footer__item:hover,
 .nav-footer__item:focus {
+	@include underline($red, rgba($blue, 0.5), 1.05em);
 	color: $red;
-	@include underline($red, rgba($blue, 0.5), 1.05em, 2px);
 }

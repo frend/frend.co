@@ -96,15 +96,15 @@ h1 + p {
 	margin-bottom: 20px;
 	@include mq($lap) {
 		font-size: 50px;
-		margin-bottom: 25px;
 		letter-spacing: -0.02em;
+		margin-bottom: 25px;
 		text-rendering: optimizeLegibility;
 	}
 }
 .text-medium {
 	font-size: 20px;
-	line-height: 1.5; /* 30px */
 	letter-spacing: -0.02em;
+	line-height: 1.5; /* 30px */
 	@include mq($lap) {
 		font-size: 26px;
 		line-height: 1.125;
