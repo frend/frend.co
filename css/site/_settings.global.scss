@@ -33,7 +33,6 @@ $easing: ease-out;
 //-----------------------------------
 
 $dark-grey: #222;
-
 $blue: #def6ff;
 $red: #ea3b37;
 $yellow: #ffe566;
@@ -44,8 +43,10 @@ $yellow: #ffe566;
 //-----------------------------------
 
 //	Breakpoints (in px)
-$lap: 500;
-$desk: 800;
+$mq-breakpoints: (
+	lap:  500px,
+	desk:  800px
+);
 
 
 

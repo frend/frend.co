@@ -1,0 +1,136 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Text
+//----------------------------------------------------------------------
+
+//	Headings
+//-----------------------------------
+
+//	base
+h1, h2, h3, h4 {
+	font-family: $sans-font;
+	font-weight: normal;
+	letter-spacing: -0.04em;
+	text-rendering: optimizeLegibility;
+	.fonts-loaded & {
+		font-family: $web-font-sans;
+		letter-spacing: 0; /* reset */
+	}
+}
+//	specific
+h1 {
+	font-size: 2.125rem; /* 34px */
+	line-height: 1.118; /* 38px from 34 */
+	margin-bottom: 1em; /* 34px */
+}
+h2 {
+	font-size: 1.5rem; /* 24px */
+	line-height: 1.25; /* 30px from 24 */
+	margin-bottom: 0.25em; /* 6px */
+	@include mq($from: desk) {
+		font-size: 1.75rem; /* 28px */
+	}
+}
+h3 {
+	font-size: 1.25rem; /* 20px */
+	line-height: 1.2; /* 24px from 20 */
+	margin-bottom: 0.25em; /* 5px */
+	@include mq($from: desk) {
+		font-size: 1.5em; /* 24px */
+	}
+}
+//	spacing
+p + h2 {
+	padding-top: 2.5rem; /* 40px */
+}
+h2 + h3,
+p + h3 {
+	padding-top: 1.75rem; /* 28px */
+}
+
+
+
+
+//	Paragraphs
+//-----------------------------------
+p {
+	font-size: 1.125rem; /* 18px */
+	letter-spacing: 0.012em;
+	line-height: 1.556; /* 28px from 18 */
+	margin-bottom: 1em; /* 18px */
+	@include mq($from: desk) {
+		font-size: 1.375rem; /* 22px */
+		line-height: 1.45; /* 29px from 22 */
+	}
+	.fonts-loaded & {
+		letter-spacing: 0;
+	}
+}
+
+
+
+
+//	Sizes/Styles
+//-----------------------------------
+.text-large {
+	font-size: 2.25rem; /* 36px */
+	line-height: 1; /* 36px */
+	margin-bottom: 0.5em; /* 18px */
+	@include mq($from: lap) {
+		font-size: 3.125rem; /* 50px */
+		letter-spacing: -0.02em;
+		text-rendering: optimizeLegibility;
+	}
+}
+.text-medium {
+	font-size: 1.25rem; /* 20px */
+	letter-spacing: -0.02em;
+	line-height: 1.5; /* 30px */
+	@include mq($from: lap) {
+		font-size: 1.625rem; /* 26px */
+		line-height: 1.154; /* 30px */
+	}
+}
+h1 + p {
+	font-size: 1.5rem; /* 24px */
+	font-style: italic;
+	letter-spacing: -0.033em;
+	line-height: 1.208; /* 29px from 24 */
+	margin-bottom: 1.333em; /* 32px */
+	@include mq($from: desk) {
+		font-size: 1.75rem; /* 28px */
+		line-height: 1.214; /* 34px from 28 */
+	}
+	.fonts-loaded & {
+		letter-spacing: 0;
+	}
+}
+
+
+
+
+
+//	Code
+//-----------------------------------
+p code {
+	background-color: rgba(255, 255, 255, 0.5);
+	font-size: 90%;
+	margin: -0.25rem 0 0; /* -4px */
+	padding: 0.25rem; /* 4px */
+	position: relative;
+}
+pre {
+	background-color: rgba(255, 255, 255, 0.5);
+	margin: 1.5rem 0 2.25rem -1.25rem; /* 24px 0 36px -20px */
+	padding: 1.25rem; /* 20px */
+	position: relative;
+	width: calc(100% + 2.5rem); /* 100% + 40px */
+}
+pre code {
+	font-size: 13px; /* 13px */
+	line-height: 1.5; /* 21px */
+	tab-size: 2;
+	@include mq($from: desk) {
+		font-size: 15px;
+	}
+}

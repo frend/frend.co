@@ -9,20 +9,18 @@
 ul:not([class]) a,
 p a,
 .text-link {
-	@include underline($dark-grey, $blue, 1.05em);
+	@include underline($dark-grey, $blue, 1.05em, 2px);
 	color: $dark-grey;
 	text-decoration: none;
 	transition: color $duration $easing;
+	&:hover,
+	&:focus {
+		@include underline($red, $blue, 1.05em, 2px);
+		color: $red;
+	}
 }
-ul:not([class]) a:hover,
-ul:not([class]) a:focus,
-p a:hover,
-p a:focus,
-.text-link:hover,
-.text-link:focus {
-	@include underline($red, $blue, 1.05em);
-	color: $red;
-}
+
+
 
 
 //	Default

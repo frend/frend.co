@@ -40,8 +40,9 @@ var src = {
 		project: [
 			'./css/**/*.scss',
 			'./css/master.scss',
-			'!./css/scss/_generic.reset.scss',
-			'!./css/scss/_components.syntax.scss'
+			'!./css/site/_generic.reset.scss',
+			'!./css/site/_components.syntax.scss',
+			'!./css/site/_tools.mq.scss'
 		],
 		output: 'global',
 		dist: './css/dist/'
