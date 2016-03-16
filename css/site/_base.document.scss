@@ -4,10 +4,10 @@
 //----------------------------------------------------------------------
 
 html {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
 	height: 100%;
 	overflow-y: scroll;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
 body {
 	background-color: $blue;
@@ -16,8 +16,8 @@ body {
 	font-family: $base-font;
 	font-size: 100%; /* 16px */
 	height: 100%;
-	line-height: $doc-line-height;
 	letter-spacing: 0.055em; // adjust letter spacing to match webfont
+	line-height: $doc-line-height;
 	.fonts-loaded & {
 		font-family: $web-font;
 		letter-spacing: 0; // reset

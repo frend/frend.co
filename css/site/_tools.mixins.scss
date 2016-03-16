@@ -16,5 +16,6 @@
 	background-position: 0 $offset;
 	background-repeat: repeat-x;
 	background-size: 1px $weight;
-	text-shadow: $size 0 0 $background-color, -$size 0 0 $background-color;
+	text-shadow: -$size 0 $background-color,
+				$size 0 $background-color;
 }
