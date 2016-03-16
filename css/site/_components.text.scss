@@ -84,8 +84,8 @@ p {
 }
 .text-medium {
 	font-size: 1.25rem; /* 20px */
-	line-height: 1.5; /* 30px */
 	letter-spacing: -0.02em;
+	line-height: 1.5; /* 30px */
 	@include mq($from: lap) {
 		font-size: 1.625rem; /* 26px */
 		line-height: 1.154; /* 30px */
@@ -115,9 +115,9 @@ h1 + p {
 p code {
 	background-color: rgba(255, 255, 255, 0.5);
 	font-size: 90%;
+	margin: -0.25rem 0 0; /* -4px */
 	padding: 0.25rem; /* 4px */
 	position: relative;
-	margin: -0.25rem 0 0 0; /* -4px */
 }
 pre {
 	background-color: rgba(255, 255, 255, 0.5);

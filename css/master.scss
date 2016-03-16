@@ -5,60 +5,60 @@
 
 //	Settings
 //-----------------------------------
-@import "./site/settings.global";
+@import './site/settings.global';
 
 
 
 
 //	Tools
 //-----------------------------------
-@import "./site/tools.mq";
-@import "./site/tools.mixins";
+@import './site/tools.mq';
+@import './site/tools.mixins';
 
 
 
 
 //	Generic
 //-----------------------------------
-@import "./site/generic.reset";
-@import "./site/generic.box-sizing";
+@import './site/generic.reset';
+@import './site/generic.box-sizing';
 
 
 
 
 //	Base
 //-----------------------------------
-@import "./site/base.document";
+@import './site/base.document';
 
 
 
 
 //	Components
 //-----------------------------------
-@import "./site/components.links";
-@import "./site/components.lists";
-@import "./site/components.text";
+@import './site/components.links';
+@import './site/components.lists';
+@import './site/components.text';
 
-@import "./site/components.containers";
-@import "./site/components.site-footer";
-@import "./site/components.site-header";
-@import "./site/components.syntax";
-@import "./site/components.component";
+@import './site/components.containers';
+@import './site/components.site-footer';
+@import './site/components.site-header';
+@import './site/components.syntax';
+@import './site/components.component';
 
 
 
 
 //	Plugin components
 //-----------------------------------
-@import "./components/accordion";
-@import "./components/bypasslinks";
-@import "./components/offcanvas";
-@import "./components/tabs";
-@import "./components/tooltip";
+@import './components/accordion';
+@import './components/bypasslinks';
+@import './components/offcanvas';
+@import './components/tabs';
+@import './components/tooltip';
 
 
 
 
 //	Utility
 //-----------------------------------
-@import "./site/utilities.generic";
+@import './site/utilities.generic';
