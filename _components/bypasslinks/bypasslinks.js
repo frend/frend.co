@@ -22,7 +22,7 @@ const Frbypasslinks = function({
 
 	//	SETUP
 	// get bypass links NodeList
-	const links = doc.querySelector(selector).querySelectorAll('a');
+	const container = doc.querySelector(selector);
 
 	//	TEMP
 	let currTarget = null;
@@ -44,6 +44,8 @@ const Frbypasslinks = function({
 		target.removeAttribute('tabindex');
 	}
 	function destroy () {
+		//	get all bypass links
+		const links = container.querySelectorAll('a');
 		//	loop through each bypass link and remove event bindings
 		links.forEach(link => {
 			_unbindPointerClick(link)
@@ -100,7 +102,10 @@ const Frbypasslinks = function({
 
 	//	INIT
 	function init () {
-		if (!links) return;
+		//	detect if bypass links exist in the document
+		if (!container) return;
+		//	get all bypass links
+		const links = container.querySelectorAll('a');
 		//	loop through each bypass link
 		links.forEach(link => {
 			_bindPointerClick(link);
