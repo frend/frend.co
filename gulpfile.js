@@ -7,13 +7,11 @@ var config = require('./webpack.config.js');
 //	Global
 var cache = require('gulp-cached');
 var clean = require('gulp-clean');
-var fs = require('fs');
 var gulp = require('gulp');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 //	CSS
 var autoprefixer = require('gulp-autoprefixer');
-var criticalcss = require("criticalcss");
 var mergemq = require('gulp-merge-media-queries');
 var nano = require('gulp-cssnano');
 var sass = require('gulp-sass');
@@ -54,7 +52,8 @@ var src = {
 			project: [
 				'./node_modules/fg-loadcss/src/loadCSS.js',
 				'./node_modules/fg-loadjs/loadJS.js',
-				'./js/modules/webfont-detector.js'
+				'./js/modules/webfont-detector.js',
+				'./js/modules/feature-detection.js'
 			],
 			output: 'initial'
 		},
@@ -144,22 +143,6 @@ gulp.task('build:css', function () {
 		.pipe(rename(src.css.output + '.min.css'))
 		.pipe(gulp.dest(src.css.dist));
 });
-gulp.task('build:css:critical', function () {
-	criticalcss.getRules(src.css.dist + src.css.output + '.min.css', function(err, output) {
-		if (err) { throw new Error(err); } else {
-			criticalcss.findCritical('./_site/index.html', {
-				forceInclude: ['.fonts-loaded'],
-				rules: JSON.parse(output),
-				ignoreConsole: true
-			}, function(err, output) {
-				if (err) { throw new Error(err); } else {
-					fs.writeFileSync(src.css.dist + 'critical.css', output);
-					fs.writeFileSync(src.includes + 'critical.css', output);
-				}
-			});
-		}
-	});
-});
 gulp.task('build:js:initial', function () {
 	return gulp.src(src.js.initial.project)
 		.pipe(concat(src.js.initial.output))
@@ -213,7 +196,7 @@ gulp.task('build:component', function (done) {
 //	Watch
 //----------------------------------------------------------------------
 gulp.task('watch', function () {
-	gulp.watch(src.css.project, ['lint:css', 'build:css', 'build:css:critical']);
+	gulp.watch(src.css.project, ['lint:css', 'build:css']);
 	gulp.watch(src.js.global.project, ['lint:js', 'build:js:global']);
 	gulp.watch(src.component.project, ['lint:component', 'build:component']);
 });
@@ -234,8 +217,7 @@ gulp.task('build', function (callback) {
 	runSequence(
 		['lint'],
 		['clean'],
-		['build:css', 'build:js:global'],
-		['build:css:critical'],
+		['build:css', 'build:js:initial', 'build:js:global'],
 		callback
 	);
 });
