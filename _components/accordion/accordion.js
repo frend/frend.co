@@ -102,7 +102,13 @@ const Fraccordion = function ({
 		panel.getBoundingClientRect();
 		//	set height on panel, reset to 'auto' on transition complete
 		panel.style.height = panelHeight + 'px';
-		setTimeout(() => { panel.style.height = 'auto' }, transitionLength);
+		setTimeout(() => {
+			panel.style.transition = 'none';
+			panel.style.height = 'auto'
+			//	recalc style and layout
+			panel.getBoundingClientRect();
+			panel.style.transition = '';
+		}, transitionLength);
 	}
 	function _unsetPanelHeight (panel) {
 		//	get panel height
