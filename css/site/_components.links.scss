@@ -9,32 +9,30 @@
 ul:not([class]) a,
 p a,
 .text-link {
+	@include underline($dark-grey, $blue, 1.05em, 2px);
 	color: $dark-grey;
 	text-decoration: none;
 	transition: color $duration $easing;
-	@include underline($dark-grey, $blue, 1.05em, 2px);
+	&:hover,
+	&:focus {
+		@include underline($red, $blue, 1.05em, 2px);
+		color: $red;
+	}
 }
-ul:not([class]) a:hover,
-ul:not([class]) a:focus,
-p a:hover,
-p a:focus,
-.text-link:hover,
-.text-link:focus {
-	color: $red;
-	@include underline($red, $blue, 1.05em, 2px);
-}
+
+
 
 
 //	Default
 //-----------------------------------
 .link-standard {
+	@include underline($dark-grey, $blue, 1.1em, 2px);
 	color: $dark-grey;
 	text-decoration: none;
 	transition: color $duration $easing;
-	@include underline($dark-grey, $blue, 1.1em, 2px);
 }
 .link-standard:hover,
 .link-standard:focus {
-	color: $red;
 	@include underline($red, $blue, 1.1em, 2px);
+	color: $red;
 }
