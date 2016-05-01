@@ -18,7 +18,7 @@ var sass = require('gulp-sass');
 var scsslint = require('gulp-scss-lint');
 var sourcemaps = require('gulp-sourcemaps');
 //	JS
-// var concat = require('gulp-concat');
+var concat = require('gulp-concat');
 var eslint = require('gulp-eslint');
 var uglify = require('gulp-uglify');
 var webpack = require('gulp-webpack');
@@ -48,6 +48,15 @@ var src = {
 		dist: './css/dist/'
 	},
 	js: {
+		initial: {
+			project: [
+				'./node_modules/fg-loadcss/src/loadCSS.js',
+				'./node_modules/fg-loadjs/loadJS.js',
+				'./js/modules/webfont-detector.js',
+				'./js/modules/feature-detection.js'
+			],
+			output: 'initial'
+		},
 		global: {
 			master: './js/master.js',
 			project: [
@@ -67,7 +76,8 @@ var src = {
 			'./_components/**/*.js',
 			'!./_components/**/dist/*.js'
 		]
-	}
+	},
+	includes: './_includes/_assets/'
 };
 var options = {
 	sass: {
@@ -132,6 +142,15 @@ gulp.task('build:css', function () {
 		.pipe(nano())
 		.pipe(rename(src.css.output + '.min.css'))
 		.pipe(gulp.dest(src.css.dist));
+});
+gulp.task('build:js:initial', function () {
+	return gulp.src(src.js.initial.project)
+		.pipe(concat(src.js.initial.output))
+		//	save minified output
+		.pipe(uglify())
+		.pipe(rename(src.js.initial.output + '.min.js'))
+		.pipe(gulp.dest(src.js.dist))
+		.pipe(gulp.dest(src.includes));
 });
 gulp.task('build:js:global', function () {
 	return gulp.src(src.js.global.master)
@@ -198,7 +217,7 @@ gulp.task('build', function (callback) {
 	runSequence(
 		['lint'],
 		['clean'],
-		['build:css', 'build:js:global'],
+		['build:css', 'build:js:initial', 'build:js:global'],
 		callback
 	);
 });
