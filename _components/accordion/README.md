@@ -110,6 +110,9 @@ var myAccordion = Fraccordion({
 	multiselectable: true,
 
 	// String - Class name that will be added to the selector when the component has been initialised
-	readyClass: 'fr-accordion--is-ready'
+	readyClass: 'fr-accordion--is-ready',
+	
+	// Integer - Duration (in milliseconds) of CSS transition when opening/closing accordion panels
+	transitionLength: 250
 });
 ~~~

@@ -16,12 +16,26 @@
 	line-height: 1.25; /* 20px from 16 */
 	margin-bottom: 0;
 	padding: 1em 1.25em; /* 16px 20px */
+	position: relative;
 	text-decoration: none;
 	text-transform: uppercase;
 	transition: background-color $duration $easing, color $duration $easing;
 }
 .fonts-loaded .fr-accordion__header {
 	font-family: $web-font-sans;
+}
+
+.fr-accordion--is-ready .fr-accordion__header::after {
+	border-left: 0.313rem solid transparent;
+	border-right: 0.313rem solid transparent;
+	border-top: 0.313rem solid rgba(0, 0, 0, 0.5);
+	content: '';
+	height: 0;
+	margin-top: -0.25rem; /* -4px */
+	position: absolute;
+	right: 1.25rem; /* 20px */
+	top: 50%;
+	width: 0;
 }
 
 .fr-accordion--is-ready .fr-accordion__header:first-child {
@@ -35,6 +49,11 @@
 .fr-accordion__header[aria-selected="true"] {
 	background-color: mix(#fff, $dark-grey, 20%);
 	color: #fff;
+}
+.fr-accordion__header[aria-selected="true"]::after {
+	border-bottom: 0.313rem solid rgba(255, 255, 255, 0.5);
+	border-top: 0;
+
 }
 
 // Hover
@@ -51,8 +70,7 @@
 
 .fr-accordion--is-ready .fr-accordion__panel {
 	background-color: $yellow;
-	border-bottom: 1px solid mix(#000, $yellow, 10%);
-	padding: 1.25em;
+	transition: height 250ms ease-out, visibility 250ms;
 }
 .fr-accordion--is-ready .fr-accordion__panel:last-child {
 	border-radius: 0 0 0.25em 0.25em; /* 4px */
@@ -64,4 +82,8 @@
 .fr-accordion--is-ready .fr-accordion p a:hover,
 .fr-accordion--is-ready .fr-accordion p a:focus {
 	@include underline($red, $yellow, 1.05em, 2px);
+}
+.fr-accordion__inner {
+	border-bottom: 1px solid mix(#000, $yellow, 10%);
+	padding: 1.25em;
 }
