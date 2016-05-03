@@ -20,12 +20,10 @@
 		font-family: $web-font-sans;
 	}
 }
-
 .fr-offcanvas-open {
 	background-color: $yellow;
 	border-bottom: 0.125em solid mix(#000, $yellow, 10%);
 }
-
 .fr-offcanvas-close {
 	background-color: mix(#fff, $dark-grey, 10%);
 	border-bottom: 0.125em solid $dark-grey;
@@ -33,6 +31,9 @@
 	position: absolute;
 	right: 1.25em; /* 20px */
 	top: 1.25em; /* 20px */
+	:not(.fr-offcanvas--is-ready) & {
+		display: none;
+	}
 }
 
 .fr-offcanvas-open:hover,
@@ -44,6 +45,11 @@
 	color: #fff;
 }
 
+// .fr-offcanvas--is-ready .fr-offcanvas-open,
+// .fr-offcanvas--is-ready .fr-offcanvas-close {
+// 	display: block;
+// }
+
 
 
 
@@ -53,6 +59,9 @@
 .fr-offcanvas {
 	background-color: $yellow;
 	padding: 20px;
+	&:not(.fr-offcanvas--is-ready) {
+		margin-bottom: 20px;
+	}
 }
 .fr-offcanvas--is-ready {
 	max-width: 400px;

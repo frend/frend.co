@@ -83,7 +83,7 @@
 .fr-accordion--is-ready .fr-accordion p a:focus {
 	@include underline($red, $yellow, 1.05em, 2px);
 }
-.fr-accordion__inner {
+.fr-accordion--is-ready .fr-accordion__inner {
 	border-bottom: 1px solid mix(#000, $yellow, 10%);
 	padding: 1.25em;
 }
