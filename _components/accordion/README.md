@@ -45,7 +45,7 @@ import Fraccordion from 'fr-accordion';
 
 Functional styles for the accordion ([accordion.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/accordion/accordion.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
 
-You can read more about installing Frend components on our [About page](/about/), including details on the functional CSS and JavaScript structure.
+You can read more about installing Frend components on our [About page](http://frend.co/about/), including details on the functional CSS and JavaScript structure.
 
 ## Usage
 
@@ -110,6 +110,9 @@ var myAccordion = Fraccordion({
 	multiselectable: true,
 
 	// String - Class name that will be added to the selector when the component has been initialised
-	readyClass: 'fr-accordion--is-ready'
+	readyClass: 'fr-accordion--is-ready',
+	
+	// Integer - Duration (in milliseconds) of CSS transition when opening/closing accordion panels
+	transitionLength: 250
 });
 ~~~

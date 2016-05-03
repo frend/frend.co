@@ -28,8 +28,8 @@
 .fr-dialogmodal--is-ready .fr-dialogmodal-modal {
 	background-color: $yellow;
 	border-radius: 0.25em; /* 4px */
-	padding: 80px 20px 20px;
 	min-width: 400px;
+	padding: 80px 20px 20px;
 }
 .fr-dialogmodal-open,
 .fr-dialogmodal-close {
@@ -55,8 +55,8 @@
 	border-bottom: 0.125em solid $dark-grey;
 	color: #fff;
 	position: absolute;
-	top: 10px;
 	right: 10px;
+	top: 10px;
 	.fr-dialogmodal:not(.fr-dialogmodal--is-ready) & {
 		display: none;
 	}

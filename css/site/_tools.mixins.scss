@@ -3,23 +3,6 @@
 //	Mixins
 //----------------------------------------------------------------------
 
-//	Media query
-//-----------------------------------
-
-/*
-*	$point: breakpoint integer in px
-*	$constraint: Constraint for media query (min/max)
-*	$feature: Media feature of query (width/height)
-*/
-
-@mixin mq($point, $constraint: min, $feature: width) {
-	@media screen and (#{$constraint}-#{$feature}: $point / $doc-font-size + em) {
-		@content;
-	}
-}
-
-
-
 //	Underline
 //-----------------------------------
 /*
@@ -33,5 +16,6 @@
 	background-position: 0 $offset;
 	background-repeat: repeat-x;
 	background-size: 1px $weight;
-	text-shadow: $size 0 0 $background-color, -$size 0 0 $background-color;
+	text-shadow: -$size 0 $background-color,
+				$size 0 $background-color;
 }

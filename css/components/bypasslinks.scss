@@ -1,0 +1,22 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Accordion
+//----------------------------------------------------------------------
+
+//	Header
+//-----------------------------------
+
+.fr-bypasslinks__link {
+	background-color: mix(#fff, $dark-grey, 20%);
+	color: #fff;
+	display: block;
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 1em;
+	line-height: 1.25;
+	padding: 1em 1.25em;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.fonts-loaded .fr-bypasslinks__link {
+	font-family: $web-font-sans;
+}

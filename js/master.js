@@ -2,7 +2,7 @@
  * Global scripts
  */
 
-import WebFontLoader from './modules/webfont-loader';
+import webFontLoader from './modules/webfont-loader';
 
 //	Run
-WebFontLoader();
+webFontLoader();

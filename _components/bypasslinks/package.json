@@ -1,19 +1,20 @@
 {
-  "name": "fr-accordion",
+  "name": "fr-bypasslinks",
   "version": "1.0.3",
-  "description": "Frend's accessible, modern accordion component.",
-  "homepage": "http://frend.co/components/accordion",
-  "main": "accordion.js",
-  "style": "accordion.css",
+  "description": "Frend's accessible, modern bypass link component.",
+  "homepage": "http://frend.co/components/bypasslinks",
+  "main": "bypasslinks.js",
+  "style": "bypasslinks.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/frend/frend.co/tree/gh-pages/_components/accordion"
+    "url": "https://github.com/frend/frend.co/tree/gh-pages/_components/bypasslinks"
   },
   "keywords": [
-    "accordion",
+    "bypasslinks",
+    "navigation",
     "accessible",
     "es2015"
   ],
