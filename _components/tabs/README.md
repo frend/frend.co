@@ -21,6 +21,8 @@ links:
     url: https://24ways.org/2015/how-tabs-should-work/
   - title: Accessible Culture - Accessible ARIA Tabs
     url: http://accessibleculture.org/articles/2010/08/aria-tabs/
+  - title: Léonie Watson - Danger! Testing Accessibility with real people
+    url: https://medium.com/@LeonieWatson/danger-testing-accessibility-with-real-people-4515f72db648
 ---
 
 The concept of a tab interface for the web may seem strikingly straight-forward. However, implementations often draw the line at styling and showing/hiding content.
