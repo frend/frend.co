@@ -36,9 +36,8 @@ const Frdialogmodal = function ({
 	let currModal = null;
 	//	global references for tab events
 	let disallowTab = false;
-	let focusFirst = false;
-	let focusLast = false;
 	//	elements within tab
+	let focusableElements = null;
 	let firstFocusableElement = null;
 	let lastFocusableElement = null;
 
@@ -82,10 +81,10 @@ const Frdialogmodal = function ({
 		//	update style hook
 		container.classList.add(activeClass);
 		//	set first/last focusable elements
-		let focusableElements = [...modal.querySelectorAll(focusableSelectors.join())];
+		focusableElements = [...modal.querySelectorAll(focusableSelectors.join())];
 		firstFocusableElement = focusableElements[0];
 		lastFocusableElement = focusableElements[focusableElements.length - 1];
-		//	cancel tab event if no items to tab to
+		//	cancel TAB event if no items to TAB to
 		if (focusableElements.length < 2) disallowTab = true;
 	}
 	function _hideModal (modal, returnfocus = true) {
@@ -108,35 +107,22 @@ const Frdialogmodal = function ({
 		}
 	}
 	function _handleTabEvent (e) {
+		//	get the index of the current active element within the modal
+		let focusedIndex = focusableElements.indexOf(doc.activeElement);
+		//	handle TAB event if need to skip
+		//	if first element is focused and shiftkey is in use
+		if (e.shiftKey && focusedIndex === 0) {
+			//	focus last item within modal
+			lastFocusableElement.focus();
+			e.preventDefault();
+		//	if last element is focused and shiftkey is not in use
+		} else if (!e.shiftKey && focusedIndex === focusableElements.length - 1) {
+			//	focus first item within modal
+			firstFocusableElement.focus();
+			e.preventDefault();
+		}
 		//	cancel default TAB event if necessary
-		if (disallowTab ||
-			(focusFirst && !e.shiftKey) ||
-			(focusLast && e.shiftKey)) e.preventDefault();
-		//	defer to get correct event
-		_defer(() => {
-			//	handle tab event if need to skip
-			//	if skip to first is true and shiftkey is not in use
-			if (focusFirst && !e.shiftKey) {
-				//	focus first element, reset temp references
-				firstFocusableElement.focus();
-				focusFirst = false;
-				focusLast = true;
-				return false;
-			//	if skip to last is true and shiftkey is in use
-			} else if (focusLast && e.shiftKey) {
-				//	focus last element, reset temp references
-				lastFocusableElement.focus();
-				focusLast = false;
-				focusFirst = true;
-				return false;
-			} else {
-				//	reset temp references
-				focusFirst = focusLast = false;
-			}
-			//	set reference for next tab event
-			if (doc.activeElement === firstFocusableElement) focusLast = true;
-			if (doc.activeElement === lastFocusableElement) focusFirst = true;
-		});
+		if (disallowTab) e.preventDefault();
 	}
 
 

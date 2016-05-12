@@ -6,7 +6,7 @@
 //	Source
 //-----------------------------------
 .component-embed {
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(#fff, 0.5);
 	height: 65vh;
 	max-height: 50rem; /* 800px */
 	overflow-x: hidden;
@@ -19,4 +19,11 @@
 }
 .component-embed__inner {
 	@extend .wrapper;
+}
+.component-embed a {
+	@include underline($dark-grey, rgba(#fff, 0.5), 1.05em, 2px);
+	&:hover,
+	&:focus {
+		@include underline($red, rgba(#fff, 0.5), 1.05em, 2px);
+	}
 }
