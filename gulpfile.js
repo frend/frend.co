@@ -12,7 +12,6 @@ var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 //	CSS
 var autoprefixer = require('gulp-autoprefixer');
-var mergemq = require('gulp-merge-media-queries');
 var nano = require('gulp-cssnano');
 var sass = require('gulp-sass');
 var scsslint = require('gulp-scss-lint');
@@ -21,7 +20,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var eslint = require('gulp-eslint');
 var uglify = require('gulp-uglify');
-var webpack = require('gulp-webpack');
+var webpack = require('webpack-stream');
 //	Components
 var babelify = require('babelify');
 var browserify = require('browserify');
@@ -136,7 +135,6 @@ gulp.task('build:css', function () {
 		.pipe(sass(options.sass))
 		.pipe(sourcemaps.init())
 		.pipe(autoprefixer(options.autoprefixer))
-		.pipe(mergemq())
 		.pipe(sourcemaps.write())
 		//	save minified output
 		.pipe(nano())
