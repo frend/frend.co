@@ -12,7 +12,7 @@ const Frdialogmodal = function ({
 		modalSelector: modalSelector = '.js-fr-dialogmodal-modal',
 		openSelector: openSelector = '.js-fr-dialogmodal-open',
 		closeSelector: closeSelector = '.js-fr-dialogmodal-close',
-		isInteractive: isInteractive = false,
+		isAlert: isAlert = false,
 		readyClass: readyClass = 'fr-dialogmodal--is-ready',
 		activeClass: activeClass = 'fr-dialogmodal--is-active'
 	} = {}) {
@@ -34,8 +34,6 @@ const Frdialogmodal = function ({
 	//	TEMP
 	let currButtonOpen = null;
 	let currModal = null;
-	//	global references for tab events
-	let disallowTab = false;
 	//	elements within tab
 	let focusableElements = null;
 	let firstFocusableElement = null;
@@ -52,7 +50,7 @@ const Frdialogmodal = function ({
 	//	A11Y
 	function _addA11y (container) {
 		let modal = container.querySelector(modalSelector);
-		let role = isInteractive ? 'dialog' : 'alertdialog';
+		let role = isAlert ? 'dialog' : 'alertdialog';
 		//	add relevant roles and properties
 		container.setAttribute('aria-hidden', true);
 		modal.setAttribute('role', role);
@@ -75,7 +73,7 @@ const Frdialogmodal = function ({
 		_defer(_bindDocKey);
 		_defer(_bindClosePointer);
 		//	if contents are not interactive, bind click off
-		if (!isInteractive) _defer(_bindContainerPointer);
+		if (!isAlert) _defer(_bindContainerPointer);
 		//	reset scroll
 		modal.scrollTop = 0;
 		//	update style hook
@@ -84,8 +82,6 @@ const Frdialogmodal = function ({
 		focusableElements = [...modal.querySelectorAll(focusableSelectors.join())];
 		firstFocusableElement = focusableElements[0];
 		lastFocusableElement = focusableElements[focusableElements.length - 1];
-		//	cancel TAB event if no items to TAB to
-		if (focusableElements.length < 2) disallowTab = true;
 	}
 	function _hideModal (modal, returnfocus = true) {
 		//	get container element
@@ -97,7 +93,7 @@ const Frdialogmodal = function ({
 		_unbindDocKey();
 		_unbindClosePointer();
 		//	if contents are not interactive, unbind click off
-		if (!isInteractive) _unbindContainerPointer();
+		if (!isAlert) _unbindContainerPointer();
 		//	update style hook
 		container.classList.remove(activeClass);
 		//	return focus to button that opened the modal and reset the reference
@@ -121,8 +117,6 @@ const Frdialogmodal = function ({
 			firstFocusableElement.focus();
 			e.preventDefault();
 		}
-		//	cancel default TAB event if necessary
-		if (disallowTab) e.preventDefault();
 	}
 
 
