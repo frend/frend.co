@@ -5,11 +5,12 @@
 
 //	Container
 .fr-dialogmodal--is-ready {
+	transform: translate3d(0, 0, 0); /* Create new layer */
 	transition: background-color $duration $easing,
 				visibility $duration $easing;
-	will-change: transform;
 	&[aria-hidden="false"] {
 		background-color: rgba($dark-grey, 0.8);
+		box-shadow: 0 3.75em 0 0 rgba($dark-grey, 0.8); /* 60px */
 		transition: background-color $duration $easing;
 	}
 }
@@ -18,12 +19,12 @@
 .fr-dialogmodal--is-ready .fr-dialogmodal-modal {
 	background-color: $yellow;
 	border-radius: 0.25em; /* 4px */
-	max-height: 100vh;
+	max-height: calc(100vh - 3.75em); /* 100vh - 60px */
 	opacity: 0;
 	overflow: auto;
 	padding: 5.625em 1.25em 0; /* 90px 20px 0 */
 	transition: opacity $duration $easing;
-	width: calc(100% - 3.75em); /* 60px */
+	width: calc(100vw - 3.75em); /* 100vw - 60px */
 	@include mq($from: lap) {
 		max-width: 37.5em; /* 600px */
 		min-width: 25em; /* 400px */
