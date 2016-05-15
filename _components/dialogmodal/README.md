@@ -21,13 +21,13 @@ links:
     url: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_dialog_role
 ---
 
-To rewrite:
+Dialogs can be utilised to display content over the top of the current context, often as a way of prompting users for a response. While developers wait for the [`dialog`](https://developer.mozilla.org/en/docs/Web/HTML/Element/dialog) element to gain better support, we can make use of existing ARIA roles and attributes to replicate its function. It's becoming a common feature of modern interfaces, and a lot of positive attention has been brought to this pattern recently, thanks to [Hugo Giraudel's A11y Dialog](http://dev.edenspiekermann.com/2016/02/11/introducing-accessible-modal-dialog/).
 
-`aria-controls` and id used to link controls and content, `aria-hidden` applied to modal to denote visibility
+The underlying markup is kept as simple as possible. `button`s are used to trigger and close the dialog, while overlay and modal containers hold our content. Assigning `aria-controls` and `id` attributes to pairs clarify which triggers are controlling their respective modal content. As the modal isn't visible by default, we add `aria-hidden="true"` to the overlay container as part of its initialisation.
 
-roles applied, `role="dialog"`/`role="alertdialog"` `role="document"`. The `alertdialog` role should be used to represent an alert, error or warning. Something that requires the user's immediate attention. Due to this we've removed clicking off the modal to close.
+Giving the modal container a `role="dialog"` aids to communicate the component's function to assistive technologies. If the content represents an alert, error or warning, we can instead use `role="alertdialog"` to ensure we're presenting something that requires an immediate response from the user before continuing. <!-- We may need to elaborate/implement the role="document" and aria-describedby, as mentioned in the ARIA table: https://www.w3.org/TR/wai-aria-practices/#alertdialog -->
 
-When open, the tab key is trapped within the modal to avoid allowing focus outside of the modal window.
+An important consideration that is often overlooked with basic dialog implementations is user focus. When opening, focus is given to the modal content. At the same time, `Esc` key and overlay/close button click events are bound to allow users to dismiss the dialog. Using the `tab` key traps focus among elements within the modal, as to avoid focus for elements in the surrounding page. Lastly, we can return focus to the original trigger when closing the modal to maintain the users' place in the document.
 
 ## Install
 
