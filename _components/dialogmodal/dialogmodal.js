@@ -36,8 +36,6 @@ const Frdialogmodal = function ({
 	let currModal = null;
 	//	elements within tab
 	let focusableElements = null;
-	let firstFocusableElement = null;
-	let lastFocusableElement = null;
 
 
 	//	UTILS
@@ -79,9 +77,7 @@ const Frdialogmodal = function ({
 		//	update style hook
 		container.classList.add(activeClass);
 		//	set first/last focusable elements
-		focusableElements = [...modal.querySelectorAll(focusableSelectors.join())];
-		firstFocusableElement = focusableElements[0];
-		lastFocusableElement = focusableElements[focusableElements.length - 1];
+		focusableElements = [].slice.call(modal.querySelectorAll(focusableSelectors.join()));
 	}
 	function _hideModal (modal, returnfocus = true) {
 		//	get container element
@@ -109,12 +105,12 @@ const Frdialogmodal = function ({
 		//	if first element is focused and shiftkey is in use
 		if (e.shiftKey && focusedIndex === 0) {
 			//	focus last item within modal
-			lastFocusableElement.focus();
+			focusableElements[focusableElements.length - 1].focus();
 			e.preventDefault();
 		//	if last element is focused and shiftkey is not in use
 		} else if (!e.shiftKey && focusedIndex === focusableElements.length - 1) {
 			//	focus first item within modal
-			firstFocusableElement.focus();
+			focusableElements[0].focus();
 			e.preventDefault();
 		}
 	}
