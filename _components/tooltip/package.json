@@ -1,6 +1,6 @@
 {
   "name": "fr-tooltip",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Frend's accessible, modern tooltip component.",
   "homepage": "http://frend.co/components/tooltip",
   "main": "tooltip.js",

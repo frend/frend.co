@@ -166,6 +166,7 @@ const Frtooltip = function ({
 	}
 	function _bindDocClick () {
 		doc.addEventListener('click', _eventDocClick);
+		doc.addEventListener('touchstart', _eventDocClick);
 	}
 	function _bindDocKey () {
 		doc.addEventListener('keydown', _eventDocKey);
@@ -181,6 +182,7 @@ const Frtooltip = function ({
 	}
 	function _unbindDocClick () {
 		doc.removeEventListener('click', _eventDocClick);
+		doc.removeEventListener('touchstart', _eventDocClick);
 	}
 	function _unbindDocKey () {
 		doc.removeEventListener('keydown', _eventDocKey);

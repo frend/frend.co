@@ -8,8 +8,17 @@
 
 //	Toggle
 .fr-tooltip--is-ready .fr-tooltip-toggle {
+	@include underline($dark-grey, rgba(#fff, 0.5), 1.05em, 2px);
+	color: $dark-grey;
 	cursor: help;
-	text-decoration: underline;
+	line-height: 1.278;
+	text-decoration: none;
+	transition: color $duration $easing;
+	&:hover,
+	&:focus {
+		@include underline($red, rgba(#fff, 0.5), 1.05em, 2px);
+		color: $red;
+	}
 }
 
 //	Tooltip
@@ -43,5 +52,3 @@
 	opacity: 1;
 	transform: translateX(-50%) translateY(-12px);
 }
-// .fr-tooltip--is-ready .fr-tooltip-tooltip {
-// }
