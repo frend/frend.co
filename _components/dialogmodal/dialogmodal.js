@@ -106,7 +106,7 @@ const Frdialogmodal = function ({
 		let focusedIndex = focusableElements.indexOf(doc.activeElement);
 		//	handle TAB event if need to skip
 		//	if first element is focused and shiftkey is in use
-		if (e.shiftKey && focusedIndex === 0) {
+		if (e.shiftKey && (focusedIndex === 0 || focusedIndex === -1)) {
 			//	focus last item within modal
 			focusableElements[focusableElements.length - 1].focus();
 			e.preventDefault();
