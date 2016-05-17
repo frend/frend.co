@@ -1,0 +1,92 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Dialog Modal
+//----------------------------------------------------------------------
+
+//	Container
+.fr-dialogmodal--is-ready {
+	transform: translate3d(0, 0, 0); /* Create new layer */
+	transition: background-color $duration $easing,
+				visibility $duration $easing;
+	&[aria-hidden="false"] {
+		background-color: rgba($dark-grey, 0.8);
+		box-shadow: 0 3.75em 0 0 rgba($dark-grey, 0.8); /* 60px */
+		transition: background-color $duration $easing;
+	}
+}
+
+//	Modal
+.fr-dialogmodal--is-ready .fr-dialogmodal-modal {
+	background-color: $yellow;
+	border-radius: 0.25em; /* 4px */
+	max-height: calc(100vh - 3.75em); /* 100vh - 60px */
+	opacity: 0;
+	overflow: auto;
+	padding: 5.625em 1.25em 0; /* 90px 20px 0 */
+	transition: opacity $duration $easing;
+	width: calc(100vw - 3.75em); /* 100vw - 60px */
+	@include mq($from: lap) {
+		max-width: 37.5em; /* 600px */
+		min-width: 25em; /* 400px */
+	}
+}
+.fr-dialogmodal--is-ready[aria-hidden="false"] .fr-dialogmodal-modal {
+	opacity: 1;
+}
+
+//	Button open
+.fr-dialogmodal-open {
+	background-color: $yellow;
+	border-bottom: 0.125em solid mix(#000, $yellow, 10%);
+	border-radius: 0.25em; /* 4px */
+	font-family: $sans-font;
+	font-size: 1em; /* 16px */
+	line-height: 1.25; /* 20px from 16 */
+	padding: 1em 1.25em; /* 16px 20px */
+	text-transform: uppercase;
+	transition: background-color $duration $easing, border-color $duration $easing, color $duration $easing;
+	.fonts-loaded & {
+		font-family: $web-font-sans;
+	}
+	&:hover,
+	&:focus {
+		background-color: mix(#fff, $dark-grey, 20%);
+		border-bottom-color: $dark-grey;
+		color: #fff;
+	}
+}
+
+//	Button close
+.fr-dialogmodal-close {
+	background-color: mix(#fff, $dark-grey, 10%);
+	border-bottom: 0.125em solid $dark-grey;
+	border-radius: 0.25em; /* 4px */
+	color: #fff;
+	font-family: $sans-font;
+	font-size: 1em; /* 16px */
+	line-height: 1.25; /* 20px from 16 */
+	padding: 1em 1.25em; /* 16px 20px */
+	position: absolute;
+	right: 1.25em; /* 20px */
+	text-transform: uppercase;
+	top: 1.25em; /* 20px */
+	transition: background-color $duration $easing, border-color $duration $easing, color $duration $easing;
+	.fr-dialogmodal:not(.fr-dialogmodal--is-ready) & {
+		display: none;
+	}
+	&:hover,
+	&:focus {
+		background-color: mix(#fff, $dark-grey, 20%);
+		border-bottom-color: $dark-grey;
+		color: #fff;
+	}
+}
+
+//	Link fix
+.fr-dialogmodal--is-ready a {
+	@include underline($dark-grey, $yellow, 1.05em, 2px);
+	&:hover,
+	&:focus {
+		@include underline($red, $yellow, 1.05em, 2px);
+	}
+}

@@ -15,19 +15,12 @@ description: Frend components are modest and dependency-free. They are built wit
 	<ul class="list-components">
 		{% assign components = site.components | sort: 'title'  %}
 		{% for component in components %}
-		{% if component.alpha != true %}
-			<li class="list-components__list-item">
-       			{% include listed-component.html %}
-       		</li>
-        {% endif %}
-        {% endfor %}
-		<li class="list-components__list-item list-components__list-item--alpha">
-			<article>
-				<h3 class="text-medium">
-					Dialog Modal &mdash; Coming soon
-				</h3>
-			</article>
-		</li>
+			{% if component.alpha != true %}
+				<li class="list-components__list-item">
+					{% include listed-component.html %}
+				</li>
+			{% endif %}
+		{% endfor %}
 		<li class="list-components__list-item list-components__list-item--alpha">
 			<article>
 				<h3 class="text-medium">
