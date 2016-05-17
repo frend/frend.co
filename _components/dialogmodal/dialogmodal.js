@@ -48,16 +48,19 @@ const Frdialogmodal = function ({
 	//	A11Y
 	function _addA11y (container) {
 		let modal = container.querySelector(modalSelector);
-		let role = isAlert ? 'dialog' : 'alertdialog';
+		let modalDoc = modal.querySelector('[role="document"]');
+		let role = isAlert ? 'alertdialog' : 'dialog';
 		//	add relevant roles and properties
 		container.setAttribute('aria-hidden', true);
 		modal.setAttribute('role', role);
+		modal.setAttribute('aria-describedby', modalDoc.getAttribute('id'));
 	}
 	function _removeA11y (container) {
 		let modal = container.querySelector(modalSelector);
 		//	add relevant roles and properties
 		container.removeAttribute('aria-hidden');
 		modal.removeAttribute('role');
+		modal.removeAttribute('aria-describedby');
 	}
 
 

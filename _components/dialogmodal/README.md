@@ -13,6 +13,8 @@ sources:
 links:
   - title: WAI ARIA Authoring Practices - Dialog Modal
     url: https://www.w3.org/TR/wai-aria-practices/#dialog_modal
+  - title: WAI ARIA Authoring Practices - Alert Dialog
+    url: https://www.w3.org/TR/wai-aria-practices/#alertdialog
   - title: Edenspiekermann A11y Dialog
     url: http://edenspiekermann.github.io/a11y-dialog/
   - title: MDN - Using the alertdialog role
@@ -25,7 +27,7 @@ Dialogs can be utilised to display content over the top of the current context, 
 
 The underlying markup is kept as simple as possible. `button`s are used to open and close the dialog, while overlay and modal containers hold our content. Assigning `aria-controls` and `id` attributes clarify which triggers are controlling their respective modal content. As the modal isn't visible by default, we add `aria-hidden="true"` to the overlay container as part of its initialisation.
 
-Giving the modal container a `role="dialog"` communicates the function of the component to assistive technologies. If the content represents an alert, error or warning, we can instead use `role="alertdialog"` to ensure we're presenting something that requires an immediate response from the user before continuing. <!-- We may need to elaborate/implement the role="document" and aria-describedby, as mentioned in the ARIA table: https://www.w3.org/TR/wai-aria-practices/#alertdialog -->
+Giving the modal container a `role="dialog"` communicates the function of the component to assistive technologies. If the content represents an alert, error or warning, we can instead use `role="alertdialog"` to ensure we're presenting something that requires an immediate response from the user before continuing. The immediate child node of the modal requires an element with `role="document"`. This allows assistive technologies to switch to document browsing mode, providing complete access to the modal content.
 
 An important consideration that is often overlooked with standard dialog implementations is user focus. When opening, focus is given to the modal content. At the same time the `Esc` key and overlay/close button click events are bound to allow users to dismiss the dialog. When the dialog is visible, using the `tab` key will retain focus among elements within the modal, as to avoid applying focus to elements in the surrounding page. Lastly, we can return focus to the original trigger when closing the modal to maintain the users' place in the document.
 
@@ -56,8 +58,10 @@ You can read more about installing Frend components on our [About page](http://f
 </button>
 <div class="js-fr-dialogmodal" id="modal-1">
   <div class="js-fr-dialogmodal-modal">
-    ...
-    <button class="js-fr-dialogmodal-close">Close</button>
+    <div role="document">
+      ...
+      <button class="js-fr-dialogmodal-close">Close</button>
+    </div>
   </div>
 </div>
 ~~~
