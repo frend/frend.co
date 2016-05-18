@@ -11,11 +11,12 @@ var gulp = require('gulp');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 //	CSS
-var autoprefixer = require('gulp-autoprefixer');
+var autoprefixer = require('autoprefixer');
 var nano = require('gulp-cssnano');
 var sass = require('gulp-sass');
 var scsslint = require('gulp-scss-lint');
 var sourcemaps = require('gulp-sourcemaps');
+var postcss = require('gulp-postcss');
 //	JS
 var concat = require('gulp-concat');
 var eslint = require('gulp-eslint');
@@ -83,8 +84,10 @@ var options = {
 		includePaths: ['./css/scss'],
 		errLogToConsole: true
 	},
-	autoprefix: {
-		browsers: ['last 2 versions', 'ie 10', 'ie 9']
+	autoprefixer: {
+		browsers: ['last 4 versions'],
+		flexbox: 'no-2009',
+		remove: false
 	},
 	babelify: {
 		presets: ['es2015'],
@@ -134,7 +137,9 @@ gulp.task('build:css', function () {
 		//	compile & transform
 		.pipe(sass(options.sass))
 		.pipe(sourcemaps.init())
-		.pipe(autoprefixer(options.autoprefixer))
+		.pipe(postcss([
+			autoprefixer(options.autoprefixer)
+		]))
 		.pipe(sourcemaps.write())
 		//	save minified output
 		.pipe(nano())
