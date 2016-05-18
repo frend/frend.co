@@ -24,6 +24,9 @@ A simple API is exposed for each component instance, which usually contains `ini
 
 The JavaScript written to enhance these components has been purposefully left with as little abstraction as possible. While we bundle scripts into ready-to-use plugins, it's also important that the source files can remain a clear reference for those interested in stepping through each of the methods. We hope this helps other developers in uncovering the steps involved in making the components more accessible.
 
+## Testing
+Our thanks go to [BrowserStack](https://www.browserstack.com/) for providing us with an open-source account.
+
 ## Platform
 Frend is powered by [Jekyll](http://jekyllrb.com) and served directly from the [frend/frend.co Github repository](https://github.com/frend/frend.co) thanks to [Github Pages](https://pages.github.com/).
 
