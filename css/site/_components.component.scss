@@ -20,10 +20,3 @@
 .component-embed__inner {
 	@extend .wrapper;
 }
-.component-embed a {
-	@include underline($dark-grey, rgba(#fff, 0.5), 1.05em, 2px);
-	&:hover,
-	&:focus {
-		@include underline($red, rgba(#fff, 0.5), 1.05em, 2px);
-	}
-}
