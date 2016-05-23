@@ -51,8 +51,9 @@ const Frtabs = function ({
 			tab.setAttribute('aria-controls', tab.hash.substring(1));
 		});
 
-		tabpanels.forEach((tabpanel) => {
+		tabpanels.forEach((tabpanel, i) => {
 			tabpanel.setAttribute('role', 'tabpanel');
+			tabpanel.setAttribute('aria-labelledby', tabs[i].id);
 			// make first child of tabpanel focusable if available
 			tabpanel.setAttribute('tabindex', 0);
 		});
@@ -85,6 +86,7 @@ const Frtabs = function ({
 		tabpanels.forEach((tabpanel) => {
 			tabpanel.removeAttribute('role');
 			tabpanel.removeAttribute('aria-hidden');
+			tabpanel.removeAttribute('aria-labelledby');
 			// remove first child focusability if present
 			tabpanel.removeAttribute('tabindex');
 		});
