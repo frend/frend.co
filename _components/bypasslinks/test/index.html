@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Dialog Modal Tests</title>
+
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/mocha/2.5.2/mocha.min.css" />
+	<link rel="stylesheet" href="../bypasslinks.css">
+</head>
+<body>
+
+	<div id="mocha"></div>
+
+	<div class="tests">
+		<ul class="fr-bypasslinks" id="bypass-1">
+			<li>
+				<a class="fr-bypasslinks__link" href="#bypass-target" id="bypass-link">
+					Skip to example 1
+				</a>
+			</li>
+		</ul>
+		<div id="bypass-target" tabindex="-1">
+			<p>
+				Tab through the page to access the bypass links. Voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim <a href="#">ipsam voluptatem</a> quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor.
+			</p>
+		</div>
+	</div>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mocha/2.5.2/mocha.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.min.js"></script>
+	<script src="../dist/frbypasslinks.min.js"></script>
+	<script src="index.js"></script>
+</body>
+</html>
