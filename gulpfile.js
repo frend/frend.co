@@ -74,7 +74,8 @@ var src = {
 		path: './_components/',
 		project: [
 			'./_components/**/*.js',
-			'!./_components/**/dist/*.js'
+			'!./_components/**/dist/*.js',
+			'!./_components/**/test/*.js'
 		]
 	},
 	includes: './_includes/_assets/'

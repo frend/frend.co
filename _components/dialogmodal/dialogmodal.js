@@ -176,8 +176,8 @@ const Frdialogmodal = function ({
 		let button = modal.querySelector(closeSelector);
 		button.removeEventListener('click', _eventClosePointer);
 	}
-	function _unbindContainerPointer () {
-		let container = currModal.parentElement;
+	function _unbindContainerPointer (modal = currModal) {
+		let container = modal.parentElement;
 		container.removeEventListener('click', _eventContainerPointer);
 	}
 	function _unbindDocKey () {

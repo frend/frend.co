@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Dialog Modal Tests</title>
+
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/mocha/2.5.2/mocha.min.css" />
+	<link rel="stylesheet" href="../dialogmodal.css">
+</head>
+<body>
+
+	<div id="mocha"></div>
+
+	<div class="tests">
+		<button class="js-fr-dialogmodal-open" aria-controls="modal-1">
+			Open
+		</button>
+		<div class="js-fr-dialogmodal" id="modal-1">
+			<div class="js-fr-dialogmodal-modal">
+				<div role="document" id="modal-1-message">
+					Test content
+					<button class="js-fr-dialogmodal-close">Close</button>
+				</div>
+			</div>
+		</div>
+		<button class="js-fr-dialogmodal-open" aria-controls="modal-2">
+			Open
+		</button>
+		<div class="js-fr-dialogmodal" id="modal-2">
+			<div class="js-fr-dialogmodal-modal">
+				<div role="document" id="modal-2-message">
+					Test content
+					<button class="js-fr-dialogmodal-close">Close</button>
+				</div>
+			</div>
+		</div>
+		<button class="js-fr-dialogmodal-open" aria-controls="modal-3" id="open-modal-3">
+			Open
+		</button>
+		<div class="js-fr-dialogmodal" id="modal-3">
+			<div class="js-fr-dialogmodal-modal">
+				<div role="document" id="modal-3-message">
+					<a href="#" id="first-modal-3">Item 1</a>
+					<a href="#">Item 2</a>
+					<a href="#">Item 3</a>
+					<button class="js-fr-dialogmodal-close" id="close-modal-3">Close</button>
+				</div>
+			</div>
+		</div>
+		<button class="js-fr-dialogmodal-open" aria-controls="modal-4" id="open-modal-4">
+			Open
+		</button>
+		<div class="js-fr-dialogmodal" id="modal-4">
+			<div class="js-fr-dialogmodal-modal">
+				<div role="document" id="modal-4-message">
+					<a href="#">Item 1</a>
+					<a href="#">Item 2</a>
+					<a href="#">Item 3</a>
+					<button class="js-fr-dialogmodal-close">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mocha/2.5.2/mocha.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.min.js"></script>
+	<script src="../dist/frdialogmodal.min.js"></script>
+	<script src="index.js"></script>
+</body>
+</html>
