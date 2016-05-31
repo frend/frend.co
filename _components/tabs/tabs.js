@@ -127,8 +127,12 @@ const Frtabs = function ({
 	function _eventTabKeydown (e) {
 		// collect tab targets, and their parents' prev/next (or first/last - this is honkin dom traversing)
 		let currentTab = e.target;
+		let isModifierKey = (e.metaKey || e.altKey) ? true : false;
 		let previousTabItem = currentTab.parentNode.previousElementSibling || currentTab.parentNode.parentNode.lastElementChild;
 		let nextTabItem = currentTab.parentNode.nextElementSibling || currentTab.parentNode.parentNode.firstElementChild;
+
+		// don't catch key events when ⌘ or Alt modifier is present
+		if (isModifierKey) return;
 
 		// catch left/right and up/down arrow key events
 		// if new next/prev tab available, show it by passing tab anchor to _showTab method

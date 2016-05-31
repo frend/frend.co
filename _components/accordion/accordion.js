@@ -192,10 +192,14 @@ const Fraccordion = function ({
 	function _eventHeaderKeydown (e) {
 		// collect header targets, and their prev/next
 		let currentHeader = e.target;
+		let isModifierKey = (e.metaKey || e.altKey) ? true : false;
 		// get context of accordion container and its children
 		let thisContainer = currentHeader.parentNode;
 		let theseHeaders = thisContainer.querySelectorAll(headerSelector);
 		let currentHeaderIndex = [].indexOf.call(theseHeaders, currentHeader);
+
+		// don't catch key events when ⌘ or Alt modifier is present
+		if (isModifierKey) return;
 
 		// catch enter/space, left/right and up/down arrow key events
 		// if new panel show it, if next/prev move focus
@@ -206,17 +210,19 @@ const Fraccordion = function ({
 				e.preventDefault();
 				break;
 			case 37:
-			case 38:
+			case 38: {
 				let previousHeaderIndex = (currentHeaderIndex === 0) ? theseHeaders.length - 1 : currentHeaderIndex - 1;
 				_giveHeaderFocus(theseHeaders, previousHeaderIndex);
 				e.preventDefault();
 				break;
+			}
 			case 39:
-			case 40:
+			case 40: {
 				let nextHeaderIndex = (currentHeaderIndex < theseHeaders.length - 1) ? currentHeaderIndex + 1 : 0;
 				_giveHeaderFocus(theseHeaders, nextHeaderIndex);
 				e.preventDefault();
 				break;
+			}
 			default:
 				break;
 		}
