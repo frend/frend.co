@@ -192,7 +192,7 @@ const Fraccordion = function ({
 	function _eventHeaderKeydown (e) {
 		// collect header targets, and their prev/next
 		let currentHeader = e.target;
-		let isModifierKey = (e.metaKey || e.altKey) ? true : false;
+		let isModifierKey = e.metaKey || e.altKey;
 		// get context of accordion container and its children
 		let thisContainer = currentHeader.parentNode;
 		let theseHeaders = thisContainer.querySelectorAll(headerSelector);

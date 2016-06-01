@@ -127,7 +127,7 @@ const Frtabs = function ({
 	function _eventTabKeydown (e) {
 		// collect tab targets, and their parents' prev/next (or first/last - this is honkin dom traversing)
 		let currentTab = e.target;
-		let isModifierKey = (e.metaKey || e.altKey) ? true : false;
+		let isModifierKey = e.metaKey || e.altKey;
 		let previousTabItem = currentTab.parentNode.previousElementSibling || currentTab.parentNode.parentNode.lastElementChild;
 		let nextTabItem = currentTab.parentNode.nextElementSibling || currentTab.parentNode.parentNode.firstElementChild;
 
