@@ -1,6 +1,6 @@
 # Frend Tabs Change Log
 
-## [1.0.3] 2016-05-31
+## [1.0.3] 2016-06-03
 - Added guard clause for modifier key events - fix issue 75
 
 ## [1.0.2] 2016-05-22
