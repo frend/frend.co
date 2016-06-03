@@ -129,12 +129,12 @@ const Froffcanvas = function({
 	//	EVENTS
 	function _eventOpenPointer (e) {
 		//	get panel
-		let panelId = e.target.getAttribute('aria-controls');
+		let panelId = e.currentTarget.getAttribute('aria-controls');
 		let panel = doc.querySelector(`#${panelId}`);
 		//	hide any open panels
 		if (currPanel) _hidePanel(currPanel, false);
 		//	save temp panel/button
-		currButtonOpen = e.target;
+		currButtonOpen = e.currentTarget;
 		currPanel = panel;
 		//	show
 		_showPanel(panel);

@@ -1,6 +1,6 @@
 {
   "name": "fr-offcanvas",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Frend's accessible, modern off-canvas component.",
   "homepage": "http://frend.co/components/accordion",
   "main": "offcanvas.js",
