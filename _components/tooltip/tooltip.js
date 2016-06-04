@@ -26,6 +26,7 @@ const Frtooltip = function ({
 	// CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
+	const _q = (el, ctx = doc) => [].slice.call(ctx.querySelectorAll(el));
 
 
 	// SUPPORTS
@@ -33,7 +34,7 @@ const Frtooltip = function ({
 
 
 	// SETUP
-	let tooltipContainers = doc.querySelectorAll(selector);
+	let tooltipContainers = _q(selector);
 
 	//	TEMP
 	let currTooltip = null;
@@ -56,8 +57,8 @@ const Frtooltip = function ({
 	//	A11Y
 	function _addA11y (container, i) {
 		//	get relative elements
-		let toggle = container.querySelector(toggleSelector);
-		let tooltip = container.querySelector(tooltipSelector);
+		let toggle = _q(toggleSelector, container)[0];
+		let tooltip = _q(tooltipSelector, container)[0];
 		//	create new button and replace toggle
 		var button = doc.createElement('button');
 		button.setAttribute('class', toggle.getAttribute('class'));
@@ -73,8 +74,8 @@ const Frtooltip = function ({
 	}
 	function _removeA11y (container) {
 		//	get relative elements
-		let toggle = container.querySelector(toggleSelector);
-		let tooltip = container.querySelector(tooltipSelector);
+		let toggle = _q(toggleSelector, container)[0];
+		let tooltip = _q(tooltipSelector, container)[0];
 		//	create new span and replace toggle
 		var span = doc.createElement('span');
 		span.setAttribute('class', toggle.getAttribute('class'));
@@ -159,7 +160,7 @@ const Frtooltip = function ({
 
 	// BIND EVENTS
 	function _bindToggleEvents (container) {
-		const toggle = container.querySelector(toggleSelector);
+		const toggle = _q(toggleSelector, container)[0];
 		toggle.addEventListener('click', _eventTogglePointer);
 		toggle.addEventListener('mouseenter', _eventTogglePointer);
 		toggle.addEventListener('mouseleave', _eventTogglePointerLeave);
@@ -175,7 +176,7 @@ const Frtooltip = function ({
 
 	//	UNBIND EVENTS
 	function _unbindToggleEvents (container) {
-		const toggle = container.querySelector(toggleSelector);
+		const toggle = _q(toggleSelector, container)[0];
 		toggle.removeEventListener('click', _eventTogglePointer);
 		toggle.removeEventListener('mouseenter', _eventTogglePointer);
 		toggle.removeEventListener('mouseleave', _eventTogglePointerLeave);

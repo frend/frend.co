@@ -26,6 +26,7 @@ const Froffcanvas = function({
 	//	CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
+	const _q = (el, ctx = doc) => [].slice.call(ctx.querySelectorAll(el));
 
 
 	//	SUPPORTS
@@ -34,7 +35,7 @@ const Froffcanvas = function({
 
 	//	SETUP
 	// set offcanvas element NodeLists
-	const panels = doc.querySelectorAll(selector);
+	const panels = _q(selector);
 
 	//	TEMP
 	let currButtonOpen = null;
@@ -130,7 +131,7 @@ const Froffcanvas = function({
 	function _eventOpenPointer (e) {
 		//	get panel
 		let panelId = e.currentTarget.getAttribute('aria-controls');
-		let panel = doc.querySelector(`#${panelId}`);
+		let panel = doc.getElementById(panelId);
 		//	hide any open panels
 		if (currPanel) _hidePanel(currPanel, false);
 		//	save temp panel/button
@@ -156,11 +157,11 @@ const Froffcanvas = function({
 
 	//	BIND EVENTS
 	function _bindOpenPointer (panel) {
-		const openButtons = doc.querySelectorAll(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // is this selector totally crazy?
+		const openButtons = _q(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // is this selector totally crazy?
 		openButtons.forEach((button) => button.addEventListener('click', _eventOpenPointer));
 	}
 	function _bindClosePointer (panel = currPanel) {
-		var closeButton = panel.querySelector(closeSelector);
+		var closeButton = _q(closeSelector, panel)[0];
 		closeButton.addEventListener('click', _eventClosePointer);
 	}
 	function _bindDocClick () {
@@ -173,11 +174,11 @@ const Froffcanvas = function({
 
 	//	UNBIND EVENTS
 	function _unbindOpenPointer (panel = currPanel) {
-		const openButtons = doc.querySelectorAll(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // yep its totally crazy
+		const openButtons = _q(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // yep its totally crazy
 		openButtons.forEach((button) => button.removeEventListener('click', _eventOpenPointer));
 	}
 	function _unbindClosePointer (panel = currPanel) {
-		var closeButton = panel.querySelector(closeSelector);
+		var closeButton = _q(closeSelector, panel)[0];
 		closeButton.removeEventListener('click', _eventClosePointer);
 	}
 	function _unbindDocClick () {
