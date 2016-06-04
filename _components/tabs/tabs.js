@@ -129,7 +129,7 @@ const Frtabs = function ({
 	// ACTIONS
 	function _showTab (target, giveFocus = true) {
 		// get context of tab container (this sucks - look at implementing equivalent .closest() method)
-		let thisContainer = target.parentNode.parentNode.parentNode;
+		let thisContainer = target.closest(selector);
 
 		let siblingTabs = thisContainer.querySelectorAll(tablistSelector + ' a');
 		let siblingTabpanels = thisContainer.querySelectorAll(tabpanelSelector);
@@ -153,7 +153,7 @@ const Frtabs = function ({
 
 	// EVENTS
 	function _eventTabClick (e) {
-		_showTab(e.target);
+		_showTab(e.target.closest('a'));
 		e.preventDefault(); // look into remove id/settimeout/reinstate id as an alternative to preventDefault
 	}
 
