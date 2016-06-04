@@ -3,7 +3,8 @@
 // element-closest | CC0-1.0 | github.com/jonathantneal/closest
 if (typeof Element.prototype.matches !== 'function') {
     Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.webkitMatchesSelector || function matches(selector) {
-        var element = this;
+        var _this = this;
+        var element = _this;
         var elements = (element.document || element.ownerDocument).querySelectorAll(selector);
         var index = 0;
 
@@ -17,7 +18,8 @@ if (typeof Element.prototype.matches !== 'function') {
 
 if (typeof Element.prototype.closest !== 'function') {
     Element.prototype.closest = function closest(selector) {
-        var element = this;
+        var _this = this;
+        var element = _this;
 
         while (element && element.nodeType === 1) {
             if (element.matches(selector)) {
