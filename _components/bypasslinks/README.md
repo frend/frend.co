@@ -14,6 +14,8 @@ sources:
 links:
   - title: WebAIM - "Skip Navigation" Links
     url: http://webaim.org/techniques/skipnav/
+  - title: Nicholas C. Zakas - Fixing “Skip to content” links
+    url: https://www.nczonline.net/blog/2013/01/15/fixing-skip-to-content-links/
   - title: Penn State Accessibility - Skip Navigation
     url: http://accessibility.psu.edu/skipnav/
   - title: W3C - Bypass blocks
