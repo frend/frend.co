@@ -36,6 +36,20 @@ layout: default
 
 		{{ page.content }}
 
+		<h2>Browser support</h2>
+		<p>Frend components rely on common JavaScript APIs like <a href="http://caniuse.com/#search=classList">classList</a>, and ES5 methods like <a href="http://caniuse.com/#search=forEach">forEach</a>. Each component tests for support of these before initialising. They will be fully functional in:</p>
+		<ul>
+			<li>Chrome 8+</li>
+			<li>Firefox 3.6+</li>
+			<li>Safari 5.1+</li>
+			<li>Opera 15+</li>
+			<li>Edge 12+</li>
+			<li>IE 10+</li>
+			<li>iOS Safari 5.1+</li>
+			<li>Android Browser 3+</li>
+		</ul>
+		<p>Browsers that haven&rsquo;t cut the mustard here will render the initial HTML to be styled up as necessary.</p>
+
 		{% if page.links %}
 			<aside>
 				<h2>References</h2>

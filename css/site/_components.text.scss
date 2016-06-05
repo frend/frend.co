@@ -40,7 +40,8 @@ h3 {
 	}
 }
 //	spacing
-p + h2 {
+p + h2,
+p + aside {
 	padding-top: 2.5rem; /* 40px */
 }
 h2 + h3,
