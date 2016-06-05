@@ -45,19 +45,16 @@ const Frdialogmodal = function ({
 	//	A11Y
 	function _addA11y (container) {
 		let modal = _q(modalSelector, container)[0];
-		let modalDoc = _q('[role="document"]', modal)[0];
 		let role = isAlert ? 'alertdialog' : 'dialog';
 		//	add relevant roles and properties
 		container.setAttribute('aria-hidden', true);
 		modal.setAttribute('role', role);
-		modal.setAttribute('aria-describedby', modalDoc.getAttribute('id'));
 	}
 	function _removeA11y (container) {
 		let modal = _q(modalSelector, container)[0];
 		//	add relevant roles and properties
 		container.removeAttribute('aria-hidden');
 		modal.removeAttribute('role');
-		modal.removeAttribute('aria-describedby');
 	}
 
 
@@ -66,7 +63,11 @@ const Frdialogmodal = function ({
 		//	show container and focus the modal
 		container.setAttribute('aria-hidden', false);
 		modal.setAttribute('tabindex', -1);
-		modal.focus();
+		//	set first/last focusable elements
+		focusableElements = _q(focusableSelectors.join(), modal);
+		//	focus first element if exists, otherwise focus modal element
+		if (focusableElements.length) focusableElements[0].focus();
+		else modal.focus();
 		//	update bound events
 		_defer(_bindDocKey);
 		_defer(_bindClosePointer);
@@ -76,8 +77,6 @@ const Frdialogmodal = function ({
 		modal.scrollTop = 0;
 		//	update style hook
 		container.classList.add(activeClass);
-		//	set first/last focusable elements
-		focusableElements = _q(focusableSelectors.join(), modal);
 	}
 	function _hideModal (modal, returnfocus = true) {
 		//	get container element
