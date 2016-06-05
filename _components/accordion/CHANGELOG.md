@@ -1,5 +1,8 @@
 # Frend Accordion Change Log
 
+## [1.0.5] 2016-06-05
+- Replace NodeList.prototype jacking with `_q()` querySelectorAll util
+
 ## [1.0.4] 2016-06-03
 - Added guard clause for modifier key events - fix issue 75
 

@@ -1,9 +1,5 @@
 'use strict';
 
-// Set Array prototype on NodeList for forEach() support
-// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
-NodeList.prototype.forEach = Array.prototype.forEach;
-
 /**
  * @param {object} options Object containing configuration overrides
  */
@@ -18,6 +14,7 @@ const Frtabs = function ({
 	// CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
+	const _q = (el, ctx = doc) => [].slice.call(ctx.querySelectorAll(el));
 
 
 	// SUPPORTS
@@ -26,16 +23,16 @@ const Frtabs = function ({
 
 	// SETUP
 	// set tab element NodeList
-	let tabContainers = doc.querySelectorAll(selector);
+	let tabContainers = _q(selector);
 
 
 	// A11Y
 	function _addA11y (tabContainer) {
 		// get tab elements
-		const tabLists = tabContainer.querySelectorAll(tablistSelector);
-		const tabListItems = tabContainer.querySelectorAll(tablistSelector + ' li');
-		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
-		const tabpanels = tabContainer.querySelectorAll(tabpanelSelector);
+		const tabLists = _q(tablistSelector, tabContainer);
+		const tabListItems = _q(tablistSelector + ' li', tabContainer);
+		const tabs = _q(tablistSelector + ' a', tabContainer);
+		const tabpanels = _q(tabpanelSelector, tabContainer);
 
 		// add roles, properties, states
 		tabLists.forEach((tabList) => {
@@ -62,10 +59,10 @@ const Frtabs = function ({
 
 	function _removeA11y (tabContainer) {
 		// get tab elements
-		const tabLists = tabContainer.querySelectorAll(tablistSelector);
-		const tabListItems = tabContainer.querySelectorAll(tablistSelector + ' li');
-		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
-		const tabpanels = tabContainer.querySelectorAll(tabpanelSelector);
+		const tabLists = _q(tablistSelector, tabContainer);
+		const tabListItems = _q(tablistSelector + ' li', tabContainer);
+		const tabs = _q(tablistSelector + ' a', tabContainer);
+		const tabpanels = _q(tabpanelSelector, tabContainer);
 
 		// remove roles, properties, states
 		tabLists.forEach((tabList) => {
@@ -98,8 +95,8 @@ const Frtabs = function ({
 		// get context of tab container (this sucks - look at implementing equivalent .closest() method)
 		let thisContainer = target.parentNode.parentNode.parentNode;
 
-		let siblingTabs = thisContainer.querySelectorAll(tablistSelector + ' a');
-		let siblingTabpanels = thisContainer.querySelectorAll(tabpanelSelector);
+		let siblingTabs = _q(tablistSelector + ' a', thisContainer);
+		let siblingTabpanels = _q(tabpanelSelector, thisContainer);
 
 		// set inactives
 		siblingTabs.forEach((tab) => {
@@ -139,12 +136,12 @@ const Frtabs = function ({
 		switch (e.keyCode) {
 			case 37:
 			case 38:
-				_showTab(previousTabItem.querySelector('[role="tab"]'));
+				_showTab(_q('[role="tab"]', previousTabItem)[0]);
 				e.preventDefault();
 				break;
 			case 39:
 			case 40:
-				_showTab(nextTabItem.querySelector('[role="tab"]'));
+				_showTab(_q('[role="tab"]', nextTabItem)[0]);
 				e.preventDefault();
 				break;
 			default:
@@ -155,7 +152,7 @@ const Frtabs = function ({
 
 	// BINDINGS
 	function _bindTabsEvents (tabContainer) {
-		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
+		const tabs = _q(tablistSelector + ' a', tabContainer);
 		// bind all tab click and keydown events
 		tabs.forEach((tab) => {
 			tab.addEventListener('click', _eventTabClick);
@@ -164,7 +161,7 @@ const Frtabs = function ({
 	}
 
 	function _unbindTabsEvents (tabContainer) {
-		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
+		const tabs = _q(tablistSelector + ' a', tabContainer);
 		// unbind all tab click and keydown events
 		tabs.forEach((tab) => {
 			tab.removeEventListener('click', _eventTabClick);
@@ -190,7 +187,7 @@ const Frtabs = function ({
 				_addA11y(tabContainer);
 				_bindTabsEvents(tabContainer);
 				// set all first tabs active on init
-				_showTab(tabContainer.querySelectorAll(tablistSelector + ' a')[0], false);
+				_showTab(_q(tablistSelector + ' a', tabContainer)[0], false);
 				// set ready style hook
 				tabContainer.classList.add(tabsReadyClass);
 			});

@@ -1,9 +1,5 @@
 'use strict';
 
-// Set Array prototype on NodeList for forEach() support
-// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
-NodeList.prototype.forEach = Array.prototype.forEach;
-
 /**
  * @param {object} options Object containing configuration overrides
  */
@@ -23,6 +19,7 @@ const Fraccordion = function ({
 	// CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
+	const _q = (el, ctx = doc) => [].slice.call(ctx.querySelectorAll(el));
 
 
 	// SUPPORTS
@@ -31,14 +28,14 @@ const Fraccordion = function ({
 
 	// SETUP
 	// set accordion element NodeLists
-	let accordionContainers = doc.querySelectorAll(selector);
+	let accordionContainers = _q(selector);
 
 
 	// A11Y
 	function _addA11y (accordionContainer) {
 		// get accordion elements
-		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
-		const accordionPanels = accordionContainer.querySelectorAll(panelSelector);
+		const accordionHeaders = _q(headerSelector, accordionContainer);
+		const accordionPanels = _q(panelSelector, accordionContainer);
 
 		// add relevant roles and properties
 		accordionContainer.setAttribute('role', 'tablist');
@@ -60,8 +57,8 @@ const Fraccordion = function ({
 	}
 	function _removeA11y (accordionContainer) {
 		// get accordion elements
-		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
-		const accordionPanels = accordionContainer.querySelectorAll(panelSelector);
+		const accordionHeaders = _q(headerSelector, accordionContainer);
+		const accordionPanels = _q(panelSelector, accordionContainer);
 
 		// remove roles and properties
 		accordionContainer.removeAttribute('role');
@@ -124,8 +121,9 @@ const Fraccordion = function ({
 
 	// ACTIONS
 	function _hideAllPanels (accordionContainer) {
-		let siblingHeaders = accordionContainer.querySelectorAll(headerSelector);
-		let siblingPanels = accordionContainer.querySelectorAll(panelSelector);
+		// get accordion elements
+		const siblingHeaders = _q(headerSelector, accordionContainer);
+		const siblingPanels = _q(panelSelector, accordionContainer);
 
 		// set inactives
 		siblingHeaders.forEach((header) => {
@@ -195,7 +193,7 @@ const Fraccordion = function ({
 		let isModifierKey = e.metaKey || e.altKey;
 		// get context of accordion container and its children
 		let thisContainer = currentHeader.parentNode;
-		let theseHeaders = thisContainer.querySelectorAll(headerSelector);
+		let theseHeaders = _q(headerSelector, thisContainer);
 		let currentHeaderIndex = [].indexOf.call(theseHeaders, currentHeader);
 
 		// don't catch key events when ⌘ or Alt modifier is present
@@ -231,7 +229,7 @@ const Fraccordion = function ({
 
 	//	BIND EVENTS
 	function _bindAccordionEvents (accordionContainer) {
-		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
+		const accordionHeaders = _q(headerSelector, accordionContainer);
 		// bind all accordion header click and keydown events
 		accordionHeaders.forEach((accordionHeader) => {
 			accordionHeader.addEventListener('click', _eventHeaderClick);
@@ -242,7 +240,7 @@ const Fraccordion = function ({
 
 	//	UNBIND EVENTS
 	function _unbindAccordionEvents (accordionContainer) {
-		const accordionHeaders = accordionContainer.querySelectorAll(headerSelector);
+		const accordionHeaders = _q(headerSelector, accordionContainer);
 		// unbind all accordion header click and keydown events
 		accordionHeaders.forEach((accordionHeader) => {
 			accordionHeader.removeEventListener('click', _eventHeaderClick);
