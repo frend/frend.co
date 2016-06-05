@@ -153,7 +153,7 @@ const Frtabs = function ({
 
 	// EVENTS
 	function _eventTabClick (e) {
-		_showTab(e.target.closest('a'));
+		_showTab(e.currentTarget);
 		e.preventDefault(); // look into remove id/settimeout/reinstate id as an alternative to preventDefault
 	}
 
