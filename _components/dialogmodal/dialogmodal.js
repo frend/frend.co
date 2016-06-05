@@ -14,13 +14,17 @@ const Frdialogmodal = function ({
 		closeSelector: closeSelector = '.js-fr-dialogmodal-close',
 		isAlert: isAlert = false,
 		readyClass: readyClass = 'fr-dialogmodal--is-ready',
-		activeClass: activeClass = 'fr-dialogmodal--is-active'
+		activeClass: activeClass = 'fr-dialogmodal--is-active',
+		onReady,
+		onDestroy,
+		onShow,
+		onHide
 	} = {}) {
-
 
 	// CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
+	const _cb = fn => typeof fn === typeof(Function) && fn();
 
 
 	// SUPPORTS
@@ -80,6 +84,8 @@ const Frdialogmodal = function ({
 		modal.scrollTop = 0;
 		//	update style hook
 		container.classList.add(activeClass);
+		//	run callback
+		_cb(onShow);
 	}
 	function _hideModal (modal, returnfocus = true) {
 		//	get container element
@@ -99,6 +105,8 @@ const Frdialogmodal = function ({
 			currButtonOpen.focus();
 			currButtonOpen = null;
 		}
+		//	run callback
+		_cb(onHide);
 	}
 	function _handleTabEvent (e) {
 		//	get the index of the current active element within the modal
@@ -175,8 +183,8 @@ const Frdialogmodal = function ({
 		let button = modal.querySelector(closeSelector);
 		button.removeEventListener('click', _eventClosePointer);
 	}
-	function _unbindContainerPointer () {
-		let container = currModal.parentElement;
+	function _unbindContainerPointer (modal = currModal) {
+		let container = modal.parentElement;
 		container.removeEventListener('click', _eventContainerPointer);
 	}
 	function _unbindDocKey () {
@@ -198,6 +206,8 @@ const Frdialogmodal = function ({
 			container.classList.remove(readyClass, activeClass);
 		});
 		_unbindDocKey();
+		//	run callback
+		_cb(onDestroy);
 	}
 
 
@@ -212,6 +222,8 @@ const Frdialogmodal = function ({
 			// set ready style hook
 			container.classList.add(readyClass);
 		});
+		//	run callback
+		_cb(onReady);
 	}
 	init();
 

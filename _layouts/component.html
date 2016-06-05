@@ -65,7 +65,23 @@ layout: default
 <script>
 	loadCSS('{{ page.filename }}.css', document.getElementById('loadCSSTarget'));
 	loadJS('/components/{{ page.filename }}/dist/fr{{ page.filename }}.min.js', function () {
-		var {{ page.filename | replace: '-', '' }} = Fr{{ page.filename | replace: '-', '' }}();
+		var {{ page.filename | replace: '-', '' }} = Fr{{ page.filename | replace: '-', '' }}({
+			onReady: function () {
+				console.log('onReady');
+			},
+			onDestroy: function () {
+				console.log('onDestroy');
+			},
+			onShow: function () {
+				console.log('onShow');
+			},
+			onHide: function () {
+				console.log('onHide');
+			}
+		});
+		window.addEventListener('keydown', function (e) {
+			if (e.keyCode === 68) {{ page.filename | replace: '-', '' }}.destroy();
+		}, 2000)
 	});
 </script>
 <noscript>
