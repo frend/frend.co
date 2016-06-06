@@ -19,13 +19,18 @@ const Froffcanvas = function({
 		openSelector: openSelector = '.js-fr-offcanvas-open',
 		closeSelector: closeSelector = '.js-fr-offcanvas-close',
 		readyClass: readyClass = 'fr-offcanvas--is-ready',
-		activeClass: activeClass = 'fr-offcanvas--is-active'
+		activeClass: activeClass = 'fr-offcanvas--is-active',
+		onReady,
+		onDestroy,
+		onShow,
+		onHide
 	} = {}) {
 
 
 	//	CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
+	const _cb = fn => typeof fn === typeof(Function) && fn();
 
 
 	//	SUPPORTS
@@ -86,6 +91,8 @@ const Froffcanvas = function({
 		panel.scrollTop = 0;
 		//	add active class
 		panel.classList.add(activeClass);
+		//	run callback
+		_cb(onShow);
 	}
 	function _hidePanel (panel = currPanel, returnfocus = true) {
 		//	add aria-hidden, remove focus
@@ -106,6 +113,10 @@ const Froffcanvas = function({
 			currButtonOpen.focus();
 			currButtonOpen = null;
 		}
+		//	remove temp reference
+		currPanel = null;
+		//	run callback
+		_cb(onHide);
 	}
 	function destroy () {
 		panels.forEach((panel) => {
@@ -116,6 +127,8 @@ const Froffcanvas = function({
 			_unbindClosePointer();
 			//	remove class
 			panel.classList.remove(readyClass);
+			//	remove set visibility
+			panel.style.visibility = '';
 		});
 		//	unbind global events
 		_unbindDocClick();
@@ -123,6 +136,8 @@ const Froffcanvas = function({
 		//	reset temp references
 		currButtonOpen = null;
 		currPanel = null;
+		//	run callback
+		_cb(onDestroy);
 	}
 
 
@@ -197,6 +212,8 @@ const Froffcanvas = function({
 			_bindOpenPointer(panel);
 			panel.classList.add(readyClass);
 		});
+		//	run callback
+		_cb(onReady);
 	}
 	init();
 
