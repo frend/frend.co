@@ -32,11 +32,9 @@ const Frtabs = function ({
 	if (!('querySelector' in doc) || !('addEventListener' in window) || !docEl.classList) return;
 
 
-	//	SETUP
-	//	set tab element NodeList
+	// SETUP
+	// set tab element NodeList
 	let tabContainers = _q(selector);
-	//	TEMP
-	let activeIndex = 0;
 
 
 	//	UTILS
@@ -148,12 +146,12 @@ const Frtabs = function ({
 		switch (e.keyCode) {
 			case 37:
 			case 38:
-				_showTab(previousTabItem.querySelector('[role="tab"]'));
+				_showTab(_q('[role="tab"]', previousTabItem)[0]);
 				e.preventDefault();
 				break;
 			case 39:
 			case 40:
-				_showTab(nextTabItem.querySelector('[role="tab"]'));
+				_showTab(_q('[role="tab"]', nextTabItem)[0]);
 				e.preventDefault();
 				break;
 			default:

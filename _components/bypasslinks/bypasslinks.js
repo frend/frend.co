@@ -1,9 +1,5 @@
 'use strict';
 
-// Set Array prototype on NodeList for forEach() support
-// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
-NodeList.prototype.forEach = Array.prototype.forEach;
-
 /**
  * @param {object} options Object containing configuration overrides
  */
@@ -14,6 +10,7 @@ const Frbypasslinks = function({
 
 	//	CONSTANTS
 	const doc = document;
+	const _q = (el, ctx = doc) => [].slice.call(ctx.querySelectorAll(el));
 
 
 	//	SUPPORTS
@@ -22,7 +19,7 @@ const Frbypasslinks = function({
 
 	//	SETUP
 	// get bypass links NodeList
-	const container = doc.querySelector(selector);
+	const container = _q(selector)[0];
 
 	//	TEMP
 	let currTarget = null;
@@ -44,10 +41,8 @@ const Frbypasslinks = function({
 		target.removeAttribute('tabindex');
 	}
 	function destroy () {
-		//	get all bypass links
-		const links = container.querySelectorAll('a');
 		//	loop through each bypass link and remove event bindings
-		links.forEach(link => {
+		_q('a', container).forEach(link => {
 			_unbindPointerClick(link)
 			_addFocusability(link);
 		});
@@ -104,10 +99,8 @@ const Frbypasslinks = function({
 	function init () {
 		//	detect if bypass links exist in the document
 		if (!container) return;
-		//	get all bypass links
-		const links = container.querySelectorAll('a');
 		//	loop through each bypass link
-		links.forEach(link => {
+		_q('a', container).forEach(link => {
 			_bindPointerClick(link);
 			_removeFocusability(link);
 		});
