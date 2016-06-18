@@ -31,14 +31,14 @@ const Frbypasslinks = function({
 		let id = link.getAttribute('href').slice(1);
 		let target = doc.getElementById(id);
 		//	set tabindex to allow focus
-		target.setAttribute('tabindex', -1);
+		if (target) target.setAttribute('tabindex', -1);
 	}
 	function _removeFocusability (link) {
 		//	get target element
 		let id = link.getAttribute('href').slice(1);
 		let target = doc.getElementById(id);
 		//	remove ability to focus (stops user highlighting element on click)
-		target.removeAttribute('tabindex');
+		if (target) target.removeAttribute('tabindex');
 	}
 	function destroy () {
 		//	loop through each bypass link and remove event bindings
@@ -55,6 +55,9 @@ const Frbypasslinks = function({
 		//	get target element
 		let id = e.target.getAttribute('href').slice(1);
 		let target = doc.getElementById(id);
+
+		// don't try to apply relevant atts/focus if target isn't present
+		if (!target) return;
 		//	set tabindex to allow focus
 		target.setAttribute('tabindex', -1);
 		target.focus();

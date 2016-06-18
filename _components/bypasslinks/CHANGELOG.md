@@ -1,5 +1,8 @@
 # Frend Bypass Links Change Log
 
+## [1.0.5] 2016-06-xx
+- Fix issue #84: Target `null` error if `id` not present
+
 ## [1.0.4] 2016-06-05
 - Replace NodeList.prototype jacking with `_q()` querySelectorAll util
 
