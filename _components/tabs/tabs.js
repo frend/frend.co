@@ -1,5 +1,12 @@
 'use strict';
 
+// Polyfill matches as per https://github.com/jonathantneal/closest
+Element.prototype.matches = Element.prototype.matches ||
+							Element.prototype.mozMatchesSelector ||
+							Element.prototype.msMatchesSelector ||
+							Element.prototype.oMatchesSelector ||
+							Element.prototype.webkitMatchesSelector;
+
 /**
  * @param {object} options Object containing configuration overrides
  */
@@ -24,6 +31,16 @@ const Frtabs = function ({
 	// SETUP
 	// set tab element NodeList
 	let tabContainers = _q(selector);
+
+
+	//	UTILS
+	function _closest (el, selector) {
+		while (el) {
+			if (el.matches(selector)) break;
+			el = el.parentElement;
+		}
+		return el;
+	}
 
 
 	// A11Y
@@ -54,9 +71,7 @@ const Frtabs = function ({
 			// make first child of tabpanel focusable if available
 			tabpanel.setAttribute('tabindex', 0);
 		});
-
 	}
-
 	function _removeA11y (tabContainer) {
 		// get tab elements
 		const tabLists = _q(tablistSelector, tabContainer);
@@ -92,9 +107,8 @@ const Frtabs = function ({
 
 	// ACTIONS
 	function _showTab (target, giveFocus = true) {
-		// get context of tab container (this sucks - look at implementing equivalent .closest() method)
-		let thisContainer = target.parentNode.parentNode.parentNode;
-
+		// get context of tab container
+		let thisContainer = _closest(target, selector);
 		let siblingTabs = _q(tablistSelector + ' a', thisContainer);
 		let siblingTabpanels = _q(tabpanelSelector, thisContainer);
 
@@ -122,14 +136,14 @@ const Frtabs = function ({
 	}
 
 	function _eventTabKeydown (e) {
-		// collect tab targets, and their parents' prev/next (or first/last - this is honkin dom traversing)
-		let currentTab = e.target;
-		let isModifierKey = e.metaKey || e.altKey;
-		let previousTabItem = currentTab.parentNode.previousElementSibling || currentTab.parentNode.parentNode.lastElementChild;
-		let nextTabItem = currentTab.parentNode.nextElementSibling || currentTab.parentNode.parentNode.firstElementChild;
+		// collect tab targets, and their parents' prev/next (or first/last)
+		let currentTab = e.currentTarget;
+		let tablist = _closest(currentTab, tablistSelector);
+		let previousTabItem = currentTab.parentNode.previousElementSibling || tablist.lastElementChild;
+		let nextTabItem = currentTab.parentNode.nextElementSibling || tablist.firstElementChild;
 
 		// don't catch key events when ⌘ or Alt modifier is present
-		if (isModifierKey) return;
+		if (e.metaKey || e.altKey) return;
 
 		// catch left/right and up/down arrow key events
 		// if new next/prev tab available, show it by passing tab anchor to _showTab method
@@ -201,7 +215,6 @@ const Frtabs = function ({
 		init,
 		destroy
 	}
-
 }
 
 
