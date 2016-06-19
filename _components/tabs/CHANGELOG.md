@@ -1,5 +1,9 @@
 # Frend Tabs Change Log
 
+## [1.0.5] 2016-06-19
+- Improve DOM traversal with `_closest()` utility
+- Add `matches` polyfill for better browser support
+
 ## [1.0.4] 2016-06-05
 - Replace NodeList.prototype jacking with `_q()` querySelectorAll util
 
