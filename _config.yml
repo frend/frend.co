@@ -3,7 +3,8 @@ title: Frend
 email: hello@frend.co
 description: A collection of accessible, modern front‑end components
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://frend.co" # the base hostname & protocol for your site
+url: "https://frend.co" # the base hostname & protocol for your site
+enforce_ssl: frend.co   # without any protocol
 
 # Build settings
 markdown: kramdown
