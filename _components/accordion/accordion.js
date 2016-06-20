@@ -185,11 +185,11 @@ const Fraccordion = function ({
 
 	//	EVENTS
 	function _eventHeaderClick (e) {
-		_togglePanel(e.target);
+		_togglePanel(e.currentTarget);
 	}
 	function _eventHeaderKeydown (e) {
 		// collect header targets, and their prev/next
-		let currentHeader = e.target;
+		let currentHeader = e.currentTarget;
 		let isModifierKey = e.metaKey || e.altKey;
 		// get context of accordion container and its children
 		let thisContainer = currentHeader.parentNode;
