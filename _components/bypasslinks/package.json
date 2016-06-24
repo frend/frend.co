@@ -1,6 +1,6 @@
 {
   "name": "fr-bypasslinks",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Frend's accessible, modern bypass link component.",
   "homepage": "http://frend.co/components/bypasslinks",
   "main": "bypasslinks.js",

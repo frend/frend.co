@@ -1,5 +1,8 @@
 # Frend Accordion Change Log
 
+## [1.0.6] 2016-06-20
+- Replaced e.target with e.currentTarget
+
 ## [1.0.5] 2016-06-05
 - Replace NodeList.prototype jacking with `_q()` querySelectorAll util
 
