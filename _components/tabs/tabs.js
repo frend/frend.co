@@ -37,6 +37,42 @@ const Frtabs = function ({
 	let tabContainers = _q(selector);
 
 
+	// API
+	let tabs = {
+		init,
+		destroy,
+		activeIndex: 0,
+		onReady,
+		onDestroy,
+		onTab
+	};
+
+	//	INIT
+	function init () {
+		if (!tabContainers.length) return;
+		//	loop through each tab element
+		tabContainers.forEach((tabContainer) => {
+			//	get first tab element
+			const initialTab = _q(tablistSelector + ' a', tabContainer)[0];
+			_addA11y(tabContainer);
+			_bindTabsEvents(tabContainer);
+			//	set all first tabs active on init
+			_showTab(initialTab, false, false);
+			//	set ready style hook
+			tabContainer.classList.add(tabsReadyClass);
+			// bind element to API object
+			tabs.element = tabContainer;
+			// run ready callback
+			_cb(tabs.onReady(tabs));
+		});
+	}
+	init();
+
+
+	//	REVEAL API
+	return tabs;
+
+
 	//	UTILS
 	function _closest (el, selector) {
 		while (el) {
@@ -124,9 +160,12 @@ const Frtabs = function ({
 		target.setAttribute('aria-selected', 'true');
 		activeTab.removeAttribute('aria-hidden');
 		//	add focus to target
-		if (giveFocus) target.focus();
-		//	run callback
-		if (runCb) _cb(onTab);
+		if (giveFocus) {
+			target.focus();
+			tabs.activeIndex = siblingTabs.indexOf(target);
+		}
+		//	run tab callback
+		if (runCb) _cb(tabs.onTab(tabs));
 	}
 
 
@@ -194,35 +233,8 @@ const Frtabs = function ({
 			_unbindTabsEvents(tabContainer);
 			tabContainer.classList.remove(tabsReadyClass);
 		});
-		//	run callback
-		_cb(onDestroy);
-	}
-
-
-	//	INIT
-	function init () {
-		if (!tabContainers.length) return
-		//	loop through each tab element
-		tabContainers.forEach((tabContainer) => {
-			//	get first tab element
-			const initialTab = _q(tablistSelector + ' a', tabContainer)[0];
-			_addA11y(tabContainer);
-			_bindTabsEvents(tabContainer);
-			//	set all first tabs active on init
-			_showTab(initialTab, false, false);
-			//	set ready style hook
-			tabContainer.classList.add(tabsReadyClass);
-		});
-		//	run callback
-		_cb(onReady);
-	}
-	init();
-
-
-	//	REVEAL API
-	return {
-		init,
-		destroy
+		//	run destroy callback
+		_cb(tabs.onDestroy(tabs));
 	}
 }
 
