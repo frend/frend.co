@@ -115,16 +115,6 @@ JavaScript for this component will take care of ARIA roles/attributes and focus 
 </div>
 ~~~
 
-### Methods
-
-~~~ js
-// remove all bindings and attributes when no longer needed
-myTabs.destroy();
-
-// re-initialise as needed
-myTabs.init();
-~~~
-
 ### Options
 
 ~~~ js
@@ -139,6 +129,61 @@ var myTabs = Frtabs({
 	tabpanelSelector: '.js-fr-tabs__panel',
 
 	// String - Class name that will be added to the selector when the component has been initialised
-	tabsReadyClass: 'fr-tabs--is-ready'
+	tabsReadyClass: 'fr-tabs--is-ready',
+
+	// Function - Callback fired on initialisation of component
+	onReady: function (tabs) {
+		// tabs ready
+	},
+
+	// Function - Callback fired on destruction of component
+	onDestroy: function (tabs) {
+		// tabs destroyed
+	},
+
+	// Function - Callback fired on tab change
+	onTab: function (tabs) {
+		// tab changed
+	}
 });
+~~~
+
+Calling `Frtabs()` in this way will return a `tabs` instance for you to reference as needed.
+
+## API
+
+### Methods
+
+~~~ js
+// Remove all bindings and attributes when no longer needed
+myTabs.destroy();
+
+// Re-initialise as needed
+myTabs.init();
+~~~
+
+### Properties
+
+~~~ js
+// Integer - Returns index of active tab
+myTabs.activeIndex; // 0
+~~~
+
+### Events
+
+~~~ js
+// Function - Callback fired on initialisation of component
+myTabs.onReady = function (tabs) {
+	// tabs ready
+}
+
+// Function - Callback fired on destruction of component
+myTabs.onDestroy = function (tabs) {
+	// tabs destroyed
+}
+
+// Function - Callback fired on tab change
+myTabs.onTab = function (tabs) {
+	console.log(tabs.activeIndex);
+}
 ~~~
