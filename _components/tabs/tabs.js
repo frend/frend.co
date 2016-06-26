@@ -1,5 +1,7 @@
 'use strict';
 
+import knot from 'knot.js';
+
 // Polyfill matches as per https://github.com/jonathantneal/closest
 Element.prototype.matches = Element.prototype.matches ||
 							Element.prototype.mozMatchesSelector ||
@@ -14,10 +16,7 @@ const Frtabs = function ({
 		selector: selector = '.js-fr-tabs',
 		tablistSelector: tablistSelector = '.js-fr-tabs__tablist',
 		tabpanelSelector: tabpanelSelector = '.js-fr-tabs__panel',
-		tabsReadyClass: tabsReadyClass = 'fr-tabs--is-ready',
-		onReady,
-		onDestroy,
-		onTab
+		tabsReadyClass: tabsReadyClass = 'fr-tabs--is-ready'
 	} = {}) {
 
 
@@ -38,14 +37,21 @@ const Frtabs = function ({
 
 
 	// API
-	let tabs = {
+	let tabs = knot({
+		// methods
 		init,
 		destroy,
-		activeIndex: 0,
-		onReady,
-		onDestroy,
-		onTab
-	};
+		// events
+		ready,
+		tab,
+		// properties
+		activeIndex: 0
+	});
+
+	init();
+
+	return tabs;
+
 
 	//	INIT
 	function init () {
@@ -57,20 +63,18 @@ const Frtabs = function ({
 			_addA11y(tabContainer);
 			_bindTabsEvents(tabContainer);
 			//	set all first tabs active on init
-			_showTab(initialTab, false, false);
+			tab(initialTab, false, false);
 			//	set ready style hook
 			tabContainer.classList.add(tabsReadyClass);
 			// bind element to API object
 			tabs.element = tabContainer;
-			// run ready callback
-			_cb(tabs.onReady(tabs));
+			setTimeout(ready, 0);
 		});
 	}
-	init();
 
-
-	//	REVEAL API
-	return tabs;
+	function ready () {
+		tabs.emit('ready');
+	}
 
 
 	//	UTILS
@@ -138,7 +142,7 @@ const Frtabs = function ({
 
 
 	// ACTIONS
-	function _showTab (target, giveFocus = true, runCb = true) {
+	function tab (target, giveFocus = true, runCb = true) {
 		//	quick return if tab is already open
 		if (target.getAttribute('aria-selected') === 'true') return;
 		// get context of tab container
@@ -163,15 +167,14 @@ const Frtabs = function ({
 		if (giveFocus) {
 			target.focus();
 			tabs.activeIndex = siblingTabs.indexOf(target);
+			tabs.emit('tab');
 		}
-		//	run tab callback
-		if (runCb) _cb(tabs.onTab(tabs));
 	}
 
 
 	//	EVENTS
 	function _eventTabClick (e) {
-		_showTab(e.target);
+		tab(e.target);
 		e.preventDefault(); //	look into remove id/settimeout/reinstate id as an alternative to preventDefault
 	}
 	function _eventTabKeydown (e) {
@@ -185,16 +188,16 @@ const Frtabs = function ({
 		if (e.metaKey || e.altKey) return;
 
 		// catch left/right and up/down arrow key events
-		// if new next/prev tab available, show it by passing tab anchor to _showTab method
+		// if new next/prev tab available, show it by passing tab anchor to tab() method
 		switch (e.keyCode) {
 			case 37:
 			case 38:
-				_showTab(_q('[role="tab"]', previousTabItem)[0]);
+				tab(_q('[role="tab"]', previousTabItem)[0]);
 				e.preventDefault();
 				break;
 			case 39:
 			case 40:
-				_showTab(_q('[role="tab"]', nextTabItem)[0]);
+				tab(_q('[role="tab"]', nextTabItem)[0]);
 				e.preventDefault();
 				break;
 			default:
@@ -232,9 +235,8 @@ const Frtabs = function ({
 			_removeA11y(tabContainer);
 			_unbindTabsEvents(tabContainer);
 			tabContainer.classList.remove(tabsReadyClass);
+			tabs.emit('destroy');
 		});
-		//	run destroy callback
-		_cb(tabs.onDestroy(tabs));
 	}
 }
 

@@ -80,31 +80,34 @@ layout: default
 	loadCSS('{{ page.filename }}.css', document.getElementById('loadCSSTarget'));
 	loadJS('/components/{{ page.filename }}/dist/fr{{ page.filename }}.min.js', function () {
 		var {{ page.filename | replace: '-', '' }} = Fr{{ page.filename | replace: '-', '' }}({
-			multiselectable: false,
-			onReady: function (component) {
-				console.log(component, 'onReady');
-			},
-			onDestroy: function (component) {
-				console.log(component, 'onDestroy');
-			},
-			onShow: function (component) {
-				console.log(component, 'onShow');
-			},
-			onHide: function (component) {
-				console.log(component, 'onHide');
-			},
-			onTab: function (component) {
-				console.log(component, 'onTab');
-			},
-			onOpen: function (component) {
-				console.log(component, 'onOpen');
-			},
-			onClose: function (component) {
-				console.log(component, 'onClose');
-			}
+			multiselectable: false
 		});
+		// EVENTS
+		{{ page.filename | replace: '-', '' }}.on('ready', function () {
+			console.log(this, 'ready');
+		});
+		{{ page.filename | replace: '-', '' }}.on('destroy', function () {
+			console.log(this, 'destroy');
+		});
+		{{ page.filename | replace: '-', '' }}.on('tab', function () {
+			console.log(this, 'tab');
+		});
+		{{ page.filename | replace: '-', '' }}.on('show', function () {
+			console.log(this, 'show');
+		});
+		{{ page.filename | replace: '-', '' }}.on('hide', function () {
+			console.log(this, 'hide');
+		});
+		{{ page.filename | replace: '-', '' }}.on('open', function () {
+			console.log(this, 'open');
+		});
+		{{ page.filename | replace: '-', '' }}.on('close', function () {
+			console.log(this, 'close');
+		});
+
 		window.addEventListener('keydown', function (e) {
 			if (e.keyCode === 68) {{ page.filename | replace: '-', '' }}.destroy();
+			if (e.keyCode === 73) {{ page.filename | replace: '-', '' }}.init();
 		}, 2000)
 	});
 </script>

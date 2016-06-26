@@ -129,22 +129,7 @@ var myTabs = Frtabs({
 	tabpanelSelector: '.js-fr-tabs__panel',
 
 	// String - Class name that will be added to the selector when the component has been initialised
-	tabsReadyClass: 'fr-tabs--is-ready',
-
-	// Function - Callback fired on initialisation of component
-	onReady: function (tabs) {
-		// tabs ready
-	},
-
-	// Function - Callback fired on destruction of component
-	onDestroy: function (tabs) {
-		// tabs destroyed
-	},
-
-	// Function - Callback fired on tab change
-	onTab: function (tabs) {
-		// tab changed
-	}
+	tabsReadyClass: 'fr-tabs--is-ready'
 });
 ~~~
 
@@ -172,18 +157,15 @@ myTabs.activeIndex; // 0
 ### Events
 
 ~~~ js
-// Function - Callback fired on initialisation of component
-myTabs.onReady = function (tabs) {
-	// tabs ready
-}
+myTabs.on('ready', function () {
+	// tabs initialised
+});
 
-// Function - Callback fired on destruction of component
-myTabs.onDestroy = function (tabs) {
+myTabs.on('destroy', function () {
 	// tabs destroyed
-}
+});
 
-// Function - Callback fired on tab change
-myTabs.onTab = function (tabs) {
-	console.log(tabs.activeIndex);
-}
+myTabs.on('tab', function () {
+	console.log(myTabs.activeIndex);
+});
 ~~~

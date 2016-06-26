@@ -39,7 +39,8 @@
   },
   "dependencies": {
     "fg-loadcss": "1.2.0",
-    "fg-loadjs": "0.2.3"
+    "fg-loadjs": "0.2.3",
+    "knot.js": "^1.1.1"
   },
   "bugs": {
     "url": "https://github.com/frend/frend.co/issues"
