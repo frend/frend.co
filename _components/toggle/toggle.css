@@ -1,0 +1,5 @@
+
+.fr-toggle--is-ready .fr-content[aria-hidden="true"] {
+  height: 0;
+  visibility: hidden;
+}

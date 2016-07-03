@@ -1,0 +1,30 @@
+//----------------------------------------------------------------------
+//	COMPONENTS
+//	Toggle
+//----------------------------------------------------------------------
+
+//	Button
+.fr-toggle {
+	background-color: $yellow;
+	border-bottom: 0.125em solid mix(#000, $yellow, 10%);
+	border-radius: 0.25em; /* 4px */
+	display: inline-block;
+	font-family: $sans-font;
+	font-size: 1em; /* 16px */
+	line-height: 1.25; /* 20px from 16 */
+	padding: 1em 1.25em; /* 16px 20px */
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background-color $duration $easing,
+				border-color $duration $easing,
+				color $duration $easing;
+	.fonts-loaded & {
+		font-family: $web-font-sans;
+	}
+	&:hover,
+	&:focus {
+		background-color: mix(#fff, $dark-grey, 20%);
+		border-bottom-color: $dark-grey;
+		color: #fff;
+	}
+}
