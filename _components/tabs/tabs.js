@@ -1,8 +1,11 @@
 'use strict';
 
-// Set Array prototype on NodeList for forEach() support
-// https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474959
-NodeList.prototype.forEach = Array.prototype.forEach;
+// Polyfill matches as per https://github.com/jonathantneal/closest
+Element.prototype.matches = Element.prototype.matches ||
+							Element.prototype.mozMatchesSelector ||
+							Element.prototype.msMatchesSelector ||
+							Element.prototype.oMatchesSelector ||
+							Element.prototype.webkitMatchesSelector;
 
 /**
  * @param {object} options Object containing configuration overrides
@@ -18,6 +21,7 @@ const Frtabs = function ({
 	// CONSTANTS
 	const doc = document;
 	const docEl = doc.documentElement;
+	const _q = (el, ctx = doc) => [].slice.call(ctx.querySelectorAll(el));
 
 
 	// SUPPORTS
@@ -26,16 +30,26 @@ const Frtabs = function ({
 
 	// SETUP
 	// set tab element NodeList
-	let tabContainers = doc.querySelectorAll(selector);
+	let tabContainers = _q(selector);
+
+
+	//	UTILS
+	function _closest (el, selector) {
+		while (el) {
+			if (el.matches(selector)) break;
+			el = el.parentElement;
+		}
+		return el;
+	}
 
 
 	// A11Y
 	function _addA11y (tabContainer) {
 		// get tab elements
-		const tabLists = tabContainer.querySelectorAll(tablistSelector);
-		const tabListItems = tabContainer.querySelectorAll(tablistSelector + ' li');
-		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
-		const tabpanels = tabContainer.querySelectorAll(tabpanelSelector);
+		const tabLists = _q(tablistSelector, tabContainer);
+		const tabListItems = _q(tablistSelector + ' li', tabContainer);
+		const tabs = _q(tablistSelector + ' a', tabContainer);
+		const tabpanels = _q(tabpanelSelector, tabContainer);
 
 		// add roles, properties, states
 		tabLists.forEach((tabList) => {
@@ -57,15 +71,13 @@ const Frtabs = function ({
 			// make first child of tabpanel focusable if available
 			tabpanel.setAttribute('tabindex', 0);
 		});
-
 	}
-
 	function _removeA11y (tabContainer) {
 		// get tab elements
-		const tabLists = tabContainer.querySelectorAll(tablistSelector);
-		const tabListItems = tabContainer.querySelectorAll(tablistSelector + ' li');
-		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
-		const tabpanels = tabContainer.querySelectorAll(tabpanelSelector);
+		const tabLists = _q(tablistSelector, tabContainer);
+		const tabListItems = _q(tablistSelector + ' li', tabContainer);
+		const tabs = _q(tablistSelector + ' a', tabContainer);
+		const tabpanels = _q(tabpanelSelector, tabContainer);
 
 		// remove roles, properties, states
 		tabLists.forEach((tabList) => {
@@ -95,11 +107,10 @@ const Frtabs = function ({
 
 	// ACTIONS
 	function _showTab (target, giveFocus = true) {
-		// get context of tab container (this sucks - look at implementing equivalent .closest() method)
-		let thisContainer = target.parentNode.parentNode.parentNode;
-
-		let siblingTabs = thisContainer.querySelectorAll(tablistSelector + ' a');
-		let siblingTabpanels = thisContainer.querySelectorAll(tabpanelSelector);
+		// get context of tab container
+		let thisContainer = _closest(target, selector);
+		let siblingTabs = _q(tablistSelector + ' a', thisContainer);
+		let siblingTabpanels = _q(tabpanelSelector, thisContainer);
 
 		// set inactives
 		siblingTabs.forEach((tab) => {
@@ -125,22 +136,26 @@ const Frtabs = function ({
 	}
 
 	function _eventTabKeydown (e) {
-		// collect tab targets, and their parents' prev/next (or first/last - this is honkin dom traversing)
-		let currentTab = e.target;
-		let previousTabItem = currentTab.parentNode.previousElementSibling || currentTab.parentNode.parentNode.lastElementChild;
-		let nextTabItem = currentTab.parentNode.nextElementSibling || currentTab.parentNode.parentNode.firstElementChild;
+		// collect tab targets, and their parents' prev/next (or first/last)
+		let currentTab = e.currentTarget;
+		let tablist = _closest(currentTab, tablistSelector);
+		let previousTabItem = currentTab.parentNode.previousElementSibling || tablist.lastElementChild;
+		let nextTabItem = currentTab.parentNode.nextElementSibling || tablist.firstElementChild;
+
+		// don't catch key events when ⌘ or Alt modifier is present
+		if (e.metaKey || e.altKey) return;
 
 		// catch left/right and up/down arrow key events
 		// if new next/prev tab available, show it by passing tab anchor to _showTab method
 		switch (e.keyCode) {
 			case 37:
 			case 38:
-				_showTab(previousTabItem.querySelector('[role="tab"]'));
+				_showTab(_q('[role="tab"]', previousTabItem)[0]);
 				e.preventDefault();
 				break;
 			case 39:
 			case 40:
-				_showTab(nextTabItem.querySelector('[role="tab"]'));
+				_showTab(_q('[role="tab"]', nextTabItem)[0]);
 				e.preventDefault();
 				break;
 			default:
@@ -151,7 +166,7 @@ const Frtabs = function ({
 
 	// BINDINGS
 	function _bindTabsEvents (tabContainer) {
-		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
+		const tabs = _q(tablistSelector + ' a', tabContainer);
 		// bind all tab click and keydown events
 		tabs.forEach((tab) => {
 			tab.addEventListener('click', _eventTabClick);
@@ -160,7 +175,7 @@ const Frtabs = function ({
 	}
 
 	function _unbindTabsEvents (tabContainer) {
-		const tabs = tabContainer.querySelectorAll(tablistSelector + ' a');
+		const tabs = _q(tablistSelector + ' a', tabContainer);
 		// unbind all tab click and keydown events
 		tabs.forEach((tab) => {
 			tab.removeEventListener('click', _eventTabClick);
@@ -186,7 +201,7 @@ const Frtabs = function ({
 				_addA11y(tabContainer);
 				_bindTabsEvents(tabContainer);
 				// set all first tabs active on init
-				_showTab(tabContainer.querySelectorAll(tablistSelector + ' a')[0], false);
+				_showTab(_q(tablistSelector + ' a', tabContainer)[0], false);
 				// set ready style hook
 				tabContainer.classList.add(tabsReadyClass);
 			});
@@ -200,7 +215,6 @@ const Frtabs = function ({
 		init,
 		destroy
 	}
-
 }
 
 

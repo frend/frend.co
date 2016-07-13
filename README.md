@@ -28,7 +28,20 @@ The JavaScript written to enhance these components has been purposefully left wi
 Our thanks go to [BrowserStack](https://www.browserstack.com/) for providing us with an open-source account.
 
 ## Platform
-Frend is powered by [Jekyll](http://jekyllrb.com) and served directly from the [frend/frend.co Github repository](https://github.com/frend/frend.co) thanks to [Github Pages](https://pages.github.com/).
+Frend is powered by [Jekyll](http://jekyllrb.com) and served directly from the [frend/frend.co Github repository](https://github.com/frend/frend.co) thanks to [Github Pages](https://pages.github.com/). If you're cloning the repo, running the site locally will first require installation of Jekyll gems:
+
+~~~
+gem install jekyll
+gem install jekyll-redirect-from
+jekyll serve
+~~~
+
+Automated builds for component script files are handled by running Gulp's watch task as you develop:
+
+~~~
+npm install
+gulp watch
+~~~
 
 ## Contributing
 Please refer to our [contributing guidelines](https://github.com/frend/frend.co/blob/gh-pages/CONTRIBUTING.md).

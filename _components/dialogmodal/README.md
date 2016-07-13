@@ -29,7 +29,9 @@ The underlying markup is kept as simple as possible. `button`s are used to open 
 
 Giving the modal container a `role="dialog"` communicates the function of the component to assistive technologies. If the content represents an alert, error or warning, we can instead use `role="alertdialog"` to ensure we're presenting something that requires an immediate response from the user before continuing. The immediate child node of the modal requires an element with `role="document"`. This allows assistive technologies to switch to document browsing mode, providing complete access to the modal content.
 
-An important consideration that is often overlooked with standard dialog implementations is user focus. When opening, focus is given to the modal content. At the same time the `Esc` key and overlay/close button click events are bound to allow users to dismiss the dialog. When the dialog is visible, using the `tab` key will retain focus among elements within the modal, as to avoid applying focus to elements in the surrounding page. Lastly, we can return focus to the original trigger when closing the modal to maintain the users' place in the document.
+An important consideration that is often overlooked with standard dialog implementations is user focus. When opening, focus is applied to the first focusable item within the modal. At the same time the `Esc` key and overlay/close button click events are bound to allow users to dismiss the dialog. When the dialog is visible, using the `tab` key will retain focus among elements within the modal, as to avoid applying focus to elements in the surrounding page. Lastly, we can return focus to the original trigger when closing the modal to maintain the users' place in the document.
+
+A heading within the modal and a related `aria-labelledby` attribute is required on the modal to clearly define the title of the dialog for assistive technologies.
 
 
 ## Install
@@ -53,12 +55,13 @@ You can read more about installing Frend components on our [About page](http://f
 ## Usage
 
 ~~~ html
-<button class="js-fr-dialogmodal-open" aria-controls="modal-1">
+<button class="js-fr-dialogmodal-open" aria-controls="modal">
   Open
 </button>
-<div class="js-fr-dialogmodal" id="modal-1">
-  <div class="js-fr-dialogmodal-modal">
+<div class="js-fr-dialogmodal" id="modal">
+  <div class="js-fr-dialogmodal-modal" aria-labelledby="modal-title">
     <div role="document">
+      <h2 id="modal-title">Title</h2>
       ...
       <button class="js-fr-dialogmodal-close">Close</button>
     </div>

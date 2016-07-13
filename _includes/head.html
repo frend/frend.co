@@ -11,7 +11,7 @@
 	<!-- open graph - twitter card -->
   	<meta name="twitter:card" content="summary">
 	<meta name="twitter:site" content="@ffffrend">
-	<meta name="twitter:url" property="og:url" content="http://frend.co">
+	<meta name="twitter:url" property="og:url" content="https://frend.co">
 	<meta name="twitter:title" property="og:title" content="{% if page.title %}{{ site.title }} — {{ page.title }}{% else %}{{ site.title }}{% endif %}">
 	<meta name="twitter:description" property="og:description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 	<meta name="og:type" content="website">
@@ -21,6 +21,9 @@
 	<link href="//cloud.webtype.com" rel="dns-prefetch" />
 	<link href="//pls.webtype.com" rel="dns-prefetch" />
 	<link href="//www.google-analytics.com" rel="dns-prefetch" />
+
+	<!-- https/http canonical urls -->
+	<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 
 	<!-- favicon/touch-icon -->
 	<link rel="shortcut icon" href="/icon-touch.png">
