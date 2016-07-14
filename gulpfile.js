@@ -10,6 +10,8 @@ var clean = require('gulp-clean');
 var gulp = require('gulp');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
+var fs = require('fs');
+var header = require('gulp-header');
 //	CSS
 var autoprefixer = require('autoprefixer');
 var nano = require('gulp-cssnano');
@@ -94,6 +96,7 @@ var options = {
 		plugins: ['add-module-exports']
 	}
 };
+var banner = '/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> License | <%= pkg.homepage %> */\n';
 
 
 //----------------------------------------------------------------------
@@ -173,7 +176,8 @@ gulp.task('build:component', function (done) {
 		var tasks = files.map(function (entry) {
 			//	get file props
 			var dir = entry.split(src.component.path)[1],
-				name = dir.split('/')[0];
+				name = dir.split('/')[0],
+				pkg = src.component.path + name + '/package.json';
 			//	use this to expose standalone module name
 			return browserify({
 					entries: [entry],
@@ -185,6 +189,9 @@ gulp.task('build:component', function (done) {
 				.pipe(source(entry))
 				.pipe(buffer())
 				.pipe(uglify())
+				.pipe(header(banner, {
+					pkg : JSON.parse(fs.readFileSync(pkg))
+				}))
 				.pipe(rename({
 					dirname: '',
 					extname: '.min.js',
