@@ -53,18 +53,18 @@ Accordions rely on header and panel pairs, wrapped in a single container.
 
 ~~~ html
 <div class="fr-accordion js-fr-accordion">
-	<h2 id="accordion-header-1" class="fr-accordion__header js-fr-accordion__header">...</h2>
-	<div id="accordion-panel-1" class="fr-accordion__panel js-fr-accordion__panel">
-		...
-	</div>
-	<h2 id="accordion-header-2" class="fr-accordion__header js-fr-accordion__header">...</h2>
-	<div id="accordion-panel-2" class="fr-accordion__panel js-fr-accordion__panel">
-		...
-	</div>
-	<h2 id="accordion-header-3" class="fr-accordion__header js-fr-accordion__header">...</h2>
-	<div id="accordion-panel-3" class="fr-accordion__panel js-fr-accordion__panel">
-		...
-	</div>
+  <h2 id="accordion-header-1" class="fr-accordion__header js-fr-accordion__header">...</h2>
+  <div id="accordion-panel-1" class="fr-accordion__panel js-fr-accordion__panel">
+    ...
+  </div>
+  <h2 id="accordion-header-2" class="fr-accordion__header js-fr-accordion__header">...</h2>
+  <div id="accordion-panel-2" class="fr-accordion__panel js-fr-accordion__panel">
+    ...
+  </div>
+  <h2 id="accordion-header-3" class="fr-accordion__header js-fr-accordion__header">...</h2>
+  <div id="accordion-panel-3" class="fr-accordion__panel js-fr-accordion__panel">
+    ...
+  </div>
 </div>
 ~~~
 
@@ -88,31 +88,31 @@ myAccordion.init();
 
 ~~~ js
 var myAccordion = Fraccordion({
-	// String - Outer container selector, hook for JS init() method
-	selector: '.js-fr-accordion',
+  // String - Outer container selector, hook for JS init() method
+  selector: '.js-fr-accordion',
 
-	// String - Accordion header elements converted to focusable, togglable elements
-	headerSelector: '.js-fr-accordion__header',
+  // String - Accordion header elements converted to focusable, togglable elements
+  headerSelector: '.js-fr-accordion__header',
 
-	// String - Use header id on element to tie each accordion panel to its header - see panelIdPrefix
-	headerIdPrefix: 'accordion-header',
+  // String - Use header id on element to tie each accordion panel to its header - see panelIdPrefix
+  headerIdPrefix: 'accordion-header',
 
-	// String - Accordion panel elements to expand/collapse
-	panelSelector: '.js-fr-accordion__panel',
+  // String - Accordion panel elements to expand/collapse
+  panelSelector: '.js-fr-accordion__panel',
 
-	// String - Use panel id on element to tie each accordion header to its panel - see headerIdPrefix
-	panelIdPrefix: 'accordion-panel',
+  // String - Use panel id on element to tie each accordion header to its panel - see headerIdPrefix
+  panelIdPrefix: 'accordion-panel',
 
-	// Boolean - If set to false, all accordion panels will be closed on init()
-	firstPanelsOpenByDefault: true,
+  // Boolean - If set to false, all accordion panels will be closed on init()
+  firstPanelsOpenByDefault: true,
 
-	// Boolean - If set to false, each accordion instance will only allow a single panel to be open at a time
-	multiselectable: true,
+  // Boolean - If set to false, each accordion instance will only allow a single panel to be open at a time
+  multiselectable: true,
 
-	// String - Class name that will be added to the selector when the component has been initialised
-	readyClass: 'fr-accordion--is-ready',
-	
-	// Integer - Duration (in milliseconds) of CSS transition when opening/closing accordion panels
-	transitionLength: 250
+  // String - Class name that will be added to the selector when the component has been initialised
+  readyClass: 'fr-accordion--is-ready',
+
+  // Integer - Duration (in milliseconds) of CSS transition when opening/closing accordion panels
+  transitionLength: 250
 });
 ~~~

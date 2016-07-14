@@ -7,7 +7,7 @@
 }
 
 .fr-tabs--is-ready .fr-tabs__tablist-item {
-	display: inline;
+  display: inline;
 }
 
 .fr-tabs__tab {
@@ -19,5 +19,5 @@
 .fr-tabs__panel {
 }
 .fr-tabs__panel[aria-hidden="true"] {
-	display: none;
+  display: none;
 }

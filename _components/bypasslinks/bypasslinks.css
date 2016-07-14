@@ -1,17 +1,17 @@
 
 .js-fr-bypasslinks {
-	left: 0;
-	position: fixed;
-	top: 0;
-	z-index: 100;
+  left: 0;
+  position: fixed;
+  top: 0;
+  z-index: 100;
 }
 .js-fr-bypasslinks a {
-	display: inline-block;
-	position: absolute;
-	top: -200%;
-	white-space: nowrap;
+  display: inline-block;
+  position: absolute;
+  top: -200%;
+  white-space: nowrap;
 }
 .js-fr-bypasslinks a:focus,
 .js-fr-bypasslinks a:active {
-	top: 0;
+  top: 0;
 }

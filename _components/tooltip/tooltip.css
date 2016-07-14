@@ -1,23 +1,23 @@
 
-/*	Container */
+/*  Container */
 .fr-tooltip--is-ready {
-	position: relative;
+  position: relative;
 }
 
-/*	Toolip */
+/*  Toolip */
 .fr-tooltip--is-ready .fr-tooltip-tooltip {
-	bottom: 100%;
-	position: absolute;
-	visibility: hidden;
+  bottom: 100%;
+  position: absolute;
+  visibility: hidden;
 }
 .fr-tooltip--is-ready .fr-tooltip-tooltip[aria-hidden="false"] {
-	visibility: visible;
+  visibility: visible;
 }
 
-/*	No JS */
+/*  No JS */
 .fr-tooltip:not(.fr-tooltip--is-ready) .fr-tooltip-tooltip::before {
-	content: " (";
+  content: " (";
 }
 .fr-tooltip:not(.fr-tooltip--is-ready) .fr-tooltip-tooltip::after {
-	content: ")";
+  content: ")";
 }
