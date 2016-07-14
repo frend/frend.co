@@ -5,28 +5,28 @@ title: A collection of accessible, modern front-end components.
 description: Frend components are modest and dependency-free. They are built with web standards as a priority and aim to avoid assumptions about tooling or environment.
 ---
 <div class="wrapper">
-	<div class="content-header">
-		<h1 class="text-large">Frend</h1>
-		<p>A collection of accessible, modern front-end components.</p>
-		<p>Frend components are modest and dependency-free. They are built with web standards as a priority and aim to avoid assumptions about tooling or environment. Care has been taken to make sure each component is compliant, keyboard navigable and properly interpreted by assistive technologies.</p>
-		<p><a href="/about">Read more about Frend</a></p>
-	</div>
-	<h2 class="visually-hidden">Components</h2>
-	<ul class="list-components">
-		{% assign components = site.components | sort: 'title'  %}
-		{% for component in components %}
-			{% if component.alpha != true %}
-				<li class="list-components__list-item">
-					{% include listed-component.html %}
-				</li>
-			{% endif %}
-		{% endfor %}
-		<li class="list-components__list-item list-components__list-item--alpha">
-			<article>
-				<h3 class="text-medium">
-					Dropdown Navigation &mdash; Coming soon
-				</h3>
-			</article>
-		</li>
-	</ul>
+  <div class="content-header">
+    <h1 class="text-large">Frend</h1>
+    <p>A collection of accessible, modern front-end components.</p>
+    <p>Frend components are modest and dependency-free. They are built with web standards as a priority and aim to avoid assumptions about tooling or environment. Care has been taken to make sure each component is compliant, keyboard navigable and properly interpreted by assistive technologies.</p>
+    <p><a href="/about">Read more about Frend</a></p>
+  </div>
+  <h2 class="visually-hidden">Components</h2>
+  <ul class="list-components">
+    {% assign components = site.components | sort: 'title'  %}
+    {% for component in components %}
+      {% if component.alpha != true %}
+        <li class="list-components__list-item">
+          {% include listed-component.html %}
+        </li>
+      {% endif %}
+    {% endfor %}
+    <li class="list-components__list-item list-components__list-item--alpha">
+      <article>
+        <h3 class="text-medium">
+          Dropdown Navigation &mdash; Coming soon
+        </h3>
+      </article>
+    </li>
+  </ul>
 </div>
