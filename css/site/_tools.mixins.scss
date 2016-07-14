@@ -1,21 +1,21 @@
 //----------------------------------------------------------------------
-//	TOOLS
-//	Mixins
+//  TOOLS
+//  Mixins
 //----------------------------------------------------------------------
 
-//	Underline
+//  Underline
 //-----------------------------------
 /*
-*	$foreground-color/$background-color: Colors for text/background
-*	$offset: Offset from baseline
-*	$size: Space around text
-*	$weight: Line weight
+*  $foreground-color/$background-color: Colors for text/background
+*  $offset: Offset from baseline
+*  $size: Space around text
+*  $weight: Line weight
 */
 @mixin underline($foreground-color, $background-color, $offset: 1.125em, $size: 1px, $weight: 1px) {
-	background-image: linear-gradient(to left, $foreground-color 50%, $foreground-color 50%);
-	background-position: 0 $offset;
-	background-repeat: repeat-x;
-	background-size: 1px $weight;
-	text-shadow: -$size 0 $background-color,
-				$size 0 $background-color;
+  background-image: linear-gradient(to left, $foreground-color 50%, $foreground-color 50%);
+  background-position: 0 $offset;
+  background-repeat: repeat-x;
+  background-size: 1px $weight;
+  text-shadow: -$size 0 $background-color,
+                $size 0 $background-color;
 }

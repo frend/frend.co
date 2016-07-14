@@ -86,8 +86,8 @@ linters:
     # Use one tab per indentation level.
     Indentation:
         enabled: true
-        character: tab
-        width: 1
+        character: space
+        width: 2
 
     # Don't write leading zeros for numeric values with a decimal point.
     LeadingZero:

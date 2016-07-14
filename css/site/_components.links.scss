@@ -1,38 +1,38 @@
 //----------------------------------------------------------------------
-//	COMPONENTS
-//	Lists
+//  COMPONENTS
+//  Lists
 //----------------------------------------------------------------------
 
-//	Text
+//  Text
 //-----------------------------------
 
 ul:not([class]) a,
 p a,
 .text-link {
-	@include underline($dark-grey, $blue, 1.05em, 2px);
-	color: $dark-grey;
-	text-decoration: none;
-	transition: color $duration $easing;
-	&:hover,
-	&:focus {
-		@include underline($red, $blue, 1.05em, 2px);
-		color: $red;
-	}
+  @include underline($dark-grey, $blue, 1.05em, 2px);
+  color: $dark-grey;
+  text-decoration: none;
+  transition: color $duration $easing;
+  &:hover,
+  &:focus {
+    @include underline($red, $blue, 1.05em, 2px);
+    color: $red;
+  }
 }
 
 
 
 
-//	Default
+//  Default
 //-----------------------------------
 .link-standard {
-	@include underline($dark-grey, $blue, 1.1em, 2px);
-	color: $dark-grey;
-	text-decoration: none;
-	transition: color $duration $easing;
+  @include underline($dark-grey, $blue, 1.1em, 2px);
+  color: $dark-grey;
+  text-decoration: none;
+  transition: color $duration $easing;
 }
 .link-standard:hover,
 .link-standard:focus {
-	@include underline($red, $blue, 1.1em, 2px);
-	color: $red;
+  @include underline($red, $blue, 1.1em, 2px);
+  color: $red;
 }

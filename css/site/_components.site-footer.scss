@@ -1,34 +1,34 @@
 //----------------------------------------------------------------------
-//	COMPONENTS
-//	Containers
+//  COMPONENTS
+//  Containers
 //----------------------------------------------------------------------
 
-//	Container
+//  Container
 //-----------------------------------
 
 .site-footer {
-	background-color: rgba(255, 255, 255, 0.5);
-	flex: none;
-	min-height: 3.75rem; /* 60px */
-	padding: 1.25rem 0; /* 20px */
+  background-color: rgba(255, 255, 255, 0.5);
+  flex: none;
+  min-height: 3.75rem; /* 60px */
+  padding: 1.25rem 0; /* 20px */
 }
 
-//	Navigation
+//  Navigation
 //-----------------------------------
 .nav-footer {
-	@extend .list-inline;
+  @extend .list-inline;
 }
 .nav-footer__list-item {
-	margin-right: 1.125rem; /* 18px */
+  margin-right: 1.125rem; /* 18px */
 }
 .nav-footer__item {
-	@include underline($dark-grey, rgba($blue, 0.5), 1.05em, 2px);
-	color: $dark-grey;
-	text-decoration: none;
-	transition: color $duration $easing;
-	&:hover,
-	&:focus {
-		@include underline($red, rgba($blue, 0.5), 1.05em, 2px);
-		color: $red;
-	}
+  @include underline($dark-grey, rgba($blue, 0.5), 1.05em, 2px);
+  color: $dark-grey;
+  text-decoration: none;
+  transition: color $duration $easing;
+  &:hover,
+  &:focus {
+    @include underline($red, rgba($blue, 0.5), 1.05em, 2px);
+    color: $red;
+  }
 }

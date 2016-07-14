@@ -1,16 +1,16 @@
 //----------------------------------------------------------------------
-//	SETTINGS
-//	Global
+//  SETTINGS
+//  Global
 //----------------------------------------------------------------------
 
-//	Typography
+//  Typography
 //-----------------------------------
 
-//	Type baseline
+//  Type baseline
 $doc-font-size: 16; /* 16px */
 $doc-line-height: 1.25; /* 20px */
 
-//	Font stacks
+//  Font stacks
 $base-font: Times, serif;
 $web-font: 'Freight Text', $base-font;
 $sans-font: Helvetica, Arial, sans-serif;
@@ -19,17 +19,17 @@ $web-font-sans: 'Benton Sans Cond Medium', $sans-font;
 
 
 
-//	Animation
+//  Animation
 //-----------------------------------
 
-//	Transition
+//  Transition
 $duration: 150ms;
 $easing: ease-out;
 
 
 
 
-//	Colors/Themes
+//  Colors/Themes
 //-----------------------------------
 
 $dark-grey: #222;
@@ -39,19 +39,19 @@ $yellow: #ffe566;
 
 
 
-//	Responsive
+//  Responsive
 //-----------------------------------
 
-//	Breakpoints (in px)
+//  Breakpoints (in px)
 $mq-breakpoints: (
-	lap:  500px,
-	desk:  800px
+  lap:  500px,
+  desk:  800px
 );
 
 
 
-//	Grid
+//  Grid
 //-----------------------------------
 
-//	Gutters (in em)
+//  Gutters (in em)
 $gutter-width: 1.25; /* 20px */

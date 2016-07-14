@@ -1,30 +1,30 @@
 //----------------------------------------------------------------------
-//	COMPONENTS
-//	Containers
+//  COMPONENTS
+//  Containers
 //----------------------------------------------------------------------
 
-//	Logo
+//  Logo
 //-----------------------------------
 .site-header__logo {
-	background-color: $red;
-	color: #fff;
-	display: inline-block;
-	font-family: $sans-font;
-	font-size: 1.5rem; /* 24px */
-	line-height: 1.25;
-	min-width: 4.25rem; /* 68px */
-	padding: 1.125rem 1.25rem; /* 18px 20px */
-	position: absolute;
-	text-decoration: none;
-	text-rendering: optimizeLegibility;
-	transition: background-color $duration $easing;
-	z-index: 1;
-	.fonts-loaded & {
-		font-family: $web-font-sans;
-		letter-spacing: 0; /* reset */
-	}
-	&:hover,
-	&:focus {
-		background-color: $dark-grey;
-	}
+  background-color: $red;
+  color: #fff;
+  display: inline-block;
+  font-family: $sans-font;
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.25;
+  min-width: 4.25rem; /* 68px */
+  padding: 1.125rem 1.25rem; /* 18px 20px */
+  position: absolute;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  transition: background-color $duration $easing;
+  z-index: 1;
+  .fonts-loaded & {
+    font-family: $web-font-sans;
+    letter-spacing: 0; /* reset */
+  }
+  &:hover,
+  &:focus {
+    background-color: $dark-grey;
+  }
 }
