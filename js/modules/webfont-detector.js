@@ -1,3 +1,3 @@
 if (sessionStorage.FontsLoaded) {
-	document.documentElement.className += ' fonts-loaded';
+  document.documentElement.className += ' fonts-loaded';
 }

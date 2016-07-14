@@ -1,54 +1,54 @@
 //----------------------------------------------------------------------
-//	COMPONENTS
-//	Tooltip
+//  COMPONENTS
+//  Tooltip
 //----------------------------------------------------------------------
 
-//	Tooltip
+//  Tooltip
 //-----------------------------------
 
-//	Toggle
+//  Toggle
 .fr-tooltip--is-ready .fr-tooltip-toggle {
-	@include underline($dark-grey, rgba(#fff, 0.5), 1.05em, 2px);
-	color: $dark-grey;
-	cursor: help;
-	line-height: 1.278;
-	text-decoration: none;
-	transition: color $duration $easing;
-	&:hover,
-	&:focus {
-		@include underline($red, rgba(#fff, 0.5), 1.05em, 2px);
-		color: $red;
-	}
+  @include underline($dark-grey, rgba(#fff, 0.5), 1.05em, 2px);
+  color: $dark-grey;
+  cursor: help;
+  line-height: 1.278;
+  text-decoration: none;
+  transition: color $duration $easing;
+  &:hover,
+  &:focus {
+    @include underline($red, rgba(#fff, 0.5), 1.05em, 2px);
+    color: $red;
+  }
 }
 
-//	Tooltip
+//  Tooltip
 .fr-tooltip--is-ready .fr-tooltip-tooltip {
-	background-color: $yellow;
-	border-radius: 0.25em; /* 4px */
-	left: 50%;
-	min-width: 260px;
-	opacity: 0;
-	padding: 5px 10px;
-	text-align: center;
-	transform: translateX(-50%) translateY(0);
-	transition: visibility $duration $easing, opacity $duration $easing, transform $duration $easing;
-	visibility: hidden;
+  background-color: $yellow;
+  border-radius: 0.25em; /* 4px */
+  left: 50%;
+  min-width: 260px;
+  opacity: 0;
+  padding: 5px 10px;
+  text-align: center;
+  transform: translateX(-50%) translateY(0);
+  transition: visibility $duration $easing, opacity $duration $easing, transform $duration $easing;
+  visibility: hidden;
 }
 .fr-tooltip--is-ready .fr-tooltip-tooltip::after {
-	border: solid transparent;
-	border-color: transparent;
-	border-top-color: $yellow;
-	border-width: 8px;
-	bottom: -16px;
-	content: '';
-	height: 0;
-	left: 50%;
-	margin-left: -8px;
-	pointer-events: none;
-	position: absolute;
-	width: 0;
+  border: solid transparent;
+  border-color: transparent;
+  border-top-color: $yellow;
+  border-width: 8px;
+  bottom: -16px;
+  content: '';
+  height: 0;
+  left: 50%;
+  margin-left: -8px;
+  pointer-events: none;
+  position: absolute;
+  width: 0;
 }
 .fr-tooltip--is-ready .fr-tooltip-tooltip[aria-hidden="false"] {
-	opacity: 1;
-	transform: translateX(-50%) translateY(-12px);
+  opacity: 1;
+  transform: translateX(-50%) translateY(-12px);
 }

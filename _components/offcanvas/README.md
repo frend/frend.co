@@ -51,13 +51,13 @@ Offcanvas relies on a paired panel and button, with a single close button living
 
 ~~~ html
 <button class="js-fr-offcanvas-open" aria-controls="offcanvas-1">
-	Open
+  Open
 </button>
 <section class="js-fr-offcanvas" id="offcanvas-1">
-	...
-	<button class="js-fr-offcanvas-close">
-		Close
-	</button>
+  ...
+  <button class="js-fr-offcanvas-close">
+    Close
+  </button>
 </section>
 ~~~
 
@@ -81,19 +81,19 @@ myOffcanvas.init();
 
 ~~~ js
 var myOffcanvas = Froffcanvas({
-	// String - Panel selector, hook for JS init() method
-	selector: '.fr-offcanvas-panel',
+  // String - Panel selector, hook for JS init() method
+  selector: '.fr-offcanvas-panel',
 
-	// String - Selector for the open button(s)
-	openSelector: '.js-fr-offcanvas-open',
+  // String - Selector for the open button(s)
+  openSelector: '.js-fr-offcanvas-open',
 
-	// String - Selector for the close button
-	closeSelector: '.js-fr-offcanvas-close',
+  // String - Selector for the close button
+  closeSelector: '.js-fr-offcanvas-close',
 
-	// String - Class name that will be added to the selector when the component has been initialised
-	readyClass: 'fr-offcanvas--is-ready',
+  // String - Class name that will be added to the selector when the component has been initialised
+  readyClass: 'fr-offcanvas--is-ready',
 
-	// String - Class name that will be added to the selector when the panel is visible
-	activeClass: 'fr-offcanvas--is-active'
+  // String - Class name that will be added to the selector when the panel is visible
+  activeClass: 'fr-offcanvas--is-active'
 });
 ~~~

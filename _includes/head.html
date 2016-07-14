@@ -1,38 +1,38 @@
 <head prefix="og: http://ogp.me/ns">
 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="theme-color" content="#ea3b37">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ea3b37">
 
-	<title>{% if page.title %}{{ site.title }} — {{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-  	<meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <title>{% if page.title %}{{ site.title }} — {{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
-	<!-- open graph - twitter card -->
-  	<meta name="twitter:card" content="summary">
-	<meta name="twitter:site" content="@ffffrend">
-	<meta name="twitter:url" property="og:url" content="https://frend.co">
-	<meta name="twitter:title" property="og:title" content="{% if page.title %}{{ site.title }} — {{ page.title }}{% else %}{{ site.title }}{% endif %}">
-	<meta name="twitter:description" property="og:description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-	<meta name="og:type" content="website">
+  <!-- open graph - twitter card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ffffrend">
+  <meta name="twitter:url" property="og:url" content="https://frend.co">
+  <meta name="twitter:title" property="og:title" content="{% if page.title %}{{ site.title }} — {{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta name="twitter:description" property="og:description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="og:type" content="website">
 
-	<!-- prefetch third-party dns -->
-	<link href="//ajax.googleapis.com" rel="dns-prefetch" />
-	<link href="//cloud.webtype.com" rel="dns-prefetch" />
-	<link href="//pls.webtype.com" rel="dns-prefetch" />
-	<link href="//www.google-analytics.com" rel="dns-prefetch" />
+  <!-- prefetch third-party dns -->
+  <link href="//ajax.googleapis.com" rel="dns-prefetch" />
+  <link href="//cloud.webtype.com" rel="dns-prefetch" />
+  <link href="//pls.webtype.com" rel="dns-prefetch" />
+  <link href="//www.google-analytics.com" rel="dns-prefetch" />
 
-	<!-- https/http canonical urls -->
-	<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+  <!-- https/http canonical urls -->
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 
-	<!-- favicon/touch-icon -->
-	<link rel="shortcut icon" href="/icon-touch.png">
-	<link rel="apple-touch-icon-precomposed" href="/icon-touch.png">
+  <!-- favicon/touch-icon -->
+  <link rel="shortcut icon" href="/icon-touch.png">
+  <link rel="apple-touch-icon-precomposed" href="/icon-touch.png">
 
-	<!-- initial.min.js -->
-	<script id="loadCSSTarget">{% include _assets/initial.min.js %}</script>
+  <!-- initial.min.js -->
+  <script id="loadCSSTarget">{% include _assets/initial.min.js %}</script>
 
-	<!-- global CSS -->
-	<link rel="stylesheet" href="/css/dist/global.min.css">
-	<link rel="stylesheet" href="//cloud.webtype.com/css/d0f727b8-b89e-413f-ad8a-085ca4d7de47.css">
+  <!-- global CSS -->
+  <link rel="stylesheet" href="/css/dist/global.min.css">
+  <link rel="stylesheet" href="//cloud.webtype.com/css/d0f727b8-b89e-413f-ad8a-085ca4d7de47.css">
 </head>

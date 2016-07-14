@@ -1,36 +1,36 @@
 //----------------------------------------------------------------------
-//	BASE
-//	Document
+//  BASE
+//  Document
 //----------------------------------------------------------------------
 
 html {
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	height: 100%;
-	overflow-y: scroll;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  overflow-y: scroll;
 }
 body {
-	background-color: $blue;
-	border-top: 0.25rem solid $red; /* 4px */
-	color: $dark-grey;
-	font-family: $base-font;
-	font-size: 100%; /* 16px */
-	height: 100%;
-	letter-spacing: 0.055em; // adjust letter spacing to match webfont
-	line-height: $doc-line-height;
-	.fonts-loaded & {
-		font-family: $web-font;
-		letter-spacing: 0; // reset
-	}
+  background-color: $blue;
+  border-top: 0.25rem solid $red; /* 4px */
+  color: $dark-grey;
+  font-family: $base-font;
+  font-size: 100%; /* 16px */
+  height: 100%;
+  letter-spacing: 0.055em; // adjust letter spacing to match webfont
+  line-height: $doc-line-height;
+  .fonts-loaded & {
+    font-family: $web-font;
+    letter-spacing: 0; // reset
+  }
 }
 
 
 
 
-//	Selection
+//  Selection
 //-----------------------------------
 ::selection {
-	background-color: rgba($dark-grey, 0.8);
-	color: #fff;
-	text-shadow: none;
+  background-color: rgba($dark-grey, 0.8);
+  color: #fff;
+  text-shadow: none;
 }

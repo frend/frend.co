@@ -52,12 +52,12 @@ You can read more about installing Frend components on our [About page](http://f
 
 ~~~ html
 <ul class="js-fr-bypasslinks">
-	<li>
-		<a href="#main-content">Skip to main content</a>
-	</li>
+  <li>
+    <a href="#main-content">Skip to main content</a>
+  </li>
 </ul>
 <main id="main-content" tabindex="-1">
-	...
+  ...
 </main>
 ~~~
 
@@ -81,7 +81,7 @@ myBypasslinks.init();
 
 ~~~ js
 var myBypasslinks = Frbypasslinks({
-	// String - Container selector, hook for JS init() method
-	selector: '.js-fr-bypasslinks'
+  // String - Container selector, hook for JS init() method
+  selector: '.js-fr-bypasslinks'
 });
 ~~~

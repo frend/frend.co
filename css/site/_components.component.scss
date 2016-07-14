@@ -1,22 +1,22 @@
 //----------------------------------------------------------------------
-//	COMPONENTS
-//	Embed
+//  COMPONENTS
+//  Embed
 //----------------------------------------------------------------------
 
-//	Source
+//  Source
 //-----------------------------------
 .component-embed {
-	background-color: rgba(#fff, 0.5);
-	height: 65vh;
-	max-height: 50rem; /* 800px */
-	overflow-x: hidden;
-	overflow-y: auto;
-	padding: 20% 0;
-	position: relative;
-	@include mq($from: lap) {
-		padding: 8% 0;
-	}
+  background-color: rgba(#fff, 0.5);
+  height: 65vh;
+  max-height: 50rem; /* 800px */
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 20% 0;
+  position: relative;
+  @include mq($from: lap) {
+    padding: 8% 0;
+  }
 }
 .component-embed__inner {
-	@extend .wrapper;
+  @extend .wrapper;
 }

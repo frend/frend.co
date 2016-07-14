@@ -51,8 +51,8 @@ Tooltips rely on a pair of `<span>`s defining both the toggle element and the to
 
 ~~~ html
 <span class="js-fr-tooltip">
-	<span class="js-fr-tooltip-toggle">ipsam</span>
-	<span class="js-fr-tooltip-tooltip">Tooltip describing ipsam</span>
+  <span class="js-fr-tooltip-toggle">ipsam</span>
+  <span class="js-fr-tooltip-tooltip">Tooltip describing ipsam</span>
 </span>
 ~~~
 
@@ -76,19 +76,19 @@ myTooltip.init();
 
 ~~~ js
 var myTooltip = Frtooltip({
-	// String - Container selector, hook for JS init() method
-	selector: '.js-fr-tooltip',
+  // String - Container selector, hook for JS init() method
+  selector: '.js-fr-tooltip',
 
-	// String - Selector to define the tooltip element
-	tooltipSelector: '.js-fr-tooltip-tooltip',
+  // String - Selector to define the tooltip element
+  tooltipSelector: '.js-fr-tooltip-tooltip',
 
-	// String - Selector to define the toggle element controlling the tooltip
-	toggleSelector: '.js-fr-tooltip-toggle',
+  // String - Selector to define the toggle element controlling the tooltip
+  toggleSelector: '.js-fr-tooltip-toggle',
 
-	// String - Prefix for the id applied to each tooltip as a reference for the toggle
-	tooltipIdPrefix: 'tooltip',
+  // String - Prefix for the id applied to each tooltip as a reference for the toggle
+  tooltipIdPrefix: 'tooltip',
 
-	// String - Class name that will be added to the selector when the component has been initialised
-	readyClass: 'fr-tooltip--is-ready'
+  // String - Class name that will be added to the selector when the component has been initialised
+  readyClass: 'fr-tooltip--is-ready'
 });
 ~~~

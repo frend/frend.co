@@ -1,65 +1,65 @@
 //----------------------------------------------------------------------
-//	COMPONENTS
-//	Tabs
+//  COMPONENTS
+//  Tabs
 //----------------------------------------------------------------------
 
-//	Tabs
+//  Tabs
 //-----------------------------------
 .fr-tabs:not(.fr-tabs--is-ready) .fr-tabs__tablist {
-	margin-bottom: 1.25em; /* 20px */
-	margin-left: 1.25em; /* 20px */
+  margin-bottom: 1.25em; /* 20px */
+  margin-left: 1.25em; /* 20px */
 }
 .fr-tabs--is-ready .fr-tabs__tablist {
-	list-style: none;
+  list-style: none;
 }
 .fr-tabs__tab {
-	color: $dark-grey;
-	display: inline-block;
-	font-family: $sans-font;
-	font-size: 1em; /* 16px */
-	line-height: 1.25; /* 20px from 16 */
-	text-decoration: none;
+  color: $dark-grey;
+  display: inline-block;
+  font-family: $sans-font;
+  font-size: 1em; /* 16px */
+  line-height: 1.25; /* 20px from 16 */
+  text-decoration: none;
 }
 .fr-tabs:not(.fr-tabs--is-ready) .fr-tabs__tab:hover,
 .fr-tabs:not(.fr-tabs--is-ready) .fr-tabs__tab:focus {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 .fr-tabs--is-ready .fr-tabs__tab {
-	background-color: mix(#000, $yellow, 5%);
-	border-radius: 0.25em 0.25em 0 0; /* 4px */
-	padding: 1em 1.25em; /* 16px 20px */
-	text-transform: uppercase;
-	transition: background-color $duration $easing, color $duration $easing;
+  background-color: mix(#000, $yellow, 5%);
+  border-radius: 0.25em 0.25em 0 0; /* 4px */
+  padding: 1em 1.25em; /* 16px 20px */
+  text-transform: uppercase;
+  transition: background-color $duration $easing, color $duration $easing;
 }
 .fonts-loaded .fr-tabs__tab {
-	font-family: $web-font-sans;
+  font-family: $web-font-sans;
 }
 
 // Active
 .fr-tabs--is-ready .fr-tabs__tab[tabindex="0"] {
-	background-color: $yellow;
+  background-color: $yellow;
 }
 
 // Hover
 .fr-tabs--is-ready .fr-tabs__tab:not([tabindex="0"]):hover {
-	background-color: mix(#fff, $dark-grey, 20%);
-	color: #fff;
+  background-color: mix(#fff, $dark-grey, 20%);
+  color: #fff;
 }
 
 
 
-//	Panels
+//  Panels
 //-----------------------------------
 
 .fr-tabs--is-ready .fr-tabs__panel {
-	background-color: $yellow;
-	padding: 1.25em;
+  background-color: $yellow;
+  padding: 1.25em;
 }
 
 .fr-tabs p a {
-	@include underline($dark-grey, $yellow, 1.05em, 2px);
+  @include underline($dark-grey, $yellow, 1.05em, 2px);
 }
 .fr-tabs p a:hover,
 .fr-tabs p a:focus {
-	@include underline($red, $yellow, 1.05em, 2px);
+  @include underline($red, $yellow, 1.05em, 2px);
 }

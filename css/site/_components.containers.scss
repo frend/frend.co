@@ -1,55 +1,55 @@
 //----------------------------------------------------------------------
-//	Components
-//	Containers
+//  Components
+//  Containers
 //----------------------------------------------------------------------
 
-//	Body
+//  Body
 //-----------------------------------
 .site {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 
 
 
-//	Content
+//  Content
 //-----------------------------------
 .site-main {
-	flex: 1 0 auto;
-	padding-bottom: 3.5rem; /* 56px */
+  flex: 1 0 auto;
+  padding-bottom: 3.5rem; /* 56px */
 }
 
 
 
 
-//	Wrapper
+//  Wrapper
 //-----------------------------------
 .wrapper {
-	margin: 0 auto;
-	max-width: 37.5rem; /* 600px */
-	padding: 0 1.25rem; /* 20px */
-	width: 100%;
-	@include mq($from: lap) {
-		max-width: 80%;
-	}
-	@include mq($from: desk) {
-		max-width: 42.5rem; /* 680px */
-	}
+  margin: 0 auto;
+  max-width: 37.5rem; /* 600px */
+  padding: 0 1.25rem; /* 20px */
+  width: 100%;
+  @include mq($from: lap) {
+    max-width: 80%;
+  }
+  @include mq($from: desk) {
+    max-width: 42.5rem; /* 680px */
+  }
 }
 
 
 
 
-//	Page content header/footer
+//  Page content header/footer
 //-----------------------------------
 .content-header {
-	margin: 4.5rem 0 2.5rem; /* 72px 0 40px */
-	@include mq($until: lap) {
-		margin-top: 6rem; /* 96px */
-	}
+  margin: 4.5rem 0 2.5rem; /* 72px 0 40px */
+  @include mq($until: lap) {
+    margin-top: 6rem; /* 96px */
+  }
 }
 .content-footer {
-	margin: 3.5rem 0; /* 56px */
+  margin: 3.5rem 0; /* 56px */
 }

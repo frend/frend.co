@@ -1,16 +1,16 @@
 //----------------------------------------------------------------------
-//	MASTER
+//  MASTER
 //
 //----------------------------------------------------------------------
 
-//	Settings
+//  Settings
 //-----------------------------------
 @import './site/settings.global';
 
 
 
 
-//	Tools
+//  Tools
 //-----------------------------------
 @import './site/tools.mq';
 @import './site/tools.mixins';
@@ -18,7 +18,7 @@
 
 
 
-//	Generic
+//  Generic
 //-----------------------------------
 @import './site/generic.reset';
 @import './site/generic.box-sizing';
@@ -26,14 +26,14 @@
 
 
 
-//	Base
+//  Base
 //-----------------------------------
 @import './site/base.document';
 
 
 
 
-//	Components
+//  Components
 //-----------------------------------
 @import './site/components.links';
 @import './site/components.lists';
@@ -48,7 +48,7 @@
 
 
 
-//	Plugin components
+//  Plugin components
 //-----------------------------------
 
 @import './components/accordion';
@@ -61,6 +61,6 @@
 
 
 
-//	Utility
+//  Utility
 //-----------------------------------
 @import './site/utilities.generic';

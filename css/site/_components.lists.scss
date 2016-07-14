@@ -1,88 +1,88 @@
 //----------------------------------------------------------------------
-//	COMPONENTS
-//	Lists
+//  COMPONENTS
+//  Lists
 //----------------------------------------------------------------------
 
 
-//	Content
+//  Content
 //-----------------------------------
 ul:not([class]) {
-	margin-left: 1.25em; /* 20px */
+  margin-left: 1.25em; /* 20px */
 }
 ul:not([class]) li {
-	font-size: 1.125rem; /* 18px */
-	letter-spacing: 0.014em;
-	line-height: 1.556; /* 28px from 18 */
-	margin-bottom: 0.5em; /* 9px from 18 */
-	@include mq($from: desk) {
-		font-size: 1.375rem; /* 22px */
-		line-height: 1.45; /* 29px from 22 */
-		margin-bottom: 0.5em; /* 11px from 22 */
-	}
-	.fonts-loaded {
-		letter-spacing: 0;
-	}
+  font-size: 1.125rem; /* 18px */
+  letter-spacing: 0.014em;
+  line-height: 1.556; /* 28px from 18 */
+  margin-bottom: 0.5em; /* 9px from 18 */
+  @include mq($from: desk) {
+    font-size: 1.375rem; /* 22px */
+    line-height: 1.45; /* 29px from 22 */
+    margin-bottom: 0.5em; /* 11px from 22 */
+  }
+  .fonts-loaded {
+    letter-spacing: 0;
+  }
 }
 
 
 
 
-//	Inline
+//  Inline
 //-----------------------------------
 .list-inline {
-	font-size: 0;
+  font-size: 0;
 }
 .list-inline > li {
-	display: inline-block;
-	font-size: 1rem; /* 16px */
+  display: inline-block;
+  font-size: 1rem; /* 16px */
 }
 
 
 
 
-//	Component list
+//  Component list
 //-----------------------------------
 .list-components {
-	font-size: 0;
-	margin: 5rem 0 0 -1.25rem; /* 80px 0 0 -20px */
+  font-size: 0;
+  margin: 5rem 0 0 -1.25rem; /* 80px 0 0 -20px */
 }
 .list-components__list-item {
-	display: inline-block;
-	font-size: 1rem; /* 16px */
-	margin-bottom: 1.25rem; /* 20px */
-	padding-left: 1.25rem; /* 20px */
-	vertical-align: top;
-	width: 100%;
+  display: inline-block;
+  font-size: 1rem; /* 16px */
+  margin-bottom: 1.25rem; /* 20px */
+  padding-left: 1.25rem; /* 20px */
+  vertical-align: top;
+  width: 100%;
 }
 .list-components__list-item--alpha {
-	opacity: 0.5;
+  opacity: 0.5;
 }
 
 
 
 
-//	Pill list
+//  Pill list
 //-----------------------------------
 .list-buttons {
-	@extend .list-inline;
-	margin-bottom: 1.25rem; /* 20px */
+  @extend .list-inline;
+  margin-bottom: 1.25rem; /* 20px */
 }
 .list-buttons__list-item {
-	margin-right: 0.313em; /* 5px */
+  margin-right: 0.313em; /* 5px */
 }
 .list-buttons__item {
-	background-color: $red;
-	border-radius: 1.429em; /* 20px */
-	color: #fff;
-	display: block;
-	font-size: 0.875rem; /* 14px */
-	font-weight: bold;
-	line-height: 1.429; /* 20px */
-	padding: 0.357em 0.714em; /* 5px 10px */
-	text-decoration: none;
-	transition: background-color $duration $easing;
-	&:hover,
-	&:focus {
-		background-color: $dark-grey;
-	}
+  background-color: $red;
+  border-radius: 1.429em; /* 20px */
+  color: #fff;
+  display: block;
+  font-size: 0.875rem; /* 14px */
+  font-weight: bold;
+  line-height: 1.429; /* 20px */
+  padding: 0.357em 0.714em; /* 5px 10px */
+  text-decoration: none;
+  transition: background-color $duration $easing;
+  &:hover,
+  &:focus {
+    background-color: $dark-grey;
+  }
 }

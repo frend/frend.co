@@ -1,90 +1,90 @@
 //----------------------------------------------------------------------
-//	COMPONENTS
-//	Off-canvas
+//  COMPONENTS
+//  Off-canvas
 //----------------------------------------------------------------------
 
-//	Toggles
+//  Toggles
 //-----------------------------------
 
 .fr-offcanvas-open,
 .fr-offcanvas-close {
-	border-radius: 0.25em; /* 4px */
-	font-family: $sans-font;
-	font-size: 1em; /* 16px */
-	line-height: 1.25; /* 20px from 16 */
-	margin-right: 0.5em; /* 8px */
-	padding: 1em 1.25em; /* 16px 20px */
-	text-transform: uppercase;
-	transition: background-color $duration $easing, border-color $duration $easing, color $duration $easing;
-	.fonts-loaded & {
-		font-family: $web-font-sans;
-	}
+  border-radius: 0.25em; /* 4px */
+  font-family: $sans-font;
+  font-size: 1em; /* 16px */
+  line-height: 1.25; /* 20px from 16 */
+  margin-right: 0.5em; /* 8px */
+  padding: 1em 1.25em; /* 16px 20px */
+  text-transform: uppercase;
+  transition: background-color $duration $easing, border-color $duration $easing, color $duration $easing;
+  .fonts-loaded & {
+    font-family: $web-font-sans;
+  }
 }
 .fr-offcanvas-open {
-	background-color: $yellow;
-	border-bottom: 0.125em solid mix(#000, $yellow, 10%);
+  background-color: $yellow;
+  border-bottom: 0.125em solid mix(#000, $yellow, 10%);
 }
 .fr-offcanvas-close {
-	background-color: mix(#fff, $dark-grey, 10%);
-	border-bottom: 0.125em solid $dark-grey;
-	color: #fff;
-	position: absolute;
-	right: 1.25em; /* 20px */
-	top: 1.25em; /* 20px */
-	.fr-offcanvas:not(.fr-offcanvas--is-ready) & {
-		display: none;
-	}
+  background-color: mix(#fff, $dark-grey, 10%);
+  border-bottom: 0.125em solid $dark-grey;
+  color: #fff;
+  position: absolute;
+  right: 1.25em; /* 20px */
+  top: 1.25em; /* 20px */
+  .fr-offcanvas:not(.fr-offcanvas--is-ready) & {
+    display: none;
+  }
 }
 
 .fr-offcanvas-open:hover,
 .fr-offcanvas-open:focus,
 .fr-offcanvas-close:hover,
 .fr-offcanvas-close:focus {
-	background-color: mix(#fff, $dark-grey, 20%);
-	border-bottom-color: $dark-grey;
-	color: #fff;
+  background-color: mix(#fff, $dark-grey, 20%);
+  border-bottom-color: $dark-grey;
+  color: #fff;
 }
 
 
 
 
-//	Panel
+//  Panel
 //-----------------------------------
 
 .fr-offcanvas {
-	background-color: $yellow;
-	padding: 20px;
-	&:not(.fr-offcanvas--is-ready) {
-		margin-bottom: 20px;
-	}
+  background-color: $yellow;
+  padding: 20px;
+  &:not(.fr-offcanvas--is-ready) {
+    margin-bottom: 20px;
+  }
 }
 .fr-offcanvas--is-ready {
-	max-width: 400px;
-	padding: 80px 20px 20px;
-	transition: transform 200ms ease-out;
-	z-index: 10;
+  max-width: 400px;
+  padding: 80px 20px 20px;
+  transition: transform 200ms ease-out;
+  z-index: 10;
 }
 .fr-offcanvas--is-ready[aria-hidden="false"] {
-	transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 .fr-offcanvas--is-ready[aria-hidden="true"] {
-	transition: transform 200ms ease-out, visibility 200ms;
+  transition: transform 200ms ease-out, visibility 200ms;
 }
 
-//	Left modifier
+//  Left modifier
 .fr-offcanvas--is-ready.fr-offcanvas--left {
-	left: auto;
-	right: 100%;
+  left: auto;
+  right: 100%;
 }
 .fr-offcanvas--is-ready.fr-offcanvas--left[aria-hidden="false"] {
-	transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 
 .fr-offcanvas p a {
-	@include underline($dark-grey, $yellow, 1.05em, 2px);
+  @include underline($dark-grey, $yellow, 1.05em, 2px);
 }
 .fr-offcanvas p a:hover,
 .fr-offcanvas p a:focus {
-	@include underline($red, $yellow, 1.05em, 2px);
+  @include underline($red, $yellow, 1.05em, 2px);
 }

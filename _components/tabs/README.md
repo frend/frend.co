@@ -59,26 +59,26 @@ A simple list of jumplinks to content anchors can form the basis of a tabs compo
 
 ~~~ html
 <div class="fr-tabs js-fr-tabs">
-	<ul class="fr-tabs__tablist js-fr-tabs__tablist">
-		<li class="fr-tabs__tablist-item">
-			<a class="fr-tabs__tab" id="tab1" href="#panel1">...</a>
-		</li>
-		<li class="fr-tabs__tablist-item">
-			<a class="fr-tabs__tab" id="tab2" href="#panel2">...</a>
-		</li>
-		<li class="fr-tabs__tablist-item">
-			<a class="fr-tabs__tab" id="tab3" href="#panel3">...</a>
-		</li>
-	</ul>
-	<section class="fr-tabs__panel js-fr-tabs__panel" id="panel1">
-		...
-	</section>
-	<section class="fr-tabs__panel js-fr-tabs__panel" id="panel2">
-		...
-	</section>
-	<section class="fr-tabs__panel js-fr-tabs__panel" id="panel3">
-		...
-	</section>
+  <ul class="fr-tabs__tablist js-fr-tabs__tablist">
+    <li class="fr-tabs__tablist-item">
+      <a class="fr-tabs__tab" id="tab1" href="#panel1">...</a>
+    </li>
+    <li class="fr-tabs__tablist-item">
+      <a class="fr-tabs__tab" id="tab2" href="#panel2">...</a>
+    </li>
+    <li class="fr-tabs__tablist-item">
+      <a class="fr-tabs__tab" id="tab3" href="#panel3">...</a>
+    </li>
+  </ul>
+  <section class="fr-tabs__panel js-fr-tabs__panel" id="panel1">
+    ...
+  </section>
+  <section class="fr-tabs__panel js-fr-tabs__panel" id="panel2">
+    ...
+  </section>
+  <section class="fr-tabs__panel js-fr-tabs__panel" id="panel3">
+    ...
+  </section>
 </div>
 ~~~
 
@@ -92,26 +92,26 @@ JavaScript for this component will take care of ARIA roles/attributes and focus 
 
 ~~~ html
 <div class="fr-tabs js-fr-tabs fr-tabs--is-ready">
-	<ul class="fr-tabs__tablist js-fr-tabs__tablist" role="tablist">
-		<li class="fr-tabs__tablist-item" role="presentation">
-			<a class="fr-tabs__tab" id="tab1" href="#panel1" role="tab" aria-controls="panel1" tabindex="0" aria-selected="true">...</a>
-		</li>
-		<li class="fr-tabs__tablist-item" role="presentation">
-			<a class="fr-tabs__tab" id="tab2" href="#panel2" role="tab" aria-controls="panel2" tabindex="-1">...</a>
-		</li>
-		<li class="fr-tabs__tablist-item" role="presentation">
-			<a class="fr-tabs__tab" id="tab3" href="#panel3" role="tab" aria-controls="panel3" tabindex="-1">...</a>
-		</li>
-	</ul>
-	<section class="fr-tabs__panel js-fr-tabs__panel" id="panel1" role="tabpanel" aria-labelledby="tab1" tabindex="0">
-		...
-	</section>
-	<section class="fr-tabs__panel js-fr-tabs__panel" id="panel2" role="tabpanel" aria-labelledby="tab2" tabindex="0" aria-hidden="true">
-		...
-	</section>
-	<section class="fr-tabs__panel js-fr-tabs__panel" id="panel3" role="tabpanel" aria-labelledby="tab3" tabindex="0" aria-hidden="true">
-		...
-	</section>
+  <ul class="fr-tabs__tablist js-fr-tabs__tablist" role="tablist">
+    <li class="fr-tabs__tablist-item" role="presentation">
+      <a class="fr-tabs__tab" id="tab1" href="#panel1" role="tab" aria-controls="panel1" tabindex="0" aria-selected="true">...</a>
+    </li>
+    <li class="fr-tabs__tablist-item" role="presentation">
+      <a class="fr-tabs__tab" id="tab2" href="#panel2" role="tab" aria-controls="panel2" tabindex="-1">...</a>
+    </li>
+    <li class="fr-tabs__tablist-item" role="presentation">
+      <a class="fr-tabs__tab" id="tab3" href="#panel3" role="tab" aria-controls="panel3" tabindex="-1">...</a>
+    </li>
+  </ul>
+  <section class="fr-tabs__panel js-fr-tabs__panel" id="panel1" role="tabpanel" aria-labelledby="tab1" tabindex="0">
+    ...
+  </section>
+  <section class="fr-tabs__panel js-fr-tabs__panel" id="panel2" role="tabpanel" aria-labelledby="tab2" tabindex="0" aria-hidden="true">
+    ...
+  </section>
+  <section class="fr-tabs__panel js-fr-tabs__panel" id="panel3" role="tabpanel" aria-labelledby="tab3" tabindex="0" aria-hidden="true">
+    ...
+  </section>
 </div>
 ~~~
 
@@ -129,16 +129,16 @@ myTabs.init();
 
 ~~~ js
 var myTabs = Frtabs({
-	// String - Outer container selector, hook for JS init() method
-	selector: '.js-fr-tabs',
+  // String - Outer container selector, hook for JS init() method
+  selector: '.js-fr-tabs',
 
-	// String - List selector to transform into tablist
-	tablistSelector: '.js-fr-tabs__tablist',
+  // String - List selector to transform into tablist
+  tablistSelector: '.js-fr-tabs__tablist',
 
-	// String - Containers which hold content, toggled via tabs
-	tabpanelSelector: '.js-fr-tabs__panel',
+  // String - Containers which hold content, toggled via tabs
+  tabpanelSelector: '.js-fr-tabs__panel',
 
-	// String - Class name that will be added to the selector when the component has been initialised
-	tabsReadyClass: 'fr-tabs--is-ready'
+  // String - Class name that will be added to the selector when the component has been initialised
+  tabsReadyClass: 'fr-tabs--is-ready'
 });
 ~~~
