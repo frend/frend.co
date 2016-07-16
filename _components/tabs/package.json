@@ -2,7 +2,7 @@
   "name": "fr-tabs",
   "version": "1.0.5",
   "description": "Frend's accessible, modern tabs component.",
-  "homepage": "http://frend.co/components/tabs",
+  "homepage": "https://frend.co/components/tabs",
   "main": "tabs.js",
   "style": "tabs.css",
   "scripts": {
@@ -17,7 +17,7 @@
     "accessible",
     "es2015"
   ],
-  "author": "Frend <hello@frend.co> (http://frend.co)",
+  "author": "Frend <hello@frend.co> (https://frend.co)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/frend/frend.co/issues"

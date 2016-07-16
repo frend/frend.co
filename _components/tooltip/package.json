@@ -2,7 +2,7 @@
   "name": "fr-tooltip",
   "version": "1.0.3",
   "description": "Frend's accessible, modern tooltip component.",
-  "homepage": "http://frend.co/components/tooltip",
+  "homepage": "https://frend.co/components/tooltip",
   "main": "tooltip.js",
   "style": "tooltip.css",
   "scripts": {
@@ -17,7 +17,7 @@
     "accessible",
     "es2015"
   ],
-  "author": "Frend <hello@frend.co> (http://frend.co)",
+  "author": "Frend <hello@frend.co> (https://frend.co)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/frend/frend.co/issues"
