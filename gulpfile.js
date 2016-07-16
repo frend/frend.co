@@ -10,13 +10,9 @@ var clean = require('gulp-clean');
 var gulp = require('gulp');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
-<<<<<<< HEAD
-//  CSS
-=======
 var fs = require('fs');
 var header = require('gulp-header');
 //  CSS
->>>>>>> component-banner
 var autoprefixer = require('autoprefixer');
 var nano = require('gulp-cssnano');
 var sass = require('gulp-sass');
