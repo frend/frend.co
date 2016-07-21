@@ -1,5 +1,8 @@
 # Frend Off Canvas Change Log
 
+## [1.0.4] 2016-07-21
+- Updated `destroy()` to fix null panel reference in `_unbindClosePointer`, remove `activeClass` and remove inline `visibility`
+
 ## [1.0.3] 2016-06-05
 - Replace NodeList.prototype jacking with `_q()` querySelectorAll util
 
