@@ -2,7 +2,7 @@
   "name": "fr-offcanvas",
   "version": "1.0.3",
   "description": "Frend's accessible, modern off-canvas component.",
-  "homepage": "http://frend.co/components/accordion",
+  "homepage": "https://frend.co/components/accordion",
   "main": "offcanvas.js",
   "style": "offcanvas.css",
   "scripts": {
@@ -18,7 +18,7 @@
     "accessible",
     "es2015"
   ],
-  "author": "Frend <hello@frend.co> (http://frend.co)",
+  "author": "Frend <hello@frend.co> (https://frend.co)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/frend/frend.co/issues"

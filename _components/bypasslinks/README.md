@@ -46,7 +46,7 @@ import Frbypasslinks from 'fr-bypasslinks';
 
 Functional styles for the bypass links ([bypasslinks.css](https://raw.githubusercontent.com/frend/frend.co/gh-pages/_components/bypasslinks/bypasslinks.css)) that are required to display the component states correctly should be referenced via a `<link>` in the `<head>` of your document, or can be integrated into your existing stylesheet.
 
-You can read more about installing Frend components on our [About page](http://frend.co/about/), including details on the functional CSS and JavaScript structure.
+You can read more about installing Frend components on our [About page](https://frend.co/about/), including details on the functional CSS and JavaScript structure.
 
 ## Usage
 
