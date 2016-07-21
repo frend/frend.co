@@ -1,0 +1,8 @@
+
+.fr-subnav {
+  position: absolute;
+  visibility: hidden;
+}
+.fr-subnav[aria-hidden="false"] {
+  visibility: visible;
+}

@@ -1,0 +1,28 @@
+{
+  "name": "fr-dropdownnavigation",
+  "version": "1.0.0",
+  "description": "Frend's accessible, modern dropdown navigation component.",
+  "homepage": "https://frend.co/components/dropdownnavigation",
+  "main": "dropdownnavigation.js",
+  "style": "dropdownnavigation.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frend/frend.co/tree/gh-pages/_components/dropdownnavigation"
+  },
+  "keywords": [
+    "navigation",
+    "dropdown",
+    "menu",
+    "mega-menu",
+    "accessible",
+    "es2015"
+  ],
+  "author": "Frend <hello@frend.co> (https://frend.co)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frend/frend.co/issues"
+  }
+}
