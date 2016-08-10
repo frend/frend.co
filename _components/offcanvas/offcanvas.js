@@ -1,11 +1,6 @@
 'use strict';
 
-// Polyfill matches as per https://github.com/jonathantneal/closest
-Element.prototype.matches = Element.prototype.matches ||
-              Element.prototype.mozMatchesSelector ||
-              Element.prototype.msMatchesSelector ||
-              Element.prototype.oMatchesSelector ||
-              Element.prototype.webkitMatchesSelector;
+import { q, closest, defer } from 'frend-utils'
 
 /**
  * @param {object} options Object containing configuration overrides
@@ -22,7 +17,6 @@ const Froffcanvas = function({
   //  CONSTANTS
   const doc = document;
   const docEl = doc.documentElement;
-  const _q = (el, ctx = doc) => [].slice.call(ctx.querySelectorAll(el));
 
 
   //  SUPPORTS
@@ -31,7 +25,7 @@ const Froffcanvas = function({
 
   //  SETUP
   // set offcanvas element NodeLists
-  const panels = _q(selector);
+  const panels = q(selector);
 
   //  TEMP
   let currButtonOpen = null;
@@ -39,17 +33,6 @@ const Froffcanvas = function({
 
 
   //  UTILS
-  function _defer (fn) {
-    //  wrapped in setTimeout to delay binding until previous rendering has completed
-    if (typeof fn === 'function') setTimeout(fn, 0);
-  }
-  function _closest (el, selector) {
-    while (el) {
-      if (el.matches(selector)) break;
-      el = el.parentElement;
-    }
-    return el;
-  }
   function _getPanelId (panel) {
     return panel.getAttribute('id');
   }
@@ -75,10 +58,10 @@ const Froffcanvas = function({
     panel.setAttribute('tabindex', -1);
     panel.focus();
     //  sort out events
-    _defer(_unbindOpenPointer);
-    _defer(_bindDocKey);
-    _defer(_bindDocClick);
-    _defer(_bindClosePointer);
+    defer(_unbindOpenPointer);
+    defer(_bindDocKey);
+    defer(_bindDocClick);
+    defer(_bindClosePointer);
     //  reset scroll position
     panel.scrollTop = 0;
     //  add active class
@@ -144,7 +127,7 @@ const Froffcanvas = function({
   function _eventDocClick (e) {
     //  check if target is panel or child of
     let isPanel = e.target === currPanel;
-    let isPanelChild = _closest(e.target, selector);
+    let isPanelChild = closest(e.target, selector);
     if (!isPanel && !isPanelChild) _hidePanel();
   }
   function _eventDocKey (e) {
@@ -155,11 +138,11 @@ const Froffcanvas = function({
 
   //  BIND EVENTS
   function _bindOpenPointer (panel) {
-    const openButtons = _q(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // is this selector totally crazy?
+    const openButtons = q(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // is this selector totally crazy?
     openButtons.forEach((button) => button.addEventListener('click', _eventOpenPointer));
   }
   function _bindClosePointer (panel = currPanel) {
-    var closeButton = _q(closeSelector, panel)[0];
+    var closeButton = q(closeSelector, panel)[0];
     closeButton.addEventListener('click', _eventClosePointer);
   }
   function _bindDocClick () {
@@ -172,11 +155,11 @@ const Froffcanvas = function({
 
   //  UNBIND EVENTS
   function _unbindOpenPointer (panel = currPanel) {
-    const openButtons = _q(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // yep its totally crazy
+    const openButtons = q(`${openSelector}[aria-controls="${_getPanelId(panel)}"]`); // yep its totally crazy
     openButtons.forEach((button) => button.removeEventListener('click', _eventOpenPointer));
   }
   function _unbindClosePointer (panel = currPanel) {
-    var closeButton = _q(closeSelector, panel)[0];
+    var closeButton = q(closeSelector, panel)[0];
     closeButton.removeEventListener('click', _eventClosePointer);
   }
   function _unbindDocClick () {
