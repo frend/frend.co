@@ -31,7 +31,7 @@ const Frdialogmodal = function ({
 	//	TEMP
 	let currButtonOpen = null;
 	let currModal = null;
-	//	elements within tab
+	//	elements within modal
 	let focusableElements = null;
 
 
