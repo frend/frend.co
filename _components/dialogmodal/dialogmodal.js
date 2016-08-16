@@ -25,7 +25,7 @@ const Frdialogmodal = function ({
 
 
 	// SETUP
-	// set accordion element NodeLists
+	// set dialog modal element NodeLists
 	const containers = _q(selector);
 	const focusableSelectors = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
 	//	TEMP
