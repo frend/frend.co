@@ -118,7 +118,7 @@ const Frdialogmodal = function ({
 	//	EVENTS
 	function _eventOpenPointer (e) {
 		//	get related elements
-		let button = e.target;
+		let button = e.currentTarget;
 		let container = doc.getElementById(button.getAttribute('aria-controls'));
 		let modal = _q(modalSelector, container)[0];
 		//	save element references

@@ -1,5 +1,8 @@
 # Frend Dialog Modal Change Log
 
+## [1.0.3] 2016-12-28
+- Replaced e.target with e.currentTarget in _eventOpenPointer
+
 ## [1.0.2] 2016-06-05
 - Replace NodeList.prototype jacking with `_q()` querySelectorAll util
 
