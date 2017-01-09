@@ -1,6 +1,6 @@
 {
   "name": "fr-dialogmodal",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Frend's accessible, modern modal component.",
   "homepage": "https://frend.co/components/dialogmodal",
   "main": "dialogmodal.js",
