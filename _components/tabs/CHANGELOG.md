@@ -1,6 +1,6 @@
 # Frend Tabs Change Log
 
-## [1.0.5] 2017-01-10
+## [1.0.6] 2017-01-10
 - Replaced e.target with e.currentTarget in `_eventTabClick()`
 
 ## [1.0.5] 2016-06-19
