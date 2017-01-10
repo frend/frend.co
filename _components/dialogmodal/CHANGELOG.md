@@ -1,5 +1,8 @@
 # Frend Dialog Modal Change Log
 
+## [1.0.4] 2017-01-10
+- Bump patch version for re-publish on npm
+
 ## [1.0.3] 2016-12-28
 - Replaced e.target with e.currentTarget in _eventOpenPointer
 
