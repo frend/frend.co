@@ -1,6 +1,6 @@
 {
   "name": "fr-tabs",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Frend's accessible, modern tabs component.",
   "homepage": "https://frend.co/components/tabs",
   "main": "tabs.js",
