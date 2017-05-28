@@ -120,21 +120,26 @@ const Fraccordion = function ({
 
 
 	// ACTIONS
-	function _hideAllPanels (accordionContainer) {
+	function _hideAllPanels (accordionContainer, init) {
 		// get accordion elements
 		const siblingHeaders = _q(headerSelector, accordionContainer);
 		const siblingPanels = _q(panelSelector, accordionContainer);
 
 		// set inactives
 		siblingHeaders.forEach((header) => {
-			header.setAttribute('tabindex', -1);
-			header.setAttribute('aria-selected', 'false');
-			header.setAttribute('aria-expanded', 'false');
+			if (!init || header.getAttribute('aria-selected') !== 'true') {
+				header.setAttribute('tabindex', -1);
+				header.setAttribute('aria-selected', 'false');
+				header.setAttribute('aria-expanded', 'false');
+			}
 		});
 		siblingPanels.forEach((panel) => {
-			if (panel.getAttribute('aria-hidden') === 'false') _unsetPanelHeight(panel);
-			//	toggle aria-hidden
-			panel.setAttribute('aria-hidden', 'true');
+			const header = _q('[aria-controls=' + panel.getAttribute('id') + ']', accordionContainer)[0]
+			if (!init || header.getAttribute('aria-selected') !== 'true') {
+				if (panel.getAttribute('aria-hidden') === 'false') _unsetPanelHeight(panel);
+				//	toggle aria-hidden
+				panel.setAttribute('aria-hidden', 'true');
+			}
 		});
 	}
 	function _hidePanel (target) {
@@ -265,7 +270,8 @@ const Fraccordion = function ({
 			accordionContainers.forEach((accordionContainer) => {
 				_addA11y(accordionContainer);
 				_bindAccordionEvents(accordionContainer);
-				_hideAllPanels(accordionContainer);
+				_hideAllPanels(accordionContainer, true);
+
 				// set all first accordion panels active on init if required (default behaviour)
 				// otherwise make sure first accordion header for each is focusable
 				if (firstPanelsOpenByDefault) {
