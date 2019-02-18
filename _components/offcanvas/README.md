@@ -90,6 +90,9 @@ var myOffcanvas = Froffcanvas({
 	// String - Selector for the close button
 	closeSelector: '.js-fr-offcanvas-close',
 
+	// Boolean - Prevent click events outside panel from triggering close
+	preventClickOutside: false
+
 	// String - Class name that will be added to the selector when the component has been initialised
 	readyClass: 'fr-offcanvas--is-ready',
 
