@@ -14,6 +14,7 @@ const Froffcanvas = function({
     selector: selector = '.js-fr-offcanvas',
     openSelector: openSelector = '.js-fr-offcanvas-open',
     closeSelector: closeSelector = '.js-fr-offcanvas-close',
+    preventClickOutside: preventClickOutside = false,
     readyClass: readyClass = 'fr-offcanvas--is-ready',
     activeClass: activeClass = 'fr-offcanvas--is-active'
   } = {}) {
@@ -77,7 +78,7 @@ const Froffcanvas = function({
     //  sort out events
     _defer(_unbindOpenPointer);
     _defer(_bindDocKey);
-    _defer(_bindDocClick);
+    if (!preventClickOutside) _defer(_bindDocClick);
     _defer(_bindClosePointer);
     //  reset scroll position
     panel.scrollTop = 0;
@@ -94,7 +95,7 @@ const Froffcanvas = function({
     //  sort out events
     _unbindClosePointer(panel);
     _unbindDocKey();
-    _unbindDocClick();
+    if (!preventClickOutside) _unbindDocClick();
     _bindOpenPointer(panel);
     //  remove active class
     panel.classList.remove(activeClass);
