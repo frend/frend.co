@@ -1,5 +1,8 @@
 # Frend Off Canvas Change Log
 
+## [1.1.0] 2019-02-18
+- Added `preventClickOutside` option to supress click events outside of off-canvas panel
+
 ## [1.0.4] 2016-07-21
 - Updated `destroy()` to fix null panel reference in `_unbindClosePointer`, remove `activeClass` and remove inline `visibility`
 
