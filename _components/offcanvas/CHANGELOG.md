@@ -1,5 +1,8 @@
 # Frend Off Canvas Change Log
 
+## [1.1.1] 2019-02-26
+- Re-publish for missing dist file. Consider v1.1.0 invalid
+
 ## [1.1.0] 2019-02-18
 - Added `preventClickOutside` option to supress click events outside of off-canvas panel
 
